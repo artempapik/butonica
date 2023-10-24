@@ -157,7 +157,7 @@
     max-height: calc(100vh - 7rem);
     overflow-y: auto;
     padding: 1rem;
-    width: calc(var(--modal-content-width) + 10rem);
+    width: calc(var(--modal-content-width) + 14rem);
 
     & .form {
         & h2 {
