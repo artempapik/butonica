@@ -55,7 +55,7 @@ const showMessage = (type, text) => {
 }
 
 const get = async url => {
-    const response = await fetch(`${BASE_URL}/${url}`, {referrerPolicy:'unsafe-url'})
+    const response = await fetch(`${BASE_URL}/${url}`)
 
     if (response.status >= 400) {
         throw new Error('403 ' + await response.text())
@@ -68,7 +68,7 @@ const doRequest = async (method, url, data) => {
     const response = await fetch(`${BASE_URL}/${url}`, {
         method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),referrerPolicy:'unsafe-url'
+        body: JSON.stringify(data)
     })
 
     if (response.status === 200) {
