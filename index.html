@@ -1,0 +1,1985 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Butonica – Облік Вашого бізнесу</title>
+    <link rel="shortcut icon" type="image/x-icon" href="img/parsley.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/company.css">
+    <link rel="stylesheet" href="css/stock.css">
+    <link rel="stylesheet" href="css/cash-register.css">
+    <link rel="stylesheet" href="css/employee.css">
+    <link rel="stylesheet" href="css/category.css">
+    <link rel="stylesheet" href="css/product.css">
+    <link rel="stylesheet" href="css/contractor.css">
+    <link rel="stylesheet" href="css/supply.css">
+    <link rel="stylesheet" href="css/leftover.css">
+    <link rel="stylesheet" href="css/inventory.css">
+    <link rel="stylesheet" href="css/sale.css">
+    <link rel="stylesheet" href="css/client.css">
+    <link rel="stylesheet" href="css/waste.css">
+    <link rel="stylesheet" href="css/shift.css">
+    <link rel="stylesheet" href="css/order.css">
+    <link rel="stylesheet" href="css/flavor.css">
+    <link rel="stylesheet" href="css/store-expense.css">
+    <link rel="stylesheet" href="css/label.css">
+</head>
+<body>
+    <header>
+        <div class="logo" onpointerup="location.reload()">
+            <img src="img/parsley.png">
+            <span class="logo-text">
+                <span>Butonica</span>
+                <span>Облік Вашого бізнесу</span>
+            </span>
+        </div>
+        <div class="theme-profile">
+            <span class="theme material-symbols-outlined">dark_mode</span>
+            <div class="profile" onpointerup="openProfile()"></div>
+            <div class="profile-info">
+                <div>
+                    <span class="material-symbols-outlined">person</span>
+                    <span></span>
+                </div>
+                <div class="subscription">
+                    <span class="material-symbols-outlined">calendar_month</span>
+                    <span class="subscription-text">
+                        <span>До кінця підписки:</span>
+                        <span></span>
+                    </span>
+                </div>
+                <div onpointerup="logout()">
+                    <span class="material-symbols-outlined">logout</span>
+                    <span>Вийти</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <aside>
+            <ul class="main-menu">
+                <li onpointerup="showSaleInfo(event)">
+                    <div class="menu-item">
+                        <div class="menu-item-content">
+                            <span class="material-symbols-outlined">terminal</span>
+                            <span>Продаж</span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="menu-item">
+                        <div>
+                            <span class="material-symbols-outlined">shopping_bag</span>
+                            <span>Замовлення</span>
+                        </div>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                    <ul class="sub-menu">
+                        <li onpointerup="showAllOrderInfo(event)">
+                            <div>
+                                <span class="material-symbols-outlined">list_alt</span>
+                                <span>Всі</span>
+                            </div>
+                        </li>
+                        <li onpointerup="showCompletedOrderInfo(event)">
+                            <div>
+                                <span class="material-symbols-outlined">done</span>
+                                <span>Виконані</span>
+                            </div>
+                        </li>
+                        <li onpointerup="showPendingOrderInfo(event)">
+                            <div>
+                                <span class="material-symbols-outlined">hourglass_empty</span>
+                                <span>В очікуванні</span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li onpointerup="showShiftInfo(event)">
+                    <div class="menu-item">
+                        <div class="menu-item-content">
+                            <span class="material-symbols-outlined">fact_check</span>
+                            <span>Робочі зміни</span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="menu-item">
+                        <div>
+                            <span class="material-symbols-outlined">cycle</span>
+                            <span>Склад</span>
+                        </div>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                    <ul class="sub-menu">
+                        <li onpointerup="showContractorInfo(event)">
+                            <div>
+                                <span class="material-symbols-outlined">group_add</span>
+                                <span>Постачальники</span>
+                            </div>
+                        </li>
+                        <li onpointerup="showSupplyInfo(event)">
+                            <div>
+                                <span class="material-symbols-outlined">local_shipping</span>
+                                <span>Поставки</span>
+                            </div>
+                        </li>
+                        <li onpointerup="showWasteInfo(event)">
+                            <div>
+                                <span class="material-symbols-outlined">delete</span>
+                                <span>Списання</span>
+                            </div>
+                        </li>
+                        <li onpointerup="showLeftoverInfo(event)">
+                            <div>
+                                <span class="material-symbols-outlined">directory_sync</span>
+                                <span>Залишки</span>
+                            </div>
+                        </li>
+                        <li onpointerup="showInventoryInfo(event)">
+                            <div>
+                                <span class="material-symbols-outlined">edit_calendar</span>
+                                <span>Інвентаризація</span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="menu-item">
+                        <div>
+                            <span class="material-symbols-outlined">view_list</span>
+                            <span>Асортимент</span>
+                        </div>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                    <ul class="sub-menu">
+                        <li onpointerup="showCategoryInfo(event)">
+                            <div>
+                                <span class="material-symbols-outlined">list</span>
+                                <span>Категорії</span>
+                            </div>
+                        </li>
+                        <li onpointerup="showProductInfo(event)">
+                            <div>
+                                <span class="material-symbols-outlined">filter_vintage</span>
+                                <span>Товари</span>
+                            </div>
+                        </li>
+                        <li onpointerup="showFlavorInfo(event)">
+                            <div>
+                                <span class="material-symbols-outlined">local_florist</span>
+                                <span>Букети та композиції</span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li onpointerup="showStoreExpenseInfo(event)">
+                    <div class="menu-item">
+                        <div class="menu-item-content">
+                            <span class="material-symbols-outlined">receipt_long</span>
+                            <span>Витрати магазину</span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="menu-item">
+                        <div>
+                            <span class="material-symbols-outlined">target</span>
+                            <span>Маркетинг</span>
+                        </div>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                    <ul class="sub-menu">
+                        <li onpointerup="showClientInfo(event)">
+                            <div>
+                                <span class="material-symbols-outlined">person_add</span>
+                                <span>Клієнти</span>
+                            </div>
+                        </li>
+                        <li onpointerup="showLabelInfo(event)">
+                            <div>
+                                <span class="material-symbols-outlined">label</span>
+                                <span>Мітки</span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li style="display: none;">
+                    <div class="menu-item">
+                        <div>
+                            <span class="material-symbols-outlined">monitoring</span>
+                            <span>Статистика</span>
+                        </div>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                    <ul class="sub-menu">
+                        <li>
+                            <div>
+                                <span class="material-symbols-outlined">show_chart</span>
+                                <span>Загальна</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <span class="material-symbols-outlined">sell</span>
+                                <span>Продажів</span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="menu-item">
+                        <div>
+                            <span class="material-symbols-outlined">settings</span>
+                            <span>Налаштування</span>
+                        </div>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                    <ul class="sub-menu">
+                        <li onpointerup="showCompanyInfo(event)">
+                            <div>
+                                <span class="material-symbols-outlined">info</span>
+                                <span>Компанія</span>
+                            </div>
+                        </li>
+                        <li onpointerup="showStockInfo(event)">
+                            <div>
+                                <span class="material-symbols-outlined">storefront</span>
+                                <span>Торгові точки</span>
+                            </div>
+                        </li>
+                        <li onpointerup="showCashRegisterInfo(event)">
+                            <div>
+                                <span class="material-symbols-outlined">account_tree</span>
+                                <span>Каси</span>
+                            </div>
+                        </li>
+                        <li onpointerup="showEmployeeInfo(event)">
+                            <div>
+                                <span class="material-symbols-outlined">person_apron</span>
+                                <span>Працівники</span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </aside>
+        <main></main>
+    </div>
+    <div class="login-modal">
+        <div class="login-modal-content">
+            <h1>
+                <img src="img/parsley.png">
+                <span class="logo-text">
+                    <span>Butonica</span>
+                    <span>Облік Вашого бізнесу</span>
+                </span>
+            </h1>
+            <div class="form">
+                <h2>
+                    <span class="material-symbols-outlined">mail</span>
+                    <span>Email</span>
+                </h2>
+                <input type="email" name="email" maxlength="25">
+            </div>
+            <div class="form">
+                <h2>
+                    <span class="material-symbols-outlined">lock</span>
+                    <span>Пароль</span>
+                </h2>
+                <input type="password" maxlength="20">
+            </div>
+            <button onpointerup="login()">Вхід</button>
+        </div>
+    </div>
+    <div class="create-stock-modal">
+        <div class="create-stock-modal-content">
+            <div class="modal-content-name">
+                <span class="material-symbols-outlined">history</span>
+                <h1></h1>
+                <span class="close-modal material-symbols-outlined">close</span>
+            </div>
+            <div class="form">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Назва</span>
+                </h2>
+                <input class="stock-name" maxlength="25">
+            </div>
+            <div class="form">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Адреса</span>
+                </h2>
+                <input class="stock-address" maxlength="25">
+            </div>
+            <button>Зберегти</button>
+        </div>
+    </div>
+    <div class="create-cash-register-modal">
+        <div class="create-cash-register-modal-content">
+            <div class="modal-content-name">
+                <span class="material-symbols-outlined">history</span>
+                <h1></h1>
+                <span class="close-modal material-symbols-outlined">close</span>
+            </div>
+            <div class="form">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Назва</span>
+                </h2>
+                <input class="cash-register-name" maxlength="25">
+            </div>
+            <div class="form">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Торгова точка</span>
+                </h2>
+                <select class="cash-register-stock"></select>
+            </div>
+            <button>Зберегти</button>
+        </div>
+    </div>
+    <div class="create-employee-modal">
+        <div class="create-employee-modal-content">
+            <div class="modal-content-name">
+                <span class="material-symbols-outlined">history</span>
+                <h1></h1>
+                <span class="close-modal material-symbols-outlined">close</span>
+            </div>
+            <div class="form">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Email</span>
+                </h2>
+                <input class="employee-email" type="email" name="email" maxlength="25">
+            </div>
+            <div class="form">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Пароль</span>
+                </h2>
+                <input class="employee-password" type="password" maxlength="20">
+            </div>
+            <div class="form">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Посада</span>
+                </h2>
+                <select class="employee-title" onchange="hideEmployeeTitle(event)">
+                    <option>Директор</option>
+                    <option>Адміністратор</option>
+                    <option>Флорист</option>
+                    <option>Менеджер</option>
+                </select>
+            </div>
+            <div class="form stock-employee">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Магазин</span>
+                </h2>
+                <select class="employee-stock"></select>
+            </div>
+            <div class="form active-employee">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Активний</span>
+                </h2>
+                <input type="checkbox">
+            </div>
+            <div class="form">
+                <h2>
+                    <span class="required">*</span>
+                    <span>ПІБ</span>
+                </h2>
+                <input class="employee-full-name" maxlength="30">
+            </div>
+            <div class="form">
+                <h2>Телефон</h2>
+                <input class="employee-phone" maxlength="10">
+            </div>
+            <div class="form">
+                <h2>Дата народження</h2>
+                <input class="employee-birth-date" type="date">
+            </div>
+            <button>Зберегти</button>
+        </div>
+    </div>
+    <div class="employee-info-modal">
+        <div class="employee-info-modal-content">
+            <h1>Працівник</h1>
+            <div class="form">
+                <h2>ПІБ</h2>
+                <h3 class="employee-full-name"></h3>
+            </div>
+            <div class="form">
+                <h2>Email</h2>
+                <h3 class="employee-email"></h3>
+            </div>
+            <div class="form">
+                <h2>Магазин</h2>
+                <h3 class="employee-stock"></h3>
+            </div>
+            <div class="form">
+                <h2>Посада</h2>
+                <h3 class="employee-title"></h3>
+            </div>
+            <div class="form">
+                <h2>Дата реєстрації</h2>
+                <h3 class="employee-registration-date"></h3>
+            </div>
+            <div class="form">
+                <h2>Дата народження</h2>
+                <h3 class="employee-birth-date"></h3>
+            </div>
+            <div class="form">
+                <h2>Телефон</h2>
+                <h3 class="employee-phone"></h3>
+            </div>
+        </div>
+    </div>
+    <div class="create-category-modal">
+        <div class="create-category-modal-content">
+            <div class="modal-content-name">
+                <span class="material-symbols-outlined">history</span>
+                <h1></h1>
+                <span class="close-modal material-symbols-outlined">close</span>
+            </div>
+            <div class="form">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Назва</span>
+                </h2>
+                <input class="category-name" maxlength="25">
+            </div>
+            <button>Зберегти</button>
+        </div>
+    </div>
+    <div class="create-product-modal">
+        <div class="create-product-modal-content">
+            <div class="modal-content-name">
+                <span class="material-symbols-outlined">history</span>
+                <h1></h1>
+                <span class="close-modal material-symbols-outlined">close</span>
+            </div>
+            <div class="upload-image">
+                <img>
+                <span class="files-buttons">
+                    <label for="product-files">
+                        <span class="material-symbols-outlined">attach_file</span>
+                    </label>
+                    <span class="remove-image material-symbols-outlined" onpointerup="removeImage(event)">delete_forever</span>
+                </span>
+                <input id="product-files" type="file" onchange="uploadImage(event)">
+            </div>
+            <div class="form">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Назва</span>
+                </h2>
+                <input class="product-name" maxlength="30">
+            </div>
+            <div class="form">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Категорія</span>
+                </h2>
+                <select class="product-category"></select>
+            </div>
+            <div class="form-check">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Оберіть тип</span>
+                </h2>
+                <form class="product-type">
+                    <label>
+                        <input type="radio" name="product-type" value="Товар" checked>
+                        <span>Товар</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="product-type" value="Послуга">
+                        <span>Послуга</span>
+                    </label>
+                </form>
+            </div>
+            <div class="form-check">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Одиниця виміру</span>
+                </h2>
+                <form>
+                    <label>
+                        <input type="radio" name="product-unit" value="штуки" checked>
+                        <span>штуки</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="product-unit" value="кілограми">
+                        <span>кілограми</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="product-unit" value="метри">
+                        <span>метри</span>
+                    </label>
+                </form>
+            </div>
+            <div class="form stock-prices">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Ціни продажу для складів</span>
+                </h2>
+            </div>
+            <button>Зберегти</button>
+        </div>
+    </div>
+    <div class="product-info-modal">
+        <div class="product-info-modal-content">
+            <div class="form product-content">
+                <div class="form product-info">
+                    <h1>Товар</h1>
+                    <div class="form">
+                        <h2>Назва</h2>
+                        <h3 class="product-name"></h3>
+                    </div>
+                    <div class="form">
+                        <h2>Категорія</h2>
+                        <h3 class="product-category"></h3>
+                    </div>
+                    <div class="form">
+                        <h2>Тип</h2>
+                        <h3 class="product-type"></h3>
+                    </div>
+                    <div class="form">
+                        <h2>Одиниця виміру</h2>
+                        <h3 class="product-unit"></h3>
+                    </div>
+                </div>
+                <img>
+            </div>
+            <div class="form">
+                <table>
+                    <tr>
+                        <td>Склад</td>
+                        <td>Ціна закупівлі</td>
+                        <td>Ціна продажу</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="create-contractor-modal">
+        <div class="create-contractor-modal-content">
+            <div class="modal-content-name">
+                <span class="material-symbols-outlined">history</span>
+                <h1></h1>
+                <span class="close-modal material-symbols-outlined">close</span>
+            </div>
+            <div class="form">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Ім'я</span>
+                </h2>
+                <input class="contractor-name" maxlength="25">
+            </div>
+            <div class="form">
+                <h2>Email</h2>
+                <input class="contractor-email" type="email" name="email" maxlength="30">
+            </div>
+            <div class="form">
+                <h2>Телефон</h2>
+                <input class="contractor-phone" maxlength="10">
+            </div>
+            <div class="form">
+                <h2>Коментар</h2>
+                <textarea class="contractor-comment" maxlength="100" rows="4"></textarea>
+            </div>
+            <button>Зберегти</button>
+        </div>
+    </div>
+    <div class="contractor-info-modal">
+        <div class="contractor-info-modal-content">
+            <div class="contractor-details">
+                <h1>Постачальник</h1>
+                <div class="form">
+                    <h2>ПІБ</h2>
+                    <h3 class="contractor-name"></h3>
+                </div>
+                <div class="form">
+                    <h2>Email</h2>
+                    <h3 class="contractor-email"></h3>
+                </div>
+                <div class="form">
+                    <h2>Телефон</h2>
+                    <h3 class="contractor-phone"></h3>
+                </div>
+                <div class="form">
+                    <h2>Коментар</h2>
+                    <h3 class="contractor-comment"></h3>
+                </div>
+                <div class="contractor-sums">
+                    <div class="form">
+                        <h2>Сума товару</h2>
+                        <h3 class="contractor-product-sum"></h3>
+                    </div>
+                    <div class="form">
+                        <h2>Оплачено</h2>
+                        <h3 class="contractor-paid"></h3>
+                    </div>
+                    <div class="form">
+                        <h2>Різниця</h2>
+                        <h3 class="contractor-delta"></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="contractor-supplies">
+            </div>
+        </div>
+    </div>
+    <div class="create-supply-modal">
+        <div class="create-supply-modal-content">
+            <div class="modal-content-name">
+                <span class="material-symbols-outlined">history</span>
+                <h1></h1>
+                <span class="close-modal material-symbols-outlined">close</span>
+            </div>
+            <datalist id="supply-product"></datalist>
+            <div class="form">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Дата</span>
+                </h2>
+                <div class="form-date">
+                    <input class="supply-date" type="date">
+                    <span onpointerup="setCurrentDate(event)">Зараз</span>
+                </div>
+            </div>
+            <div class="form">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Постачальник</span>
+                </h2>
+                <input list="supply-contractor">
+                <datalist id="supply-contractor"></datalist>
+            </div>
+            <div class="form">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Склад</span>
+                </h2>
+                <select class="supply-stock"></select>
+            </div>
+            <div class="form">
+                <h2>Сума оплати</h2>
+                <div class="supply-paid-sum-block">
+                    <input class="supply-paid-sum" type="number" min="0" max="100000" oninput="handlePriceInput(event)">
+                    <span>грн</span>
+                </div>
+            </div>
+            <div class="form">
+                <h2>Дата оплати</h2>
+                <div class="form-date">
+                    <input class="supply-pay-date" type="date">
+                    <span onpointerup="setCurrentDate(event)">Зараз</span>
+                </div>
+            </div>
+            <div class="form">
+                <h2>Коментар</h2>
+                <input class="supply-comment" maxlength="35">
+            </div>
+            <div class="form associated-costs">
+                <h2>Супутні витрати</h2>
+                <div class="associated-costs-data"></div>
+                <button class="one-more-product" onpointerup="addAssociatedCost()">Додати</button>
+            </div>
+            <div class="form supply-products">
+                <h2>Товари</h2>
+                <table>
+                    <tr>
+                        <td>Товар</td>
+                        <td>Кількість</td>
+                        <td>Ціна</td>
+                        <td>Сума</td>
+                    </tr>
+                </table>
+                <button class="one-more-product" onpointerup="addSupplyProduct()">Додати товар</button>
+            </div>
+            <div class="form">
+                <h2 class="total-sum">
+                    <span>Разом: </span>
+                    <span>0.00</span>
+                    <span>грн</span>
+                </h2>
+                <h2 class="total-sum-associated-costs">
+                    <span>Разом із супутніми витратами: </span>
+                    <span></span>
+                    <span>грн</span>
+                </h2>
+            </div>
+            <button>Зберегти</button>
+        </div>
+    </div>
+    <div class="supply-info-modal">
+        <div class="supply-info-modal-content">
+            <h1>Поставка</h1>
+            <div class="form">
+                <h2>Дата</h2>
+                <h3 class="supply-date"></h3>
+            </div>
+            <div class="form">
+                <h2>Постачальник</h2>
+                <h3 class="supply-contractor"></h3>
+            </div>
+            <div class="form">
+                <h2>Склад</h2>
+                <h3 class="supply-stock"></h3>
+            </div>
+            <div class="form">
+                <h2>Сума оплати</h2>
+                <h3 class="supply-paid-sum"></h3>
+            </div>
+            <div class="form">
+                <h2>Дата оплати</h2>
+                <h3 class="supply-pay-date"></h3>
+            </div>
+            <div class="form">
+                <h2>Коментар</h2>
+                <h3 class="supply-comment"></h3>
+            </div>
+            <div class="supply-products">
+                <h2>Товари</h2>
+                <table>
+                    <tr>
+                        <td>Товар</td>
+                        <td>Кількість</td>
+                        <td>Ціна</td>
+                        <td>Сума</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="total-sum">
+                <span>Разом:</span>
+                <span></span>
+            </div>
+            <div class="supply-associated-costs">
+                <h2>Супутні витрати</h2>
+                <table>
+                    <tr>
+                        <td>Назва</td>
+                        <td>Ціна</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="total-sum-associated-costs">
+                <span>Разом із супутніми витратами:</span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <div class="create-inventory-modal">
+        <div class="create-inventory-modal-content">
+            <div class="modal-content-name">
+                <span class="material-symbols-outlined">history</span>
+                <h1></h1>
+                <span class="close-modal material-symbols-outlined">close</span>
+            </div>
+            <div class="inventory-header">
+                <div class="form">
+                    <h2>
+                        <span class="required">*</span>
+                        <span>Дата</span>
+                    </h2>
+                    <div class="form-date">
+                        <input class="inventory-date" type="date">
+                        <span onpointerup="setCurrentDate(event)">Зараз</span>
+                    </div>
+                </div>
+                <div class="form">
+                    <h2>
+                        <span class="required">*</span>
+                        <span>Склад</span>
+                    </h2>
+                    <select class="inventory-stock"></select>
+                </div>
+            </div>
+            <table>
+                <tr>
+                    <td>Товар</td>
+                    <td>Запланований залишок</td>
+                    <td>Фактичний залишок</td>
+                    <td>Різниця</td>
+                    <td>Сума</td>
+                </tr>
+            </table>
+            <div class="total-sum">
+                <span>Всього:</span>
+                <span>0.00</span>
+                <span>грн</span>
+            </div>
+            <button>Провести інвентаризацію</button>
+        </div>
+    </div>
+    <div class="create-client-modal">
+        <div class="create-client-modal-content">
+            <div class="modal-content-name">
+                <span class="material-symbols-outlined">history</span>
+                <h1></h1>
+                <span class="close-modal material-symbols-outlined">close</span>
+            </div>
+            <div class="form">
+                <h2>
+                    <span class="required">*</span>
+                    <span>ПІБ</span>
+                </h2>
+                <input class="client-full-name" maxlength="50">
+            </div>
+            <div class="form">
+                <h2>Телефон</h2>
+                <textarea class="client-phone" maxlength="30" rows="3"></textarea>
+            </div>
+            <div class="form">
+                <h2>Email</h2>
+                <input class="client-email" type="email" name="email" maxlength="25">
+            </div>
+            <div class="form">
+                <h2>Дата народження</h2>
+                <input class="client-birth-date" type="date">
+            </div>
+            <div class="form-check">
+                <h2>Стать</h2>
+                <form>
+                    <label>
+                        <input type="radio" name="client-sex" value="Чоловік" checked>
+                        <span>Чоловік</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="client-sex" value="Жінка">
+                        <span>Жінка</span>
+                    </label>
+                </form>
+            </div>
+            <div class="form">
+                <h2>Instagram</h2>
+                <input class="client-instagram" maxlength="50">
+            </div>
+            <div class="form">
+                <h2>Коментар</h2>
+                <textarea class="client-comment" maxlength="150" rows="6"></textarea>
+            </div>
+            <button>Зберегти</button>
+        </div>
+    </div>
+    <div class="client-info-modal">
+        <div class="client-info-modal-content">
+            <div class="form client-content">
+                <div class="form client-info">
+                    <h1>Клієнт</h1>
+                    <div class="form">
+                        <h2>ПІБ</h2>
+                        <h3 class="client-full-name"></h3>
+                    </div>
+                    <div class="form">
+                        <h2>Телефон(и)</h2>
+                        <h3 class="client-phone"></h3>
+                    </div>
+                    <div class="form">
+                        <h2>Email</h2>
+                        <h3 class="client-email"></h3>
+                    </div>
+                    <div class="form">
+                        <h2>Дата народження</h2>
+                        <h3 class="client-birth-date"></h3>
+                    </div>
+                    <div class="form">
+                        <h2>Стать</h2>
+                        <h3 class="client-sex"></h3>
+                    </div>
+                    <div class="form">
+                        <h2>Instagram</h2>
+                        <h3 class="client-instagram"></h3>
+                    </div>
+                    <div class="form">
+                        <h2>Коментар</h2>
+                        <h3 class="client-comment"></h3>
+                    </div>
+                    <div class="form">
+                        <h2>Бонусний рахунок</h2>
+                        <h3 class="client-bonus-cash"></h3>
+                    </div>
+                    <h2 class="orders-empty">Замовлення відсутні</h2>
+                    <div class="form client-orders">
+                        <div class="order-header">
+                            <h2>Замовлення</h2>
+                            <div class="order-arrows">
+                                <span class="material-symbols-outlined">chevron_left</span>
+                                <span class="material-symbols-outlined">chevron_right</span>
+                            </div>
+                        </div>
+                        <table>
+                            <tr>
+                                <td>Товар</td>
+                                <td>К-ть</td>
+                            </tr>
+                        </table>
+                        <div class="order-price">
+                            <span>Загальна ціна:</span>
+                            <span></span>
+                        </div>
+                        <div class="client-orders-total-sum">
+                            <span>Загальна сума замовлень:</span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="create-waste-modal">
+        <div class="create-waste-modal-content">
+            <div class="modal-content-name">
+                <span class="material-symbols-outlined">history</span>
+                <h1></h1>
+                <span class="close-modal material-symbols-outlined">close</span>
+            </div>
+            <datalist id="waste-product"></datalist>
+            <div class="waste-header">
+                <div class="form">
+                    <h2>
+                        <span class="required">*</span>
+                        <span>Дата</span>
+                    </h2>
+                    <div class="form-date">
+                        <input class="waste-date" type="date">
+                        <span onpointerup="setCurrentDate(event)">Зараз</span>
+                    </div>
+                </div>
+                <div class="form">
+                    <h2>
+                        <span class="required">*</span>
+                        <span>Склад</span>
+                    </h2>
+                    <select class="waste-stock"></select>
+                </div>
+            </div>
+            <div class="form">
+                <span>Коментар</span>
+                <textarea class="waste-comment" maxlength="120" rows="3"></textarea>
+            </div>
+            <div class="waste-products">
+                <div>
+                    <span>Товар</span>
+                    <span>Кількість</span>
+                </div>
+            </div>
+            <button class="one-more-product" onpointerup="addWasteProduct()">Додати товар</button>
+            <button>Зберегти</button>
+        </div>
+    </div>
+    <div class="waste-info-modal">
+        <div class="waste-info-modal-content">
+            <h1>Списання</h1>
+            <div class="form">
+                <h2>Дата</h2>
+                <h3 class="waste-date"></h3>
+            </div>
+            <div class="form">
+                <h2>Склад</h2>
+                <h3 class="waste-stock"></h3>
+            </div>
+            <div class="form">
+                <h2>Хто списав</h2>
+                <h3 class="waste-employee"></h3>
+            </div>
+            <div class="form">
+                <h2>Коментар</h2>
+                <h3 class="waste-comment"></h3>
+            </div>
+            <div class="waste-products">
+                <h2>Товари</h2>
+                <table>
+                    <tr>
+                        <td>Товар</td>
+                        <td>Кількість</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="create-sale-modal">
+        <div class="create-sale-modal-content">
+            <div class="sale-checkout">
+                <div class="sale-pay-sum">
+                    <span>Сума оплати:</span>
+                    <div>
+                        <input class="sale-paid-sum" type="number" min="0" max="100000" oninput="handlePriceInput(event)">
+                        <span>грн</span>
+                    </div>
+                </div>
+                <div class="sale-change">
+                    <span>Решта</span>
+                    <div>
+                        <span class="change"></span>
+                        <span>грн</span>
+                    </div>
+                </div>
+            </div>
+            <div class="payment">
+                <form>
+                    <label>
+                        <input type="radio" name="pay-type" value="Готівка" checked>
+                        <span>Готівка</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="pay-type" value="Безготівковий розрахунок">
+                        <span>Термінал</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="pay-type" value="Безкоштовно">
+                        <span>Безкоштовно</span>
+                    </label>
+                </form>
+                <button onpointerup="createSale()">Оплата</button>
+            </div>
+        </div>
+    </div>
+    <div class="create-sale-order-modal">
+        <div class="create-sale-order-modal-content">
+            <div class="modal-content-name">
+                <span class="material-symbols-outlined">history</span>
+                <h1>Оформити замовлення</h1>
+                <span class="close-modal material-symbols-outlined">close</span>
+            </div>
+            <div class="sale-order-type">
+                <span>Доставка</span>
+                <span>Самовивіз</span>
+            </div>
+            <div class="sale-order-labels"></div>
+            <div class="sale-order-labels"></div>
+            <div class="sale-order-date-header" id="delivery-date">
+                <div class="sale-order-date-time">
+                    <div class="sale-order-date">
+                        <div>
+                            <span>
+                                <span class="required">*</span>
+                                <span>Дата</span>
+                            </span>
+                            <span onpointerup="setCurrentDate(event)" class="today-button">Сьогодні</span>
+                        </div>
+                        <input class="sale-order-date-date" type="date">
+                    </div>
+                    <div class="sale-order-time">
+                        <div>
+                            <span>
+                                <span>час</span>
+                                <span class="exact-time">від:</span>
+                            </span>
+                            <input type="time" class="sale-order-date-time-from">
+                        </div>
+                        <div>
+                            <span>
+                                <span>час</span>
+                                <span class="exact-time">до:</span>
+                            </span>
+                            <input type="time" class="sale-order-date-time-till">
+                        </div>
+                    </div>
+                </div>
+                <div class="sale-order-image">
+                    <div class="upload-image">
+                        <img>
+                        <span class="files-buttons">
+                            <label for="delivery-files">
+                                <span class="material-symbols-outlined">attach_file</span>
+                            </label>
+                            <span class="remove-image material-symbols-outlined" onpointerup="removeImage(event)">delete_forever</span>
+                        </span>
+                        <input id="delivery-files" type="file" onchange="uploadImage(event)">
+                    </div>
+                </div>
+            </div>
+            <div class="sale-order-date-header" id="pickup-date">
+                <div class="sale-order-date-time">
+                    <div class="sale-order-date">
+                        <div>
+                            <span>
+                                <span class="required">*</span>
+                                <span>Дата</span>
+                            </span>
+                            <span onpointerup="setCurrentDate(event)" class="today-button">Сьогодні</span>
+                        </div>
+                        <input class="sale-order-date-date" type="date">
+                    </div>
+                    <div class="sale-order-time">
+                        <div>
+                            <span>
+                                <span>
+                                    <span class="required">*</span>
+                                    <span>час</span>
+                                </span>
+                                <span class="exact-time">від:</span>
+                            </span>
+                            <input type="time" class="sale-order-date-time-from">
+                        </div>
+                        <div>
+                            <span>
+                                <span>
+                                    <span class="required">*</span>
+                                    <span>час</span>
+                                </span>
+                                <span class="exact-time">до:</span>
+                            </span>
+                            <input type="time" class="sale-order-date-time-till">
+                        </div>
+                    </div>
+                </div>
+                <div class="sale-order-image">
+                    <div class="upload-image">
+                        <img>
+                        <span class="files-buttons">
+                            <label for="pickup-files">
+                                <span class="material-symbols-outlined">attach_file</span>
+                            </label>
+                            <span class="remove-image material-symbols-outlined" onpointerup="removeImage(event)">delete_forever</span>
+                        </span>
+                        <input id="pickup-files" type="file" onchange="uploadImage(event)">
+                    </div>
+                </div>
+            </div>
+            <div class="customer-recipient-info" id="delivery-customer-recipient-info">
+                <div class="sale-order-info">
+                    <div>
+                        <h2>
+                            <span class="required">*</span>
+                            <span>Ім'я замовника</span>
+                        </h2>
+                        <textarea class="sale-order-customer-name" maxlength="100" rows="3"></textarea>
+                    </div>
+                    <div>
+                        <h2>Телефон</h2>
+                        <textarea class="sale-order-customer-phone" maxlength="30" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="sale-order-info">
+                    <div>
+                        <h2>Ім'я отримувача</h2>
+                        <textarea class="sale-order-recipient-name" maxlength="30" rows="3"></textarea>
+                    </div>
+                    <div>
+                        <h2>Телефон</h2>
+                        <textarea class="sale-order-recipient-phone" maxlength="30" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="customer-recipient-info" id="pickup-customer-recipient-info">
+                <div class="sale-order-info">
+                    <div>
+                        <h2>
+                            <span class="required">*</span>
+                            <span>Ім'я замовника</span>
+                        </h2>
+                        <textarea class="sale-order-customer-name" maxlength="30" rows="3"></textarea>
+                    </div>
+                    <div>
+                        <h2>Телефон</h2>
+                        <textarea class="sale-order-customer-phone" maxlength="30" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="form sale-order-textarea" id="delivery-address">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Адреса доставки</span>
+                </h2>
+                <div>
+                    <textarea class="sale-order-address" maxlength="100" rows="2"></textarea>
+                </div>
+            </div>
+            <div class="form sale-order-textarea" id="delivery-comment">
+                <h2>Коментар</h2>
+                <div>
+                    <textarea class="sale-order-comment" maxlength="300" rows="6"></textarea>
+                </div>
+            </div>
+            <div class="form sale-order-textarea" id="pickup-comment">
+                <h2>Коментар</h2>
+                <div>
+                    <textarea class="sale-order-comment" maxlength="200" rows="4"></textarea>
+                </div>
+            </div>
+            <div class="sale-order-products">
+                <h2>Товари</h2>
+                <table>
+                    <tr>
+                        <td>Назва</td>
+                        <td>Кількість</td>
+                        <td>Сума</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="sale-order-checkout">
+                <div class="sale-order-total-sum">
+                    <span>Загальна сума:</span>
+                    <span></span>
+                </div>
+                <div class="free-payment">
+                    <input type="checkbox">
+                    <span>Безкоштовно</span>
+                </div>
+            </div>
+            <div class="payment">
+                <div class="payment-content">
+                    <div class="cashback">
+                        <h1>
+                            <span class="material-symbols-outlined">savings</span>
+                            <span>Бонуси</span>
+                        </h1>
+                        <div class="client-info">
+                            <div class="client">
+                                <span class="material-symbols-outlined">person</span>
+                                <span></span>
+                            </div>
+                            <div class="balance">
+                                <span class="material-symbols-outlined">savings</span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="order-pay-sum">
+                            <span>
+                                <span>Сума</span>
+                                <span>бонусів:</span>
+                            </span>
+                            <div>
+                                <input class="sale-order-paid-sum" type="number" min="0" max="100000" oninput="handlePriceInput(event)">
+                                <span>грн</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cash">
+                        <h1>
+                            <span class="material-symbols-outlined">attach_money</span>
+                            <span>Оплата</span>
+                        </h1>
+                        <ul>
+                            <li class="active-payment-type">
+                                <span class="material-symbols-outlined">attach_money</span>
+                                <span>Готівка</span>
+                            </li>
+                            <li>
+                                <span class="material-symbols-outlined">contactless</span>
+                                <span>Термінал</span>
+                            </li>
+                        </ul>
+                        <div class="order-pay-sum">
+                            <span>
+                                <span>Сума</span>
+                                <span>оплати:</span>
+                            </span>
+                            <div>
+                                <input class="sale-order-paid-sum" type="number" min="0" max="100000" oninput="handlePriceInput(event)">
+                                <span>грн</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button>Оплата</button>
+            </div>
+        </div>
+    </div>
+    <div class="create-internet-order-modal">
+        <div class="create-internet-order-modal-content">
+            <div class="modal-content-name">
+                <span class="material-symbols-outlined">history</span>
+                <h1>Оформити online-замовлення</h1>
+                <span class="close-modal material-symbols-outlined">close</span>
+            </div>
+            <datalist id="internet-product"></datalist>
+            <datalist id="internet-flavor"></datalist>
+            <div class="sale-order-type">
+                <span>Доставка</span>
+                <span>Самовивіз</span>
+            </div>
+            <div class="sale-order-labels"></div>
+            <div class="sale-order-labels"></div>
+            <div class="sale-order-date-header" id="delivery-date">
+                <div class="sale-order-date-time">
+                    <div class="sale-order-date">
+                        <div>
+                            <span>
+                                <span class="required">*</span>
+                                <span>Дата</span>
+                            </span>
+                            <span onpointerup="setCurrentDate(event)" class="today-button">Сьогодні</span>
+                        </div>
+                        <input class="sale-order-date-date" type="date">
+                    </div>
+                    <div class="sale-order-time">
+                        <div>
+                            <span>
+                                <span>час</span>
+                                <span class="exact-time">від:</span>
+                            </span>
+                            <input type="time" class="sale-order-date-time-from">
+                        </div>
+                        <div>
+                            <span>
+                                <span>час</span>
+                                <span class="exact-time">до:</span>
+                            </span>
+                            <input type="time" class="sale-order-date-time-till">
+                        </div>
+                    </div>
+                </div>
+                <div class="sale-order-image">
+                    <div class="upload-image">
+                        <img>
+                        <span class="files-buttons">
+                            <label for="delivery-files">
+                                <span class="material-symbols-outlined">attach_file</span>
+                            </label>
+                            <span class="remove-image material-symbols-outlined" onpointerup="removeImage(event)">delete_forever</span>
+                        </span>
+                        <input id="delivery-files" type="file" onchange="uploadImage(event)">
+                    </div>
+                </div>
+            </div>
+            <div class="sale-order-date-header" id="pickup-date">
+                <div class="sale-order-date-time">
+                    <div class="sale-order-date">
+                        <div>
+                            <span>
+                                <span class="required">*</span>
+                                <span>Дата</span>
+                            </span>
+                            <span onpointerup="setCurrentDate(event)" class="today-button">Сьогодні</span>
+                        </div>
+                        <input class="sale-order-date-date" type="date">
+                    </div>
+                    <div class="sale-order-time">
+                        <div>
+                            <span>
+                                <span>
+                                    <span class="required">*</span>
+                                    <span>час</span>
+                                </span>
+                                <span class="exact-time">від:</span>
+                            </span>
+                            <input type="time" class="sale-order-date-time-from">
+                        </div>
+                        <div>
+                            <span>
+                                <span>
+                                    <span class="required">*</span>
+                                    <span>час</span>
+                                </span>
+                                <span class="exact-time">до:</span>
+                            </span>
+                            <input type="time" class="sale-order-date-time-till">
+                        </div>
+                    </div>
+                </div>
+                <div class="sale-order-image">
+                    <div class="upload-image">
+                        <img>
+                        <span class="files-buttons">
+                            <label for="pickup-files">
+                                <span class="material-symbols-outlined">attach_file</span>
+                            </label>
+                            <span class="remove-image material-symbols-outlined" onpointerup="removeImage(event)">delete_forever</span>
+                        </span>
+                        <input id="pickup-files" type="file" onchange="uploadImage(event)">
+                    </div>
+                </div>
+            </div>
+            <div class="internet-client-info">
+                <div>
+                    <h2>Клієнт</h2>
+                    <select></select>
+                </div>
+                <div>
+                    <input type="checkbox">
+                    <span>Зберегти клієнта</span>
+                </div>
+            </div>
+            <div class="customer-recipient-info" id="delivery-customer-recipient-info">
+                <div class="sale-order-info">
+                    <div>
+                        <h2>
+                            <span class="required">*</span>
+                            <span>Ім'я замовника</span>
+                        </h2>
+                        <textarea class="sale-order-customer-name" maxlength="100" rows="3"></textarea>
+                    </div>
+                    <div>
+                        <h2>Телефон</h2>
+                        <textarea class="sale-order-customer-phone" maxlength="30" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="sale-order-info">
+                    <div>
+                        <h2>Ім'я отримувача</h2>
+                        <textarea class="sale-order-recipient-name" maxlength="30" rows="3"></textarea>
+                    </div>
+                    <div>
+                        <h2>Телефон</h2>
+                        <textarea class="sale-order-recipient-phone" maxlength="30" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="customer-recipient-info" id="pickup-customer-recipient-info">
+                <div class="sale-order-info">
+                    <div>
+                        <h2>
+                            <span class="required">*</span>
+                            <span>Ім'я замовника</span>
+                        </h2>
+                        <textarea class="sale-order-customer-name" maxlength="30" rows="3"></textarea>
+                    </div>
+                    <div>
+                        <h2>Телефон</h2>
+                        <textarea class="sale-order-customer-phone" maxlength="30" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="form sale-order-textarea" id="delivery-address">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Адреса доставки</span>
+                </h2>
+                <div>
+                    <textarea class="sale-order-address" maxlength="100" rows="2"></textarea>
+                </div>
+            </div>
+            <div class="form sale-order-textarea" id="delivery-comment">
+                <h2>Коментар</h2>
+                <div>
+                    <textarea class="sale-order-comment" maxlength="300" rows="6"></textarea>
+                </div>
+            </div>
+            <div class="form sale-order-textarea" id="pickup-comment">
+                <h2>Коментар</h2>
+                <div>
+                    <textarea class="sale-order-comment" maxlength="200" rows="4"></textarea>
+                </div>
+            </div>
+            <div class="form sale-order-stock">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Склад</span>
+                </h2>
+                <select></select>
+            </div>
+            <div class="sale-order-flavors">
+                <h2>Букети</h2>
+                <table>
+                    <tr>
+                        <td>Букет</td>
+                        <td>Ціна</td>
+                    </tr>
+                </table>
+                <button class="one-more-product" onpointerup="addInternetOrderFlavor()">Додати букет</button>
+            </div>
+            <div class="sale-order-products">
+                <h2>Товари</h2>
+                <table>
+                    <tr>
+                        <td>Товар</td>
+                        <td>Кількість</td>
+                        <td>Ціна</td>
+                        <td>Сума</td>
+                    </tr>
+                </table>
+                <button class="one-more-product" onpointerup="addInternetOrderProduct()">Додати товар</button>
+            </div>
+            <div class="sale-order-checkout">
+                <div class="sale-order-total-sum">
+                    <span>Загальна сума:</span>
+                    <input type="number" min="0" max="100000">
+                    <span>грн</span>
+                </div>
+                <div class="free-payment">
+                    <input type="checkbox">
+                    <span>Безкоштовно</span>
+                </div>
+            </div>
+            <div class="payment">
+                <div class="payment-content">
+                    <div class="cashback">
+                        <h1>
+                            <span class="material-symbols-outlined">savings</span>
+                            <span>Бонуси</span>
+                        </h1>
+                        <div class="client-info">
+                            <div class="client">
+                                <span class="material-symbols-outlined">person</span>
+                                <span></span>
+                            </div>
+                            <div class="balance">
+                                <span class="material-symbols-outlined">savings</span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="order-pay-sum">
+                            <span>
+                                <span>Сума</span>
+                                <span>бонусів:</span>
+                            </span>
+                            <div>
+                                <input class="sale-order-paid-sum" type="number" min="0" max="100000" oninput="handlePriceInput(event)">
+                                <span>грн</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cash">
+                        <h1>
+                            <span class="material-symbols-outlined">attach_money</span>
+                            <span>Оплата</span>
+                        </h1>
+                        <ul>
+                            <li class="active-payment-type">
+                                <span class="material-symbols-outlined">attach_money</span>
+                                <span>Готівка</span>
+                            </li>
+                            <li>
+                                <span class="material-symbols-outlined">contactless</span>
+                                <span>Термінал</span>
+                            </li>
+                        </ul>
+                        <div class="order-pay-sum">
+                            <span>
+                                <span>Сума</span>
+                                <span>оплати:</span>
+                            </span>
+                            <div>
+                                <input class="sale-order-paid-sum" type="number" min="0" max="100000" oninput="handlePriceInput(event)">
+                                <span>грн</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button>Оплата</button>
+            </div>
+        </div>
+    </div>
+    <div class="create-shift-modal">
+        <div class="create-shift-modal-content">
+            <h1>Вхід</h1>
+            <div class="form">
+                <h2>Оберіть касу:</h2>
+                <select></select>
+            </div>
+            <div class="form">
+                <h2>Внесіть готівку:</h2>
+                <div>
+                    <input type="number" oninput="handlePriceInput(event)">
+                    <span>грн</span>
+                </div>
+            </div>
+            <div class="shift-choices">
+                <button onpointerup="location.reload()">На головну</button>
+                <button onpointerup="createEmployeeShift()">Почати зміну</button>
+            </div>
+        </div>
+    </div>
+    <div class="shift-info-modal">
+        <div class="shift-info-modal-content">
+            <h1>Робоча зміна</h1>
+            <div class="operations"></div>
+            <div class="shift-end-sums">
+                <div class="cash">
+                    <span class="end-sum-title">
+                        <span class="material-symbols-outlined">attach_money</span>
+                        <span>Сума готівки:</span>
+                    </span>
+                    <span class="end-sum"></span>
+                </div>
+                <div class="terminal-cash">
+                    <span class="end-sum-title">
+                        <span class="material-symbols-outlined">contactless</span>
+                        <span>Сума терміналу:</span>
+                    </span>
+                    <span class="end-sum"></span>
+                </div>
+                <div class="bonus-cash">
+                    <span class="end-sum-title">
+                        <span class="material-symbols-outlined">savings</span>
+                        <span>Сума бонусів:</span>
+                    </span>
+                    <span class="end-sum"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cash-register-operations-modal">
+        <div class="cash-register-operations-modal-content">
+            <h1>Каса</h1>
+            <div class="cash-register-cash">
+                <div class="form">
+                    <span>Баланс готівки:</span>
+                    <span></span>
+                </div>
+                <div class="form">
+                    <span class="cash-register-sum">
+                        <span class="material-symbols-outlined">attach_money</span>
+                        <span>Виручка готівки:</span>
+                    </span>
+                    <span></span>
+                </div>
+                <div class="form">
+                    <span class="cash-register-sum">
+                        <span class="material-symbols-outlined">contactless</span>
+                        <span>Виручка терміналу:</span>
+                    </span>
+                    <span></span>
+                </div>
+                <div class="form">
+                    <span class="cash-register-sum">
+                        <span class="material-symbols-outlined">point_of_sale</span>
+                        <span>Загальна виручка:</span>
+                    </span>
+                    <span></span>
+                </div>
+            </div>
+            <div class="cash-register-operations">
+                <form>
+                    <label>
+                        <input type="radio" name="operation-type" value="Внесення" checked>
+                        <span>Внесення</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="operation-type" value="Винесення">
+                        <span>Винесення</span>
+                    </label>
+                </form>
+                <div>
+                    <span class="required">*</span>
+                    <input type="number" min="0" max="100000" oninput="handlePriceInput(event)">
+                    <span>грн</span>
+                </div>
+            </div>
+            <div class="form">
+                <h2>Коментар</h2>
+                <textarea maxlength="50"></textarea>
+            </div>
+            <button onpointerup="performCashRegisterOperation()">Провести операцію</button>
+        </div>
+    </div>
+    <div class="order-info-modal">
+        <div class="order-info-modal-content">
+            <div class="order-main-info">
+                <div class="order-title">
+                    <div class="order-number-date">
+                        <div class="order-number">Замовлення № <span></span></div>
+                        <div class="order-date">
+                            <span>Дата</span>
+                            <input type="date">
+                        </div>
+                    </div>
+                    <div class="order-time">
+                        <div>
+                            <span>від</span>
+                            <input type="time">
+                        </div>
+                        <div>
+                            <span>до</span>
+                            <input type="time">
+                        </div>
+                    </div>
+                </div>
+                <div class="order-info-image">
+                    <div class="upload-image">
+                        <img>
+                        <span class="files-buttons">
+                            <label for="order-info-files">
+                                <span class="material-symbols-outlined">attach_file</span>
+                            </label>
+                            <span class="remove-image material-symbols-outlined" onpointerup="removeImage(event)">delete_forever</span>
+                        </span>
+                        <input id="order-info-files" type="file" onchange="uploadImage(event)">
+                    </div>
+                </div>
+            </div>
+            <div class="order-status">
+                <div class="statuses">
+                    <span class="status active-order-status">
+                        <span class="material-symbols-outlined">sync</span>
+                        <span>Прийняте<br>в обробку</span>
+                    </span>
+                    <span class="status">
+                        <span class="material-symbols-outlined">done</span>
+                        <span>Зібране<br>флористом</span>
+                    </span>
+                    <span class="status">
+                        <span class="material-symbols-outlined">local_shipping</span>
+                        <span>Доставлене<br>замовнику</span>
+                    </span>
+                </div>
+                <div class="surcharge-block">
+                    <div class="surcharge">
+                        Сума доплати: <span></span> грн
+                    </div>
+                    <div class="surcharge-buttons">
+                        <span class="surcharge-button">
+                            <span class="material-symbols-outlined">attach_money</span>
+                            <span>Готівка</span>
+                        </span>
+                        <span class="surcharge-button">
+                            <span class="material-symbols-outlined">contactless</span>
+                            <span>Термінал</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="customer">
+                <div class="name">
+                    <span>Замовник</span>
+                    <span></span>
+                </div>
+                <div class="phones"></div>
+            </div>
+            <div class="recipient">
+                <div class="name">
+                    <span>Отримувач</span>
+                    <span></span>
+                </div>
+                <div class="phones"></div>
+            </div>
+            <div class="address">
+                <span class="material-symbols-outlined">location_on</span>
+                <span></span>
+            </div>
+            <div class="comment">
+                <span class="material-symbols-outlined">comment</span>
+                <textarea maxlength="300" rows="6"></textarea>
+            </div>
+            <div class="form order-products">
+                <h2>Склад замовлення</h2>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Товар</td>
+                            <td>Кількість</td>
+                            <td>Ціна</td>
+                            <td>Сума</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="one-more-product" onpointerup="addOrderProduct()">Додати товар</button>
+            </div>
+            <button>Зберегти</button>
+        </div>
+    </div>
+    <div class="create-flavor-modal">
+        <div class="create-flavor-modal-content">
+            <div class="modal-content-name">
+                <span class="material-symbols-outlined">history</span>
+                <h1></h1>
+                <span class="close-modal material-symbols-outlined">close</span>
+            </div>
+            <datalist id="flavor-product"></datalist>
+            <div class="upload-image">
+                <img>
+                <span class="files-buttons">
+                    <label for="flavor-files">
+                        <span class="material-symbols-outlined">attach_file</span>
+                    </label>
+                    <span class="remove-image material-symbols-outlined" onpointerup="removeImage(event)">delete_forever</span>
+                </span>
+                <input id="flavor-files" type="file" onchange="uploadImage(event)">
+            </div>
+            <div class="form">
+                <h2>Назва</h2>
+                <input class="flavor-name" maxlength="25">
+            </div>
+            <div class="form">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Склад</span>
+                </h2>
+                <select class="flavor-stock"></select>
+            </div>
+            <div class="form-check">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Оберіть тип</span>
+                </h2>
+                <form class="flavor-type">
+                    <label>
+                        <input type="radio" name="flavor-type" value="Букет" checked>
+                        <span>Букет</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="flavor-type" value="Композиція">
+                        <span>Композиція</span>
+                    </label>
+                </form>
+            </div>
+            <div class="form flavor-products">
+                <div>
+                    <h2>Товари</h2>
+                    <button class="view-flavor-templates" onpointerup="viewFlavorTemplates()">
+                        <span class="material-symbols-outlined">auto_awesome_motion</span>
+                        <span>Шаблони</span>
+                    </button>
+                </div>
+                <table>
+                    <tr>
+                        <td>Товар</td>
+                        <td>Кількість</td>
+                        <td>Ціна</td>
+                        <td>Сума</td>
+                    </tr>
+                </table>
+                <button class="one-more-product" onpointerup="addFlavorProduct()">Додати товар</button>
+            </div>
+            <div class="form flavor-sums">
+                <h2 class="total-buying-sum">
+                    <span>Собівартість:</span>
+                    <span>0.00</span>
+                </h2>
+                <h2 class="total-sum">
+                    <span>Разом:</span>
+                    <input type="number" min="0" max="100000" oninput="handlePriceInput(event)">
+                </h2>
+            </div>
+            <div class="flavor-save-buttons">
+                <button onpointerup="saveTemplate()">
+                    <span class="material-symbols-outlined">auto_awesome_motion</span>
+                    <span>Зберегти шаблон</span>
+                </button>
+                <button>Зберегти</button>
+            </div>
+        </div>
+    </div>
+    <div class="flavor-info-modal">
+        <div class="flavor-info-modal-content">
+            <div class="form flavor-content">
+                <div class="form flavor-info">
+                    <h1></h1>
+                    <div class="form">
+                        <h2>Зібрав</h2>
+                        <h3 class="flavor-employee"></h3>
+                    </div>
+                    <div class="form">
+                        <h2>Дата</h2>
+                        <h3 class="flavor-date"></h3>
+                    </div>
+                    <div class="form">
+                        <h2>Склад</h2>
+                        <h3 class="flavor-stock"></h3>
+                    </div>
+                </div>
+                <img>
+            </div>
+            <div class="form">
+                <table>
+                    <tr>
+                        <td>Товар</td>
+                        <td>Кількість</td>
+                    </tr>
+                </table>
+                <div class="flavor-total-sums">
+                    <h2 class="flavor-total-buying-sum">
+                        <span>Собівартість:</span>
+                        <span></span>
+                    </h2>
+                    <h2 class="flavor-total-sum">
+                        <span>Ціна:</span>
+                        <span></span>
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flavor-templates-modal">
+        <div class="flavor-templates-modal-content">
+            <ul></ul>
+        </div>
+    </div>
+    <div class="create-store-expense-modal">
+        <div class="create-store-expense-modal-content">
+            <div class="modal-content-name">
+                <span class="material-symbols-outlined">history</span>
+                <h1></h1>
+                <span class="close-modal material-symbols-outlined">close</span>
+            </div>
+            <div class="form">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Дата</span>
+                </h2>
+                <input type="date" class="store-expense-date">
+            </div>
+            <div class="form">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Склад</span>
+                </h2>
+                <select class="store-expense-stock"></select>
+            </div>
+            <div class="form">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Сума</span>
+                </h2>
+                <div>
+                    <input type="number" min="0" max="1000000" oninput="handlePriceInput(event)" class="store-expense-sum">
+                    <span>грн</span>
+                </div>
+            </div>
+            <div class="form">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Коментар</span>
+                </h2>
+                <textarea class="store-expense-comment" maxlength="150" rows="6"></textarea>
+            </div>
+            <button>Зберегти</button>
+        </div>
+    </div>
+    <div class="create-label-modal">
+        <div class="create-label-modal-content">
+            <div class="modal-content-name">
+                <span class="material-symbols-outlined">history</span>
+                <h1></h1>
+                <span class="close-modal material-symbols-outlined">close</span>
+            </div>
+            <div class="form">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Назва</span>
+                </h2>
+                <input maxlength="30">
+            </div>
+            <div class="form">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Колір</span>
+                </h2>
+                <div class="label-colors"></div>
+            </div>
+            <button>Зберегти</button>
+        </div>
+    </div>
+    <div id="message"></div>
+    <script src="js/script.js"></script>
+    <script src="js/company.js"></script>
+    <script src="js/stock.js"></script>
+    <script src="js/cash-register.js"></script>
+    <script src="js/employee.js"></script>
+    <script src="js/category.js"></script>
+    <script src="js/product.js"></script>
+    <script src="js/contractor.js"></script>
+    <script src="js/supply.js"></script>
+    <script src="js/leftover.js"></script>
+    <script src="js/inventory.js"></script>
+    <script src="js/sale.js"></script>
+    <script src="js/client.js"></script>
+    <script src="js/waste.js"></script>
+    <script src="js/shift.js"></script>
+    <script src="js/all-orders.js"></script>
+    <script src="js/completed-orders.js"></script>
+    <script src="js/pending-orders.js"></script>
+    <script src="js/flavor.js"></script>
+    <script src="js/store-expense.js"></script>
+    <script src="js/label.js"></script>
+</body>
+</html>
