@@ -737,11 +737,11 @@ table {
 @media (hover: none) {
     html {
         text-size-adjust: none;
+        touch-action: manipulation;
     }
     
     * {
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-        touch-action: manipulation;
     }
 }
 
