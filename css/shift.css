@@ -198,5 +198,6 @@
     .shift-info-modal-content {
         max-height: calc(100vh - 20rem);
         padding: 1.3rem;
+        font-size: 2rem !important;
     }
 }
