@@ -1,0 +1,218 @@
+.create-supply-modal-content {
+    max-height: calc(100vh - 7rem);
+    overflow-y: auto;
+    width: calc(var(--modal-content-width) + 8rem);
+    gap: 1.5rem;
+
+    & select {
+        width: 14rem;
+    }
+
+    & input[list=supply-contractor] {
+        width: 13rem;
+    }
+
+    & .supply-paid-sum-block {
+        display: flex;
+        gap: .6rem;
+        align-items: center;
+
+        & .supply-paid-sum {
+            padding: .4rem;
+            width: 5.5rem;
+        }
+    }
+
+    & .total-sum, & .total-sum-associated-costs {
+        align-self: end;
+        margin-bottom: 1rem;
+
+        & span:first-child {
+            font-weight: bold;
+        }
+    }
+
+    & .total-sum-associated-costs {
+        display: none;
+    }
+}
+
+.associated-costs, .supply-products {
+    & h2 {
+        margin-top: 1.5rem;
+        font-size: 1.4rem !important;
+        font-weight: bold !important;
+    }
+
+    & .one-more-product {
+        background: none;
+        border: .1rem rgba(110, 110, 110, .8) dashed;
+        width: 100%;
+        color: rgb(0, 0, 0);
+        font-size: 1rem;
+        padding: .5rem 0;
+        transition: .1s;
+    
+        &:hover {
+            border-color: rgb(30, 30, 30);
+        }
+    }
+}
+
+.associated-costs {
+    & .associated-costs-data {
+        display: flex;
+        flex-direction: column;
+        gap: .7rem;
+
+        & div {
+            display: flex;
+            gap: 2rem;
+            justify-content: space-between;
+    
+            & input:first-child {
+                flex: 3;
+            }
+    
+            & input:last-child {
+                flex: 1;
+            }
+    
+            & span {
+                color: rgba(255, 0, 0, .6);
+                cursor: pointer;
+                align-self: center;
+    
+                &:hover {
+                    color: rgba(255, 0, 0, .9);
+                }
+            }
+        }
+    }
+}
+
+.supply-products:not(.supply-info-modal .supply-products) {
+    & table {
+        display: block;
+        box-shadow: none;
+        margin-bottom: 0;
+
+        & tbody {
+            display: none;
+
+            & td {
+                color: rgb(0, 0, 0);
+            }
+        }
+
+        & td:nth-child(4) {
+            width: 4rem;
+            text-align: center;
+        }
+
+        & input {
+            font-size: .85rem;
+            width: 4rem;
+        }
+
+        & input[list=supply-product] {
+            width: 9.1rem;
+        }
+
+        & tr {
+            background: var(--white);
+
+            &:hover {
+                background: var(--white);
+            }
+
+            & .remove-supply-product {
+                transition: .1s;
+
+                & span {
+                    color: rgba(255, 0, 0, .6);
+                    cursor: pointer;
+
+                    &:hover {
+                        color: rgba(255, 0, 0, .9);
+                    }
+                }
+            }
+        }
+
+        & td {
+            border-right: none !important;
+            font-size: .9rem;
+            padding: .5rem .2rem;
+        }
+    }
+}
+
+.supply-table table tr:not(:first-child) td:first-child {
+    text-align: center;
+}
+
+.supply-info-modal-content {
+    gap: 1.5rem;
+    max-height: calc(100vh - 7rem);
+    overflow-y: auto;
+    padding: 1rem;
+    width: calc(var(--modal-content-width) + 14rem);
+
+    & .form {
+        & h2 {
+            font-weight: bold;
+        }
+
+        & h3 {
+            font-weight: normal;
+            font-size: 1.1rem;
+        }
+    }
+
+    & table {
+        display: block;
+        
+        & td {
+            font-size: 1rem;
+            padding: .6rem .5rem;
+
+            &:nth-child(2) {
+                text-align: center;
+            }
+        }
+    }
+
+    & .supply-products table {
+        width: 100%;
+
+        & td:not(:last-child) {
+            white-space: nowrap;
+        }
+
+        & td:last-child {
+            width: 100%;
+        }
+    }
+
+    & .supply-products h2, & .supply-associated-costs h2 {
+        margin: 0;
+        margin-bottom: 1rem;
+    }
+
+    & .total-sum, & .total-sum-associated-costs {
+        display: flex;
+        justify-content: end;
+        font-size: 1.2rem;
+        font-weight: bold;
+        gap: .5rem;
+
+        & span:last-child {
+            font-weight: normal;
+        }
+    }
+}
+
+.supply-table table tr:not(:first-child) {
+    cursor: pointer;
+}
