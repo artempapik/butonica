@@ -16,11 +16,11 @@ const showSaleInfo = e => {
         fillSelectedMenuItem(e)
 
         document.querySelector('header').style.display = 'none'
-        document.querySelector('main').style.padding = '0 .4rem'
+        document.querySelector('main').classList.add('sale-padding')
 
         document.querySelectorAll('.main-menu span:last-child').forEach(i => i.style.display = 'none')
         document.querySelectorAll('.menu-item').forEach(i => i.style.width = 'fit-content')
-        document.querySelector('.main-menu').style.padding = '1.7rem .2rem'
+        document.querySelector('.main-menu').classList.add('sale-padding')
         document.querySelectorAll('.sub-menu li').forEach(i => {
             i.style.marginLeft = '0'
             i.style.color = 'rgb(204, 85, 0)'
