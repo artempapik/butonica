@@ -196,8 +196,7 @@
 
 @media only screen and (max-width: 1500px) {
     .shift-info-modal-content {
-        max-height: calc(100vh - 20rem);
+        max-height: calc(100vh - 12rem);
         padding: 1.3rem;
-        font-size: 2rem !important;
     }
 }
