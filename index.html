@@ -689,7 +689,7 @@
             <div class="form associated-costs">
                 <h2>Супутні витрати</h2>
                 <div class="associated-costs-data"></div>
-                <button class="one-more-product" onpointerup="addAssociatedCost()">Додати</button>
+                <button class="one-more-product" ontouchstart="event.preventDefault()" onpointerup="addAssociatedCost()">Додати</button>
             </div>
             <div class="form supply-products">
                 <h2>Товари</h2>
@@ -701,7 +701,7 @@
                         <td>Сума</td>
                     </tr>
                 </table>
-                <button class="one-more-product" onpointerup="addSupplyProduct()">Додати товар</button>
+                <button class="one-more-product" ontouchstart="event.preventDefault()" onpointerup="addSupplyProduct(event)">Додати товар</button>
             </div>
             <div class="form">
                 <h2 class="total-sum">
@@ -1983,3 +1983,4 @@
     <script src="js/label.js"></script>
 </body>
 </html>
+ 
