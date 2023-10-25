@@ -734,11 +734,17 @@ table {
 
 @media only screen and (max-width: 1200px) {
     main.main-padding {
-        padding: 0 1rem;
+        padding: 0 1.6rem;
     }
 
-    .main-menu.main-padding {
-        padding: 1.3rem .2rem;
+    .main-menu {
+        &.main-padding {
+            padding: 1.3rem .2rem;
+        }
+
+        & .menu-item {
+            padding: .7rem .5rem;
+        }
     }
 
     [class$="header"] {
