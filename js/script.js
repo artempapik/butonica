@@ -1,6 +1,9 @@
-const BASE_URL = 'https://botanice.user30503.realhost-free.net'
-// const BASE_URL = 'https://localhost:7099'
+const Environment = {
+    DEV: 'https://localhost:7099',
+    PROD: 'https://botanice.user30503.realhost-free.net'
+}
 
+const BASE_URL = Environment.PROD
 const EMPTY_IMAGE_URL = 'img/empty-flower.webp'
 
 let imageData
@@ -656,11 +659,11 @@ const menuItemsContents = {
 
 const fillSelectedMenuItem = e => {
     document.querySelector('header').style.display = ''
-    document.querySelector('main').style.padding = '0 1.5rem 0 2.5rem'
+    document.querySelector('main').classList.remove('sale-padding')
 
     document.querySelectorAll('.main-menu span:last-child').forEach(i => i.style.display = '')
     document.querySelectorAll('.menu-item').forEach(i => i.style.width = '')
-    document.querySelector('.main-menu').style.padding = '1.3rem .9rem'
+    document.querySelector('.main-menu').classList.remove('sale-padding')
     document.querySelectorAll('.sub-menu li').forEach(i => {
         i.style.marginLeft = '2rem'
         i.style.color = ''
