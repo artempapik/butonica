@@ -441,13 +441,9 @@
                 gap: 1rem;
                 align-items: center;
 
-                & span {
-                    width: 5rem;
-                }
-
                 & div {
                     display: flex;
-                    gap: .4rem;
+                    gap: 1rem;
 
                     & select, & input {
                         border-radius: .6rem;
@@ -469,10 +465,10 @@
 
                 & span:last-child {
                     cursor: pointer;
-                    color: rgb(210, 43, 43);
+                    color: rgb(220, 90, 90);
 
                     &:hover {
-                        text-decoration: underline;
+                        color: rgb(190, 30, 30);
                     }
                 }
             }
