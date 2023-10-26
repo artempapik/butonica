@@ -81,7 +81,7 @@
 
     .employee-table table {
         & td {
-            padding: .7rem .3rem;
+            padding: .7rem .4rem;
         }
         
         & tr:not(:first-child) {
