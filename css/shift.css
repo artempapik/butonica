@@ -199,4 +199,10 @@
         max-height: calc(100vh - 12rem);
         padding: 1.3rem;
     }
+
+    .shift-table table {
+        & tr:first-child, td:nth-child(2) {
+            font-size: .9rem;
+        }
+    }
 }
