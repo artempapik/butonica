@@ -766,7 +766,7 @@ table {
 
     main {
         &.main-padding {
-            padding: 0 .4rem 0 .5rem;
+            padding: 0 .6rem;
         }
 
         &.sale-padding {
