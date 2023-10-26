@@ -756,7 +756,7 @@ table {
 }
 
 @media only screen and (max-width: 1500px) {
-    input[type=checkbox] {
+    input {
         transform: none !important;
     }
     
