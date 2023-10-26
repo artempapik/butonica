@@ -235,7 +235,7 @@ const createFlavorRow = flavor => {
     tr.append(
         createTd(getFlavorName(flavor)),
         flavorProductsColumn,
-        createTd(flavor.totalSum.toFixed(2)),
+        createTd(flavor.totalSum.toFixed(2) + ' грн'),
         createTd(flavor.stock),
         actionsColumn
     )
