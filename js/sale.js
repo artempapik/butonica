@@ -22,7 +22,7 @@ const showSaleInfo = e => {
         document.querySelectorAll('.menu-item').forEach(i => i.style.width = 'fit-content')
         document.querySelector('.main-menu').classList.add('sale-padding')
         document.querySelectorAll('.sub-menu li').forEach(i => {
-            i.style.marginLeft = '0'
+            i.classList.add('sale-padding')
             i.style.color = 'rgb(204, 85, 0)'
             i.querySelector('div').style.justifyContent = 'center'
             i.querySelector('div span').style.fontWeight = 'bold'
