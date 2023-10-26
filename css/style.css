@@ -778,11 +778,15 @@ table {
 
     .sub-menu li {
         &.main-padding {
-            margin-left: .5rem;
+            margin-left: .3rem;
         }
 
         &.sale-padding {
             margin-left: 0;
+        }
+
+        & div {
+            padding: .4rem .7rem;
         }
     }
 
