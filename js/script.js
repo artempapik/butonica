@@ -665,7 +665,7 @@ const fillSelectedMenuItem = e => {
     document.querySelectorAll('.menu-item').forEach(i => i.style.width = '')
     document.querySelector('.main-menu').classList.remove('sale-padding')
     document.querySelectorAll('.sub-menu li').forEach(i => {
-        i.style.marginLeft = '2rem'
+        i.classList.remove('sale-padding')
         i.style.color = ''
         i.querySelector('div').style.justifyContent = ''
         i.querySelector('div span').style.fontWeight = ''
