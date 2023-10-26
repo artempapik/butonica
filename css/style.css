@@ -750,11 +750,10 @@ table {
 
     body {
         touch-action: manipulation;
-        height: 100%;
         position: fixed;
         overflow-y: scroll;
     }
-    
+
     * {
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     }
