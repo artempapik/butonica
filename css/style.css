@@ -799,6 +799,6 @@ table {
     }
 
     [class$="header"] {
-        margin: 1.3rem 0;
+        margin: 1rem 0 1.5rem 0;
     }
 }
