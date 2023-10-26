@@ -758,7 +758,7 @@ table {
 @media only screen and (max-width: 1500px) {
     main {
         &.main-padding {
-            padding: 0 .6rem;
+            padding: 0 .4rem 0 .5rem;
         }
 
         &.sale-padding {
@@ -768,7 +768,7 @@ table {
 
     .main-menu {
         &.main-padding {
-            padding: 1.3rem .2rem;
+            padding: 1.3rem .1rem;
         }
 
         & li .menu-item {
@@ -778,7 +778,7 @@ table {
 
     .sub-menu li {
         &.main-padding {
-            margin-left: .7rem;
+            margin-left: .5rem;
         }
 
         &.sale-padding {
@@ -787,6 +787,6 @@ table {
     }
 
     [class$="header"] {
-        margin: 1rem 0 1.5rem 0;
+        margin: 1rem 0;
     }
 }
