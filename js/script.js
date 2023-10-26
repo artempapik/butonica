@@ -486,7 +486,7 @@ const menuItemsContents = {
                             <select></select>
                             <input onkeyup="searchClientByPhone()" class="search-checkout-client" placeholder="Телефон" maxlength="13">
                         </div>
-                        <span>Очистити</span>
+                        <span class="material-symbols-outlined">cancel</span>
                     </div>
                     <div class="sale-payment" onpointerup="createSaleModal()">Оплата</div>
                 </div>
