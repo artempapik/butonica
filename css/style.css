@@ -756,6 +756,10 @@ table {
 }
 
 @media only screen and (max-width: 1500px) {
+    input[type=checkbox] {
+        transform: none !important;
+    }
+    
     header {
         padding: .3rem 1.2rem;
     }
