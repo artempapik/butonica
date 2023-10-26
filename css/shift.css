@@ -15,9 +15,9 @@
             flex-direction: column;
             gap: .7rem;
 
-            &:first-child {
-                border-top: .1rem rgb(120, 120, 120) dashed;
-                border-bottom: .1rem rgb(120, 120, 120) dashed;
+            &:first-child .types span:first-child {
+                text-decoration: underline;
+                color: rgb(0, 0, 0) !important;
             }
 
             &:first-child, &.surcharge {
@@ -73,9 +73,10 @@
                         display: flex;
                         flex-direction: column;
                         gap: .2rem;
+                        align-self: end;
 
                         & span:first-child {
-                            color: rgb(20, 20, 20);
+                            color: rgb(30, 30, 30);
 
                             & .order-number {
                                 margin-left: .5rem;
