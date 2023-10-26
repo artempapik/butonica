@@ -9,7 +9,6 @@
     --white: rgb(255, 255, 255);
     --search-input-width: 10rem;
     touch-action: pan-x pan-y;
-    height: 100%;
 }
 
 ::-webkit-scrollbar {
@@ -737,6 +736,9 @@ table {
 @media (hover: none) {
     html {
         text-size-adjust: none;
+    }
+
+    body {
         touch-action: manipulation;
     }
     
@@ -748,7 +750,7 @@ table {
 @media only screen and (max-width: 1500px) {
     main {
         &.main-padding {
-            padding: 0 1.6rem;
+            padding: 0 .7rem 0 1.2rem;
         }
 
         &.sale-padding {
