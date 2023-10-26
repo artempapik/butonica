@@ -181,7 +181,7 @@ const createShiftRow = shift => {
         createTd(shift.employee),
         createTd(formatDate(shift.start)),
         createTd(formatDate(shift.end)),
-        createTd(shift.revenue.toFixed(2) + ' грн'),
+        createTd(shift.revenue.toFixed(2)),
         statusTd
     )
     return tr
