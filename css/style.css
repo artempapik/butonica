@@ -484,7 +484,7 @@ table {
 
             &:first-child {
                 color: rgb(var(--edit-action-color));
-                margin-right: 1.2rem;
+                margin-right: .8rem;
 
                 &:hover {
                     background: rgb(var(--edit-action-color));
@@ -759,7 +759,7 @@ table {
     header {
         padding: .3rem 1.2rem;
     }
-    
+
     main {
         &.main-padding {
             padding: 0 .4rem 0 .5rem;
@@ -790,7 +790,7 @@ table {
         }
 
         & div {
-            padding: .4rem .7rem;
+            padding: .5rem;
         }
     }
 
