@@ -542,8 +542,8 @@ const menuItemsContents = {
                 <tr>
                     <td>Каса</td>
                     <td>Працівник</td>
-                    <td>Час відкриття</td>
-                    <td>Час закриття</td>
+                    <td>Відкриття</td>
+                    <td>Закриття</td>
                     <td>Виручка</td>
                     <td>Статус</td>
                 </tr>
