@@ -1,4 +1,6 @@
 .create-employee-modal-content {
+    max-height: calc(100vh - 7rem);
+
     & div:first-child {
         margin-bottom: 1rem;
     }
@@ -72,7 +74,13 @@
 }
 
 @media only screen and (max-width: 1500px) {
-    .employee-table table tr:not(:first-child) td:nth-child(2) {
-        font-size: .9rem;
+    .create-employee-modal-content {
+        max-height: calc(100vh - 10rem);
+    }
+
+    .employee-table table tr:not(:first-child) {
+        & td:first-child, & td:nth-child(2), & td:nth-child(5) {
+            font-size: .9rem;
+        }
     }
 }
