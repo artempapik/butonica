@@ -907,3 +907,5 @@ const keepDatalistOptions = selector => {
         }
     }
 }
+
+document.ondblclick = e => e.preventDefault()
