@@ -487,6 +487,10 @@ const addSupplyProduct = () => {
     const selector = 'supply-product'
     supplyProductSelect.setAttribute('list', selector)
 
+    supplyProductSelect.onfocus = () => {
+        console.log(2)
+    }
+
     const supplyProductColumn = document.createElement('td')
     supplyProductColumn.append(supplyProductSelect)
 
