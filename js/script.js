@@ -722,12 +722,6 @@ const handlePriceInput = e => {
     }
 }
 
-document.querySelectorAll('.close-modal').forEach(b => b.ontouchend = e => e.preventDefault())
-
-window.ontouchend = e => {
-    e.preventDefault()
-}
-
 document.querySelectorAll('.close-modal').forEach(b => b.onpointerup = () => {
     for (const modal of [
         stockModal,
@@ -747,7 +741,7 @@ document.querySelectorAll('.close-modal').forEach(b => b.onpointerup = () => {
         labelModal
     ]) {
         if (modal) {
-            modal.style.display = ''
+            setTimeout(() => modal.style.display = '', 1)
         }
     }
 })
@@ -769,8 +763,7 @@ window.onpointerup = e => {
         employeeInfoModal
     ]) {
         if (e.target === modal) {
-            modal.style.display = ''
-            e.preventDefault()
+            setTimeout(() => modal.style.display = '', 1)
         }
     }
 }
