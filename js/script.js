@@ -722,7 +722,7 @@ const handlePriceInput = e => {
     }
 }
 
-document.querySelectorAll('.close-modal').forEach(b => b.onpointerup = () => {
+document.querySelectorAll('.close-modal').forEach(b => b.onpointerup = e => {
     for (const modal of [
         stockModal,
         cashRegisterModal,
@@ -742,6 +742,7 @@ document.querySelectorAll('.close-modal').forEach(b => b.onpointerup = () => {
     ]) {
         if (modal) {
             modal.style.display = ''
+            e.preventDefault()
         }
     }
 })
@@ -764,6 +765,7 @@ window.onpointerup = e => {
     ]) {
         if (e.target === modal) {
             modal.style.display = ''
+            e.preventDefault()
         }
     }
 }
@@ -833,7 +835,7 @@ if (loginInfo) {
         document.querySelector('.profile-info div span:last-child').textContent = loginInfo.fullName + ' — ' + employeeTitleToName[loginInfo.title]
         document.querySelector('.subscription-text span:last-child').textContent = getSubscriptionExpiresText(new Date(loginInfo.startSubscription))
         removeMenus(loginInfo.title)
-    })//.catch(() => showMessage('error', getErrorMessage('підписку')))
+    }).catch(() => showMessage('error', getErrorMessage('підписку')))
 } else {
     loginModal.style.display = 'flex'
 }
