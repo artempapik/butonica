@@ -31,7 +31,7 @@ body {
     user-select: none;
     display: flex;
     flex-direction: column;
-    font-family: 'Roboto', system-ui, -apple-system, 'Helvetica Neue';
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     background: rgb(250, 250, 250);
 }
 
