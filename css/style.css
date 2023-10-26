@@ -520,7 +520,7 @@ table {
     }
 
     & span:first-child {
-        margin-right: 2rem;
+        margin-right: 1rem;
     }
 
     & span:last-child {
