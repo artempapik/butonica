@@ -1,5 +1,6 @@
 .create-employee-modal-content {
     max-height: calc(100vh - 7rem);
+    overflow-y: auto;
 
     & div:first-child {
         margin-bottom: 1rem;
