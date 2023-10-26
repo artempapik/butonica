@@ -8,7 +8,6 @@
     --table-hover-color: 79, 118, 181;
     --white: rgb(255, 255, 255);
     --search-input-width: 10rem;
-    touch-action: pan-x pan-y;
 }
 
 ::-webkit-scrollbar {
@@ -742,10 +741,14 @@ table {
 }
 
 @media (hover: none) {
+    :root {
+        touch-action: pan-x pan-y;
+    }
+
     html {
         text-size-adjust: none;
     }
-    
+
     * {
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     }
