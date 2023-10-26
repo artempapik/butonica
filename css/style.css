@@ -756,6 +756,10 @@ table {
 }
 
 @media only screen and (max-width: 1500px) {
+    header {
+        padding: .3rem 1.2rem;
+    }
+    
     main {
         &.main-padding {
             padding: 0 .4rem 0 .5rem;
