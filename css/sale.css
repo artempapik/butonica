@@ -466,9 +466,7 @@
 
                 & span:last-child {
                     cursor: pointer;
-                    font-weight: bold;
                     color: rgb(210, 43, 43);
-                    font-size: .9rem;
 
                     &:hover {
                         text-decoration: underline;
@@ -1316,6 +1314,11 @@
     .sale-content .sale-panel {
         min-width: 26rem;
         width: 26rem;
-        max-height: 80vh;
-    }   
+        max-height: 82vh;
+
+        & .sale-pay-buttons .checkout-clients {
+            padding: .9rem .3rem;
+            gap: .7rem;
+        }
+    }
 }
