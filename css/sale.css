@@ -13,6 +13,7 @@
     & div {
         gap: .7rem;
         width: fit-content;
+        align-items: center;
         display: flex;
         color: rgb(70, 70, 70);
 
@@ -30,6 +31,7 @@
         padding: 1rem;
         padding-left: 2.9rem;
         background-size: 1.7rem;
+        border-radius: 1.5rem;
     }
 }
 
@@ -1337,7 +1339,7 @@
         }
 
         & .sale-cash-register .cash-register-products .products .sale-products {
-            max-height: 33vh;
+            max-height: 30vh;
             padding: .1rem;
             gap: .4rem;
         }
