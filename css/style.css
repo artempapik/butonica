@@ -754,6 +754,10 @@ table {
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     }
 
+    input {
+        transform: none !important;
+    }
+
     input[type="checkbox"] {
         position: relative;
         appearance: none;
@@ -790,10 +794,6 @@ table {
 }
 
 @media only screen and (max-width: 1500px) {
-    input {
-        transform: none !important;
-    }
-
     header {
         padding: .3rem 1.2rem;
     }
