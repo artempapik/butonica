@@ -366,7 +366,15 @@ aside {
 
     & li {
         padding: 0;
-        margin-left: 2rem;
+
+        &.main-padding {
+            margin-left: 2rem;
+        }
+
+        &.main-padding {
+            margin-left: 0;
+        }
+
         color: rgb(30, 30, 30);
 
         & div {
@@ -765,6 +773,16 @@ table {
 
         & li .menu-item {
             padding: .7rem .5rem;
+        }
+    }
+
+    .sub-menu li {
+        &.main-padding {
+            margin-left: 1rem;
+        }
+
+        &.sale-padding {
+            margin-left: 0;
         }
     }
 
