@@ -84,10 +84,8 @@
             padding: .7rem .4rem;
         }
         
-        & tr:not(:first-child) {
-            & td:first-child, & td:nth-child(2) {
-                font-size: .9rem;
-            }
+        & tr:not(:first-child) td:nth-child(2) {
+            font-size: .9rem;
         }
     }
 }
