@@ -1311,3 +1311,11 @@
         align-self: auto;
     }
 }
+
+@media only screen and (max-width: 1500px) {
+    .sale-content .sale-panel {
+        min-width: 26rem;
+        width: 26rem;
+        max-height: 80vh;
+    }   
+}
