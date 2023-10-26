@@ -743,27 +743,16 @@ table {
 
 @media (hover: none) {
     html {
-        background-color: red;
+        text-size-adjust: none;
         overflow: hidden;
         width: 100%;
-      }
-      
-      body {
-        height: 100%;
-        position: fixed;
-        /* prevent overscroll bounce*/
-        background-color: lightgreen;
-        overflow-y: scroll;
-        -webkit-overflow-scrolling: touch;
-        /* iOS velocity scrolling */
-      }
-      
-    html {
-        text-size-adjust: none;
     }
 
     body {
         touch-action: manipulation;
+        height: 100%;
+        position: fixed;
+        overflow-y: scroll;
     }
     
     * {
