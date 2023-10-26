@@ -682,8 +682,8 @@ const createSaleProduct = product => {
     spans.item(3).textContent = product.totalProductCost || product.totalProductCost === 0 ? product.totalProductCost.toFixed(2) : product.sellingCost.toFixed(2)
 
     const input = document.createElement('input')
-    input.oninput = e => handlePriceInput(e)
-    input.onchange = () => {
+    input.oninput = e => {
+        handlePriceInput(e)
         spans.item(1).textContent = input.value
 
         const totalCost = +input.value * product.sellingCost
