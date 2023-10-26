@@ -1311,14 +1311,35 @@
 }
 
 @media only screen and (max-width: 1500px) {
+    .sale-content .sale-products {
+        gap: .8rem;
+        row-gap: .8rem;
+
+        & .sale-product, & .sale-flavor {
+            padding: .3rem;
+        }
+    }
+
     .sale-content .sale-panel {
         min-width: 26rem;
         width: 26rem;
         max-height: 82vh;
 
-        & .sale-pay-buttons .checkout-clients {
-            padding: .9rem .3rem;
-            gap: .7rem;
+        & .sale-pay-buttons {
+            & .to-pay {
+                padding: .5rem;
+            }
+
+            & .checkout-clients {
+                padding: .9rem .3rem;
+                gap: .7rem;
+            }
+        }
+
+        & .sale-cash-register .cash-register-products .products .sale-products {
+            max-height: 37vh;
+            padding: .1rem;
+            gap: .4rem;
         }
     }
 }
