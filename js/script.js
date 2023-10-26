@@ -722,7 +722,13 @@ const handlePriceInput = e => {
     }
 }
 
-document.querySelectorAll('.close-modal').forEach(b => b.onpointerup = e => {
+document.querySelectorAll('.close-modal').forEach(b => b.ontouchend = e => e.preventDefault())
+
+window.ontouchend = e => {
+    e.preventDefault()
+}
+
+document.querySelectorAll('.close-modal').forEach(b => b.onpointerup = () => {
     for (const modal of [
         stockModal,
         cashRegisterModal,
@@ -742,7 +748,6 @@ document.querySelectorAll('.close-modal').forEach(b => b.onpointerup = e => {
     ]) {
         if (modal) {
             modal.style.display = ''
-            e.preventDefault()
         }
     }
 })
