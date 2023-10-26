@@ -1337,7 +1337,7 @@
         }
 
         & .sale-cash-register .cash-register-products .products .sale-products {
-            max-height: 35vh;
+            max-height: 34vh;
             padding: .1rem;
             gap: .4rem;
         }
