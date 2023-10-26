@@ -20,6 +20,7 @@
         & input {
             transform: scale(1.5);
             width: fit-content;
+            margin: 0;
             box-shadow: none;
         }
     }
@@ -1314,6 +1315,10 @@
 }
 
 @media only screen and (max-width: 1500px) {
+    .sale-header div input {
+        width: unset;
+    }
+
     .sale-content .sale-products {
         gap: .8rem;
         row-gap: .8rem;
