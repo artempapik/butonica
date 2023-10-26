@@ -484,7 +484,7 @@ table {
 
             &:first-child {
                 color: rgb(var(--edit-action-color));
-                margin-right: .8rem;
+                margin-right: 1.2rem;
 
                 &:hover {
                     background: rgb(var(--edit-action-color));
@@ -800,7 +800,7 @@ table {
 
     main {
         &.main-padding {
-            padding: 0 .6rem;
+            padding: 0 .4rem 0 1rem;
         }
 
         &.sale-padding {
@@ -808,8 +808,14 @@ table {
         }
     }
 
-    table td {
-        padding: .7rem;
+    table {
+        & td {
+            padding: .7rem;
+        }
+
+        & [class$="actions"] span:first-child { 
+            margin-right: .5rem;
+        }
     }
 
     .main-menu {
