@@ -443,7 +443,7 @@
 
                 & div {
                     display: flex;
-                    gap: 1rem;
+                    gap: .5rem;
 
                     & select, & input {
                         border-radius: .6rem;
