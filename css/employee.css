@@ -79,9 +79,15 @@
         max-height: calc(100vh - 10rem);
     }
 
-    .employee-table table tr:not(:first-child) {
-        & td:first-child, & td:nth-child(2), & td:nth-child(5) {
-            font-size: .9rem;
+    .employee-table table {
+        & td {
+            padding: .7rem .3rem;
+        }
+        
+        & tr:not(:first-child) {
+            & td:first-child, & td:nth-child(2), & td:nth-child(5) {
+                font-size: .9rem;
+            }
         }
     }
 }
