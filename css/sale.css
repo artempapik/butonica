@@ -774,6 +774,7 @@
 
         & .free-payment {
             display: flex;
+            align-items: center;
             gap: .5rem;
             margin-bottom: .3rem;
         }
@@ -1325,7 +1326,7 @@
     .sale-content .sale-panel {
         min-width: 26rem;
         width: 26rem;
-        max-height: 82vh;
+        max-height: 82.5vh;
 
         & .sale-pay-buttons {
             & .to-pay {
@@ -1339,7 +1340,7 @@
         }
 
         & .sale-cash-register .cash-register-products .products .sale-products {
-            max-height: 30vh;
+            max-height: 31vh;
             padding: .1rem;
             gap: .4rem;
         }
