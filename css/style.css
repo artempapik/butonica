@@ -800,7 +800,7 @@ table {
 
     main {
         &.main-padding {
-            padding: 0 .4rem 0 1rem;
+            padding: 0 .4rem 0 .8rem;
         }
 
         &.sale-padding {
