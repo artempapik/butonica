@@ -1316,6 +1316,7 @@
 
 @media only screen and (max-width: 1500px) {
     .sale-header div input {
+        padding: 0 1.5rem;
         width: unset;
     }
 
