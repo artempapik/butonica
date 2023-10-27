@@ -295,7 +295,7 @@ const menuItemsContents = {
             <h1>Категорії</h1>
             <button onpointerup="createCategoryModal()">Створити</button>
         </div>
-        <input oninput="searchCategory()" class="search-category" placeholder="Пошук категорії">
+        <input type="search" oninput="searchCategory()" class="search-category" placeholder="Пошук категорії">
         <div class="category-table">
             <table>
                 <tr>
@@ -313,7 +313,7 @@ const menuItemsContents = {
             <h1>Товари</h1>
             <button onpointerup="createProductModal()">Створити</button>
         </div>
-        <input oninput="searchProduct()" class="search-product" placeholder="Пошук товару">
+        <input type="search" oninput="searchProduct()" class="search-product" placeholder="Пошук товару">
         <div class="product-filters">
             <h4>Категорії:</h4>
             <button onpointerup="showAllProducts()">Всі</button>
@@ -373,7 +373,7 @@ const menuItemsContents = {
         <div class="leftover-header">
             <h1>Залишки по складах</h1>
         </div>
-        <input oninput="searchLeftover()" class="search-leftover" placeholder="Пошук товару">
+        <input type="search" oninput="searchLeftover()" class="search-leftover" placeholder="Пошук товару">
         <div>
         <div class="leftover-category-filters">
             <h4>Категорії:</h4>
@@ -886,7 +886,7 @@ const keepDatalistOptions = selector => {
             e.target.placeholder = e.target.value
             e.target.value = ''
         }
-    
+
         input.onblur = e => {
             if (!options.some(o => o.value === e.target.value)) {
                 e.target.value = e.target.placeholder
