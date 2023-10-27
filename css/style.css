@@ -757,6 +757,10 @@ table {
         transform: none !important;
     }
 
+    input[type="search"] {
+        appearance: none;
+    }
+
     input[type="checkbox"] {
         position: relative;
         appearance: none;
