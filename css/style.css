@@ -113,6 +113,27 @@ input, textarea {
     }
 }
 
+input[type=search] {
+    &::-webkit-search-cancel-button {
+        appearance: none;
+        height: 1.5rem;
+        width: 1.5rem;
+        background: url('../img/cancel2.png') no-repeat 50% 50%;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    &:focus::-webkit-search-cancel-button {
+        opacity: .6;
+        pointer-events: all;
+        cursor: pointer;
+    }
+
+    &:focus::-webkit-search-cancel-button:hover {
+        opacity: .9;
+    }
+}
+
 input[type=checkbox] {
     height: fit-content;
     transform: scale(1.25);
@@ -755,10 +776,6 @@ table {
 
     input {
         transform: none !important;
-    }
-
-    input[type="search"] {
-        appearance: none;
     }
 
     input[type="checkbox"] {
