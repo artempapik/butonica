@@ -7,7 +7,7 @@
     --input-border-color: rgba(128, 128, 128, .7);
     --table-hover-color: 79, 118, 181;
     --white: rgb(255, 255, 255);
-    --search-input-width: 10rem;
+    --search-input-width: 12rem;
 }
 
 ::-webkit-scrollbar {
