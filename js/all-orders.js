@@ -233,6 +233,7 @@ const createOrderRow = (order, table) => {
                 productsTable.append(tr)
             }
 
+            orderInfoModal.querySelector('.total-sum span:last-child').textContent = response.totalSum.toFixed(2) + ' грн'
             orderInfoModal.querySelector('button:not(.one-more-product)').onpointerup = () => editOrderStatus(order, !!response.surcharge, tr, table)
             orderInfoModal.style.display = 'flex'
             orderInfoModal.querySelector('.order-info-modal-content').scroll(0, 0)
