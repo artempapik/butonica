@@ -323,6 +323,7 @@ header {
 }
 
 aside {
+    overflow-y: auto;
     box-shadow: rgba(0, 0, 0, .05) 0 6px 24px 0, rgba(0, 0, 0, .08) 0 0 0 1px;
     background: var(--white);
 }
@@ -675,7 +676,7 @@ table {
         padding: .15rem .9rem;
         border: rgb(var(--table-hover-color)) .1rem solid;
         border-radius: .7rem;
-        transition: .1s;
+        transition: .05s;
 
         &:first-of-type {
             background: rgba(var(--table-hover-color), .8);
@@ -683,7 +684,7 @@ table {
         }
 
         &:hover {
-            border-style: dashed;
+            box-shadow: rgba(6, 24, 44, .2) 0 0 0 2px, rgba(6, 24, 44, .3) 0 4px 6px -1px, rgba(255, 255, 255, .1) 0 1px 0 inset;
         }
     }
 }
