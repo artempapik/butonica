@@ -431,7 +431,7 @@ const menuItemsContents = {
     sale: `
         <div class="sale-header">
             <h1>Продаж</h1>
-            <input class="search-sale-product" onkeyup="searchSaleProductFlavor(event)" placeholder="Пошук товару або букету">
+            <input type="search" class="search-sale-product" onkeyup="searchSaleProductFlavor(event)" placeholder="Пошук товару або букету">
             <div>
                 <input type="checkbox" onclick="showFlowerImages()">
                 <label>зображення</label>
