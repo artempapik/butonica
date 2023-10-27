@@ -34,10 +34,10 @@ const fillInventoryFilters = (filtersBlock, items, key) => {
             const checkedButtonColor = 'rgb(230, 230, 230)'
 
             if (button.style.color === checkedButtonColor) {
-                button.style.background = '#eee'
+                button.style.background = 'rgb(242, 242, 242)'
                 button.style.color = 'rgb(50, 50, 50)'
             } else {
-                button.style.background = 'rgba(0, 119, 204, .8)'
+                button.style.background = 'rgba(79, 118, 181, .8)'
                 button.style.color = checkedButtonColor
             }
 
@@ -53,13 +53,13 @@ const fillInventoryFilters = (filtersBlock, items, key) => {
             const allCategoriesButton = filtersBlock.querySelector('button')
 
             if (filters.length) {
-                allCategoriesButton.style.background = '#eee'
+                allCategoriesButton.style.background = 'rgb(242, 242, 242)'
                 allCategoriesButton.style.color = 'rgb(50, 50, 50)'
                 filterInventories(inventories.filter(i => filters.some(f => i.stock === f)))
                 return
             }
 
-            allCategoriesButton.style.background = 'rgba(0, 119, 204, .8)'
+            allCategoriesButton.style.background = 'rgba(79, 118, 181, .8)'
             allCategoriesButton.style.color = checkedButtonColor
             filterInventories(inventories)
         }
@@ -83,12 +83,12 @@ const showAllInventories = () => {
     const filterButtons = inventoryFilters.querySelectorAll('button:not(:first-of-type)')
 
     for (const button of filterButtons) {
-        button.style.background = '#eee'
+        button.style.background = 'rgb(242, 242, 242)'
         button.style.color = 'rgb(50, 50, 50)'
     }
 
     const allCategoriesButton = inventoryFilters.querySelector('button')
-    allCategoriesButton.style.background = 'rgba(0, 119, 204, .8)'
+    allCategoriesButton.style.background = 'rgba(79, 118, 181, .8)'
     allCategoriesButton.style.color = 'rgb(230, 230, 230)'
 
     filterInventories(inventories)
