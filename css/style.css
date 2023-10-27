@@ -114,10 +114,12 @@ input, textarea {
 }
 
 input[type=search] {
+    appearance: none;
+
     &::-webkit-search-cancel-button {
         appearance: none;
-        height: 1.5rem;
-        width: 1.5rem;
+        height: 1rem;
+        width: 1rem;
         background: url('../img/cancel.png') no-repeat 50% 50%;
         opacity: 0;
         pointer-events: none;
@@ -129,7 +131,7 @@ input[type=search] {
         cursor: pointer;
     }
 
-    &:focus::-webkit-search-cancel-button:hover {
+    &::-webkit-search-cancel-button:hover {
         opacity: .9;
     }
 }
