@@ -83,7 +83,7 @@ const showSaleInfo = e => {
 
         checkoutClientsSelect = checkoutClients.querySelector('select')
         checkoutClientInput = document.querySelector('.search-checkout-client')
-
+        
         get(`Client/phones/${loginInfo.companyId}`).then(response => {
             clientsWithPhones = response
             fillClientsSelect(clientsWithPhones)
@@ -91,7 +91,7 @@ const showSaleInfo = e => {
         })
     }).catch(e => {
         if (e.message.startsWith('403')) {
-            showMessage('error', `Зміна відкрита співробітником "${e.message.substring(e.message.indexOf('403') + 4)}"`)
+            showMessage('error', `Зміна відкрита співробітником: ${e.message.substring(e.message.indexOf('403') + 4)}`)
             return
         }
 
