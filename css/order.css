@@ -295,6 +295,18 @@
             }
         }
     }
+
+    & .total-sum {
+        display: flex;
+        justify-content: end;
+        font-size: 1.2rem;
+        font-weight: bold;
+        gap: .5rem;
+
+        & span:last-child {
+            font-weight: normal;
+        }
+    }
 }
 
 [class$="order-table"] table td {
