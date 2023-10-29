@@ -25,20 +25,7 @@
 }
 
 @media only screen and (max-width: 1500px) {
-    .leftover-table table {
-        display: block;
-        width: 100%;
-
-        & tr:not(:first-child) td:nth-child(2) {
-            font-size: .9rem;
-        }
-
-        & td:not(:last-child) {
-            white-space: nowrap;
-        }
-
-        & td:last-child {
-            width: 100%;
-        }
+    .leftover-table table tr:not(:first-child) td:nth-child(2) {
+        font-size: .9rem;
     }
 }
