@@ -1332,11 +1332,11 @@
     }
 
     .sale-content .sale-products {
-        gap: .8rem;
-        row-gap: .8rem;
+        gap: .6rem;
+        row-gap: .6rem;
 
         & .sale-product, & .sale-flavor {
-            padding: .3rem;
+            padding: .2rem;
         }
     }
 
@@ -1351,8 +1351,8 @@
             }
 
             & .checkout-clients {
-                padding: .9rem .3rem;
-                gap: .7rem;
+                padding: .9rem .2rem;
+                gap: .5rem;
             }
         }
 
