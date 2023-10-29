@@ -351,20 +351,7 @@
         width: calc(var(--modal-content-width) + 4rem);
     }
 
-    .flavor-table table {
-        display: block;
-        width: 100%;
-        
-        & tr:not(:first-child) td:nth-child(4) {
-            font-size: .9rem;
-        }
-
-        & td:not(:last-child) {
-            white-space: nowrap;
-        }
-
-        & td:last-child {
-            width: 100%;
-        }
+    .flavor-table table & tr:not(:first-child) td:nth-child(4) {
+        font-size: .9rem;
     }
 }
