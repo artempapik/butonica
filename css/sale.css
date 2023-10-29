@@ -1341,8 +1341,8 @@
     }
 
     .sale-content .sale-panel {
-        min-width: 27rem;
-        width: 27rem;
+        min-width: 27.5rem;
+        width: 27.5rem;
         max-height: 82.5vh;
 
         & .sale-pay-buttons {
@@ -1352,7 +1352,7 @@
 
             & .checkout-clients {
                 padding: .9rem .2rem;
-                gap: .5rem;
+                gap: .4rem;
             }
         }
 
