@@ -76,6 +76,7 @@ const showSaleInfo = e => {
             saleFlavors = response.flavors ? response.flavors.map(f => ({
                 id: f.id,
                 name: getFlavorName(f),
+                imageData: f.imageData,
                 totalProductCost: f.totalSum
             })) : []
 
