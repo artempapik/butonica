@@ -123,6 +123,10 @@
                     margin-bottom: 0;
                     width: 100%;
 
+                    & tbody {
+                        position: relative;
+                    }
+
                     & td {
                         font-size: 1rem;
                         padding: .4rem .7rem;
