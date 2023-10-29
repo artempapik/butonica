@@ -210,9 +210,22 @@
         }
     }
 
-    .shift-table table tr:not(:first-child) {
-        & td:nth-child(2), & td:nth-child(3), & td:nth-child(4) {
-            font-size: .9rem;
+    .shift-table table {
+        display: block;
+        width: 100%;
+        
+        & tr:not(:first-child) {
+            & td:nth-child(2), & td:nth-child(3), & td:nth-child(4) {
+                font-size: .9rem;
+            }
+        }
+
+        & td:not(:last-child) {
+            white-space: nowrap;
+        }
+    
+        & td:last-child {
+            width: 100%;
         }
     }
 }
