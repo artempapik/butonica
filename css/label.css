@@ -1,0 +1,35 @@
+.create-label-modal-content {
+    width: calc(var(--modal-content-width) - 3rem);
+    gap: 2rem;
+
+    & .form {
+        gap: 1rem;
+
+        & .label-colors {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            row-gap: .7rem;
+            justify-content: space-between;
+    
+            & .label-color {
+                --label-size: 2rem;
+                width: var(--label-size);
+                height: var(--label-size);
+                border-radius: 50%;
+                cursor: pointer;
+                outline: .1rem rgb(150, 150, 150) solid;
+    
+                &:hover {
+                    transform: scale(1.1);
+                }
+            }
+        }
+    }
+}
+
+.label-table table tr:not(:first-child) td:first-child span {
+    padding: .3rem .9rem;
+    border-radius: .5rem;
+    box-shadow: rgba(0, 0, 0, .12) 0 1px 2px, rgba(0, 0, 0, .12) 0 1px 2px;
+}

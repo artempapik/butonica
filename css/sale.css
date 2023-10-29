@@ -1,0 +1,1365 @@
+.sale-header {
+    position: sticky;
+    top: 0;
+    margin: 0;
+    margin-bottom: .6rem;
+    padding: .5rem 1.7rem;
+    background: rgba(225, 231, 240);
+    border-bottom-left-radius: .5rem;
+    border-bottom-right-radius: .5rem;
+    box-shadow: rgba(50, 50, 93, .35) 0 2px 5px -1px, rgba(0, 0, 0, .35) 0 1px 3px -1px;
+    z-index: 1;
+
+    & div {
+        gap: .7rem;
+        width: fit-content;
+        align-items: center;
+        display: flex;
+        color: rgb(70, 70, 70);
+
+        & input {
+            transform: scale(1.5);
+            width: fit-content;
+            margin: 0;
+            box-shadow: none;
+        }
+    }
+
+    & input {
+        box-shadow: rgba(50, 50, 93, .25) 0 2px 5px -1px, rgba(0, 0, 0, .3) 0 1px 3px -1px;
+        font-size: 1.25rem;
+        width: 40%;
+        padding: 1rem;
+        padding-left: 2.9rem;
+        background-size: 1.7rem;
+        border-radius: 1.5rem;
+    }
+}
+
+.sale-content {
+    gap: .7rem;
+    display: flex;
+    height: 100%;
+
+    & .sale-products {
+        height: fit-content;
+        flex: 2;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        row-gap: 1rem;
+        margin: 0 auto;
+        margin-bottom: .5rem;
+
+        & .sale-product, & .sale-flavor {
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            box-shadow: rgba(6, 24, 44, .1) 0 0 0 2px, rgba(6, 24, 44, .3) 0 4px 6px -1px, rgba(255, 255, 255, .1) 0 1px 0 inset;
+            padding: .5rem;
+            border-radius: .7rem;
+            cursor: pointer;
+
+            & img {
+                width: 5rem;
+                height: 8rem;
+                margin: auto;
+                filter: drop-shadow(1px 1px 2px rgb(130, 130, 130));
+            }
+
+            & div {
+                width: 10rem;
+                height: 5rem;
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            &:hover {
+                box-shadow: rgba(6, 24, 44, .4) 0 0 0 2px, rgba(6, 24, 44, .65) 0 4px 6px -1px, rgba(255, 255, 255, .08) 0 1px 0 inset;
+            }
+
+            & .sale-product-amount-price, & .sale-flavor-price {
+                justify-content: space-between;
+                align-items: end;
+                flex-direction: row;
+                gap: 1.5rem;
+
+                & span:first-child {
+                    font-size: .9rem;
+                    color: rgb(60, 60, 60);
+                }
+
+                & span:last-child {
+                    color: rgba(0, 100, 190, .9);
+                    font-weight: bold;
+                }
+            }
+
+            & .sale-flavor-name {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+
+                & span:first-child {
+                    font-size: 1.4rem;
+                    color: rgb(214, 90, 10);
+                }
+            }
+
+            & .sale-flavor-price {
+                justify-content: end;
+
+                & span:first-child {
+                    font-size: 1rem;
+                }
+            }
+        }
+
+        & .sale-flavor {
+            outline: .1rem solid rgb(100, 100, 100);
+        }
+    }
+
+    & .sale-panel {
+        position: sticky;
+        top: 5.3rem;
+        max-height: 90vh;
+        overflow-y: auto;
+        border-top-left-radius: .5rem;
+        border-top-right-radius: .5rem;
+        background: rgb(255, 255, 255);
+        display: flex;
+        flex-direction: column;
+        box-shadow: rgba(0, 0, 0, .16) 0 1px 4px, rgba(51, 51, 51, .7) 0 0 0 3px;
+        margin-bottom: .5rem;
+        min-width: 31rem;
+        width: 31rem;
+
+        & .sale-cash-register {
+            flex: 1;
+            padding: .3rem;
+            padding-bottom: 0;
+    
+            & .cash-register {
+                display: flex;
+                gap: 1rem;
+    
+                & button {
+                    padding-left: 0;
+                    padding-right: 0;
+                    border-width: .15rem;
+                    border-radius: .7rem;
+                    transition: .1s;
+                    display: flex;
+                    gap: .2rem;
+                    justify-content: center;
+                }
+    
+                & button:first-child {
+                    background: rgba(255, 255, 255, .9);
+                    color: rgb(30, 30, 30);
+                    flex: 4;
+                    border-color: rgba(0, 119, 204, .6);
+    
+                    &:hover {
+                        color: rgb(250, 250, 250);
+                        background: rgba(0, 119, 204, .9);
+                    }
+                }
+    
+                & button:last-child {
+                    background: rgba(255, 255, 255, .9);
+                    color: rgb(30, 30, 30);
+                    flex: 3;
+                    border-color: rgba(239, 1, 7, .6);
+    
+                    &:hover {
+                        color: rgb(250, 250, 250);
+                        background: rgba(239, 1, 7, .8);
+                    }
+                }
+            }
+    
+            & .cash-register-products {
+                margin-top: .3rem;
+    
+                & .empty-cart {
+                    margin: auto;
+                    margin-top: 6rem;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+    
+                    & span:first-child {
+                        font-size: 4rem;
+                        align-self: center;
+                    }
+    
+                    & span:last-child {
+                        font-size: 1.5rem;
+                        font-weight: bold;
+                    }
+                }
+
+                & .shifts {
+                    display: flex;
+                    gap: .5rem;
+                    row-gap: .3rem;
+                    flex-wrap: wrap;
+                    align-items: center;
+    
+                    & .shift {
+                        padding: 0 .2rem;
+                        display: flex;
+                        justify-content: space-between;
+                        border-color: rgb(170, 170, 170);
+                        border-radius: .4rem;
+                        font-family: 'Courier New', 'SF Mono';
+                        background: rgb(250, 250, 250);
+                        color: rgb(20, 20, 20);
+
+                        &:hover {
+                            border-color: rgb(0, 0, 0);
+                        }
+
+                        & span:first-child {
+                            margin: auto;
+                        }
+        
+                        & span:last-child {
+                            font-size: 1.3rem;
+                            align-self: center;
+                            
+                            &:hover {
+                                color: rgb(239, 1, 7);
+                            }
+                        }
+                    }
+    
+                    & .add-shift {
+                        display: none;
+                        align-items: center;
+                        cursor: pointer;
+                        
+                        &:hover {
+                            color: rgb(0, 119, 204);
+                        }
+                    }
+                }
+    
+                & .products {
+                    display: none;
+                    
+                    & .products-header {
+                        margin: .6rem 0;
+    
+                        & div:first-of-type {
+                            display: flex;
+                            gap: .5rem;
+    
+                            & .shopping-cart-total {
+                                font-size: 1.2rem;
+                                font-weight: bold;
+                                color: rgb(80, 80, 80);
+                            }
+                        }
+
+                        & span {
+                            font-size: 1.5rem;
+    
+                            &.remove-cart {
+                                cursor: pointer;
+                                color: rgba(239, 1, 7, .7);
+    
+                                &:hover {
+                                    color: rgb(239, 1, 7);
+                                }
+                            }
+                        }
+                    }
+    
+                    & .sale-products {
+                        display: flex;
+                        flex-direction: column;
+                        gap: .5rem;
+                        max-height: 48vh;
+                        overflow-y: auto;
+                        flex-wrap: nowrap;
+                        padding: .2rem;
+
+                        & .sale-product-content {
+                            display: flex;
+                            gap: .7rem;
+                            align-items: center;
+
+                            & .sale-product, & .sale-flavor {
+                                flex: 1;
+                                cursor: default;
+                                align-items: center;
+                                display: flex;
+                                flex-direction: row;
+                                background: rgb(240, 240, 240);
+                                padding: .3rem .6rem;
+                                box-shadow: rgba(0, 0, 0, .02) 0 1px 3px 0, rgba(27, 31, 35, .15) 0 0 0 1px;
+                                border-radius: .5rem;
+        
+                                &:hover {
+                                    box-shadow: rgba(0, 0, 0, .3) 0 1px 3px 0, rgba(27, 31, 35, .25) 0 0 0 1px;
+                                }
+
+                                & div {
+                                    height: auto;
+                                }
+        
+                                & .sale-product-header, & .sale-flavor-header {
+                                    height: fit-content;
+                                    margin: 0;
+                                    display: flex;
+                                    gap: .3rem;
+                                    align-items: start;
+                                    flex: 2;
+                                    flex-direction: column;
+        
+                                    & .sale-product-name, & .sale-flavor-name {
+                                        width: 9rem;
+                                        height: fit-content;
+                                        font-weight: bold;
+                                    }
+
+                                    & .sale-flavor-name {
+                                        justify-content: start;
+                                        gap: .5rem;
+
+                                        & span:first-child {
+                                            color: rgb(204, 85, 0);
+                                        }
+                                    }
+        
+                                    & .sale-product-cost, & .sale-flavor-cost {
+                                        height: fit-content;
+                                        display: block;
+                                    }
+                                }
+        
+                                & .sale-product-buttons {
+                                    display: flex;
+                                    flex-direction: row;
+                                    align-items: center;
+                                    gap: .5rem;
+        
+                                    & button {
+                                        border: 0;
+                                        border-radius: 50%;
+                                        background: rgba(42, 82, 190, .8);
+                                        font-size: 1.25rem;
+                                        padding: 0 .6rem;
+        
+                                        &:hover {
+                                            background: rgb(42, 82, 190);
+                                        }
+
+                                        &:first-child {
+                                            padding: 0 .7rem;
+                                        }
+                                    }
+
+                                    & input {
+                                        text-align: center;
+                                        padding: .2rem .3rem;
+                                        height: 2rem;
+                                        width: 4rem;
+                                        box-shadow: none;
+                                        border-radius: .5rem;
+                                    }
+                                }
+                            }
+
+                            & .sale-flavor {
+                                outline: .1rem solid rgb(100, 100, 100);
+                            }
+
+                            & .material-symbols-outlined {
+                                color: rgba(255, 0, 0, .6);
+                                cursor: pointer;
+
+                                &:hover {
+                                    color: rgba(255, 0, 0, .9);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        & .sale-pay-buttons {
+            text-align: center;
+
+            & .to-pay {
+                align-items: center;
+                padding: 1rem;
+                display: flex;
+                justify-content: space-between;
+
+                & .to-pay-message {
+                    font-size: 1.3rem;
+                    font-weight: bold;
+                }
+
+                & div {
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+
+                    & input {
+                        font-size: 1.1rem;
+                        padding: .4rem;
+                        width: 5.5rem;
+                    }
+                }
+            }
+
+            & .checkout {
+                padding: 1rem 0;
+                border-top: .1rem rgb(120, 120, 120) solid;
+                border-bottom: .1rem rgb(120, 120, 120) solid;
+                cursor: pointer;
+                font-size: 1.1rem;
+                background: rgb(225, 225, 225);
+
+                &:hover {
+                    background: rgb(215, 215, 215);
+                }
+            }
+
+            & .checkout-clients {
+                padding: .8rem .5rem;
+                display: flex;
+                justify-content: space-between;
+                gap: 1rem;
+                align-items: center;
+
+                & .add-client {
+                    display: flex;
+                    align-items: center;
+                    gap: .4rem;
+
+                    & span:first-child {
+                        cursor: pointer;
+                        color: rgba(42, 82, 190, .8);
+
+                        &:hover {
+                            color: rgb(42, 82, 190);
+                        }
+                    }
+                }
+
+                & .select-client {
+                    display: flex;
+                    gap: .5rem;
+
+                    & select, & input {
+                        border-radius: .6rem;
+                    }
+
+                    & select {
+                        width: 10rem;
+                    }
+
+                    & input {
+                        background-position: .3rem;
+                        background-size: 1.1rem;
+                        font-size: .9rem;
+                        padding: 0 .3rem;
+                        padding-left: 1.6rem;
+                        width: 6.7rem;
+                    }
+                }
+
+                & .clear-client {
+                    cursor: pointer;
+                    color: rgb(220, 90, 90);
+
+                    &:hover {
+                        color: rgb(190, 30, 30);
+                    }
+                }
+            }
+
+            & .sale-payment {
+                padding: 1.2rem 0;
+                cursor: pointer;
+                font-size: 1.7rem;
+                background: rgb(68, 153, 128);
+                color: rgb(245, 245, 245);
+
+                &:hover {
+                    background: rgb(58, 143, 118);
+                }
+            }
+        }
+    }
+}
+
+.create-sale-modal-content {
+    padding: .5rem;
+    gap: 1.5rem;
+
+    & .sale-checkout {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1.4rem;
+        font-size: 1.1rem;
+
+        & div span:first-child:not(& div span span) {
+            font-weight: bold;
+        }
+
+        & div {
+            display: flex;
+            justify-content: space-between;
+            gap: .8rem;
+            align-items: center;
+        }
+
+        & .sale-pay-sum {
+            align-items: center;
+
+            & input {
+                text-align: right;
+                width: 5rem;
+                padding: .4rem .2rem;
+            }
+        }
+
+        & .sale-change {
+            display: none;
+            font-size: 1rem;
+            background: rgb(255, 251, 230);
+            border: .1rem rgb(255, 200, 130) solid;
+            border-radius: .5rem;
+            padding: .6rem;
+
+            & span {
+                font-weight: normal !important;
+            }
+        }
+    }
+
+    & .payment {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+
+        & form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+    
+            & label {
+                display: flex;
+                align-items: baseline;
+                gap: .5rem;
+            }
+        }
+    
+        & button {
+            font-size: 1.3rem;
+            background: rgb(68, 153, 128);
+            color: rgb(245, 245, 245);
+            border-color: rgb(150, 150, 150);
+            align-self: auto;
+    
+            &:hover {
+                background: rgb(58, 143, 118);
+            }
+        }
+    }
+}
+
+.create-sale-order-modal-content, .create-internet-order-modal-content {
+    max-height: calc(100vh - 7rem);
+    overflow-y: auto;
+    width: calc(var(--modal-content-width) + 12rem);
+    padding: 1rem .8rem;
+
+    & .modal-content-name span:first-child {
+        display: block;
+        visibility: hidden;
+    }
+
+    & .sale-order-type {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+
+        & span {
+            border: .1rem rgb(255, 255, 255) solid;
+            cursor: pointer;
+            padding: .8rem;
+            border-radius: .3rem;
+
+            &:hover {
+                border: .1rem rgb(40, 40, 40) solid;
+            }
+        }
+    }
+
+    & .sale-order-labels {
+        display: none;
+        flex-wrap: wrap;
+        gap: 1rem;
+        row-gap: .7rem;
+        margin-bottom: -1.3rem;
+
+        & .sale-order-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: .4rem;
+            padding: 0 .3rem;
+            font-size: .9rem;
+            cursor: pointer;
+            width: 6.5rem;
+            height: 2.5rem;
+            text-align: center;
+
+            &:hover {
+                transform: scale(1.03);
+            }
+        }
+    }
+
+    & .sale-order-date-header {
+        display: none;
+        margin: 0;
+        padding: 1.3rem;
+        outline: .1rem rgb(50, 50, 50) solid;
+        justify-content: space-between;
+        align-items: center;
+
+        & .sale-order-date-time {
+            display: flex;
+            flex-direction: column;
+            gap: .8rem;
+
+            & .sale-order-date {
+                display: flex;
+                flex-direction: column;
+                gap: .8rem;
+    
+                & div {
+                    display: flex;
+                    justify-content: space-between;
+    
+                    & .today-button {
+                        cursor: pointer;
+                        color: rgb(0, 71, 171);
+                        font-weight: bold;
+    
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+    
+            & .sale-order-time {
+                display: flex;
+                flex-direction: column;
+                gap: .5rem;
+    
+                & div {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: 1rem;
+    
+                    & span .exact-time {
+                        font-weight: bold;
+                    }
+
+                    & input {
+                        padding: .2rem .3rem;
+                    }
+                }
+            }
+        }
+
+        & .sale-order-image div {
+            flex-direction: column !important;
+            gap: .5rem;
+        }
+    }
+
+    & textarea {
+        width: 11.5rem;
+    }
+
+    & .customer-recipient-info {
+        display: none;
+        flex-direction: column;
+        gap: 2rem;
+        padding: 1.3rem;
+        outline: .1rem rgb(80, 80, 80) dashed;
+
+        & .sale-order-info {
+            display: flex;
+            justify-content: space-between;
+    
+            & div {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+    
+                & h2 {
+                    font-weight: normal;
+                    font-size: 1.1rem;
+                }
+            }
+        }
+    }
+
+    & .sale-order-textarea {
+        display: none;
+
+        & div {
+            display: flex;
+
+            & textarea {
+                flex: 1;
+            }
+        }
+    }
+
+    & .sale-order-products {
+        flex-direction: column;
+        gap: 1.3rem;
+        
+        & table {
+            display: block;
+            overflow: visible;
+            width: 100%;
+
+            & td {
+                font-size: 1rem;
+                padding: .6rem;
+            }
+    
+            & td:not(:last-child) {
+                white-space: nowrap;
+            }
+    
+            & td:nth-child(2) {
+                text-align: center;
+            }
+    
+            & td:last-child {
+                width: 100%;
+            }
+        }
+    }
+
+    & .sale-order-checkout {
+        flex-direction: column;
+        align-items: center;
+        gap: .9rem;
+
+        & .sale-order-total-sum {
+            box-shadow: rgba(0, 0, 0, .12) 0 1px 3px, rgba(0, 0, 0, .24) 0 1px 2px;
+            display: flex;
+            gap: .5rem;
+            background: rgba(42, 82, 190, .95);
+            color: rgb(240, 240, 240);
+            padding: .7rem;
+            border-radius: .5rem;
+
+            & span:last-child {
+                font-weight: bold;
+                color: rgb(230, 230, 230);
+                letter-spacing: .03rem;
+            }
+        }
+
+        & .free-payment {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            margin-bottom: .3rem;
+        }
+    }
+
+    & .payment {
+        margin-top: -1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        & .payment-content {
+            display: flex;
+            border: .1rem rgb(150, 150, 150) solid;
+            padding-bottom: .7rem;
+            border-radius: .5rem;
+
+            & .cashback, & .cash {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                
+                & h1 {
+                    font-size: 1.3rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: .5rem;
+                    color: rgb(235, 235, 235);
+                    letter-spacing: .04rem;
+    
+                    & span:first-child {
+                        font-size: 1.9rem;
+                    }
+                }
+            }
+    
+            & .cashback {
+                & h1 {
+                    background: rgba(42, 82, 190, .75);
+                    gap: .6rem;
+                    border-top-left-radius: .35rem;
+                }
+    
+                & .client-info {
+                    margin-left: .3rem;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+    
+                    & .client, & .balance {
+                        display: flex;
+                        align-items: center;
+                        gap: .5rem;
+        
+                        & span:last-child {
+                            color: rgb(30, 30, 30);
+                        }
+                    }
+    
+                    & .balance span:last-child {
+                        font-weight: bold;
+                        font-size: 1.05rem;
+                    }
+                }
+            }
+    
+            & .cash {
+                & h1 {
+                    background: rgba(68, 153, 128, .95);
+                    gap: .2rem;
+                    border-top-right-radius: .35rem;
+                }
+    
+                & ul {
+                    margin-left: .5rem;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+    
+                    & li {
+                        display: flex;
+                        align-items: center;
+                        gap: .8rem;
+    
+                        & span:first-child {
+                            font-size: 1.7rem;
+                            border-radius: 50%;
+                            padding: .15rem;
+                            cursor: pointer;
+                            transition: .05s;
+    
+                            &:hover {
+                                transform: scale(1.15);
+                            }
+                        }
+    
+                        &.active-payment-type {
+                            font-weight: bold;
+    
+                            & span:first-child {
+                                background: rgba(204, 85, 0, .5);
+                            }
+                        }
+                    }
+                }
+            }
+    
+            & .cashback .client-info, & .cash ul {
+                height: 4.5rem;
+            }
+    
+            & .order-pay-sum {
+                margin-top: 1.2rem;
+                justify-content: center;
+                display: flex;
+                align-items: center;
+                gap: .7rem;
+    
+                & span span:last-child {
+                    text-decoration: underline;
+                }
+    
+                & div {
+                    display: flex;
+                    align-items: center;
+                    gap: .4rem;
+    
+                    & input {
+                        padding: .2rem;
+                        border-radius: .7rem;
+                    }
+
+                    & span {
+                        font-size: .9rem;
+                    }
+                }
+            }
+    
+            & .cashback input {
+                width: 4rem;
+            }
+    
+            & .cash input {
+                width: 4.7rem;
+            }
+        }
+
+        & button {
+            font-size: 1.3rem;
+            background: rgb(68, 153, 128);
+            color: rgb(245, 245, 245);
+            border-color: rgb(150, 150, 150);
+            width: 12rem;
+            margin: 0 auto;
+            margin-top: -1rem;
+            padding: .2rem 0;
+    
+            &:hover {
+                background: rgb(58, 143, 118);
+            }
+        }
+    }
+
+    /* & .sale-order-checkout {
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1.4rem;
+        font-size: 1.1rem;
+
+        & div span:first-child:not(& div span span) {
+            font-weight: bold;
+        }
+
+        & div {
+            display: flex;
+            justify-content: space-between;
+            gap: .8rem;
+            align-items: center;
+        }
+
+        & .order-pay-sum {
+            align-items: center;
+
+            & input {
+                text-align: right;
+                width: 5rem;
+                padding: .4rem .2rem;
+            }
+        }
+
+        & .order-change {
+            display: none;
+            font-size: 1rem;
+            background: rgb(255, 251, 230);
+            border: .1rem rgb(255, 200, 130) solid;
+            border-radius: .5rem;
+            padding: .6rem;
+
+            & span {
+                font-weight: normal !important;
+            }
+        }
+    } */
+
+    /* & .payment {
+        display: flex;
+        outline: .15rem rgb(150, 150, 150) solid;
+        flex-direction: column;
+        padding: .7rem;
+        gap: 1.5rem;
+        border-radius: .2rem;
+
+        & form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+    
+            & label {
+                display: flex;
+                align-items: baseline;
+                gap: .5rem;
+            }
+        }
+    
+        & button {
+            font-size: 1.3rem;
+            background: rgb(68, 153, 128);
+            color: rgb(245, 245, 245);
+            border-color: rgb(150, 150, 150);
+            align-self: auto;
+    
+            &:hover {
+                background: rgb(58, 143, 118);
+            }
+        }
+    } */
+}
+
+.create-internet-order-modal-content {
+    & .internet-client-info {
+        display: flex;
+        padding: 0 .5rem;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: -1.3rem;
+
+        & div {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+
+            & h2 {
+                font-size: 1.1rem;
+            }
+
+            & select {
+                width: 13rem;
+            }
+        }
+    }
+
+    & .sale-order-stock {
+        width: 12rem;
+    }
+
+    & .sale-order-flavors, & .sale-order-products {
+        & div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1rem 0 .7rem 0;
+
+            & h2 {
+                font-size: 1.3rem;
+                font-weight: bold;
+            }
+        }
+
+        & table {
+            display: block;
+            box-shadow: none;
+            margin-bottom: 0;
+
+            & tbody {
+                display: none;
+        
+                & td {
+                    color: rgb(0, 0, 0);
+                }
+            }
+
+            & td:nth-child(3), & td:nth-child(4) {
+                text-align: center;
+            }
+        
+            & input {
+                font-size: .9rem;
+                width: 5rem;
+            }
+        
+            & input[list=internet-product], & input[list=internet-flavor] {
+                width: 12rem;
+            }
+        
+            & tr {
+                background: var(--white);
+        
+                &:hover {
+                    background: var(--white);
+                }
+        
+                & .remove-internet-product, & .remove-internet-flavor {
+                    transition: .1s;
+        
+                    & span {
+                        color: rgba(255, 0, 0, .6);
+                        cursor: pointer;
+        
+                        &:hover {
+                            color: rgba(255, 0, 0, .9);
+                        }
+                    }
+                }
+            }
+        
+            & td {
+                border-right: none !important;
+                font-size: .9rem;
+                padding: .5rem .1rem;
+            }
+        }
+
+        & .one-more-product {
+            background: none;
+            border: .1rem rgba(110, 110, 110, .8) dashed;
+            width: 100%;
+            color: rgb(0, 0, 0);
+            font-size: 1rem;
+            padding: .5rem 0;
+            transition: .1s;
+        
+            &:hover {
+                border-color: rgb(30, 30, 30);
+            }
+        }
+    }
+
+    & .sale-order-flavors {
+        & h2 {
+            margin-bottom: 1rem;
+        }
+
+        & table td:nth-child(2) {
+            width: 5rem;
+            text-align: center;
+        }
+    }
+
+    & .sale-order-products h2 {
+        margin-bottom: -1rem;
+    }
+
+    & .sale-order-total-sum {
+        align-items: center;
+        color: rgb(20, 20, 20) !important;
+        background: none !important;
+        box-shadow: none !important;
+        border: .1rem solid rgb(150, 150, 150);
+
+        & input {
+            padding: .1rem;
+            width: 5.8rem;
+            border-radius: .5rem;
+        }
+
+        & span:last-child {
+            color: rgb(50, 50, 50) !important;
+        }
+    }
+
+    & .cashback {
+        display: none !important;
+    }
+
+    & .cash ul {
+        margin: auto !important;
+    }
+}
+
+.create-shift-modal {
+    backdrop-filter: blur(.5rem);
+
+    & .create-shift-modal-content {
+        padding: 1.6rem 1.4rem .8rem 1.4rem;
+
+        & h1 {
+            font-size: 1.8rem;
+            text-align: center;
+        }
+    
+        & .form {
+            flex-direction: row;
+            align-items: center;
+
+            & h2 {
+                width: 10.5rem;
+            }
+
+            & select {
+                width: 9rem;
+            }
+
+            & div {
+                display: flex;
+                align-items: center;
+                gap: .5rem;
+
+                & input {
+                    padding: .3rem;
+                    width: 6rem;
+                }
+            }
+        }
+
+        & button {
+            align-self: auto;
+        }
+    }
+
+    & .shift-choices {
+        display: flex;
+        gap: 1rem;
+
+        & button {
+            &:first-child {
+                flex: 2;
+                background: rgb(240, 240, 240);
+                color: rgb(60, 60, 60);
+                border-color: rgb(100, 100, 100);
+
+                &:hover {
+                    background: rgb(255, 255, 255);
+                }
+            }
+
+            &:last-child {
+                flex: 3;
+            }
+        }
+    }
+}
+
+.cash-register-operations-modal-content {
+    padding: 1.3rem;
+    gap: 1.5rem;
+
+    & h1 {
+        text-align: center;
+        font-size: 1.7rem;
+        margin-bottom: .2rem;
+    }
+
+    & .cash-register-cash {
+        border-radius: .3rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        padding: .7rem;
+        outline: .1rem rgb(120, 120, 120) dashed;
+
+        & .form {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            & .cash-register-sum {
+                display: flex;
+                align-items: center;
+                gap: .5rem;
+
+                & span:first-child {
+                    color: rgb(50, 50, 50);
+                }
+            }
+
+            &:first-child {
+                padding-bottom: 1.2rem;
+                border-bottom: .1rem solid rgb(150, 150, 150);
+            }
+
+            &:not(:last-child) {
+                color: rgb(30, 30, 30);
+            }
+
+            & span:not(.cash-register-sum span):last-child {
+                font-weight: bold;
+            }
+        }
+    }
+
+    & .cash-register-operations {
+        border-radius: .3rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        outline: .1rem rgb(180, 180, 180) solid;
+        padding: 1rem .5rem;
+
+        & form {
+            display: flex;
+            gap: .9rem;
+
+            & label {
+                display: flex;
+                gap: .3rem;
+                align-items: baseline;
+            }
+        }
+
+        & div {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+
+            & input[type=number] {
+                width: 5.5rem;
+                padding: .3rem;
+            }
+        }
+    }
+
+    & button {
+        align-self: auto;
+    }
+}
+
+@media only screen and (max-width: 1500px) {
+    .sale-header div input {
+        padding: 0 1.5rem;
+        width: unset;
+    }
+
+    .sale-content .sale-products {
+        gap: .8rem;
+        row-gap: .8rem;
+
+        & .sale-product, & .sale-flavor {
+            padding: .3rem;
+        }
+    }
+
+    .sale-content .sale-panel {
+        min-width: 26rem;
+        width: 26rem;
+        max-height: 82.5vh;
+
+        & .sale-pay-buttons {
+            & .to-pay {
+                padding: .5rem;
+            }
+
+            & .checkout-clients {
+                padding: .9rem .3rem;
+                gap: .7rem;
+            }
+        }
+
+        & .sale-cash-register .cash-register-products .products .sale-products {
+            max-height: 31vh;
+            padding: .1rem;
+            gap: .4rem;
+        }
+    }
+}
