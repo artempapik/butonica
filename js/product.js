@@ -424,7 +424,7 @@ const filterProducts = () => {
 
     if (productFilters.sort === 'asc') {
         filteredProducts.sort((a, b) => a.name.localeCompare(b.name))
-    } else if (categoryFilters.sort === 'desc') {
+    } else if (productFilters.sort === 'desc') {
         filteredProducts.sort((b, a) => a.name.localeCompare(b.name))
     }
 
