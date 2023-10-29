@@ -1341,8 +1341,8 @@
     }
 
     .sale-content .sale-panel {
-        min-width: 26rem;
-        width: 26rem;
+        min-width: 27rem;
+        width: 27rem;
         max-height: 82.5vh;
 
         & .sale-pay-buttons {
