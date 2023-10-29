@@ -190,6 +190,8 @@
 }
 
 .flavor-info-modal-content {
+    overflow-y: auto;
+    max-height: calc(100vh - 7rem);
     padding: 1rem;
     width: calc(var(--modal-content-width) + 2rem);
     gap: 1.5rem;
@@ -344,6 +346,7 @@
 
 @media only screen and (max-width: 1500px) {
     .flavor-info-modal-content {
+        max-height: calc(100vh - 10rem);
         padding: .8rem;
         width: calc(var(--modal-content-width) + 4rem);
     }
