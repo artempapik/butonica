@@ -508,8 +508,8 @@ const createInternetOrderModal = () => {
         pickupBlocks.forEach(b => b.style.display = 'flex')
     })
 
-    const orderProducts = internetOrderModal.querySelector('table')
-    orderProducts.innerHTML = orderProducts.querySelector('tbody').innerHTML
+    const orderProducts = internetOrderModal.querySelectorAll('table')
+    orderProducts.forEach(op => op.innerHTML = op.querySelector('tbody').innerHTML)
 
     const paymentContent = internetOrderModal.querySelector('.payment-content')
     const freePaymentCheckbox = internetOrderModal.querySelector('.free-payment input')
