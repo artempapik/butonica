@@ -18,13 +18,13 @@ const showPendingOrderInfo = e => {
 
 const fillPendingOrdersTable = order => pendingOrdersTable.append(createOrderRow(order, pendingOrdersTable))
 
-const getOrdersByDate = (e) => {
+const getPendingOrdersByDate = e => {
     const date = e.target.value ? new Date(e.target.value) : false
     const query = date ?
         `${loginInfo.companyId}/${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}` :
-        `pending/${loginInfo.companyId}`
+        `${loginInfo.companyId}`
 
-    get('Order/' + query)
+    get('Order/pending/' + query)
         .then(response => {
             pendingOrdersTable.innerHTML = pendingOrdersTable.querySelector('tbody').innerHTML
 
