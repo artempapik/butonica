@@ -216,7 +216,9 @@ const createSale = () => {
         }
 
         saleModal.style.display = ''
-        showMessage('error', createErrorMessage(SALE))
+        // showMessage('error', createErrorMessage(SALE))
+        alert(e.message)
+        showMessage('error', 'Продаж ніби створився? Перевір')
     })
 }
 
@@ -471,9 +473,11 @@ const createSaleOrder = saleOrderType => {
         closeShift()
         saleOrderModal.style.display = ''
         showMessage('success', createSuccessMessage(ORDER))
-    }).catch(() => {
+    }).catch(e => {
         saleOrderModal.style.display = ''
-        showMessage('error', createErrorMessage(ORDER))
+        // showMessage('error', createErrorMessage(ORDER))
+        alert(e.message)
+        showMessage('error', 'Продаж ніби створився? Перевір')
     })
 }
 
