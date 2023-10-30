@@ -180,6 +180,7 @@ const createInventoryModal = () => {
             }
 
             inventoryProductsTable.style.display = 'block'
+            inventoryProductsTable.scroll(0, 0)
             inventoryModal.querySelector('.total-sum').style.display = 'flex'
         })
     }
