@@ -3,7 +3,7 @@ const Environment = {
     PROD: 'https://botanice.user30503.realhost-free.net'
 }
 
-const BASE_URL = Environment.PROD
+const BASE_URL = Environment.DEV
 const EMPTY_IMAGE_URL = 'img/empty-flower.webp'
 
 let imageData
@@ -560,10 +560,35 @@ const menuItemsContents = {
     `,
     allorder: `
         <div class="order-header">
-            <h1>Всі замовлення</h1>
+            <div class="order-date">
+                <h1>Всі замовлення</h1>
+                <input type="date" onchange="getAllOrdersByDate(event)">
+            </div>
             <button onpointerup="createInternetOrderModal()">Створити</button>
         </div>
         <div class="all-order-table">
+            <table>
+                <tr>
+                    <td>№</td>
+                    <td>Дата</td>
+                    <td>Замовник</td>
+                    <td>Тип</td>
+                    <td>Статус</td>
+                    <td>Мітки</td>
+                    <td>Дії</td>
+                </tr>
+            </table>
+        </div>
+    `,
+    pendingorder: `
+        <div class="order-header">
+            <div class="order-date">
+                <h1>Замовлення в очікуванні</h1>
+                <input type="date" onchange="getPendingOrdersByDate(event)">
+            </div>
+            <button onpointerup="createInternetOrderModal()">Створити</button>
+        </div>
+        <div class="pending-order-table">
             <table>
                 <tr>
                     <td>№</td>
@@ -583,28 +608,6 @@ const menuItemsContents = {
             <button onpointerup="createInternetOrderModal()">Створити</button>
         </div>
         <div class="completed-order-table">
-            <table>
-                <tr>
-                    <td>№</td>
-                    <td>Дата</td>
-                    <td>Замовник</td>
-                    <td>Тип</td>
-                    <td>Статус</td>
-                    <td>Мітки</td>
-                    <td>Дії</td>
-                </tr>
-            </table>
-        </div>
-    `,
-    pendingorder: `
-        <div class="order-header">
-            <div class="order-date">
-                <h1>Замовлення в очікуванні</h1>
-                <input type="date" onchange="getOrdersByDate(event)">
-            </div>
-            <button onpointerup="createInternetOrderModal()">Створити</button>
-        </div>
-        <div class="pending-order-table">
             <table>
                 <tr>
                     <td>№</td>
