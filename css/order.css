@@ -9,7 +9,7 @@
 }
 
 .order-info-modal-content {
-    max-height: calc(100vh - 7rem);
+    max-height: calc(100vh - 8rem);
     overflow-y: auto;
     width: calc(var(--modal-content-width) + 12rem);
     gap: 1.5rem;
