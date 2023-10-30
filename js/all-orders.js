@@ -783,3 +783,23 @@ const addInternetOrderFlavor = () => {
         }
     })
 }
+
+const getAllOrdersByDate = e => {
+    const date = e.target.value ? new Date(e.target.value) : false
+    const query = date ?
+        `${loginInfo.companyId}/${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}` :
+        `${loginInfo.companyId}`
+
+    get('Order/' + query)
+        .then(response => {
+            allOrdersTable.innerHTML = allOrdersTable.querySelector('tbody').innerHTML
+
+            if (!response.length) {
+                allOrdersTable.append(createEmptyDataDiv())
+                return
+            }
+
+            response.forEach(o => fillAllOrdersTable(o))
+        })
+        .catch(() => showMessage('error', getErrorMessage('замовлення за цією датою')))
+}
