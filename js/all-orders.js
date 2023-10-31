@@ -4,19 +4,7 @@ const orderInfoModal = document.querySelector('.order-info-modal')
 const internetOrderModal = document.querySelector('.create-internet-order-modal')
 const internetTotalSumElement = internetOrderModal.querySelector('.sale-order-total-sum input')
 
-const showAllOrderInfo = e => {
-    fillSelectedMenuItem(e)
-    main.innerHTML = menuItemsContents['allorder']
-    allOrdersTable = document.querySelector('.all-order-table table')
-
-    get(`Order/${loginInfo.companyId}`).then(response => {
-        if (response.length) {
-            allOrdersTable.style.display = 'block'
-        }
-
-        response.forEach(o => fillAllOrdersTable(o))
-    }).catch(() => showMessage('error', getErrorMessage(ORDER)))
-
+const fillDatalists = () => {
     get(`Product/ids-names-costs/${loginInfo.companyId}`).then(response => {
         orderProducts = response
 
@@ -48,6 +36,22 @@ const showAllOrderInfo = e => {
 
         internetFlavorsOptions = internetOrderModal.querySelectorAll(`#internet-flavor option`)
     })
+}
+
+const showAllOrderInfo = e => {
+    fillSelectedMenuItem(e)
+    main.innerHTML = menuItemsContents['allorder']
+    allOrdersTable = document.querySelector('.all-order-table table')
+
+    get(`Order/${loginInfo.companyId}`).then(response => {
+        if (response.length) {
+            allOrdersTable.style.display = 'block'
+        }
+
+        response.forEach(o => fillAllOrdersTable(o))
+    }).catch(() => showMessage('error', getErrorMessage(ORDER)))
+
+    fillDatalists()
 }
 
 const calculateInternetOrderTotalSum = () => {
