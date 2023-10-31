@@ -839,8 +839,8 @@ table {
 
     select {
         appearance: none;
-        padding: 1rem;
-        background: url(https://stackoverflow.com/favicon.ico) 96% / 15% no-repeat #EEE;
+        padding: 1.1rem;
+        background: url('../img/empty-flower.webp') 96% / 15% no-repeat;
     }
 }
 
