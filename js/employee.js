@@ -78,7 +78,7 @@ const createEmployeeRow = employee => {
         employeeInfoModal.querySelector('.employee-title').textContent = employeeTitleToName[employee.title]
         employeeInfoModal.querySelector('.employee-registration-date').textContent = formatDate(employee.registrationDate)
         employeeInfoModal.querySelector('.employee-birth-date').textContent = formatDate(employee.birthDate, false)
-        employeeInfoModal.querySelector('.employee-phone').textContent = employee.phone
+        employeeInfoModal.querySelector('.employee-phone').textContent = formatPhoneNumber(employee.phone)
         employeeInfoModal.style.display = 'flex'
     }
 
