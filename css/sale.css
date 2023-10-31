@@ -1230,7 +1230,7 @@
                 flex: 2;
                 background: rgb(240, 240, 240);
                 color: rgb(60, 60, 60);
-                border-color: rgb(100, 100, 100);
+                border: .1rem rgb(150, 150, 150) solid;
 
                 &:hover {
                     background: rgb(255, 255, 255);
