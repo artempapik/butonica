@@ -242,16 +242,20 @@
             display: block;
             box-shadow: none;
             margin-bottom: 0;
-    
-            & tbody td {
-                color: rgb(0, 0, 0);
+
+            & tbody {
+                position: relative;
+
+                & td {
+                    color: rgb(0, 0, 0);
+
+                    &:nth-child(4) {
+                        width: 4rem;
+                        text-align: center;
+                    }
+                }
             }
-    
-            & td:nth-child(4) {
-                width: 4rem;
-                text-align: center;
-            }
-    
+            
             & input {
                 font-size: .85rem;
                 width: 4rem;
