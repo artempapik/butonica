@@ -216,9 +216,7 @@ const createSale = () => {
         }
 
         saleModal.style.display = ''
-        // showMessage('error', createErrorMessage(SALE))
-        alert(e.message)
-        showMessage('error', 'Продаж ніби створився? Перевір')
+        showMessage('error', createErrorMessage(SALE))
     })
 }
 
@@ -473,11 +471,9 @@ const createSaleOrder = saleOrderType => {
         closeShift()
         saleOrderModal.style.display = ''
         showMessage('success', createSuccessMessage(ORDER))
-    }).catch(e => {
+    }).catch(() => {
         saleOrderModal.style.display = ''
-        // showMessage('error', createErrorMessage(ORDER))
-        alert(e.message)
-        showMessage('error', 'Продаж ніби створився? Перевір')
+        showMessage('error', createErrorMessage(ORDER))
     })
 }
 
@@ -507,23 +503,29 @@ const setActiveButton = button => {
 
 const closeShift = (updateSaleWindow = true) => {
     if (updateSaleWindow) {
-        const saleFlavors = document.querySelectorAll('.sale-content .sale-flavor')
-        const saleProducts = document.querySelectorAll('.sale-content .sale-product')
+        document.querySelector('.search-sale-product').value = ''
+        document.querySelector('.sale-products').innerHTML = ''
+
+        fillSaleFlavors(saleFlavors, true)
+        fillSaleProducts(saleProducts, true)
+        
+        const saleFlavorsNodes = document.querySelectorAll('.sale-content .sale-flavor')
+        const saleProductsNodes = document.querySelectorAll('.sale-content .sale-product')
 
         for (const product of shifts[activeShiftIndex].products) {
             if (product.isFlavor) {
-                for (const saleFlavor of saleFlavors) {
+                for (const saleFlavor of saleFlavorsNodes) {
                     if (saleFlavor.querySelector('.sale-flavor-name span:last-child').textContent === product.name) {
                         saleFlavor.remove()
                         break
                     }
                 }
             } else {
-                for (const saleProduct of saleProducts) {
+                for (const saleProduct of saleProductsNodes) {
                     if (saleProduct.querySelector('.sale-product-name').textContent === product.name) {
                         let amount = saleProduct.querySelector('.sale-product-amount-price span').textContent
                         const spaceIndex = amount.indexOf(' ')
-                        amount = (+amount.substring(0, spaceIndex) - product.shiftAmount) + amount.substring(spaceIndex)
+                        amount = Math.round((+amount.substring(0, spaceIndex) - product.shiftAmount) * 100) / 100 + amount.substring(spaceIndex)
                         saleProduct.querySelector('.sale-product-amount-price span').textContent = amount
                         break
                     }
@@ -550,12 +552,12 @@ const closeShift = (updateSaleWindow = true) => {
         activeShiftIndex--
     }
 
-    const saleProducts = document.querySelector('.cash-register-products .sale-products')
-    saleProducts.innerHTML = ''
+    const saleProductsScreen = document.querySelector('.cash-register-products .sale-products')
+    saleProductsScreen.innerHTML = ''
 
     if (shifts.length) {
         setActiveButton(document.querySelectorAll('.shifts button').item(activeShiftIndex))
-        shifts[activeShiftIndex].products.forEach(p => saleProducts.append(p.isFlavor ? createSaleFlavor(p) : createSaleProduct(p)))
+        shifts[activeShiftIndex].products.forEach(p => saleProductsScreen.append(p.isFlavor ? createSaleFlavor(p) : createSaleProduct(p)))
         document.querySelector('.shopping-cart-total').textContent = shifts[activeShiftIndex].products.length
         document.querySelector('.cash-register-products .products').style.display = shifts[activeShiftIndex].products.length ? 'block' : ''
         updateTotalSum()
