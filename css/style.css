@@ -839,12 +839,7 @@ table {
 
     select {
         appearance: none;
-        margin: 50px;
-        width: 150px;
-        padding: 5rem;
-        font-size: 1rem;
-        border: 1px solid #CCC;
-        height: 34px;
+        padding: 1rem;
         background: url(https://stackoverflow.com/favicon.ico) 96% / 15% no-repeat #EEE;
     }
 }
