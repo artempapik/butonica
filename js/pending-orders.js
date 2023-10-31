@@ -13,7 +13,7 @@ const showPendingOrderInfo = e => {
         response.forEach(o => fillPendingOrdersTable(o))
     }).catch(() => showMessage('error', getErrorMessage(ORDER)))
 
-    get(`Product/ids-names/${loginInfo.companyId}`).then(response => orderProducts = response)
+    fillDatalists()
 }
 
 const fillPendingOrdersTable = order => pendingOrdersTable.append(createOrderRow(order, pendingOrdersTable))
