@@ -13,7 +13,7 @@ const showCompletedOrderInfo = e => {
         response.forEach(o => fillCompletedOrdersTable(o))
     }).catch(() => showMessage('error', getErrorMessage(ORDER)))
 
-    get(`Product/ids-names/${loginInfo.companyId}`).then(response => orderProducts = response)
+    fillDatalists()
 }
 
 const fillCompletedOrdersTable = order => completedOrdersTable.append(createOrderRow(order, completedOrdersTable))
