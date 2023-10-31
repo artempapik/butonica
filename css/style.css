@@ -840,9 +840,7 @@ table {
     select {
         appearance: none;
         padding: .45rem !important;
-        color: rgb(30, 30, 30);
         font-size: 1rem;
-        background: url('../img/empty-flower.webp') 96% / 12% no-repeat;
     }
 }
 
