@@ -323,7 +323,7 @@
 }
 
 [class$="order-table"] table td {
-    &:nth-child(4), &:nth-child(5), &:nth-child(6) {
+    &:nth-child(2), &:nth-child(5), &:nth-child(6), &:nth-child(7) {
         text-align: center;
     }
 
@@ -343,11 +343,11 @@
         max-width: 16rem;
     }
 
-    & td:nth-child(6) {
+    & td:nth-child(7) {
         max-width: 12rem;
     }
 
-    & td:nth-child(5) span, & td:nth-child(6) span {
+    & td:nth-child(6) span, & td:nth-child(7) span {
         display: block;
         font-size: .9rem;
         color: rgb(250, 250, 250);
@@ -356,7 +356,7 @@
         box-shadow: rgba(0, 0, 0, .12) 0 1px 2px, rgba(0, 0, 0, .12) 0 1px 2px;
     }
 
-    & td:nth-child(6) span:not(:last-child) {
+    & td:nth-child(7) span:not(:last-child) {
         margin-bottom: .3rem;
     }
 
