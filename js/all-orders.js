@@ -298,8 +298,58 @@ const createOrderRow = (order, table) => {
         labelsTd.append(span)
     }
 
+    const convertMsToTime = milliseconds => {
+        let seconds = Math.floor(milliseconds / 1000)
+        let minutes = Math.floor(seconds / 60)
+        const hours = Math.floor(minutes / 60)
+
+        seconds %= 60
+
+        if (seconds >= 30) {
+            minutes++
+        }
+
+        minutes %= 60
+        const days = Math.round(hours / 24)
+
+        if (days) {
+            return { text: days + 'д' }
+        }
+
+        if (hours < 0) {
+            return {
+                text: '!',
+                background: 'rgb(240, 0, 0)'
+            }
+        }
+
+        if (hours) {
+            return {
+                text: hours + ' г',
+                background: 'rgb(48, 133, 108)'
+            }
+        }
+
+        return {
+            text: minutes + ' хв',
+            background: 'rgb(230, 80, 25)'
+        }
+    }
+
+    const timeLeft = order.status === 2 ?
+        { text: '–' } :
+        convertMsToTime(new Date(order.date.replace('00', order.timeFrom.substring(0, 2)).replace('00', order.timeFrom.substring(3))) - new Date())
+
+    const timeLeftTd = createTd(timeLeft.text)
+
+    if ('background' in timeLeft) {
+        timeLeftTd.style.background = timeLeft.background
+        timeLeftTd.style.color = 'rgb(240, 240, 240)'
+    }
+
     tr.append(
         createTd(order.id),
+        timeLeftTd,
         createTd(formatOrderDate(order.date, order.timeFrom, order.timeTill)),
         createTd(order.customer),
         createTd(order.isPickup ? 'Самовивіз' : 'Доставка'),
