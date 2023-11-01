@@ -570,6 +570,9 @@ const menuItemsContents = {
             <table>
                 <tr>
                     <td>№</td>
+                    <td>
+                        <span class="material-symbols-outlined">history_toggle_off</span>
+                    </td>
                     <td>Дата</td>
                     <td>Замовник</td>
                     <td>Тип</td>
@@ -592,6 +595,9 @@ const menuItemsContents = {
             <table>
                 <tr>
                     <td>№</td>
+                    <td>
+                        <span class="material-symbols-outlined">history_toggle_off</span>
+                    </td>
                     <td>Дата</td>
                     <td>Замовник</td>
                     <td>Тип</td>
@@ -611,6 +617,9 @@ const menuItemsContents = {
             <table>
                 <tr>
                     <td>№</td>
+                    <td>
+                        <span class="material-symbols-outlined">history_toggle_off</span>
+                    </td>
                     <td>Дата</td>
                     <td>Замовник</td>
                     <td>Тип</td>
