@@ -404,10 +404,10 @@ const createInternetOrderModal = () => {
     const internetOrderClientsBlock = internetOrderModal.querySelector('.internet-client-info')
 
     const internetOrderClients = internetOrderClientsBlock.querySelector('select')
-    const clientName = internetOrderModal.querySelector('.sale-order-customer-name')
+    const clientNames = internetOrderModal.querySelectorAll('.sale-order-customer-name')
     const cashbackBlock = internetOrderModal.querySelector('.cashback')
 
-    const clientPhone = internetOrderModal.querySelector('.sale-order-customer-phone')
+    const clientPhones = internetOrderModal.querySelectorAll('.sale-order-customer-phone')
     let clientsWithPhones
 
     const fillInternetClientsSelect = clients => {
@@ -424,16 +424,25 @@ const createInternetOrderModal = () => {
         }
     }
 
-    clientPhone.oninput = () => {
-        const searchQuery = clientPhone.value.trim()
+    clientPhones.forEach(ch => ch.oninput = () => {
+        const searchQuery = ch.value.trim()
 
         if (!searchQuery) {
             fillInternetClientsSelect(clientsWithPhones)
+            saveClient.checked = false
             return
         }
 
         fillInternetClientsSelect(clientsWithPhones.filter(c => c.phone.split('\n').some(p => p.includes(searchQuery))))
-    }
+
+        if (internetOrderClients.value) {
+            saveClient.checked = false
+            clientNames.forEach(cn => cn.value = internetOrderClients.selectedOptions[0].dataset.name)
+            cashbackBlock.style.cssText = 'display:flex !important'
+            cashbackBlock.querySelector('.client span:last-child').textContent = internetOrderClients.selectedOptions[0].dataset.name
+            cashbackBlock.querySelector('.balance span:last-child').textContent = (+internetOrderClients.selectedOptions[0].dataset.bonusCash).toFixed(2) + ' грн'
+        }
+    })
 
     get(`Client/phones/${loginInfo.companyId}`).then(response => {
         clientsWithPhones = response
@@ -443,8 +452,8 @@ const createInternetOrderModal = () => {
 
     internetOrderClients.onchange = e => {
         saveClient.checked = false
-        clientName.value = e.target.selectedOptions[0].dataset.name
-        clientPhone.value = e.target.selectedOptions[0].dataset.phone
+        clientNames.forEach(cn => cn.value = e.target.selectedOptions[0].dataset.name)
+        clientPhones.forEach(ch => ch.value = e.target.selectedOptions[0].dataset.phone)
         cashbackBlock.style.cssText = 'display:flex !important'
         cashbackBlock.querySelector('.client span:last-child').textContent = e.target.selectedOptions[0].dataset.name
         cashbackBlock.querySelector('.balance span:last-child').textContent = (+e.target.selectedOptions[0].dataset.bonusCash).toFixed(2) + ' грн'
@@ -454,8 +463,8 @@ const createInternetOrderModal = () => {
     saveClient.onclick = () => {
         if (saveClient.checked) {
             internetOrderClients.value = ''
-            clientName.value = ''
-            clientPhone.value = ''
+            clientNames.forEach(cn => cn.value = '')
+            clientPhones.forEach(ch => ch.value = '')
             cashbackBlock.style.cssText = 'display:none !important'
             cashbackBlock.querySelector('.client span:last-child').textContent = ''
             cashbackBlock.querySelector('.balance span:last-child').textContent = ''
