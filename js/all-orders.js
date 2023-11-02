@@ -319,7 +319,7 @@ const createOrderRow = (order, table) => {
         if (hours < 0) {
             return {
                 text: '!',
-                background: 'rgb(240, 0, 0)'
+                background: 'rgb(255, 0, 0)'
             }
         }
 
@@ -345,6 +345,7 @@ const createOrderRow = (order, table) => {
     if ('background' in timeLeft) {
         timeLeftTd.style.background = timeLeft.background
         timeLeftTd.style.color = 'rgb(240, 240, 240)'
+        timeLeftTd.style.fontWeight = 'bold'
     }
 
     tr.append(
