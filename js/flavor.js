@@ -168,8 +168,15 @@ const createFlavorRow = flavor => {
                 )
                 flavorProducts.append(tr)
             }
-            
-            flavorInfoModal.querySelector('.flavor-total-buying-sum span:last-child').textContent = flavor.totalBuyingSum.toFixed(2)
+
+            const totalBuyingSum = flavorInfoModal.querySelector('.flavor-total-buying-sum')
+
+            if (loginInfo.title > 1) {
+                totalBuyingSum.style.visibility = 'hidden'
+            } else {
+                totalBuyingSum.querySelector('span:last-child').textContent = flavor.totalBuyingSum.toFixed(2)
+            }
+
             flavorInfoModal.querySelector('.flavor-total-sum span:last-child').textContent = flavor.totalSum.toFixed(2)
             flavorInfoModal.style.display = 'flex'
             flavorInfoModal.querySelector('.flavor-info-modal-content').scroll(0, 0)
