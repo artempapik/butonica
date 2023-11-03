@@ -125,6 +125,11 @@ const createFlavorModal = () => {
     flavorModal.querySelector('input[name=flavor-type]').checked = true
     flavorModal.querySelector('.view-flavor-templates').style.display = ''
     flavorModal.querySelector('.total-buying-sum span:last-child').textContent = '0.00'
+
+    if (loginInfo.title > 1) {
+        flavorModal.querySelector('.total-buying-sum').style.visibility = 'hidden'
+    }
+
     flavorModal.querySelector('.total-sum input').value = '0.00'
 
     const flavorsProductsTable = flavorModal.querySelector('table')
@@ -196,6 +201,11 @@ const createFlavorRow = flavor => {
 
         flavor.products.forEach(p => addFlavorProduct(p))
         calculateFlavorTotalSum()
+
+        if (loginInfo.title > 1) {
+            flavorModal.querySelector('.total-buying-sum').style.visibility = 'hidden'
+        }
+        
         flavorModal.querySelector('.view-flavor-templates').style.display = 'none'
         flavorTemplatesModal.style.display = ''
 
