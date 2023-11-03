@@ -183,7 +183,7 @@ const createOrderRow = (order, table) => {
                 fillClient('recipient', response.recipient)
             }
 
-            orderInfoModal.querySelector('.address span:last-child').textContent = response.address
+            orderInfoModal.querySelector('.address textarea').value = response.address
             orderInfoModal.querySelector('.comment textarea').value = response.comment
 
             const productsTable = orderInfoModal.querySelector('.order-products table')
@@ -310,7 +310,7 @@ const createOrderRow = (order, table) => {
         }
 
         minutes %= 60
-        const days = Math.round(hours / 24)
+        const days = Math.floor(hours / 24)
 
         if (days) {
             return { text: days + 'д' }
@@ -364,6 +364,19 @@ const createOrderRow = (order, table) => {
 const fillAllOrdersTable = order => allOrdersTable.append(createOrderRow(order, allOrdersTable))
 
 const editOrderStatus = (order, shouldSurcharge, oldRow, table) => {
+    const dateElement = orderInfoModal.querySelector('.order-date input')
+
+    if (!dateElement.value) {
+        showMessage('error', 'Введіть дату замовлення')
+        return
+    }
+
+    const date = new Date(dateElement.value)
+
+    const times = orderInfoModal.querySelectorAll('.order-time input')
+    const timeFromElement = times.item(0)
+    const timeTillElement = times.item(1)
+
     const orderStatuses = orderInfoModal.querySelectorAll('.status')
     let activeOrderStatus = 0
 
@@ -380,13 +393,23 @@ const editOrderStatus = (order, shouldSurcharge, oldRow, table) => {
         return
     }
 
-    let comment = orderInfoModal.querySelector('.comment textarea').value.trim()
-    if (!comment) {
-        comment = 'Пусто'
-    }
+    const address = orderInfoModal.querySelector('.address textarea').value.trim()
+    const comment = orderInfoModal.querySelector('.comment textarea').value.trim()
 
-    put(`Order/${order.id}/${activeOrderStatus}/${comment}`).then(() => {
+    put('Order', {
+        id: order.id,
+        date,
+        timeFromString: timeFromElement.value,
+        timeTillString: timeTillElement.value,
+        status: activeOrderStatus,
+        address,
+        comment
+    }).then(() => {
+        order.date = dateElement.value + 'T00:00:00'
+        order.timeFrom = timeFromElement.value
+        order.timeTill = timeTillElement.value
         order.status = activeOrderStatus
+        order.address = address
         order.comment = comment
 
         showMessage('info', 'Статус замовлення змінено')
