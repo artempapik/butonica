@@ -1,4 +1,10 @@
 .create-flavor-modal-content {
+    width: calc(var(--modal-content-width) + 5.5rem);
+    max-height: calc(100vh - 7rem);
+    overflow-y: auto;
+    gap: 1.5rem;
+    padding: 1.2rem 1.5rem;
+
     & .flavor-products div .view-flavor-templates,
     & .flavor-save-buttons button:first-child {
         display: flex;
@@ -15,18 +21,6 @@
     & .flavor-products div .view-flavor-templates {
         padding: .2rem .9rem;
     }
-
-    & .flavor-save-buttons button:first-child {
-        padding: .3rem 1rem;
-    }
-}
-
-.create-flavor-modal-content {
-    width: calc(var(--modal-content-width) + 5.5rem);
-    max-height: calc(100vh - 7rem);
-    overflow-y: auto;
-    gap: 1.5rem;
-    padding: 1.2rem 1.5rem;
 
     & .modal-content-name {
         margin-bottom: .5rem;
@@ -184,6 +178,7 @@
 
         & button:first-child {
             align-self: center;
+            padding: .3rem 1rem;
         }
     }
 }
@@ -192,7 +187,7 @@
     overflow-y: auto;
     max-height: calc(100vh - 7rem);
     padding: 1rem;
-    width: calc(var(--modal-content-width) + 2rem);
+    width: calc(var(--modal-content-width) + 3rem);
     gap: 1.5rem;
 
     & .flavor-content {
