@@ -862,7 +862,7 @@ if (loginInfo) {
 }
 
 const login = () => {
-    const email = loginModal.querySelector('input[type=email]').value
+    const email = loginModal.querySelector('input').value
     const password = loginModal.querySelector('input[type=password]').value
     const companyUser = { email, password }
 
