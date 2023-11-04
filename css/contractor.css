@@ -102,7 +102,8 @@
         }
 
         & .total-sum {
-            font-size: 1.4rem;
+            padding-bottom: 1rem;
+            font-size: 1.3rem;
             align-self: end;
 
             & span:last-child {
@@ -128,7 +129,7 @@
 
 .contractor-supply-products table {
     display: block;
-    margin-top: .5rem;
+    margin: .5rem 0 0 0;
 
     & tbody {
         font-size: 1rem;
