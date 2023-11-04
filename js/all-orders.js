@@ -325,13 +325,13 @@ const createOrderRow = (order, table) => {
 
         if (hours) {
             return {
-                text: hours + ' г',
+                text: hours + 'г',
                 background: 'rgb(48, 133, 108)'
             }
         }
 
         return {
-            text: minutes + ' хв',
+            text: minutes + 'хв',
             background: 'rgb(230, 80, 25)'
         }
     }
