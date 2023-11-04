@@ -312,15 +312,15 @@ const createOrderRow = (order, table) => {
         minutes %= 60
         const days = Math.floor(hours / 24)
 
-        if (days) {
-            return { text: days + 'д' }
-        }
-
-        if (hours < 0) {
+        if (days < 0 || hours < 0) {
             return {
                 text: '!',
                 background: 'rgb(255, 0, 0)'
             }
+        }
+
+        if (days) {
+            return { text: days + 'д' }
         }
 
         if (hours) {
