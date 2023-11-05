@@ -60,7 +60,10 @@ const showMessage = (type, text) => {
         ], animationTime)
     }, delayTime)
 
-    setTimeout(() => message.style.display = '', disappearTime)
+    setTimeout(() => {
+        message.style.display = ''
+        message.querySelectorAll('div').forEach(n => n.textContent = '')
+    }, disappearTime)
 }
 
 const get = async url => {
@@ -678,6 +681,41 @@ const menuItemsContents = {
             </table>
         </div>
     `,
+    generalstatistics: `
+        <div class="general-statistics-header">
+            <h1>Загальна статистика</h1>
+        </div>
+        <ul class="general-statistics-info">
+            <li>
+                <span class="stat-title">Прибуток:</span>
+                <span class="stat-value">
+                    <span></span>
+                    <span>грн</span>
+                </span>
+            </li>
+            <li>
+                <span class="stat-title">Дохід від продаж:</span>
+                <span class="stat-value">
+                    <span></span>
+                    <span>грн</span>
+                </span>
+            </li>
+            <li>
+                <span class="stat-title">Витрати магазину:</span>
+                <span class="stat-value">
+                    <span></span>
+                    <span>грн</span>
+                </span>
+            </li>
+            <li>
+                <span class="stat-title">Витрати на товар:</span>
+                <span class="stat-value">
+                    <span></span>
+                    <span>грн</span>
+                </span>
+            </li>
+        </ul>
+    `
 }
 
 const fillSelectedMenuItem = e => {
@@ -808,9 +846,9 @@ const employeeTitleToName = {
 }
 
 const removeMenus = title => {
-    if (title > 1) {
-        const mainMenuItems = document.querySelectorAll('li')
+    const mainMenuItems = document.querySelectorAll('li')
 
+    if (title > 1) {
         for (const menu of [
             'Торгові точки',
             'Постачальники',
@@ -828,6 +866,15 @@ const removeMenus = title => {
         }
 
         document.querySelector('.subscription').style.display = 'none'
+    }
+
+    if (title) {
+        for (const mainMenuItem of mainMenuItems) {
+            if (mainMenuItem.querySelector('span:last-child').textContent === 'Статистика') {
+                mainMenuItem.remove()
+                break
+            }
+        }
     }
 }
 
