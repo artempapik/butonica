@@ -470,7 +470,14 @@ const createInternetOrderModal = () => {
             cashbackBlock.style.cssText = 'display:flex !important'
             cashbackBlock.querySelector('.client span:last-child').textContent = internetOrderClients.selectedOptions[0].dataset.name
             cashbackBlock.querySelector('.balance span:last-child').textContent = (+internetOrderClients.selectedOptions[0].dataset.bonusCash).toFixed(2) + ' грн'
+            return
         }
+        
+        clientNames.forEach(cn => cn.value = '')
+        cashbackBlock.style.cssText = 'display:none !important'
+        cashbackBlock.querySelector('.client span:last-child').textContent = ''
+        cashbackBlock.querySelector('.balance span:last-child').textContent = ''
+        cashbackBlock.style.display = ''
     })
 
     get(`Client/phones/${loginInfo.companyId}`).then(response => {
