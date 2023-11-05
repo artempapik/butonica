@@ -452,6 +452,12 @@ const createInternetOrderModal = () => {
 
         if (!searchQuery) {
             fillInternetClientsSelect(clientsWithPhones)
+            internetOrderClients.value = ''
+            clientNames.forEach(cn => cn.value = '')
+            cashbackBlock.style.cssText = 'display:none !important'
+            cashbackBlock.querySelector('.client span:last-child').textContent = ''
+            cashbackBlock.querySelector('.balance span:last-child').textContent = ''
+            cashbackBlock.style.display = ''
             saveClient.checked = false
             return
         }
@@ -492,7 +498,6 @@ const createInternetOrderModal = () => {
             cashbackBlock.querySelector('.client span:last-child').textContent = ''
             cashbackBlock.querySelector('.balance span:last-child').textContent = ''
             cashbackBlock.style.display = ''
-            return
         }
     }
 
