@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="css/flavor.css">
     <link rel="stylesheet" href="css/store-expense.css">
     <link rel="stylesheet" href="css/label.css">
+    <link rel="stylesheet" href="css/general-statistics.css">
 </head>
 <body>
     <header>
@@ -205,7 +206,7 @@
                         </li>
                     </ul>
                 </li>
-                <li style="display: none;">
+                <li>
                     <div class="menu-item">
                         <div>
                             <span class="material-symbols-outlined">monitoring</span>
@@ -214,7 +215,7 @@
                         <span class="material-symbols-outlined">expand_more</span>
                     </div>
                     <ul class="sub-menu">
-                        <li class="main-padding">
+                        <li class="main-padding" onpointerup="showGeneralStatisticsInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">show_chart</span>
                                 <span>Загальна</span>
@@ -2024,5 +2025,6 @@
     <script src="js/flavor.js"></script>
     <script src="js/store-expense.js"></script>
     <script src="js/label.js"></script>
+    <script src="js/general-statistics.js"></script>
 </body>
 </html>
