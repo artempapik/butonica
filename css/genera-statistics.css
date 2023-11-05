@@ -1,0 +1,20 @@
+.general-statistics-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    & li {
+        display: flex;
+        align-items: center;
+
+        & .stat-title {
+            width: 12rem;
+            font-size: 1.2rem;
+        }
+
+        & .stat-value {
+            font-size: 1.1rem;
+            font-family: monospace;
+        }
+    }
+}
