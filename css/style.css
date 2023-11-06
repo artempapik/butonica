@@ -903,7 +903,7 @@ table {
     width: var(--screensaver-size);
     height: var(--screensaver-size);
     position: absolute;
-    animation: moveX 5s linear 0s infinite alternate, moveY 6s linear 0s infinite alternate;
+    animation: moveX 11s linear 0s infinite alternate, moveY 13.4s linear 0s infinite alternate;
 }
 
 @keyframes moveX {
