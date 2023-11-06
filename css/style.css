@@ -8,7 +8,6 @@
     --table-hover-color: 79, 118, 181;
     --white: rgb(255, 255, 255);
     --search-input-width: 12rem;
-    --screensaver-size: 5rem;
 }
 
 ::-webkit-scrollbar {
@@ -900,18 +899,44 @@ table {
 }
 
 #screensaver {
-    width: var(--screensaver-size);
-    height: var(--screensaver-size);
-    position: absolute;
-    animation: moveX 11s linear 0s infinite alternate, moveY 13.4s linear 0s infinite alternate;
+    background: rgb(220, 220, 220);
+    border-radius: .4rem;
+    padding: .5rem .8rem;
+    position: fixed;
+    animation: moveX 7s linear 0s infinite alternate, moveY 9.4s linear 0s infinite alternate;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+
+    & img {
+        width: 3rem;
+    }
+
+    & .logo-text {
+        display: flex;
+        flex-direction: column;
+        gap: .1rem;
+        align-self: center;
+
+        & span:first-child {
+            font-family: 'Quicksand', -apple-system;
+            font-size: 1.7rem;
+        }
+
+        & span:last-child {
+            color: rgb(70, 70, 70);
+            font-size: .7rem;
+            font-family: monospace, 'SF Mono';
+        }
+    }
 }
 
 @keyframes moveX {
-    from { left: calc(100% - var(--screensaver-size)); }
-    to { left: 0; }
+    0% { left: calc(100% - 13.5rem); }
+    100% { left: 0; }
 }
 
 @keyframes moveY {
     from { top: 0; }
-    to { top: calc(100% - var(--screensaver-size)); }
+    to { top: calc(100% - 4.3rem); }
 }
