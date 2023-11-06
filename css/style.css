@@ -8,6 +8,7 @@
     --table-hover-color: 79, 118, 181;
     --white: rgb(255, 255, 255);
     --search-input-width: 12rem;
+    --screensaver-size: 5rem;
 }
 
 ::-webkit-scrollbar {
@@ -896,4 +897,21 @@ table {
     [class$="header"] {
         margin: 1rem 0 1.5rem 0;
     }
+}
+
+#screensaver {
+    width: var(--screensaver-size);
+    height: var(--screensaver-size);
+    position: absolute;
+    animation: moveX 5s linear 0s infinite alternate, moveY 6s linear 0s infinite alternate;
+}
+
+@keyframes moveX {
+    from { left: calc(100% - var(--screensaver-size)); }
+    to { left: 0; }
+}
+
+@keyframes moveY {
+    from { top: 0; }
+    to { top: calc(100% - var(--screensaver-size)); }
 }
