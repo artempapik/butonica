@@ -932,7 +932,7 @@ table {
 }
 
 @keyframes moveX {
-    0% { left: calc(100% - 13.5rem); }
+    0% { left: calc(100% - 13.7rem); }
     100% { left: 0; }
 }
 
