@@ -16,5 +16,19 @@
             font-size: 1.1rem;
             font-family: monospace, 'SF Mono';
         }
+
+        &.sub-value {
+            margin-top: .5rem;
+            padding: 0 .5rem 0 1rem;
+            justify-content: space-between;
+
+            & .stat-title {
+                font-size: .9rem;
+            }
+
+            & .stat-value {
+                font-size: 1rem;
+            }
+        }
     }
 }
