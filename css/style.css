@@ -820,13 +820,13 @@ table {
 }
 
 @keyframes moveX {
-    0% { left: calc(100% - 14.2rem); }
+    0% { left: calc(100% - 13.5rem); }
     100% { left: 0; }
 }
 
 @keyframes moveY {
     from { top: 0; }
-    to { top: calc(100% - 3.5rem); }
+    to { top: calc(100% - 4.3rem); }
 }
 
 @media (hover: none) {
@@ -886,9 +886,9 @@ table {
         font-size: 1rem;
     }
 
-    @keyframes moveY {
-        from { top: 0; }
-        to { top: calc(100% - 4.3rem); }
+    @keyframes moveX {
+        0% { left: calc(100% - 14.2rem); }
+        100% { left: 0; }
     }
 }
 
