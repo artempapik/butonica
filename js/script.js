@@ -994,4 +994,35 @@ const keepDatalistOptions = selector => {
     }
 }
 
+const getRandom = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
+
+const screensaverMarkup = `
+    <div id="screensaver">
+        <img src="img/parsley.png">
+        <span class="logo-text">
+            <span>Butonica</span>
+            <span>Облік Вашого бізнесу</span>
+        </span>
+    </div>
+`
+
+const toggleScreensaver = () => {
+    const screensaver = document.querySelector('#screensaver')
+    const toggleScreensaverButton = document.querySelector('.profile-info div:nth-child(3)')
+
+    if (screensaver) {
+        screensaver.remove()
+        toggleScreensaverButton.style.fontWeight = ''
+        return
+    }
+
+    const root = document.querySelector(':root')
+    root.style.setProperty('--screensaver-delay', -(getRandom(1, 20) + getRandom(1, 10) / 10) + 's')
+    root.style.setProperty('--screensaver-move-x', getRandom(6, 12) + getRandom(1, 10) / 10 + 's')
+    root.style.setProperty('--screensaver-move-y', getRandom(8, 14) + getRandom(1, 10) / 10 + 's')
+
+    toggleScreensaverButton.style.fontWeight = 'bold'
+    document.body.insertAdjacentHTML('afterend', screensaverMarkup)
+}
+
 document.ondblclick = e => e.preventDefault()
