@@ -694,11 +694,27 @@ const menuItemsContents = {
                 </span>
             </li>
             <li>
-                <span class="stat-title">Дохід від продаж:</span>
-                <span class="stat-value">
-                    <span></span>
-                    <span>грн</span>
-                </span>
+                <ul>
+                    <li>
+                        <span class="stat-title">Дохід від продаж:</span>
+                        <span class="stat-value">
+                            <span></span>
+                            <span>грн</span>
+                        </span>
+                    </li>
+                    <li class="sub-value">
+                        <span class="stat-title">продажі:</span>
+                        <span class="stat-value">
+                            <span></span>
+                        </span>
+                    </li>
+                    <li class="sub-value">
+                        <span class="stat-title">інтернет-замовлення:</span>
+                        <span class="stat-value">
+                            <span></span>
+                        </span>
+                    </li>
+                </ul>
             </li>
             <li>
                 <span class="stat-title">Витрати магазину:</span>
