@@ -786,6 +786,49 @@ table {
     }
 }
 
+#screensaver {
+    background: rgb(220, 220, 220);
+    border-radius: .4rem;
+    padding: .5rem .8rem;
+    position: fixed;
+    animation: moveX 7s linear 0s infinite alternate, moveY 9.4s linear 0s infinite alternate;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+
+    & img {
+        width: 3rem;
+    }
+
+    & .logo-text {
+        display: flex;
+        flex-direction: column;
+        gap: .1rem;
+        align-self: center;
+
+        & span:first-child {
+            font-family: 'Quicksand', -apple-system;
+            font-size: 1.7rem;
+        }
+
+        & span:last-child {
+            color: rgb(70, 70, 70);
+            font-size: .7rem;
+            font-family: monospace, 'SF Mono';
+        }
+    }
+}
+
+@keyframes moveX {
+    0% { left: calc(100% - 14.2rem); }
+    100% { left: 0; }
+}
+
+@keyframes moveY {
+    from { top: 0; }
+    to { top: calc(100% - 3.5rem); }
+}
+
 @media (hover: none) {
     :root {
         touch-action: pan-x pan-y;
@@ -842,6 +885,11 @@ table {
         padding: .45rem !important;
         font-size: 1rem;
     }
+
+    @keyframes moveY {
+        from { top: 0; }
+        to { top: calc(100% - 4.3rem); }
+    }
 }
 
 @media only screen and (max-width: 1500px) {
@@ -896,47 +944,4 @@ table {
     [class$="header"] {
         margin: 1rem 0 1.5rem 0;
     }
-}
-
-#screensaver {
-    background: rgb(220, 220, 220);
-    border-radius: .4rem;
-    padding: .5rem .8rem;
-    position: fixed;
-    animation: moveX 7s linear 0s infinite alternate, moveY 9.4s linear 0s infinite alternate;
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-
-    & img {
-        width: 3rem;
-    }
-
-    & .logo-text {
-        display: flex;
-        flex-direction: column;
-        gap: .1rem;
-        align-self: center;
-
-        & span:first-child {
-            font-family: 'Quicksand', -apple-system;
-            font-size: 1.7rem;
-        }
-
-        & span:last-child {
-            color: rgb(70, 70, 70);
-            font-size: .7rem;
-            font-family: monospace, 'SF Mono';
-        }
-    }
-}
-
-@keyframes moveX {
-    0% { left: calc(100% - 14.2rem); }
-    100% { left: 0; }
-}
-
-@keyframes moveY {
-    from { top: 0; }
-    to { top: calc(100% - 4.3rem); }
 }
