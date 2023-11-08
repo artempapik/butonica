@@ -832,6 +832,20 @@ table {
     to { top: calc(100% - 4.3rem); }
 }
 
+#loader {
+    width: 1.9rem;
+    height: 1.9rem;
+    border: .3rem solid rgb(var(--table-hover-color));
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    animation: rotation 1.5s linear infinite;
+}
+
+@keyframes rotation {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 @media (hover: none) {
     :root {
         touch-action: pan-x pan-y;
