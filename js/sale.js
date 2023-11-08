@@ -48,9 +48,48 @@ const showSaleInfo = e => {
         }
 
         checkoutClients = document.querySelector('.checkout-clients')
+
         checkoutClients.querySelector('.clear-client').onpointerup = () => {
             checkoutClients.querySelector('select').value = ''
             checkoutClients.querySelector('input').value = ''
+        }
+
+        clientModal.querySelector('button').onpointerup = () => {
+            const fullNameElement = clientModal.querySelector('.client-full-name')
+            const fullName = fullNameElement.value.trim()
+
+            if (!fullName) {
+                showMessage('error', 'Введіть ПІБ клієнта')
+                return
+            }
+
+            const birthDateElement = clientModal.querySelector('.client-birth-date')
+
+            const client = {
+                companyId: loginInfo.companyId,
+                fullName,
+                phone: clientModal.querySelector('.client-phone').value,
+                email: clientModal.querySelector('.client-email').value,
+                birthDate: birthDateElement.value ? new Date(birthDateElement.value) : null,
+                isMale: clientModal.querySelector('input[type=radio]').checked,
+                instagram: clientModal.querySelector('.client-instagram').value,
+                comment: clientModal.querySelector('.client-comment').value
+            }
+
+            post('Client', client).then(response => {
+                showMessage('success', createSuccessMessage(CLIENT))
+                const option = document.createElement('option')
+                option.text = client.fullName + ' ' + client.phone.split('\n')[0]
+                option.dataset.id = response
+                option.dataset.name = client.fullName
+                option.dataset.phone = client.phone
+                option.dataset.bonusCash = 0
+                checkoutClientsSelect.add(option)
+                clientModal.style.display = ''
+            }).catch(() => {
+                clientModal.style.display = ''
+                showMessage('error', createErrorMessage(CLIENT))
+            })
         }
 
         totalSum = document.querySelector('.to-pay input')
