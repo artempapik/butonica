@@ -45,12 +45,16 @@ const clientModal = document.querySelector('.create-client-modal')
 const clientInfoModal = document.querySelector('.client-info-modal')
 const clientModalContent = clientInfoModal.querySelector('.client-info-modal-content')
 
-const createClientModal = () => {
+const createClientModal = (addCreateEvent = true) => {
     clientModal.querySelector('h1').textContent = `Створити ${CLIENT}`
     clientModal.querySelectorAll('input').forEach(i => i.value = '')
     clientModal.querySelectorAll('textarea').forEach(t => t.value = '')
     clientModal.querySelector('input[type=radio]').checked = true
-    clientModal.querySelector('button').onpointerup = () => createClient()
+
+    if (addCreateEvent) {
+        clientModal.querySelector('button').onpointerup = () => createClient()
+    }
+    
     clientModal.style.display = 'flex'
 }
 
