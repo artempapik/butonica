@@ -490,7 +490,7 @@ const menuItemsContents = {
                     <div class="checkout" onpointerup="createSaleOrderModal()">Оформити замовлення</div>
                     <div class="checkout-clients">
                         <div class="add-client">
-                            <span class="material-symbols-outlined">add_circle</span>
+                            <span class="material-symbols-outlined" onpointerup="createClientModal(false)">add_circle</span>
                             <span>Клієнт:</span>
                         </div>
                         <div class="select-client">
