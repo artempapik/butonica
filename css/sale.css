@@ -1032,7 +1032,6 @@
 
 .create-internet-order-modal-content {
     & .internet-client-info {
-        display: flex;
         padding: 0 .5rem;
         justify-content: space-between;
         align-items: center;
@@ -1140,7 +1139,7 @@
 
     & .sale-order-flavors {
         & h2 {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         & table td:nth-child(2) {
