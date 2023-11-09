@@ -192,8 +192,8 @@ const createSaleModal = () => {
         changeBlock.querySelector('.change').textContent = (paidSum - +totalSum.value).toFixed(2)
     }
 
-    saleModal.querySelectorAll('.payment label').forEach(l => l.onpointerup = e => {
-        const isCash = e.target.value === 'Готівка'
+    saleModal.querySelectorAll('.payment label').forEach(l => l.onpointerup = () => {
+        const isCash = l.querySelector('input').value === 'Готівка'
         saleModal.querySelector('.sale-checkout').style.display = isCash ? 'flex' : 'none'
         saleModal.querySelector('.sale-checkout .sale-change').style.display = isCash && +paidSumInput.value > +totalSum.value ? 'flex' : ''
     })
