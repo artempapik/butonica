@@ -966,3 +966,84 @@ table {
         max-height: calc(100vh - 9rem);
     }
 }
+
+@media only screen and (max-width: 500px) {
+    header {
+        padding: .2rem 1rem;
+    }
+
+    main {
+        &.main-padding, &.sale-padding {
+            padding: 0 .2rem;
+        }
+    }
+
+    aside {
+        min-width: fit-content;
+    }
+
+    table {
+        & td {
+            padding: .3rem;
+        }
+
+        & tbody {
+            & span.material-symbols-outlined {
+                font-size: 1.1rem;
+            }
+
+            & td {
+                font-size: .9rem;
+            }
+        }
+
+        & [class$="actions"] {
+            & span {
+                font-size: 1rem;
+
+                &:first-child {
+                    margin-right: .3rem;
+                }
+            }
+        }
+    }
+
+    .main-menu {
+        &.main-padding {
+            padding: 1.3rem .1rem;
+        }
+
+        & li .menu-item {
+            padding: .7rem .5rem;
+            width: fit-content;
+        }
+
+        & span:last-child {
+            display: none;
+        }
+    }
+
+    .sub-menu li {
+        &.main-padding, &.sale-padding {
+            margin-left: .35rem;
+        }
+
+        & div {
+            width: fit-content;
+            padding: .3rem;
+        }
+    }
+
+    [class$="header"] {
+        margin: .7rem 0 1rem 0;
+    }
+
+    [class$="filters"] {
+        flex-direction: column;
+        align-items: start;
+
+        & button {
+            width: 12rem;
+        }
+    }
+}
