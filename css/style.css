@@ -967,7 +967,7 @@ table {
     }
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 700px) {
     header {
         padding: .2rem 1rem;
     }
