@@ -970,8 +970,8 @@ document.onpointerdown = e => {
 }
 
 document.onpointerup = e => {
-    document.activeElement.blur()
-    
+    e.target.style.inputMode = 'none'
+
     if (e.target.classList.contains('profile')) {
         return
     }
