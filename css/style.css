@@ -1006,6 +1006,20 @@ table {
                 }
             }
         }
+
+        & .table-no-data {
+            padding: 1.5rem 0;
+    
+            & img {
+                width: 6rem;
+            }
+    
+            & span {
+                font-size: .9rem;
+                letter-spacing: .02rem;
+                word-spacing: .2rem;
+            }
+        }
     }
 
     button {
