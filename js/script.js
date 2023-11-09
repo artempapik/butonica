@@ -969,8 +969,12 @@ document.onpointerdown = e => {
     }
 }
 
+const isMobile = 'ontouchstart' in window
+
 document.onpointerup = e => {
-    e.target.style.inputMode = 'none'
+    if (isMobile) {
+        document.activeElement.blur()
+    }
 
     if (e.target.classList.contains('profile')) {
         return
