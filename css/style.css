@@ -789,6 +789,7 @@ table {
 }
 
 #screensaver {
+    user-select: none;
     background: rgb(220, 220, 220);
     border-radius: .4rem;
     padding: .5rem .8rem;
