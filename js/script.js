@@ -959,6 +959,26 @@ const login = () => {
 const profileInfo = document.querySelector('.profile-info')
 const openProfile = () => profileInfo.style.display = profileInfo.style.display === 'flex' ? '' : 'flex'
 
+document.onscroll = () => profileInfo.style.display = ''
+document.oncontextmenu = e => e.preventDefault()
+document.ondblclick = e => e.preventDefault()
+
+document.onpointerdown = e => {
+    if (e.button === 1) {
+        e.preventDefault()
+    }
+}
+
+document.onpointerup = e => {
+    document.activeElement.blur()
+    
+    if (e.target.classList.contains('profile')) {
+        return
+    }
+
+    profileInfo.style.display = ''
+}
+
 const logout = () => {
     if (confirm('Ви дійсно бажаєте вийти з системи?')) {
         localStorage.setItem('login-info', null)
@@ -1029,5 +1049,3 @@ const toggleScreensaver = () => {
     toggleScreensaverButton.style.fontWeight = 'bold'
     document.body.insertAdjacentHTML('beforeend', screensaverMarkup)
 }
-
-document.ondblclick = e => e.preventDefault()
