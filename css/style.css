@@ -976,6 +976,10 @@ table {
         &.main-padding, &.sale-padding {
             padding: 0 .2rem;
         }
+
+        & h1 {
+            font-size: 1.2rem;
+        }
     }
 
     aside {
@@ -983,18 +987,13 @@ table {
     }
 
     table {
-        & td {
-            padding: .3rem;
+        & tbody span.material-symbols-outlined {
+            font-size: 1.1rem;
         }
 
-        & tbody {
-            & span.material-symbols-outlined {
-                font-size: 1.1rem;
-            }
-
-            & td {
-                font-size: .9rem;
-            }
+        & td {
+            padding: .3rem;
+            font-size: .9rem;
         }
 
         & [class$="actions"] {
