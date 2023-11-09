@@ -1058,7 +1058,7 @@ table {
     }
 
     [class$="modal-content"] {
-        max-height: calc(100vh - 8.5rem);
+        max-height: calc(100vh - 19rem);
     }
 }
 
