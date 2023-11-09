@@ -741,7 +741,8 @@ const menuItemsContents = {
 
 const fillSelectedMenuItem = e => {
     document.querySelector('header').style.display = ''
-    document.querySelector('main').classList.remove('sale-padding')
+    main.style.background = 'unset'
+    main.classList.remove('sale-padding')
 
     document.querySelectorAll('.main-menu span:last-child').forEach(i => i.style.display = '')
     document.querySelectorAll('.menu-item').forEach(i => i.style.width = '')
