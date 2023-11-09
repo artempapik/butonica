@@ -978,7 +978,7 @@ table {
         }
 
         & h1 {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
         }
     }
 
@@ -1005,6 +1005,10 @@ table {
                 }
             }
         }
+    }
+
+    button {
+        padding: .4rem .8rem;
     }
 
     .main-menu {
