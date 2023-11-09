@@ -538,10 +538,16 @@ const createInternetOrderModal = () => {
     })
 
     const labelsBlock = internetOrderModal.querySelector('.sale-order-labels')
+    const internetClientBlock = internetOrderModal.querySelector('.internet-client-info')
+    const orderStockBlock = internetOrderModal.querySelector('.sale-order-stock')
+    const orderFlavorsBlock = internetOrderModal.querySelector('.sale-order-flavors')
     const deliveryBlocks = internetOrderModal.querySelectorAll('[id^=delivery]')
     const pickupBlocks = internetOrderModal.querySelectorAll('[id^=pickup]')
 
     labelsBlock.style.display = 'none'
+    internetClientBlock.style.display = 'none'
+    orderStockBlock.style.display = 'none'
+    orderFlavorsBlock.style.display = 'none'
     deliveryBlocks.forEach(b => b.style.display = 'none')
     pickupBlocks.forEach(b => b.style.display = 'none')
 
@@ -567,7 +573,10 @@ const createInternetOrderModal = () => {
 
         labelsBlock.innerHTML = ''
         labelsBlock.style.display = 'flex'
-        
+        internetClientBlock.style.display = 'flex'
+        orderStockBlock.style.display = 'flex'
+        orderFlavorsBlock.style.display = ''
+
         for (const label of labels) {
             const div = document.createElement('div')
             div.classList = 'sale-order-label'
