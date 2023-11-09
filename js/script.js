@@ -1027,7 +1027,7 @@ const toggleScreensaver = () => {
     root.style.setProperty('--screensaver-move-y', getRandom(8, 14) + getRandom(1, 10) / 10 + 's')
 
     toggleScreensaverButton.style.fontWeight = 'bold'
-    document.body.insertAdjacentHTML('afterend', screensaverMarkup)
+    document.body.insertAdjacentHTML('beforeend', screensaverMarkup)
 }
 
 document.ondblclick = e => e.preventDefault()
