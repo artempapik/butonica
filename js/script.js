@@ -230,11 +230,15 @@ const menuItemsContents = {
                                 <span class="required">*</span>
                                 <span>Назва</span>
                             </span>
+                            <span class="material-symbols-outlined" onpointerup="copyToClipboard('company-name')">content_copy</span>
                         </h2>
                         <input class="company-name" maxlength="30">
                     </div>
                     <div class="form">
-                        <h2>Контактні дані</h2>
+                        <h2>
+                            <span>Контактні дані</span>
+                            <span class="material-symbols-outlined" onpointerup="copyToClipboard('company-contact-info')">content_copy</span>
+                        </h2>
                         <textarea class="company-contact-info" maxlength="100" rows="3"></textarea>
                     </div>
                 </div>
@@ -737,6 +741,11 @@ const menuItemsContents = {
             </li>
         </ul>
     `
+}
+
+const copyToClipboard = className => {
+    navigator.clipboard.writeText(document.querySelector('.' + className).value)
+    showMessage('info', 'Скопійовано')
 }
 
 const fillSelectedMenuItem = e => {
