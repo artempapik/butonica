@@ -1364,3 +1364,9 @@
         }
     }
 }
+
+@media only screen and (max-width: 700px) {
+    .create-shift-modal .create-shift-modal-content {
+        padding: .8rem 1.4rem .4rem 1.4rem;
+    }
+}
