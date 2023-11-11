@@ -133,7 +133,7 @@
 
 .contractor-supply-products table {
     display: block;
-    margin: .5rem 0 0 0;
+    margin: .5rem 0;
 
     & tbody {
         font-size: 1rem;
