@@ -31,6 +31,7 @@ const showSaleInfo = e => {
         main.innerHTML = menuItemsContents['sale']
 
         if (!response) {
+            hideBodyOverflow()
             shiftModal.style.display = 'flex'
     
             get(`CashRegister/ids-names/${loginInfo.companyId}`).then(response => {
@@ -168,6 +169,7 @@ const createEmployeeShift = () => {
         shiftId = response
         showMessage('success', 'Ви почали зміну')
         shiftModal.style.display = 'none'
+        document.body.style.overflow = ''
     })
 }
 
