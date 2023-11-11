@@ -154,7 +154,7 @@ const createEmployeeShift = () => {
     const cash = shiftModal.querySelector('input')
 
     if (!cash.value) {
-        showMessage('error', 'Введіть готівку')
+        showMessage('error', 'Внесіть готівку')
         return
     }
 
