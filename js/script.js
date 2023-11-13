@@ -129,11 +129,13 @@ const createDeleteSpan = className => createIconSpan(className, 'delete')
 const getClassForNumber = number => {
     if (number > 0) {
         return 'positive-left'
-    } else if (number < 0) {
+    }
+    
+    if (number < 0) {
         return 'negative-left'
     }
 
-    return ''
+    return 'zero-left'
 }
 
 const createEmptyDataDiv = () => {
