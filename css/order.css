@@ -1,13 +1,3 @@
-.order-date {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-
-    & input {
-        padding: .5rem;
-    }
-}
-
 .order-info-modal-content {
     width: calc(var(--modal-content-width) + 12rem);
     gap: 1.5rem;
@@ -364,6 +354,24 @@
 }
 
 @media only screen and (max-width: 700px) {
+    .order-info-modal-content {
+        & .order-main-info {
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2rem;
+        }
+        
+        & .order-status {
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        & .customer, & .recipient {
+            flex-direction: column;
+            gap: 1.4rem;
+        }
+    }
+
     [class$="order-table"] table tr:not(:first-child) {
         & td:nth-child(6) span, & td:nth-child(7) span {
             padding: .2rem .4rem;
