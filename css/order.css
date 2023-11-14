@@ -354,13 +354,25 @@
 }
 
 @media only screen and (max-width: 700px) {
+    [class$="order-table"] table tr:not(:first-child) {
+        & td:nth-child(6) span, & td:nth-child(7) span {
+            padding: .2rem .4rem;
+            border-radius: .4rem;
+        }
+    }
+}
+
+@media only screen and (max-width: 700px) and (orientation: portrait) {
     .order-info-modal-content {
+        padding: 1rem .5rem;
+        gap: 1.3rem;
+
         & .order-main-info {
             flex-direction: column;
             align-items: center;
             gap: 1.2rem;
         }
-        
+
         & .order-status {
             flex-direction: column;
             gap: 1.2rem;
@@ -370,12 +382,10 @@
             flex-direction: column;
             gap: 1.4rem;
         }
-    }
 
-    [class$="order-table"] table tr:not(:first-child) {
-        & td:nth-child(6) span, & td:nth-child(7) span {
-            padding: .2rem .4rem;
-            border-radius: .4rem;
+        & .order-products table {
+            overflow-x: auto;
+            width: 100%;
         }
     }
 }
