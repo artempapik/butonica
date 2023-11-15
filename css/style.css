@@ -1196,12 +1196,19 @@ table {
 }
 
 @media only screen and (max-width: 700px) and (orientation: portrait) {
+    header .theme-profile .profile-info {
+        right: .7rem;
+
+        & div {
+            padding: .3rem .5rem;
+        }
+    }
+
     main .header-items {
-        flex-direction: column;
         gap: .5rem;
 
         & span {
-            display: none !important;
+            font-size: 1.5rem;
         }
     }
 
