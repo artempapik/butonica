@@ -1208,8 +1208,12 @@ table {
         gap: 0;
 
         & span {
-            text-align: left;
+            text-align: center;
             font-size: 1.5rem;
+        }
+
+        & h1 {
+            font-size: 1.4rem;
         }
     }
 
