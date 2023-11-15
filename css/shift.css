@@ -229,7 +229,7 @@
         }
 
         &:nth-child(2) {
-            max-width: 7rem;
+            max-width: 5.5rem;
             word-wrap: break-word;
         }
     }
