@@ -1205,15 +1205,12 @@ table {
     }
 
     main .header-items {
-        gap: .2rem;
-
         & span {
-            text-align: center;
-            font-size: 1.5rem;
+            display: none;
         }
 
         & h1 {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
         }
     }
 
