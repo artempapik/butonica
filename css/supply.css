@@ -218,3 +218,14 @@
         gap: 1.3rem;
     }
 }
+
+@media only screen and (max-width: 700px) and (orientation: portrait) {
+    .supply-info-modal-content {
+        padding: 0 .5rem .8rem .5rem;
+
+        & .supply-products table {
+            width: 100%;
+            overflow-x: auto;
+        }
+    }
+}
