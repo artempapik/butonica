@@ -1205,7 +1205,7 @@ table {
     }
 
     main .header-items {
-        gap: 0;
+        gap: .2rem;
 
         & span {
             text-align: center;
@@ -1213,7 +1213,7 @@ table {
         }
 
         & h1 {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
         }
     }
 
