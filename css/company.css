@@ -61,7 +61,7 @@
 @media only screen and (max-width: 700px) and (orientation: portrait) {
     .company-container {
         width: unset;
-        border-radius: .4rem;
-        padding: .4rem .2rem;
+        border-radius: .7rem;
+        padding: .4rem .5rem;
     }
 }
