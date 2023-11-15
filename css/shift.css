@@ -227,5 +227,10 @@
         &:first-child, &:last-child {
             display: none;
         }
+
+        &:nth-child(2) {
+            max-width: 7rem;
+            word-wrap: break-word;
+        }
     }
 }
