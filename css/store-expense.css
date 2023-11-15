@@ -36,3 +36,9 @@
         max-width: 22rem;
     }
 }
+
+@media only screen and (max-width: 700px) and (orientation: portrait) {
+    .store-expense-table table td:nth-child(2) {
+        display: none;
+    }
+}
