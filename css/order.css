@@ -239,9 +239,12 @@
 
                     &:nth-child(4) {
                         width: 4rem;
-                        text-align: center;
                     }
                 }
+            }
+
+            & td:nth-child(4) {
+                text-align: center;
             }
             
             & input {
