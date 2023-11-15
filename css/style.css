@@ -1206,7 +1206,7 @@ table {
 
     main .header-items {
         & span {
-            display: none;
+            display: none !important;
         }
 
         & h1 {
