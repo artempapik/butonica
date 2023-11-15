@@ -395,9 +395,7 @@
         }
     }
 
-    [class$="order-table"] table td {
-        &:nth-child(2), &:nth-child(5), &:nth-child(6), &:nth-child(7) {
-            display: none;
-        }
+    [class$="order-table"] table td:nth-child(7) {
+        display: none;
     }
 }
