@@ -222,4 +222,10 @@
             display: none;
         }
     }
+
+    .shift-table table td {
+        &:first-child, &:last-child {
+            display: none;
+        }
+    }
 }
