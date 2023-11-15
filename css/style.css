@@ -1196,6 +1196,15 @@ table {
 }
 
 @media only screen and (max-width: 700px) and (orientation: portrait) {
+    main .header-items {
+        flex-direction: column;
+        gap: .5rem;
+
+        & span {
+            display: none !important;
+        }
+    }
+
     [class$="modal-content"] {
         max-height: calc(100vh - 9.5rem);
     }
