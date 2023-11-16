@@ -83,6 +83,7 @@ const createEmployeeRow = employee => {
         showHideNodeInfo(employeeInfoModal, 'employee-birth-date', formatDate(employee.birthDate, false))
         showHideNodeInfo(employeeInfoModal, 'employee-phone', formatPhoneNumber(employee.phone))
         employeeInfoModal.style.display = 'flex'
+        employeeInfoModal.querySelector('.employee-info-modal-content').scroll(0, 0)
     }
 
     if (loginInfo.title === 0) {
