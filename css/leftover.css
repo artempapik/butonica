@@ -38,4 +38,10 @@
             margin-right: 0;
         }
     }
+
+    .leftover-table {
+        & div:not(table div) {
+            font-size: 1rem;
+        }
+    }
 }
