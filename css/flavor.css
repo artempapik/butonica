@@ -349,7 +349,7 @@
 
 @media only screen and (max-width: 700px) and (orientation: portrait) {
     .create-flavor-modal-content {
-        padding: .7rem .5rem;
+        padding: .5rem .3rem;
 
         & table {
             width: 100%;
