@@ -91,5 +91,10 @@
         &:nth-child(2), &:nth-child(5) {
             display: none;
         }
+
+        &:nth-child(3) span {
+            padding: .2rem .4rem !important;
+            border-radius: .3rem !important;
+        }
     }
 }
