@@ -1399,7 +1399,7 @@
             outline: .1rem rgb(50, 50, 50) solid;
         }
 
-        & .sale-order-products {
+        & .sale-order-products table {
             width: 100%;
             overflow-x: auto;
         }
