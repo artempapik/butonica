@@ -1212,6 +1212,10 @@ table {
         }
     }
 
+    table [class$="actions"] span:first-child {
+        margin-right: 0;
+    }
+
     [class$="modal-content"] {
         max-height: calc(100vh - 9.5rem);
     }
