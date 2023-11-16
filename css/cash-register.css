@@ -43,7 +43,13 @@
 }
 
 @media only screen and (max-width: 700px) and (orientation: portrait) {
-    .cash-register-table table td:nth-child(4) {
-        display: none;
+    .cash-register-table table {
+        & tbody span.material-symbols-outlined {
+            display: none;
+        }
+        
+        & td:nth-child(4) {
+            display: none;
+        }
     }
 }
