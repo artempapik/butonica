@@ -41,6 +41,7 @@
 
     .leftover-table {
         & div:not(table div) {
+            gap: .2rem;
             font-size: 1rem;
         }
     }
