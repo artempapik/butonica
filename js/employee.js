@@ -101,6 +101,7 @@ const createEmployeeRow = employee => {
             employeeModal.querySelector('.employee-birth-date').value = employee.birthDate ? getDate(employee.birthDate) : ''
 
             if (getComputedStyle(actionsColumn.querySelector('.delete-employee')).display === 'none') {
+                employeeModal.querySelector('.employee-title').parentNode.style.display = 'none'
                 employeeModal.querySelector('.stock-employee').style.display = 'none'
                 employeeModal.querySelector('.active-employee').style.display = 'none'
             }
