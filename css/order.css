@@ -334,6 +334,10 @@
         max-width: 16rem;
     }
 
+    & td:nth-child(5) img {
+        width: 1.6rem;
+    }
+
     & td:nth-child(7) {
         max-width: 12rem;
     }
