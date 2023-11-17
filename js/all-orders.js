@@ -364,12 +364,17 @@ const createOrderRow = (order, table) => {
         timeLeftTd.style.fontWeight = 'bold'
     }
 
+    const orderTypeTd = createTd()
+    const img = document.createElement('img')
+    img.src = `img/${order.isPickup ? 'pickup' : 'delivery'}.png`
+    orderTypeTd.append(img)
+
     tr.append(
         createTd(order.id),
         timeLeftTd,
         createTd(formatOrderDate(order.date, order.timeFrom, order.timeTill)),
         createTd(order.customer),
-        createTd(order.isPickup ? 'Самовивіз' : 'Доставка'),
+        orderTypeTd,
         statusTd,
         labelsTd,
         actionsColumn
