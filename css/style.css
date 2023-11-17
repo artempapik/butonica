@@ -1148,7 +1148,7 @@ table {
 
     .main-menu {
         &.main-padding {
-            padding: 1.3rem .1rem;
+            padding: .5rem .1rem;
         }
 
         & li .menu-item {
