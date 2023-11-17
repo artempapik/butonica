@@ -132,6 +132,14 @@
 }
 
 @media only screen and (max-width: 700px) and (orientation: portrait) {
+    .create-waste-modal-content {
+        padding: .6rem .4rem;
+
+        & .waste-products .waste-product div {
+            gap: .5rem;
+        }
+    }
+
     .waste-table table td:nth-child(3) {
         max-width: 6rem;
         word-wrap: break-word;
