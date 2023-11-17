@@ -227,5 +227,10 @@
             width: 100%;
             overflow-x: auto;
         }
+
+        & .total-sum, & .total-sum-associated-costs {
+            font-size: 1.1rem;
+            gap: .2rem;
+        }
     }
 }
