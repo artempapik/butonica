@@ -63,5 +63,21 @@
         width: unset;
         border-radius: .7rem;
         padding: .4rem .5rem;
+
+        & .content {
+            gap: .8rem;
+
+            & .inputs {
+                gap: .6rem;
+
+                & h2 {
+                    margin: .2rem 0;
+                }
+            }
+        }
+
+        & .save {
+            margin-top: .9rem;
+        }
     }
 }
