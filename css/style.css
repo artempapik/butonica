@@ -1148,11 +1148,11 @@ table {
 
     .main-menu {
         &.main-padding {
-            padding: .5rem .1rem;
+            padding: .4rem .1rem;
         }
 
         & li .menu-item {
-            padding: .7rem .5rem;
+            padding: .6rem .5rem;
             width: fit-content;
         }
 
