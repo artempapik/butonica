@@ -352,6 +352,14 @@
         padding: .5rem .3rem;
     }
 
+    .flavor-info-modal-content {
+        padding: .5rem .4rem;
+
+        & h1 {
+            margin-top: .4rem;
+        }
+    }
+
     .flavor-table table td:nth-child(4) {
         display: none;
     }
