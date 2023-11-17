@@ -80,3 +80,18 @@
         }
     }
 }
+
+@media only screen and (max-width: 700px) and (orientation: portrait) {
+    .create-inventory-modal-content {
+        padding: .4rem .2rem;
+
+        & .inventory-stock {
+            width: unset;
+        }
+
+        & table {
+            width: 100%;
+            overflow-x: auto;
+        }
+    }
+}
