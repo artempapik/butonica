@@ -208,6 +208,9 @@ const payTypeToIndex = {
 }
 
 const createSale = () => {
+    const payButton = saleModal.querySelector('button')
+    payButton.disabled = true
+
     const checkoutClient = checkoutClients.querySelector('select').selectedOptions[0]
     const clientId = checkoutClient ? +checkoutClient.dataset.id : null
 
@@ -248,10 +251,12 @@ const createSale = () => {
     post('Order', sale).then(() => {
         closeShift()
         saleModal.style.display = ''
+        payButton.disabled = false
         showMessage('success', createSuccessMessage(SALE))
     }).catch(e => {
         if (e.message === '403') {
             saleModal.style.display = ''
+            payButton.disabled = false
             showMessage('error', 'Продаж не може перевищувати залишок на складі')
             return
         }
