@@ -957,6 +957,16 @@ table {
     animation: rotation 1.5s linear infinite;
 }
 
+.loader-button {
+    display: none;
+    width: 1.2rem !important;
+    height: 1.2rem !important;
+    border: .15rem solid rgb(230, 230, 230);
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    animation: rotation .7s linear infinite;
+}
+
 @keyframes rotation {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
