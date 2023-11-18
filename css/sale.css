@@ -568,8 +568,11 @@
                 gap: .5rem;
             }
         }
-    
+
         & button {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
             font-size: 1.3rem;
             background: rgb(68, 153, 128);
             color: rgb(245, 245, 245);
@@ -578,6 +581,15 @@
     
             &:hover {
                 background: rgb(58, 143, 118);
+            }
+
+            &:disabled {
+                background: rgb(40, 120, 90);
+                pointer-events: none;
+
+                & .loader-button {
+                    display: block;
+                }
             }
         }
     }
