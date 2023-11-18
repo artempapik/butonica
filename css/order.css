@@ -22,10 +22,11 @@
                     font-size: 1.4rem;
                     text-decoration: underline;
                 }
-    
+                
                 & .order-date {
                     display: flex;
                     align-items: center;
+                    align-self: end;
                     gap: 1rem;
     
                     & span {
