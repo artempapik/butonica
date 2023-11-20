@@ -96,9 +96,9 @@ const createClientRow = client => {
             instagram.parentNode.style.display = ''
             const link = document.createElement('a')
             link.textContent = client.instagram
-            link.href = `https://www.instagram.com/${client.instagram}`
+            link.href = `https://www.instagram.com/${client.instagram[0] === '@' ? client.instagram.substring(1) : client.instagram}`
             link.target = 'blank'
-    
+            
             instagram.innerHTML = ''
             instagram.append(link)
         } else {
