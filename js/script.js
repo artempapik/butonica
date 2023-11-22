@@ -1097,7 +1097,6 @@ const profileInfo = document.querySelector('.profile-info')
 const openProfile = () => profileInfo.style.display = profileInfo.style.display === 'flex' ? '' : 'flex'
 
 document.onscroll = () => profileInfo.style.display = ''
-document.oncontextmenu = e => e.preventDefault()
 document.ondblclick = e => e.preventDefault()
 
 document.onpointerdown = e => {
