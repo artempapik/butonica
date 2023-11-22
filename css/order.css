@@ -38,7 +38,7 @@
                     }
                 }
             }
-    
+            
             & .order-time {
                 display: flex;
                 align-self: end;
@@ -330,6 +330,10 @@
 
 [class$="order-table"] table tr:not(:first-child) {
     cursor: pointer;
+
+    & td:nth-child(2) img {
+        width: 1.7rem;
+    }
 
     & td:nth-child(3) {
         max-width: 16rem;
