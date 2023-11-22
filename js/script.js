@@ -109,9 +109,15 @@ const replaceLoadIcons = () => {
     document.querySelector('.header-items span').style.display = 'block'
 }
 
-const createTd = text => {
+const createTd = value => {
     const td = document.createElement('td')
-    td.textContent = text
+
+    if (value instanceof HTMLElement) {
+        td.append(value)
+    } else {
+        td.textContent = value
+    }
+
     return td
 }
 
