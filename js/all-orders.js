@@ -50,7 +50,7 @@ const showAllOrderInfo = e => {
 
         response.forEach(o => fillAllOrdersTable(o))
         replaceLoadIcons()
-    }).catch(() => showMessage('error', getErrorMessage(ORDER)))
+    })//.catch(() => showMessage('error', getErrorMessage(ORDER)))
 
     fillDatalists()
 }
@@ -257,7 +257,7 @@ const createOrderRow = (order, table) => {
 
             orderInfoModal.style.display = 'flex'
             orderInfoModal.querySelector('.order-info-modal-content').scroll(0, 0)
-        }).catch(() => showMessage('error', getErrorMessage(ORDER)))
+        })//.catch(() => showMessage('error', getErrorMessage(ORDER)))
     }
 
     if (loginInfo.title < 2 || loginInfo.employeeId === order.employeeId) {
@@ -314,6 +314,18 @@ const createOrderRow = (order, table) => {
         labelsTd.append(span)
     }
 
+    const calculateDaysLeft = date => {
+        const daysLeft = new Date(date).getDate() - new Date().getDate()
+
+        if (!daysLeft) {
+            const img = document.createElement('img')
+            img.src = 'img/today.png'
+            return img
+        }
+        
+        return daysLeft + 'д'
+    }
+
     const convertMsToTime = milliseconds => {
         let seconds = Math.floor(milliseconds / 1000)
         let minutes = Math.floor(seconds / 60)
@@ -354,7 +366,9 @@ const createOrderRow = (order, table) => {
 
     const timeLeft = order.status === 2 ?
         { text: '–' } :
-        convertMsToTime(new Date(order.timeFrom ? order.date.replace('00', order.timeFrom.substring(0, 2)).replace('00', order.timeFrom.substring(3)) : order.date) - new Date())
+        order.timeFrom ?
+            convertMsToTime(new Date(order.date.replace('00', order.timeFrom.substring(0, 2)).replace('00', order.timeFrom.substring(3))) - new Date()) :
+            { text: calculateDaysLeft(order.date) }
 
     const timeLeftTd = createTd(timeLeft.text)
 
