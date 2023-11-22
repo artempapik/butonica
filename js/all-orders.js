@@ -354,7 +354,7 @@ const createOrderRow = (order, table) => {
 
     const timeLeft = order.status === 2 ?
         { text: '–' } :
-        convertMsToTime(new Date(order.date.replace('00', order.timeFrom.substring(0, 2)).replace('00', order.timeFrom.substring(3))) - new Date())
+        convertMsToTime(new Date(order.timeFrom ? order.date.replace('00', order.timeFrom.substring(0, 2)).replace('00', order.timeFrom.substring(3)) : order.date) - new Date())
 
     const timeLeftTd = createTd(timeLeft.text)
 
