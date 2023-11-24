@@ -50,7 +50,7 @@ const showAllOrderInfo = e => {
 
         response.forEach(o => fillAllOrdersTable(o))
         replaceLoadIcons()
-    })//.catch(() => showMessage('error', getErrorMessage(ORDER)))
+    }).catch(() => showMessage('error', getErrorMessage(ORDER)))
 
     fillDatalists()
 }
@@ -257,7 +257,7 @@ const createOrderRow = (order, table) => {
 
             orderInfoModal.style.display = 'flex'
             orderInfoModal.querySelector('.order-info-modal-content').scroll(0, 0)
-        })//.catch(() => showMessage('error', getErrorMessage(ORDER)))
+        }).catch(() => showMessage('error', getErrorMessage(ORDER)))
     }
 
     if (loginInfo.title < 2 || loginInfo.employeeId === order.employeeId) {
