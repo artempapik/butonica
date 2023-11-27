@@ -165,6 +165,7 @@
 
     & .customer, & .recipient {
         display: flex;
+        gap: 1rem;
         justify-content: space-between;
         padding: 1rem;
         border-radius: .5rem;
