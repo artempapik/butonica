@@ -450,7 +450,7 @@ const editOrderStatus = (order, shouldSurcharge, oldRow, table) => {
         showMessage('info', 'Статус замовлення змінено')
         const newRow = createOrderRow(order, table)
         table.replaceChild(newRow, oldRow)
-        orderInfoModal.style.display = ''
+        hideModal(orderInfoModal)
     }).catch(() => showMessage('error', 'Не вдалося відредагувати замовлення'))
 }
 
