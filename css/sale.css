@@ -86,8 +86,11 @@
                 flex-direction: row;
                 gap: 1.5rem;
 
-                & span:first-child {
+                & span:first-child, & span:last-child {
                     font-size: .9rem;
+                }
+
+                & span:first-child {
                     color: rgb(60, 60, 60);
                 }
 
@@ -1329,6 +1332,28 @@
             & input[type=number] {
                 width: 5.5rem;
                 padding: .3rem;
+            }
+        }
+    }
+
+    & .cash-register-comment-icons {
+        padding: 0 .2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        & ul {
+            display: flex;
+            gap: 1rem;
+
+            & img {
+                cursor: pointer;
+                width: 1.7rem;
+                transition: .05s;
+
+                &:hover {
+                    transform: scale(1.15);
+                }
             }
         }
     }
