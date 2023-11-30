@@ -1086,7 +1086,13 @@ const showCashRegisterOperations = () => {
 
         cashRegisterOperationsModal.querySelector('input[name=operation-type]').checked = true
         cashRegisterOperationsModal.querySelector('input[type=number]').value = ''
-        cashRegisterOperationsModal.querySelector('textarea').value = ''
+
+        const textarea = cashRegisterOperationsModal.querySelector('textarea')
+        textarea.value = ''
+        
+        const iconTexts = ["Кур'єр", 'Сміття', 'Вода', 'Оренда приміщення', 'Розмін']
+        document.querySelectorAll('.cash-register-comment-icons li').forEach((icon, i) => icon.onpointerup = () => textarea.value = iconTexts[i])
+
         cashRegisterOperationsModal.style.display = 'flex'
     }).catch(() => showMessage('error', getErrorMessage(CASH_REGISTER)))
 }
