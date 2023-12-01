@@ -722,8 +722,10 @@ const createInternetOrder = saleOrderType => {
         showMessage('error', 'Клієнт не має стільки бонусів на рахунку')
         return
     }
+
+    const totalSum = +internetOrderModal.querySelector('.sale-order-total-sum input').value
     
-    if (paidBonusSum > +internetOrderModal.querySelector('.sale-order-paid-sum').value / 2) {
+    if (paidBonusSum > totalSum / 2) {
         showMessage('error', 'Сума бонусів не може перевищувати половину суми замовлення')
         return
     }
@@ -771,7 +773,7 @@ const createInternetOrder = saleOrderType => {
         comment: internetOrderModal.querySelector(`#${saleOrderType}-comment textarea`).value.trim(),
         flavors,
         products,
-        totalSum: internetOrderModal.querySelector('.sale-order-total-sum input').value,
+        totalSum,
         payType: internetOrderModal.querySelector('.free-payment input').checked ?
             2 :
             internetOrderModal.querySelector('.payment-content li').classList.contains('active-payment-type') ? 0 : 1,
