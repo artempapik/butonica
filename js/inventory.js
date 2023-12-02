@@ -258,6 +258,9 @@ const createInventory = () => {
         return
     }
 
+    const payButton = inventoryModal.querySelector('button')
+    payButton.disabled = true
+
     const products = []
 
     for (const tr of inventoryModal.querySelectorAll('tr:not(:first-child)')) {
@@ -274,17 +277,19 @@ const createInventory = () => {
         totalSum: +inventoryModal.querySelector('.total-sum span:nth-child(2)').textContent
     }
 
-    hideModal(inventoryModal)
-
     post('Inventory', inventory).then(response => {
-        showMessage('success', createSuccessMessage(INVENTORY))
+        hideModalEnableButton(inventoryModal, payButton)
+        showMessage('success', 'Інвентаризацію проведено')
         inventory.id = response
         inventory.stock = stock
         inventories.push(inventory)
         fillInventoriesTable(inventory)
         inventoryFilters.style.display = 'flex'
         inventoriesTable.style.display = 'block'
-    }).catch(() => showMessage('error', createErrorMessage(INVENTORY)))
+    }).catch(() => {
+        hideModalEnableButton(inventoryModal, payButton)
+        showMessage('error', 'Не вдалося провести інвентаризацію')
+    })
 }
 
 const editInventory = () => {
