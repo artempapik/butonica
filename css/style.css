@@ -159,6 +159,9 @@ textarea {
 }
 
 button {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
     align-items: center;
     cursor: pointer;
     font-size: 1rem;
@@ -183,7 +186,7 @@ button {
     }
 
     &:disabled {
-        background: rgb(40, 120, 90);
+        opacity: .8;
         pointer-events: none;
 
         & .loader-button {
