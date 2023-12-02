@@ -585,15 +585,6 @@
             &:hover {
                 background: rgb(58, 143, 118);
             }
-
-            &:disabled {
-                background: rgb(40, 120, 90);
-                pointer-events: none;
-
-                & .loader-button {
-                    display: block;
-                }
-            }
         }
     }
 }
