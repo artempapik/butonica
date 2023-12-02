@@ -363,6 +363,9 @@ const createSupply = () => {
         }
     }
 
+    const payButton = supplyModal.querySelector('button:not(.one-more-product)')
+    payButton.disabled = true
+
     const comment = supplyModal.querySelector('.supply-comment').value.trim()
     const totalSum = +totalSumElement.textContent
     const totalSumAssociatedCosts = +totalSumAssociatedCostsElement.textContent
@@ -405,9 +408,8 @@ const createSupply = () => {
         associatedCosts
     }
 
-    hideModal(supplyModal)
-
     post('Supply', supply).then(response => {
+        hideModalEnableButton(supplyModal, payButton)
         showMessage('success', createSuccessMessage(SUPPLY))
         supply.id = response
         supply.contractor = contractor
@@ -415,7 +417,10 @@ const createSupply = () => {
         supplies.push(supply)
         fillSuppliesTable(supply)
         suppliesTable.style.display = 'block'
-    }).catch(() => showMessage('error', createErrorMessage(SUPPLY)))
+    }).catch(() => {
+        hideModalEnableButton(supplyModal, payButton)
+        showMessage('error', createErrorMessage(SUPPLY))
+    })
 }
 
 const editSupply = () => {
