@@ -21,7 +21,7 @@
         gap: 2rem;
         border-top: .1rem rgb(150, 150, 150) solid;
         width: fit-content;
-        padding-top: 2rem;
+        padding: 2rem 0 1rem 0;
     }
 
     & .contractor-debt,
