@@ -941,6 +941,11 @@ const hideModal = modal => {
     document.body.style.overflow = ''
 }
 
+const hideModalEnableButton = (modal, button) => {
+    hideModal(modal)
+    button.style.disabled = false
+}
+
 document.querySelectorAll('.close-modal').forEach(b => b.onpointerup = () => {
     for (const modal of [
         stockModal,
