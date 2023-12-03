@@ -1354,10 +1354,10 @@
             gap: 0;
 
             & .sale-order-info {
-                padding: .5rem 0;
+                padding: .4rem 0;
 
                 & textarea {
-                    width: 9.2rem;
+                    width: 9.1rem;
                 }
             }
         }
@@ -1365,6 +1365,19 @@
         & .sale-order-products table {
             width: 100%;
             overflow-x: auto;
+        }
+
+        & .payment .payment-content {
+            flex-direction: column;
+            gap: 1rem;
+
+            & .cashback h1 {
+                border-top-right-radius: .35rem;
+            }
+
+            & .cash h1 {
+                border-top-right-radius: 0;
+            }
         }
     }
 }
