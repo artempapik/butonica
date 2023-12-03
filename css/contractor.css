@@ -109,6 +109,10 @@
             font-size: 1.3rem;
             align-self: end;
 
+            &:last-child {
+                padding-bottom: 1rem;
+            }
+
             & span:last-child {
                 font-weight: normal;
             }
