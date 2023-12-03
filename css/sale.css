@@ -1355,10 +1355,10 @@
 
             & .sale-order-info {
                 align-items: center;
-                padding: .7rem 0;
+                padding: .5rem 0;
 
                 & textarea {
-                    width: 9.5rem;
+                    width: 9.2rem;
                 }
             }
         }
