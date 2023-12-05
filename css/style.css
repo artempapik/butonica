@@ -992,13 +992,6 @@ table {
 
     html {
         text-size-adjust: none;
-        overflow: hidden;
-    }
-
-    body {
-        position: fixed;
-        overflow: scroll;
-        -webkit-overflow-scrolling: touch;
     }
 
     * {
