@@ -997,8 +997,10 @@ table {
     }
 
     body {
+        width: 100%;
         position: fixed;
         overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
     }
 
     * {
