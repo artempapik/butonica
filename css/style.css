@@ -994,7 +994,8 @@ table {
         text-size-adjust: none;
     }
 
-    main {
+    body {
+        position: fixed;
         overflow-y: scroll;
     }
 
