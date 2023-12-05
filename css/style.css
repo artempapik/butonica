@@ -993,6 +993,7 @@ table {
     html {
         text-size-adjust: none;
         overflow: hidden;
+        width: 100%;
     }
 
     body {
