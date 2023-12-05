@@ -992,6 +992,7 @@ table {
 
     html {
         text-size-adjust: none;
+        overflow: hidden;
     }
 
     body {
