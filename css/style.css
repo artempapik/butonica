@@ -1072,6 +1072,10 @@ table {
             padding: .7rem .5rem;
         }
     }
+
+    .sub-menu li.main-padding {
+        margin-left: .7rem;
+    }
 }
 
 @media only screen and (max-width: 1400px) {
