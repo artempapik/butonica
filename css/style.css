@@ -993,13 +993,11 @@ table {
     html {
         text-size-adjust: none;
         overflow: hidden;
-        width: 100%;
     }
 
     body {
-        width: 100%;
         position: fixed;
-        overflow-y: scroll;
+        overflow: scroll;
         -webkit-overflow-scrolling: touch;
     }
 
@@ -1248,10 +1246,6 @@ table {
 }
 
 @media only screen and (max-width: 700px) and (orientation: portrait) {
-    header {
-        width: 100%;
-    }
-    
     header .theme-profile .profile-info {
         right: .7rem;
 
