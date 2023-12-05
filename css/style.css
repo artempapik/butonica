@@ -994,6 +994,10 @@ table {
         text-size-adjust: none;
     }
 
+    main {
+        overflow-y: scroll;
+    }
+
     * {
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     }
