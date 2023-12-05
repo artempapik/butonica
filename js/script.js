@@ -1194,7 +1194,3 @@ const toggleScreensaver = () => {
     toggleScreensaverButton.style.fontWeight = 'bold'
     document.body.insertAdjacentHTML('beforeend', screensaverMarkup)
 }
-
-if (isMobile) {
-    document.querySelectorAll('html, body, main').forEach(e => e.style.height = window.screen.height + 'px')
-}
