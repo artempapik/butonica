@@ -234,7 +234,7 @@
         }
 
         &:nth-child(5) {
-            font-weight: normal;
+            font-weight: normal !important;
         }
     }
 }
