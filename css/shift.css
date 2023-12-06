@@ -4,6 +4,29 @@
     padding-top: 0;
     gap: 1.7rem;
 
+    & .shift-title-time {
+        display: flex;
+        flex-direction: column;
+        gap: .7rem;
+
+        & .shift-title {
+            display: flex;
+            align-items: baseline;
+            gap: .9rem;
+    
+            & span {
+                font-size: 1.1rem;
+                font-weight: bold;
+                color: rgb(30, 30, 30);
+            }
+        }
+
+        & .shift-time {
+            display: flex;
+            gap: .4rem;
+        }
+    }
+
     & .operations {
         display: flex;
         flex-direction: column;
