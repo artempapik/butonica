@@ -1103,10 +1103,8 @@ table {
         padding: 1.3rem .1rem;
     }
 
-    .sub-menu li {
-        &.main-padding {
-            margin-left: .3rem;
-        }
+    .sub-menu li.main-padding {
+        margin-left: .3rem;
     }
 
     [class$="header"] {
