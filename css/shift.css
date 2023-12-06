@@ -241,7 +241,7 @@
 
 @media only screen and (max-width: 700px) and (orientation: portrait) {
     .shift-info-modal-content {
-        padding: .8rem .5rem;
+        padding: .6rem .5rem;
         padding-top: 0;
 
         & .shift-title-time .shift-title {
