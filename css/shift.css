@@ -251,11 +251,11 @@
                 font-size: 1rem;
             }
         }
-    }
 
-    .shift-info-modal-content .operations .form {
-        &:not(&.cash-register-operation) .content .bonus-paid {
-            display: none;
+        & .operations .form {
+            &:not(&.cash-register-operation) .content .bonus-paid {
+                display: none;
+            }
         }
     }
 
