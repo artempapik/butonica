@@ -240,6 +240,19 @@
 }
 
 @media only screen and (max-width: 700px) and (orientation: portrait) {
+    .shift-info-modal-content {
+        padding: 1.2rem 1rem;
+        gap: 1.5rem;
+    
+        & .shift-title-time .shift-title {
+            gap: .4rem;
+    
+            & span {
+                font-size: 1rem;
+            }
+        }
+    }
+
     .shift-info-modal-content .operations .form {
         &:not(&.cash-register-operation) .content .bonus-paid {
             display: none;
