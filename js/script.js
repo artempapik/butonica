@@ -934,14 +934,10 @@ const handlePriceInput = e => {
     }
 }
 
-const hideBodyOverflow = () => {
-    document.documentElement.style.overflow = 'hidden'
-    document.body.style.overflow = 'hidden'
-}
+const hideBodyOverflow = () => document.body.style.overflow = 'hidden'
 
 const hideModal = modal => {
     modal.style.display = ''
-    document.documentElement.style.overflow = ''
     document.body.style.overflow = ''
 }
 
