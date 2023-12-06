@@ -1073,8 +1073,18 @@ table {
         }
     }
 
-    .sub-menu li.main-padding {
-        margin-left: .7rem;
+    .sub-menu li {
+        &.main-padding {
+            margin-left: .7rem;
+        }
+
+        &.sale-padding {
+            margin-left: 0;
+        }
+
+        & div {
+            padding: .5rem;
+        }
     }
 }
 
@@ -1089,27 +1099,13 @@ table {
         }
     }
 
-    .main-menu {
-        &.main-padding {
-            padding: 1.3rem .1rem;
-        }
-
-        & li .menu-item {
-            padding: .7rem .5rem;
-        }
+    .main-menu.main-padding {
+        padding: 1.3rem .1rem;
     }
 
     .sub-menu li {
         &.main-padding {
             margin-left: .3rem;
-        }
-
-        &.sale-padding {
-            margin-left: 0;
-        }
-
-        & div {
-            padding: .5rem;
         }
     }
 
