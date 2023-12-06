@@ -251,7 +251,7 @@
 
         & .operations .form {
             & .content {
-                padding: .6rem .2rem;    
+                padding: .8rem .1rem;    
             }
 
             &:not(&.cash-register-operation) .content .bonus-paid {
