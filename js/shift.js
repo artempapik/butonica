@@ -40,12 +40,16 @@ const createShiftRow = shift => {
         shiftInfoModal.querySelector('.shift-title span').textContent = shift.employee
         shiftInfoModal.querySelector('.shift-time span').textContent = formatDate(shift.start)
 
-        const hyphenShiftTime = document.querySelector('.shift-time span:nth-child(2)')
+        const setDisplayForShiftEnd = display => {
+            document.querySelector('.shift-time span:nth-child(2)').style.display = display
+            document.querySelector('.shift-time span:last-child').style.display = display
+        }
+
         if (shift.end) {
-            hyphenShiftTime.style.display = 'block'
+            setDisplayForShiftEnd('block')
             shiftInfoModal.querySelector('.shift-time span:last-child').textContent = formatDate(shift.end)
         } else {
-            hyphenShiftTime.style.display = 'none'
+            setDisplayForShiftEnd('none')
         }
 
         get(`Shift/${shift.id}/operations`).then(response => {
