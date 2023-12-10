@@ -332,11 +332,6 @@ const createOrderRow = (order, table) => {
         const hours = Math.floor(minutes / 60)
 
         seconds %= 60
-
-        if (seconds >= 30) {
-            minutes++
-        }
-
         minutes %= 60
         const days = Math.floor(hours / 24)
 
