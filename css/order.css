@@ -334,8 +334,8 @@
         }
 
         &:nth-child(2) {
-            padding-left: .8rem;
-            padding-right: .8rem;
+            padding-left: .9rem;
+            padding-right: .9rem;
         }
     }
 }
