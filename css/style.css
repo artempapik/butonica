@@ -1260,4 +1260,10 @@ table {
             border-bottom: none;
         }
     }
+
+    #loader {
+        width: 1rem !important;
+        height: 1rem !important;
+        border-width: .2rem;
+    }
 }
