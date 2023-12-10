@@ -3,7 +3,7 @@ const Environment = {
     PROD: 'https://botanice.user30503.realhost-free.net'
 }
 
-const BASE_URL = Environment.PROD
+const BASE_URL = Environment.DEV
 const EMPTY_IMAGE_URL = 'img/empty-flower.webp'
 
 let imageData
@@ -105,7 +105,7 @@ const put = async (url, data) => await doRequest('put', url, data)
 const remove = async (url, data) => await doRequest('delete', url, data)
 
 const replaceLoadIcons = () => {
-    document.querySelector('#loader').remove()
+    document.querySelector('#loader')?.remove()
     document.querySelector('.header-items span').style.display = 'block'
 }
 
@@ -775,7 +775,27 @@ const menuItemsContents = {
             <div class="header-items">
                 <div id="loader"></div>
                 <span class="material-symbols-outlined">show_chart</span>
-                <h1>Загальна статистика</h1>
+                <div class="statistics-filter">
+                    <h1>Загальна статистика</h1>
+                    <div class="date-filter">
+                        <div>за:</div>
+                        <select onchange="changeStatisticsMonth(event)">
+                            <option>поточний місяць</option>
+                            <option>січень</option>
+                            <option>лютий</option>
+                            <option>березень</option>
+                            <option>квітень</option>
+                            <option>травень</option>
+                            <option>червень</option>
+                            <option>липень</option>
+                            <option>серпень</option>
+                            <option>вересень</option>
+                            <option>жовтень</option>
+                            <option>листопад</option>
+                            <option>грудень</option>
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
         <ul class="general-statistics-info">
