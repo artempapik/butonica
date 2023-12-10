@@ -48,3 +48,21 @@
         }
     }
 }
+
+@media only screen and (max-width: 700px) and (orientation: portrait) {
+    .statistics-filter {
+        flex-direction: column;
+        gap: .7rem;
+        margin-bottom: 1rem;
+    }
+
+    .general-statistics-info li {
+        & .stat-title {
+            font-size: 1.1rem;
+        }
+
+        & .stat-value {
+            font-size: 1rem;
+        }
+    }
+}
