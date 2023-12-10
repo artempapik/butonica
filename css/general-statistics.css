@@ -1,3 +1,19 @@
+.statistics-filter {
+    display: flex;
+    align-items: baseline;
+    gap: 1.4rem;
+
+    & .date-filter {
+        display: flex;
+        align-items: center;
+        gap: .6rem;
+
+        & div {
+            font-size: 1.4rem;
+        }
+    }
+}
+
 .general-statistics-info {
     display: flex;
     flex-direction: column;
