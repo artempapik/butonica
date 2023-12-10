@@ -58,6 +58,7 @@
 
     .general-statistics-info li {
         & .stat-title {
+            width: 11rem;
             font-size: 1.1rem;
         }
 
