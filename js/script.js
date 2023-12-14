@@ -614,7 +614,27 @@ const menuItemsContents = {
             <div class="header-items">
                 <div id="loader"></div>
                 <span class="material-symbols-outlined">fact_check</span>
-                <h1>Робочі зміни</h1>
+                <div class="shifts-date-filter">
+                    <h1>Робочі зміни</h1>
+                    <div class="month-filter">
+                        <div>за:</div>
+                        <select onchange="getShifts(event.target.selectedIndex)">
+                            <option>поточний місяць</option>
+                            <option>січень</option>
+                            <option>лютий</option>
+                            <option>березень</option>
+                            <option>квітень</option>
+                            <option>травень</option>
+                            <option>червень</option>
+                            <option>липень</option>
+                            <option>серпень</option>
+                            <option>вересень</option>
+                            <option>жовтень</option>
+                            <option>листопад</option>
+                            <option>грудень</option>
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="shift-table">
@@ -775,11 +795,11 @@ const menuItemsContents = {
             <div class="header-items">
                 <div id="loader"></div>
                 <span class="material-symbols-outlined">show_chart</span>
-                <div class="statistics-filter">
+                <div class="statistics-date-filter">
                     <h1>Загальна статистика</h1>
-                    <div class="date-filter">
+                    <div class="month-filter">
                         <div>за:</div>
-                        <select onchange="changeStatisticsMonth(event)">
+                        <select onchange="getStatisticsValues(event.target.selectedIndex)">
                             <option>поточний місяць</option>
                             <option>січень</option>
                             <option>лютий</option>
