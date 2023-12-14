@@ -188,6 +188,7 @@ const createShiftRow = shift => {
                 operations.append(cashRegisterOperation)
             }
 
+            operations.querySelector('.types span').textContent = 'Початок зміни:'
             const shiftEndSums = shiftInfoModal.querySelector('.shift-end-sums')
             shiftEndSums.querySelector('.cash .end-sum').textContent = shift.shiftEndCash.toFixed(2) + ' грн'
             shiftEndSums.querySelector('.terminal-cash .end-sum').textContent = shift.shiftEndTerminalCash.toFixed(2) + ' грн'
