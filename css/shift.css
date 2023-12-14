@@ -200,8 +200,6 @@
 }
 
 .shift-table table {
-    display: block;
-
     & td {
         &:nth-child(3), &:nth-child(4), &:last-child {
             text-align: center;
