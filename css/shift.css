@@ -37,11 +37,6 @@
             flex-direction: column;
             gap: .7rem;
 
-            &:first-child .types span:first-child {
-                text-decoration: underline;
-                color: rgb(0, 0, 0) !important;
-            }
-
             &:first-child, &.surcharge {
                 pointer-events: none;
 
@@ -98,7 +93,7 @@
                         align-self: end;
 
                         & span:first-child {
-                            color: rgb(30, 30, 30);
+                            color: rgb(20, 20, 20);
 
                             & .order-number {
                                 margin-left: .5rem;
