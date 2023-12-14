@@ -6,6 +6,8 @@ const shiftModalContent = shiftInfoModal.querySelector('.shift-info-modal-conten
 const getShifts = month => {
     get(`Shift/${loginInfo.employeeId}/${month || new Date().getMonth() + 1}`).then(response => {
         shiftsTable.innerHTML = shiftsTable.querySelector('tbody').innerHTML
+        shiftsTable.style.display = 'block'
+        replaceLoadIcons()
 
         if (!response.length) {
             shiftsTable.append(createEmptyDataDiv())
@@ -13,8 +15,6 @@ const getShifts = month => {
         }
 
         response.forEach(s => fillShiftsTable(s))
-        shiftsTable.style.display = 'block'
-        replaceLoadIcons()
     }).catch(() => showMessage('error', getErrorMessage('робочі зміни')))
 }
 
