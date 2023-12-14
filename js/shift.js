@@ -3,19 +3,25 @@ let shiftsTable
 const shiftInfoModal = document.querySelector('.shift-info-modal')
 const shiftModalContent = shiftInfoModal.querySelector('.shift-info-modal-content')
 
-const showShiftInfo = e => {
-    fillSelectedMenuItem(e)
-    main.innerHTML = menuItemsContents['shift']
-    shiftsTable = document.querySelector('.shift-table table')
+const getShifts = month => {
+    get(`Shift/${loginInfo.employeeId}/${month || new Date().getMonth() + 1}`).then(response => {
+        shiftsTable.innerHTML = shiftsTable.querySelector('tbody').innerHTML
 
-    get(`Shift/${loginInfo.employeeId}`).then(response => {
-        if (response.length) {
-            shiftsTable.style.display = 'block'
+        if (!response.length) {
+            shiftsTable.append(createEmptyDataDiv())
+            return
         }
 
         response.forEach(s => fillShiftsTable(s))
         replaceLoadIcons()
     }).catch(() => showMessage('error', getErrorMessage('робочі зміни')))
+}
+
+const showShiftInfo = e => {
+    fillSelectedMenuItem(e)
+    main.innerHTML = menuItemsContents['shift']
+    shiftsTable = document.querySelector('.shift-table table')
+    getShifts(0)
 }
 
 const cashRegisterOperationTypeToName = {
