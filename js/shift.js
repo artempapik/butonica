@@ -13,6 +13,7 @@ const getShifts = month => {
         }
 
         response.forEach(s => fillShiftsTable(s))
+        shiftsTable.style.display = 'block'
         replaceLoadIcons()
     }).catch(() => showMessage('error', getErrorMessage('робочі зміни')))
 }
