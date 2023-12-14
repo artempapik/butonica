@@ -14,5 +14,3 @@ const showGeneralStatisticsInfo = e => {
     main.innerHTML = menuItemsContents['generalstatistics']
     getStatisticsValues(0)
 }
-
-const changeStatisticsMonth = e => getStatisticsValues(e.target.selectedIndex)
