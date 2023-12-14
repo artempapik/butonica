@@ -834,6 +834,22 @@ table {
     }
 }
 
+[class$="date-filter"] {
+    display: flex;
+    align-items: baseline;
+    gap: 1.4rem;
+
+    & .month-filter {
+        display: flex;
+        align-items: center;
+        gap: .6rem;
+
+        & div {
+            font-size: 1.4rem;
+        }
+    }
+}
+
 .positive-left, .negative-left {
     font-weight: bold;
 }
@@ -1251,6 +1267,12 @@ table {
 
     [class$="modal-content"] {
         max-height: calc(100vh - 9.5rem);
+    }
+
+    [class$="date-filter"] {
+        flex-direction: column;
+        gap: .7rem;
+        margin-bottom: 1rem;
     }
 
     #message {
