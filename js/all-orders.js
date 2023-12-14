@@ -372,8 +372,6 @@ const createOrderRow = (order, table) => {
         timeLeftTd.style.color = 'rgb(240, 240, 240)'
         timeLeftTd.style.fontWeight = 'bold'
         timeLeftTd.style.fontSize = '.9rem'
-        timeLeftTd.style.border = '.1rem solid rgb(70, 70, 70)'
-        timeLeftTd.style.borderLeft = 'none'
     }
 
     const orderTypeTd = createTd()
