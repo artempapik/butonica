@@ -416,24 +416,27 @@
         }
     }
 
-    [class$="order-table"] table td:nth-child(7) {
-        display: none;
-    }
-
     [class$="order-table"] table {
         & td {
             &:first-child {
-                padding: 0 .15rem;
+                padding: 0 .05rem;
                 font-size: .8rem;
             }
     
             &:nth-child(2) {
-                padding-left: .3rem;
-                padding-right: .3rem;
+                font-size: .9rem;
+                padding-left: .15rem;
+                padding-right: .15rem;
+            }
+
+            &:nth-child(3) {
+                padding: 0 .1rem;
             }
 
             &:nth-child(4) {
-                max-width: 7rem;
+                max-width: 5rem;
+                padding: 0 .2rem;
+                word-wrap: break-word;
             }
 
             &:nth-child(5) img {
@@ -441,8 +444,12 @@
             }
 
             &:nth-child(6) span {
-                font-size: .8rem !important;
-                padding: .15rem .2rem !important;
+                font-size: .7rem !important;
+                padding: .15rem .15rem !important;
+            }
+
+            &:nth-child(7) {
+                display: none;
             }
         }
     }
