@@ -390,6 +390,11 @@
     main .header-items {
         flex-direction: column;
         align-items: start;
+        gap: .5rem;
+
+        & h1 {
+            font-size: 1.1rem;
+        }
     }
 
     .order-info-modal-content {
