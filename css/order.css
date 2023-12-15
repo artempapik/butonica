@@ -424,9 +424,8 @@
             }
     
             &:nth-child(2) {
-                font-size: .9rem;
-                padding-left: .15rem;
-                padding-right: .15rem;
+                padding-left: .1rem;
+                padding-right: .1rem;
             }
 
             &:nth-child(3) {
@@ -443,9 +442,13 @@
                 width: 1.4rem !important;
             }
 
-            &:nth-child(6) span {
-                font-size: .7rem !important;
-                padding: .15rem .15rem !important;
+            &:nth-child(6) {
+                padding: 0 .15rem;
+
+                & span {
+                    font-size: .7rem !important;
+                    padding: .15rem .1rem !important;
+                }
             }
 
             &:nth-child(7) {
