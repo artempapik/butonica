@@ -1273,6 +1273,10 @@ table {
         flex-direction: column;
         gap: .7rem;
         margin-bottom: 1rem;
+
+        & .month-filter div {
+            font-size: 1rem;
+        }
     }
 
     #message {
