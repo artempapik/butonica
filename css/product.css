@@ -1,0 +1,109 @@
+.search-product {
+    display: none;
+    width: var(--search-input-width);
+    margin-bottom: 1.1rem;
+}
+
+.create-product-modal-content,
+.product-info-modal-content {
+    gap: 1.5rem;
+}
+
+.product-info-modal-content {
+    padding: 1rem;
+    padding-top: 0;
+    width: calc(var(--modal-content-width) + 10rem);
+
+    & .product-content {
+        flex-direction: row;
+        justify-content: space-between;
+
+        & .product-info {
+            flex: 2;
+            gap: 1.5rem;
+        }
+
+        & img {
+            margin-top: .8rem;
+            width: 8rem;
+            height: fit-content;
+        }   
+    }
+
+    & table {
+        display: block;
+        width: 100%;
+
+        & tbody {
+            font-size: 1rem;
+        }
+
+        & tr td {
+            &:nth-child(2),
+            &:nth-child(3) {
+                text-align: center;
+            }
+        }
+
+        & td:not(:last-child) {
+            white-space: nowrap;
+        }
+
+        & td:last-child {
+            width: 100%;
+        }
+    }
+
+    & .form {
+        & h2 {
+            font-weight: bold;
+        }
+
+        & h3 {
+            font-weight: normal;
+        }
+    }
+}
+
+.create-product-modal-content {
+    & .form input[type=number] {
+        width: 5rem;
+    }
+
+    & .form-check {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+
+        & form {
+            display: flex;
+            gap: 1rem;
+
+            & label {
+                display: flex;
+                align-items: center;
+                gap: .4rem;
+            }
+
+            &.product-type label {
+                align-items: baseline;
+            }
+        }
+    }
+
+    & .stock-prices {
+        & h2 {
+            margin-bottom: .6rem;
+        }
+
+        & div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+}
+
+.product-table table tr:not(:first-child) {
+    cursor: pointer;
+}
