@@ -297,7 +297,6 @@ const createInventory = () => {
         inventory.stock = stock
         inventories.push(inventory)
         fillInventoriesTable(inventory)
-        inventoryFilters.style.display = 'flex'
         inventoriesTable.style.display = 'block'
     }).catch(() => {
         hideModalEnableButton(inventoryModal, payButton)
