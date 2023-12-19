@@ -1310,14 +1310,14 @@ table {
         }
     }
 
-    main .order-header {
+    main [class$="header"] {
         align-items: start;
 
         & .header-items {
             & span:not(.change-page span) {
                 display: none !important;
             }
-    
+            
             & h1 {
                 font-size: 1.3rem;
             }
