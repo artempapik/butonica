@@ -26,13 +26,14 @@ const showInventoryInfo = e => {
     getInventories(0)
 
     get(`Stock/ids-names/${loginInfo.companyId}`).then(response => {
+        inventoryStocks = response
+
         if (response.length < 2) {
             inventoryFilters.style.display = ''
             return
         }
 
         inventoryFilters.style.display = 'flex'
-        inventoryStocks = response
         fillInventoryFilters(inventoryFilters, inventoryStocks, 'name')
     })
 }
