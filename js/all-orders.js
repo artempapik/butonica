@@ -439,7 +439,7 @@ const createOrderRow = (order, table) => {
         }
 
         return {
-            text: minutes + 'хв',
+            text: (minutes || 1) + 'хв',
             background: 'rgb(230, 80, 25)'
         }
     }
