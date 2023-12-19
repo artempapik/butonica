@@ -1321,9 +1321,9 @@ table {
             & h1 {
                 font-size: 1.3rem;
             }
-    
+            
             & .change-page {
-                margin-top: 1.3rem;
+                margin-top: 1.1rem;
             }
         }
     }
