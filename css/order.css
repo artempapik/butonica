@@ -448,7 +448,6 @@
         & td {
             &:first-child {
                 padding: 0;
-                font-size: .8rem;
             }
 
             &:nth-child(2) {
