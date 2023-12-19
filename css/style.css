@@ -1311,8 +1311,6 @@ table {
     }
 
     main [class$="header"] {
-        align-items: start;
-
         & .header-items {
             & span:not(.change-page span) {
                 display: none !important;
@@ -1326,6 +1324,10 @@ table {
                 margin-top: 1.1rem;
             }
         }
+    }
+
+    main .order-header {
+        align-items: start;
     }
 
     table [class$="actions"] span:first-child {
