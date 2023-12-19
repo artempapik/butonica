@@ -1205,6 +1205,10 @@ table {
         & h1 {
             font-size: 1.5rem;
         }
+
+        & .header-items {
+            flex-wrap: wrap;
+        }
     }
 
     aside {
@@ -1306,13 +1310,21 @@ table {
         }
     }
 
-    main .header-items {
-        & span:not(.change-page span) {
-            display: none !important;
-        }
+    main .order-header {
+        align-items: start;
 
-        & h1 {
-            font-size: 1.3rem;
+        & .header-items {
+            & span:not(.change-page span) {
+                display: none !important;
+            }
+    
+            & h1 {
+                font-size: 1.3rem;
+            }
+    
+            & .change-page {
+                margin-top: 1.3rem;
+            }
         }
     }
 
