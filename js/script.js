@@ -995,6 +995,7 @@ const copyToClipboard = className => {
 }
 
 const fillSelectedMenuItem = e => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
     currentPage = 1
     document.querySelector('header').style.display = ''
     main.style.background = 'unset'
