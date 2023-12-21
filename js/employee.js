@@ -131,13 +131,15 @@ const createEmployeeRow = employee => {
     const titleTd = document.createElement('td')
     titleTd.append(span)
 
-    const activeSpan = document.createElement('span')
-    activeSpan.classList = 'material-symbols-outlined'
-    activeSpan.textContent = employee.isActive ? 'check_circle' : 'cancel'
-    activeSpan.style.background = employee.isActive ? 'rgb(0, 115, 0)' : 'rgb(235, 0, 0)'
+    const activeIcon = document.createElement('img')
+    activeIcon.src = employee.isActive ? 'img/check.png' : 'img/decline.png'
+
+    if (!employee.isActive) {
+        activeIcon.classList.add('scaled')
+    }
 
     const activeEmployeeTd = document.createElement('td')
-    activeEmployeeTd.append(activeSpan)
+    activeEmployeeTd.append(activeIcon)
 
     tr.append(
         createTd(employee.fullName),
