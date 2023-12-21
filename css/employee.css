@@ -59,10 +59,12 @@
                 text-align: center;
             }
 
-            &:nth-child(4) span {
-                border-radius: 50%;
-                color: rgb(240, 240, 240);
-                font-size: 1.7rem;
+            &:nth-child(4) img {
+                width: 1.3rem;
+
+                &.scaled {
+                    width: 1.7rem;
+                }
             }
         }
     }
