@@ -80,7 +80,7 @@ const createEmployeeRow = employee => {
         employeeInfoModal.querySelector('.employee-stock').textContent = employee.title === 0 ? '–' : employee.stock
         employeeInfoModal.querySelector('.employee-title').textContent = employeeTitleToName[employee.title]
         employeeInfoModal.querySelector('.employee-registration-date').textContent = formatDate(employee.registrationDate)
-        showHideNodeInfo(employeeInfoModal, 'employee-birth-date', formatDate(employee.birthDate, false))
+        showHideNodeInfo(employeeInfoModal, 'employee-birth-date', formatDate(employee.birthDate, false, false))
         showHideNodeInfo(employeeInfoModal, 'employee-phone', formatPhoneNumber(employee.phone))
         employeeInfoModal.style.display = 'flex'
         employeeInfoModal.querySelector('.employee-info-modal-content').scroll(0, 0)
@@ -132,7 +132,7 @@ const createEmployeeRow = employee => {
     titleTd.append(span)
 
     const activeIcon = document.createElement('img')
-    activeIcon.src = employee.isActive ? 'img/check.png' : 'img/decline.png'
+    activeIcon.src = `img/${employee.isActive ? 'check' : 'decline'}.png`
 
     if (!employee.isActive) {
         activeIcon.classList.add('scaled')
