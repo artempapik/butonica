@@ -213,6 +213,10 @@
     cursor: pointer;
 }
 
+.supply-header .supplies-date-filter {
+    align-items: center;
+}
+
 @media only screen and (max-width: 1400px) {
     .supply-info-modal-content {
         gap: 1.3rem;
@@ -232,5 +236,9 @@
             font-size: 1rem;
             gap: .2rem;
         }
+    }
+
+    .supply-header .supplies-date-filter {
+        align-items: start;
     }
 }
