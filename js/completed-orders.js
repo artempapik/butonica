@@ -86,6 +86,11 @@ const showCompletedOrderInfo = e => {
     completedOrdersTable = document.querySelector('.completed-order-table table')
 
     get(`Order/completed/${loginInfo.companyId}/pages-count`).then(response => {
+        if (!response) {
+            return
+        }
+
+        document.querySelector('.change-page').style.display = 'flex'
         completedOrdersPages = response
         document.querySelector('.change-page .page-number span:last-child').textContent = 'з ' + completedOrdersPages
     })
