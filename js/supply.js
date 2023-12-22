@@ -18,11 +18,69 @@ const getSupplies = month => {
     }).catch(() => showMessage('error', getErrorMessage('поставки')))
 }
 
+const getSuppliesByPeriod = () => {
+    const periodFilter = document.querySelector('.period-filter')
+    const periodFrom = periodFilter.querySelector('.period-from')
+    const periodTo = periodFilter.querySelector('.period-to')
+
+    const periodFromDate = periodFrom.value ? new Date(periodFrom.value) : false
+    const periodToDate = periodTo.value ? new Date(periodTo.value) : false
+
+    if (!periodFromDate && !periodToDate) {
+        showMessage('error', 'Оберіть обидва періоди')
+        return
+    }
+
+    if (periodToDate - periodFromDate < 0) {
+        showMessage('error', 'Невірно вибрані періоди')
+        return
+    }
+
+    showLoadAnimation()
+
+    const fromDateString = `${periodFromDate.getDate()}/${periodFromDate.getMonth() + 1}/${periodFromDate.getFullYear()}`
+    const toDateString = `${periodToDate.getDate()}/${periodToDate.getMonth() + 1}/${periodToDate.getFullYear()}`
+
+    get(`Supply/${loginInfo.companyId}/${fromDateString}/${toDateString}`).then(response => {
+        suppliesTable.innerHTML = suppliesTable.querySelector('tbody').innerHTML
+        suppliesTable.style.display = 'block'
+        replaceLoadIcons()
+
+        if (!response.length) {
+            suppliesTable.append(createEmptyDataDiv())
+            return
+        }
+
+        response.forEach(s => fillSuppliesTable(s))
+    }).catch(() => showMessage('error', getErrorMessage('поставки')))
+}
+
 const showSupplyInfo = e => {
     fillSelectedMenuItem(e)
     main.innerHTML = menuItemsContents['supply']
     suppliesTable = document.querySelector('.supply-table table')
     getSupplies(0)
+
+    const supplyViewTypes = document.querySelectorAll('.supply-view-type .type')
+    supplyViewTypes.forEach((type, index) => {
+        type.onpointerup = () => {
+            supplyViewTypes.forEach(t => t.classList.remove('active'))
+            type.classList.add('active')
+
+            const monthFilter = document.querySelector('.month-filter')
+            const periodFilter = document.querySelector('.period-filter')
+
+            if (index) {
+                monthFilter.style.display = 'none'
+                periodFilter.style.display = 'flex'
+                return
+            }
+
+            getSupplies(document.querySelector('.month-filter select').selectedIndex)
+            monthFilter.style.display = 'flex'
+            periodFilter.style.display = 'none'
+        }
+    })
 
     get(`Contractor/ids-names/${loginInfo.companyId}`).then(response => {
         const selector = 'supply-contractor'
