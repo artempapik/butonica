@@ -421,8 +421,17 @@ const menuItemsContents = {
                 <span class="material-symbols-outlined">local_shipping</span>
                 <div class="supplies-date-filter">
                     <h1>Поставки</h1>
+                    <div class="supply-view-type">
+                        <div class="type active">
+                            <img src="img/calendar.png">
+                            <span>за місяць</span>
+                        </div>
+                        <div class="type">
+                            <img src="img/period.png">
+                            <span>за період</span>
+                        </div>
+                    </div>
                     <div class="month-filter">
-                        <div>за:</div>
                         <select onchange="getSupplies(event.target.selectedIndex)">
                             <option>поточний місяць</option>
                             <option>січень</option>
@@ -438,6 +447,19 @@ const menuItemsContents = {
                             <option>листопад</option>
                             <option>грудень</option>
                         </select>
+                    </div>
+                    <div class="period-filter">
+                        <div class="filters-block">
+                            <div>
+                                <span>з</span>
+                                <input class="period-from" type="date">
+                            </div>
+                            <div>
+                                <span>до</span>
+                                <input class="period-to" type="date">
+                            </div>
+                        </div>
+                        <button onpointerup="getSuppliesByPeriod()">ок</button>
                     </div>
                 </div>
             </div>
