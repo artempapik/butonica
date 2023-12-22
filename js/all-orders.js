@@ -124,6 +124,11 @@ const showAllOrderInfo = e => {
     allOrdersTable = document.querySelector('.all-order-table table')
 
     get(`Order/${loginInfo.companyId}/pages-count`).then(response => {
+        if (!response) {
+            return
+        }
+
+        document.querySelector('.change-page').style.display = 'flex'
         allOrdersPages = response
         document.querySelector('.change-page .page-number span:last-child').textContent = 'з ' + allOrdersPages
     })
