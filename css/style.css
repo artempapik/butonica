@@ -476,7 +476,7 @@ main {
 
         & .change-page {
             margin-left: .35rem;
-            display: flex;
+            display: none;
             align-items: center;
             gap: 2.2rem;
 
