@@ -460,13 +460,13 @@ main {
         align-items: center;
         gap: 1.2rem;
 
-        & span:not(& .change-page span) {
+        & span:not(& .change-page span, & [class$="view-type"] span, & .period-filter span) {
             display: none;
             text-align: right;
             font-size: 1.9rem;
         }
     
-        & span, & #loader {
+        & span:not(& .change-page span, & [class$="view-type"] span, & .period-filter span), & #loader {
             width: 2.4rem;
         }
     
@@ -478,11 +478,11 @@ main {
             margin-left: .35rem;
             display: none;
             align-items: center;
-            gap: 2.2rem;
+            gap: 1.5rem;
 
             & .arrows {
                 display: flex;
-                gap: 1.5rem;
+                gap: .7rem;
 
                 & .arrow-group {
                     display: flex;
@@ -901,6 +901,78 @@ table {
 
         & div {
             font-size: 1.4rem;
+        }
+    }
+
+    & .period-filter {
+        display: none;
+        gap: .8rem;
+
+        & .filters-block {
+            display: flex;
+            flex-direction: column;
+            gap: .3rem;
+
+            & div {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: .5rem;
+    
+                & span {
+                    font-size: .9rem;
+                }
+    
+                & input {
+                    padding: .15rem .35rem;
+                    border-radius: .6rem;
+                }
+            }
+        }
+
+        & button {
+            margin-left: .3rem;
+            align-self: center;
+            padding: .25rem .75rem;
+        }
+    }
+}
+
+[class$="view-type"] {
+    margin-left: .5rem;
+    display: flex;
+    gap: .5rem;
+
+    & .type {
+        --active-type-color: rgb(220, 220, 220);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .2rem;
+        padding: .3rem .5rem;
+        border-radius: .5rem;
+        transition: .02s;
+
+        & img {
+            width: 2.2rem;
+        }
+
+        & span {
+            font-size: .8rem;
+        }
+
+        &.active {
+            background: var(--active-type-color);
+
+            & span {
+                font-weight: bold;
+                color: rgb(30, 30, 30);
+            }
+        }
+
+        &:hover {
+            cursor: pointer;
+            background: var(--active-type-color);
         }
     }
 }
@@ -1336,6 +1408,10 @@ table {
 
     [class$="modal-content"] {
         max-height: calc(100vh - 9.5rem);
+    }
+
+    [class$="view-type"] {
+        margin-left: 0;
     }
 
     [class$="date-filter"] {
