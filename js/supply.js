@@ -26,7 +26,7 @@ const getSuppliesByPeriod = () => {
     const periodFromDate = periodFrom.value ? new Date(periodFrom.value) : false
     const periodToDate = periodTo.value ? new Date(periodTo.value) : false
 
-    if (!periodFromDate && !periodToDate) {
+    if (!periodFromDate || !periodToDate) {
         showMessage('error', 'Оберіть обидва періоди')
         return
     }
