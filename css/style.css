@@ -467,7 +467,7 @@ main {
         }
     
         & span:not(& .change-page span, & [class$="view-type"] span, & .period-filter span), & #loader {
-            width: 2.4rem;
+            width: 2.3rem;
         }
     
         & input {
