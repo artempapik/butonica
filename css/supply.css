@@ -238,7 +238,13 @@
         }
     }
 
-    .supply-header .supplies-date-filter {
-        align-items: start;
+    .supply-header {
+        & button:not(& .header-items button) {
+            align-self: start;
+        }
+        
+        & .supplies-date-filter {
+            align-items: start;
+        }
     }
 }
