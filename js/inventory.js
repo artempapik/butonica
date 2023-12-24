@@ -5,16 +5,17 @@ const getInventories = month => {
     showLoadAnimation()
 
     get(`Inventory/${loginInfo.companyId}/${month || new Date().getMonth() + 1}`).then(response => {
+        inventories = response
         inventoriesTable.innerHTML = inventoriesTable.querySelector('tbody').innerHTML
         inventoriesTable.style.display = 'block'
         replaceLoadIcons()
 
-        if (!response.length) {
+        if (!inventories.length) {
             inventoriesTable.append(createEmptyDataDiv())
             return
         }
 
-        response.forEach(i => fillInventoriesTable(i))
+        inventories.forEach(i => fillInventoriesTable(i))
     }).catch(() => showMessage('error', 'інвентаризації'))
 }
 
@@ -298,10 +299,10 @@ const createInventory = () => {
         inventories.push(inventory)
         fillInventoriesTable(inventory)
         inventoriesTable.style.display = 'block'
-    }).catch(() => {
+    })/*.catch(() => {
         hideModalEnableButton(inventoryModal, payButton)
         showMessage('error', 'Не вдалося провести інвентаризацію')
-    })
+    })*/
 }
 
 const editInventory = () => {
