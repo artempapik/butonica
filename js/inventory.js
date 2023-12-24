@@ -299,10 +299,10 @@ const createInventory = () => {
         inventories.push(inventory)
         fillInventoriesTable(inventory)
         inventoriesTable.style.display = 'block'
-    })/*.catch(() => {
+    }).catch(() => {
         hideModalEnableButton(inventoryModal, payButton)
         showMessage('error', 'Не вдалося провести інвентаризацію')
-    })*/
+    })
 }
 
 const editInventory = () => {
