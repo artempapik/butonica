@@ -1,17 +1,27 @@
-for (const image of ['empty-flower.webp', 'calendar.png', 'period.png', 'delivery.png', 'pickup.png']) {
-    const img = new Image()
-    
-    img.onload = function() {
-        const index = list.indexOf(this)
-
-        if (index !== -1) {
-            list.splice(index, 1)
-        }
+const preloadImages = (...images) => {
+    if (!preloadImages.list) {
+        preloadImages.list = []
     }
 
-    list.push(img)
-    img.src = 'img/' + image
+    const list = preloadImages.list
+
+    for (const image of images) {
+        const img = new Image()
+        
+        img.onload = function() {
+            const index = list.indexOf(this)
+
+            if (index !== -1) {
+                list.splice(index, 1)
+            }
+        }
+
+        list.push(img)
+        img.src = 'img/' + image
+    }
 }
+
+preloadImages('empty-flower.webp', 'calendar.png', 'period.png', 'delivery.png', 'pickup.png')
 
 const Environment = {
     DEV: 'https://localhost:7099',
