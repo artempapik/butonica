@@ -1,3 +1,23 @@
+function preloadImages(array) {
+    if (!preloadImages.list) {
+        preloadImages.list = [];
+    }
+    var list = preloadImages.list;
+    for (var i = 0; i < array.length; i++) {
+        var img = new Image();
+        img.onload = function() {
+            var index = list.indexOf(this);
+            if (index !== -1) {
+                list.splice(index, 1);
+            }
+        }
+        list.push(img);
+        img.src = array[i];
+    }
+}
+
+preloadImages(['img/empty-flower.webp'])
+
 const Environment = {
     DEV: 'https://localhost:7099',
     PROD: 'https://botanice.user30503.realhost-free.net'
@@ -502,10 +522,7 @@ const menuItemsContents = {
                         <span>Товар</span>
                         <span class="material-symbols-outlined">unfold_more</span>
                     </td>
-                    <td onpointerup="sortLeftoverByStock()">
-                        <span>Склад</span>
-                        <span class="material-symbols-outlined">unfold_more</span>
-                    </td>
+                    <td>Склад</td>
                     <td onpointerup="sortLeftoverByAmount()">
                         <span>Кількість</span>
                         <span class="material-symbols-outlined">unfold_more</span>
