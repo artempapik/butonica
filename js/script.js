@@ -17,7 +17,7 @@ const preloadImages = (...images) => {
         }
 
         list.push(img)
-        img.src = 'img' + image
+        img.src = 'img/' + image
     }
 }
 
