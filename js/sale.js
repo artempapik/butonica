@@ -251,16 +251,7 @@ const createSale = () => {
         hideModal(saleModal)
         payButton.disabled = false
         showMessage('success', createSuccessMessage(SALE))
-    }).catch(e => {
-        if (e.message === '403') {
-            hideModal(saleModal)
-            payButton.disabled = false
-            showMessage('error', 'Продаж не може перевищувати залишок на складі')
-            return
-        }
-
-        showMessage('error', createErrorMessage(SALE))
-    })
+    }).catch(() => showMessage('error', createErrorMessage(SALE)))
 }
 
 const createSaleOrderModal = () => {
