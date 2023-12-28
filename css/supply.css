@@ -153,7 +153,7 @@
     gap: 1.5rem;
     padding: 1rem;
     padding-top: 0;
-    width: calc(var(--modal-content-width) + 14rem);
+    width: calc(var(--modal-content-width) + 12rem);
 
     & .form {
         & h2 {
@@ -168,6 +168,7 @@
 
     & table {
         display: block;
+        margin-bottom: 0;
         
         & td {
             font-size: 1rem;
