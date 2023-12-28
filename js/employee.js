@@ -50,7 +50,7 @@ const createEmployeeModal = () => {
 const employeeTitleToBackground = {
     0: '0, 119, 204',
     1: '127, 0, 255',
-    2: '34, 139, 34',
+    2: '60, 154, 64',
     3: '232, 132, 35'
 }
 
