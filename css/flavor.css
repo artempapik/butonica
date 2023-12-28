@@ -1,7 +1,7 @@
 .create-flavor-modal-content {
     width: calc(var(--modal-content-width) + 5.5rem);
-    gap: 1.5rem;
-    padding: 1.2rem 1.5rem;
+    gap: 1.2rem;
+    padding: 1rem 1.2rem;
 
     & .flavor-products div .view-flavor-templates,
     & .flavor-save-buttons button:first-child {
@@ -36,7 +36,7 @@
     & .form-check {
         display: flex;
         flex-direction: column;
-        gap: 1.2rem;
+        gap: .8rem;
 
         & form {
             display: flex;
