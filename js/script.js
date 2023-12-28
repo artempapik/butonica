@@ -1,4 +1,14 @@
-for (const src of ['empty-flower.webp', 'calendar.png', 'period.png', 'delivery.png', 'pickup.png']) {
+for (const src of [
+    'delivery.png',
+    'pickup.png',
+    'cancel.png',
+    'empty-box.webp',
+    'empty-flower.webp',
+    'calendar.png',
+    'period.png',
+    'check.png',
+    'decline.png'
+]) {
     const img = new Image()
     img.src = 'img/' + src
 }
