@@ -1424,6 +1424,8 @@ table {
     }
 
     #message {
+        width: 70%;
+        text-align: center;
         text-decoration: none;
 
         & div:last-child {
