@@ -207,8 +207,8 @@ const createSupplyRow = supply => {
                 tr.append(
                     createTd(product.product),
                     createTd(product.amount),
-                    createTd(product.price.toFixed(2) + ' грн'),
-                    createTd(product.sum.toFixed(2) + ' грн')
+                    createTd(product.price.toFixed(2)),
+                    createTd(product.sum.toFixed(2))
                 )
                 supplyProductsTable.append(tr)
             }
