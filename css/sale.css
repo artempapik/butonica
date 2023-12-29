@@ -189,7 +189,7 @@
             }
     
             & .cash-register-products {
-                margin-top: .3rem;
+                margin-top: .5rem;
     
                 & .empty-cart {
                     margin: auto;
@@ -211,8 +211,9 @@
 
                 & .shifts {
                     display: flex;
-                    gap: .5rem;
-                    row-gap: .3rem;
+                    margin: 0 .3rem;
+                    gap: .8rem;
+                    row-gap: .4rem;
                     flex-wrap: wrap;
                     align-items: center;
     
@@ -903,7 +904,7 @@
                     }
                 }
             }
-    
+            
             & .cashback .client-info, & .cash ul {
                 height: 4.5rem;
             }
