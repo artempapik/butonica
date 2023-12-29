@@ -226,36 +226,53 @@ header {
     align-items: center;
     box-shadow: rgba(50, 50, 93, .25) 0 30px 60px -12px inset, rgba(0, 0, 0, .3) 0 18px 36px -18px inset;
 
-    & .logo {
-        cursor: pointer;
+    & .logo-panel {
         display: flex;
         align-items: center;
-        gap: .8rem;
-        transition: .15s;
+        gap: .7rem;
 
-        &:hover {
-            filter: contrast(200%);
+        & .material-symbols-outlined {
+            display: none;
+            border-radius: 1rem;
+            padding: .2rem;
+            cursor: pointer;
+
+            &:hover {
+                background: rgb(170, 170, 170);
+            }
         }
 
-        & img {
-            width: 2.5rem;
-        }
-
-        & .logo-text {
+        & .logo {
+            cursor: pointer;
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            gap: .8rem;
+            transition: .15s;
     
-            & span:first-child {
-                font-family: 'Quicksand', -apple-system;
-                letter-spacing: .05rem;
-                font-size: 1.7rem;
+            &:hover {
+                filter: contrast(200%);
             }
     
-            & span:last-child {
-                font-family: monospace, 'SF Mono';
-                letter-spacing: .04rem;
-                font-size: .7rem;
-                color: rgb(90, 90, 90);
+            & img {
+                width: 2.5rem;
+            }
+    
+            & .logo-text {
+                display: flex;
+                flex-direction: column;
+        
+                & span:first-child {
+                    font-family: 'Quicksand', -apple-system;
+                    letter-spacing: .05rem;
+                    font-size: 1.7rem;
+                }
+        
+                & span:last-child {
+                    font-family: monospace, 'SF Mono';
+                    letter-spacing: .04rem;
+                    font-size: .7rem;
+                    color: rgb(90, 90, 90);
+                }
             }
         }
     }
@@ -1266,6 +1283,10 @@ table {
 
     header {
         padding: .2rem .4rem;
+
+        & .logo-panel .material-symbols-outlined {
+            display: block;
+        }
     }
 
     main {
@@ -1283,6 +1304,7 @@ table {
     }
 
     aside {
+        display: none;
         min-width: fit-content;
     }
 
@@ -1332,22 +1354,15 @@ table {
 
         & li .menu-item {
             padding: .6rem .5rem;
-            width: fit-content;
-        }
-
-        & span:last-child {
-            display: none;
         }
     }
 
     .sub-menu li {
         &.main-padding, &.sale-padding {
-            width: fit-content;
             margin-left: .35rem;
         }
 
         & div {
-            width: fit-content;
             padding: .3rem;
         }
     }
