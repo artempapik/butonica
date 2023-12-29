@@ -160,7 +160,7 @@ const createShiftRow = shift => {
                         tr.append(
                             createTd(product.name),
                             createTd(product.amount),
-                            createTd(product.sum.toFixed(2) + ' грн')
+                            createTd(product.sum.toFixed(2))
                         )
                         table.append(tr)
                     }
