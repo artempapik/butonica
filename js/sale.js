@@ -517,7 +517,7 @@ const setActiveButton = button => {
         button.style.background = 'rgb(250, 250, 250)'
         button.style.color = 'rgb(20, 20, 20)'
         button.querySelector('span:last-child').style.display = 'none'
-        button.style.width = '4.4rem'
+        button.style.width = '4.6rem'
     }
 
     if (!button) {
@@ -526,7 +526,7 @@ const setActiveButton = button => {
 
     button.style.background = 'rgb(20, 20, 20)'
     button.style.color = 'rgb(240, 240, 240)'
-    button.style.width = '5.5rem'
+    button.style.width = '5.7rem'
 
     if (button.children.length) {
         button.querySelector('span:last-child').style.display = ''
