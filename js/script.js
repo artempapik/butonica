@@ -1028,9 +1028,21 @@ const copyToClipboard = className => {
     showMessage('info', 'Скопійовано')
 }
 
+const menuButton = document.querySelector('.logo-panel span')
+const menu = document.querySelector('aside')
+
+const pressMenuButton = (icon = 'menu', display = '') => {
+    menuButton.innerHTML = icon
+    menu.style.display = display
+}
+
+menuButton.onpointerup = () => menu.style.display ? pressMenuButton() : pressMenuButton('close', 'flex')
+
 const fillSelectedMenuItem = e => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
     currentPage = 1
+    pressMenuButton()
+
     document.querySelector('header').style.display = ''
     main.style.background = 'unset'
     main.classList.remove('sale-padding')
@@ -1391,18 +1403,4 @@ const toggleScreensaver = () => {
 
     toggleScreensaverButton.style.fontWeight = 'bold'
     document.body.insertAdjacentHTML('beforeend', screensaverMarkup)
-}
-
-const menuButton = document.querySelector('.logo-panel span')
-menuButton.onpointerup = () => {
-    const menu = document.querySelector('aside')
-
-    if (!menu.style.display) {
-        menuButton.innerHTML = 'close'
-        menu.style.display = 'flex'
-        return
-    }
-
-    menuButton.innerHTML = 'menu'
-    menu.style.display = ''
 }
