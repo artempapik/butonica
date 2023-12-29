@@ -126,7 +126,7 @@ const fillLeftoversTable = leftoverProducts => {
 
         const productBuyingCostColumn = document.createElement('td')
         productBuyingCostColumn.classList = getClassForNumber(product.buyingCost)
-        productBuyingCostColumn.textContent = product.buyingCost ? product.buyingCost.toFixed(2) + ' грн' : ''
+        productBuyingCostColumn.textContent = product.buyingCost ? product.buyingCost.toFixed(2) : ''
 
         const tr = document.createElement('tr')
         tr.append(
