@@ -486,7 +486,7 @@
                 }
             }
 
-            &:nth-child(7), &:last-child {
+            &:nth-child(7) {
                 display: none;
             }
         }
