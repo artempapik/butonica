@@ -1392,3 +1392,17 @@ const toggleScreensaver = () => {
     toggleScreensaverButton.style.fontWeight = 'bold'
     document.body.insertAdjacentHTML('beforeend', screensaverMarkup)
 }
+
+const menuButton = document.querySelector('.logo-panel span')
+menuButton.onpointerup = () => {
+    const menu = document.querySelector('aside')
+
+    if (!menu.style.display) {
+        menuButton.innerHTML = 'close'
+        menu.style.display = 'flex'
+        return
+    }
+
+    menuButton.innerHTML = 'menu'
+    menu.style.display = ''
+}
