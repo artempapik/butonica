@@ -1342,6 +1342,7 @@ table {
 
     .sub-menu li {
         &.main-padding, &.sale-padding {
+            width: fit-content;
             margin-left: .35rem;
         }
 
