@@ -1049,6 +1049,7 @@ const fillSelectedMenuItem = e => {
     currentPage = 1
     pressMenuButton()
 
+    document.body.style.height = 'fit-content'
     document.querySelector('header').style.display = ''
     main.style.background = 'unset'
     main.classList.remove('sale-padding')
