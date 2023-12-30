@@ -1031,23 +1031,18 @@ const copyToClipboard = className => {
 const menuButton = document.querySelector('.logo-panel span')
 const menu = document.querySelector('aside')
 
-const pressMenuButton = (icon = 'menu', display = '') => {
-    if (icon === 'menu') {
-        document.body.style.overflow = ''
-    } else {
-        hideBodyOverflow()
-    }
-
-    menuButton.innerHTML = icon
+const pressMenuButton = display => {
+    hideBodyOverflow()
     menu.style.display = display
 }
 
-menuButton.onpointerup = () => menu.style.display ? pressMenuButton() : pressMenuButton('close', 'flex')
+menuButton.onpointerup = () => menu.style.display ? pressMenuButton('') : pressMenuButton('flex')
 
 const fillSelectedMenuItem = e => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
     currentPage = 1
     pressMenuButton()
+    setTimeout(() => hideModal(menu), 1)
 
     document.body.style.height = 'fit-content'
     document.querySelector('header').style.display = ''
@@ -1189,6 +1184,7 @@ document.querySelectorAll('.close-modal').forEach(b => b.onpointerup = () => {
 
 window.onpointerup = e => {
     for (const modal of [
+        menu,
         productInfoModal,
         contractorInfoModal,
         supplyInfoModal,
