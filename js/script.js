@@ -1041,13 +1041,12 @@ menuButton.onpointerup = () => menu.style.display ? pressMenuButton('') : pressM
 const fillSelectedMenuItem = e => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
     currentPage = 1
-    pressMenuButton()
     setTimeout(() => hideModal(menu), 1)
 
     if (isMobile) {
         document.body.style.height = 'fit-content'
     }
-    
+
     document.querySelector('header').style.display = ''
     main.style.background = 'unset'
     main.classList.remove('sale-padding')
