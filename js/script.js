@@ -1044,7 +1044,10 @@ const fillSelectedMenuItem = e => {
     pressMenuButton()
     setTimeout(() => hideModal(menu), 1)
 
-    document.body.style.height = 'fit-content'
+    if (isMobile) {
+        document.body.style.height = 'fit-content'
+    }
+    
     document.querySelector('header').style.display = ''
     main.style.background = 'unset'
     main.classList.remove('sale-padding')
