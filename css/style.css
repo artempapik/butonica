@@ -778,7 +778,7 @@ table {
 [class$="modal"] {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     left: 0;
     top: 0;
     width: 100%;
@@ -1306,9 +1306,7 @@ table {
 
     aside {
         display: none;
-        z-index: 1;
-        position: absolute;
-
+        z-index: 2;
         position: fixed;
         left: 0;
         top: 0;
@@ -1319,7 +1317,7 @@ table {
         align-items: center;
 
         & .main-menu {
-            max-height: calc(100vh - 9rem);
+            max-height: calc(100vh - 7rem);
             overflow-y: auto;
             position: relative;
             background: var(--white);
