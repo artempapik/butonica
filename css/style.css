@@ -1317,7 +1317,7 @@ table {
         align-items: center;
 
         & .main-menu {
-            max-height: calc(100vh - 8rem);
+            max-height: calc(100vh - 7.5rem);
             overflow-y: auto;
             position: relative;
             background: var(--white);
@@ -1401,6 +1401,7 @@ table {
     }
 
     #message {
+        z-index: 2;
         padding: 1rem;
     }
 }
