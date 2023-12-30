@@ -1032,6 +1032,12 @@ const menuButton = document.querySelector('.logo-panel span')
 const menu = document.querySelector('aside')
 
 const pressMenuButton = (icon = 'menu', display = '') => {
+    if (icon === 'menu') {
+        document.body.style.overflow = ''
+    } else {
+        hideBodyOverflow()
+    }
+
     menuButton.innerHTML = icon
     menu.style.display = display
 }
