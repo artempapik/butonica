@@ -1317,11 +1317,11 @@ table {
         align-items: center;
 
         & .main-menu {
-            max-height: calc(100vh - 7.5rem);
+            max-height: calc(100vh - 7rem);
             overflow-y: auto;
             position: relative;
             background: var(--white);
-            padding: 1.2rem .6rem !important;
+            padding: .9rem .6rem !important;
             border-radius: 1rem;
             width: calc(var(--modal-content-width) - 4rem);
 
