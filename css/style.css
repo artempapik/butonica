@@ -1321,9 +1321,9 @@ table {
             overflow-y: auto;
             position: relative;
             background: var(--white);
-            padding: 1.6rem;
+            padding: 1.2rem 1rem !important;
             border-radius: 1rem;
-            width: calc(var(--modal-content-width) - 2rem);
+            width: calc(var(--modal-content-width) - 4rem);
 
             & li .menu-item {
                 width: unset;
@@ -1370,14 +1370,8 @@ table {
         padding: .4rem .8rem;
     }
 
-    .main-menu {
-        &.main-padding {
-            padding: .4rem .1rem;
-        }
-
-        & li .menu-item {
-            padding: .6rem .5rem;
-        }
+    .main-menu li .menu-item {
+        padding: .6rem .5rem;
     }
 
     .sub-menu li {
