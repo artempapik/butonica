@@ -1321,7 +1321,7 @@ table {
             overflow-y: auto;
             position: relative;
             background: var(--white);
-            padding: 1.2rem 1rem !important;
+            padding: 1.2rem .6rem !important;
             border-radius: 1rem;
             width: calc(var(--modal-content-width) - 4rem);
 
