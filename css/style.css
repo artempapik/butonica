@@ -1317,7 +1317,7 @@ table {
         align-items: center;
 
         & .main-menu {
-            max-height: calc(100vh - 7rem);
+            max-height: calc(100vh - 8rem);
             overflow-y: auto;
             position: relative;
             background: var(--white);
