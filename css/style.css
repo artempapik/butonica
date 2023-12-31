@@ -1321,7 +1321,7 @@ table {
 
     main {
         &.main-padding, &.sale-padding {
-            padding: 0 .2rem;
+            padding: 0 .3rem;
         }
 
         & h1 {
