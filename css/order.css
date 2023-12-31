@@ -441,6 +441,10 @@
     }
 
     [class$="order-table"] table {
+        & tbody td {
+            font-size: .8rem;
+        }
+
         & tr:not(:first-child) td:nth-child(2) {
             padding: .85rem .1rem;
         }
