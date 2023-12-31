@@ -1360,13 +1360,13 @@ table {
         }
     }
 
-    table {
-        & tbody {
-            top: 3rem;
+    main table tbody {
+        top: 3rem;
+    }
 
-            & span.material-symbols-outlined {
-                font-size: 1.1rem;
-            }
+    table {
+        & tbody span.material-symbols-outlined {
+            font-size: 1.1rem;
         }
 
         & td {
