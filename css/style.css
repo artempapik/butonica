@@ -1295,10 +1295,21 @@ table {
             }
         }
         
-        & .theme-profile .profile {
-            width: 2.4rem;
-            height: 2.4rem;
-            font-size: 1rem;
+        & .theme-profile {
+            & .profile {
+                width: 2.4rem;
+                height: 2.4rem;
+                font-size: 1rem;
+            }
+
+            & .profile-info {
+                right: .7rem;
+                top: 3.4rem;
+
+                & div {
+                    padding: .3rem .5rem;
+                }
+            }
         }
     }
 
@@ -1346,7 +1357,7 @@ table {
     table {
         & tbody {
             top: 3rem;
-            
+
             & span.material-symbols-outlined {
                 font-size: 1.1rem;
             }
@@ -1427,14 +1438,6 @@ table {
         position: sticky;
         top: 0;
         z-index: 2;
-
-        & .theme-profile .profile-info {
-            right: .7rem;
-
-            & div {
-                padding: .4rem .5rem;
-            }
-        }
     }
 
     main [class$="header"] {
