@@ -83,7 +83,7 @@ const createStoreExpenseRow = storeExpense => {
     tr.append(
         createTd(formatDate(storeExpense.date, false)),
         createTd(storeExpense.stock),
-        createTd(storeExpense.sum.toFixed(2) + ' грн'),
+        createTd(storeExpense.sum.toFixed(2)),
         createTd(storeExpense.comment),
         actionsColumn
     )
