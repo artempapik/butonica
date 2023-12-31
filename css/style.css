@@ -1285,8 +1285,14 @@ table {
         padding: .1rem .5rem;
 
         & .logo-panel {
-            & .logo .logo-text span:first-child {
-                font-size: 1.6rem;
+            & .logo .logo-text span {
+                &:first-child {
+                    font-size: 1.6rem;
+                }
+
+                &:last-child {
+                    font-size: .6rem;
+                }
             }
 
             & .material-symbols-outlined {
