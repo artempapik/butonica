@@ -689,7 +689,7 @@ table {
         top: 0;
 
         & td:not(& td:last-child) {
-            border-right: .1rem solid rgb(130, 130, 130);
+            border-right: 0 solid rgb(50, 50, 50);
         }
     }
 
