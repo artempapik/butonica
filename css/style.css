@@ -28,6 +28,8 @@ body, h1, h2, h3, h4 {
 }
 
 body {
+    min-height: 100%;
+    height: auto;
     user-select: none;
     -webkit-user-select: none;
     display: flex;
@@ -219,12 +221,21 @@ img {
 }
 
 header {
+    z-index: 1;
+    position: sticky;
+    top: 0;
     background: rgb(235, 235, 235);
     display: flex;
     justify-content: space-between;
     padding: .4rem 1.5rem;
     align-items: center;
     box-shadow: rgba(50, 50, 93, .25) 0 30px 60px -12px inset, rgba(0, 0, 0, .3) 0 18px 36px -18px inset;
+    transition: .1s;
+    cursor: pointer;
+
+    &:hover {
+        background: rgb(210, 210, 210);
+    }
 
     & .logo-panel {
         display: flex;
@@ -361,6 +372,7 @@ header {
 }
 
 aside {
+    z-index: 0;
     overflow-y: auto;
     box-shadow: rgba(0, 0, 0, .05) 0 6px 24px 0, rgba(0, 0, 0, .08) 0 0 0 1px;
     background: var(--white);
@@ -629,6 +641,10 @@ main {
             height: 9.4rem;
             animation-duration: 11s;
         }
+    }
+
+    & table tbody {
+        top: 3.7rem;
     }
 }
 
@@ -1076,6 +1092,7 @@ table {
 }
 
 #screensaver {
+    z-index: 2;
     user-select: none;
     background: rgb(220, 220, 220);
     border-radius: .4rem;
@@ -1220,6 +1237,10 @@ table {
         &.sale-padding {
             padding: 0 .3rem;
         }
+
+        & table tbody {
+            top: 3.5rem;
+        }
     }
 
     .main-menu {
@@ -1361,7 +1382,7 @@ table {
     }
 
     main table tbody {
-        top: 3rem;
+        top: 2.9rem;
     }
 
     table {
