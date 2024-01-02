@@ -12,7 +12,7 @@ const showSaleInfo = e => {
         shiftId = response
         fillSelectedMenuItem(e)
 
-        document.querySelector('header').style.display = 'none'
+        header.style.display = 'none'
         document.querySelector('main').classList.add('sale-padding')
 
         document.querySelectorAll('.main-menu span:last-child').forEach(i => i.style.display = 'none')
