@@ -43,6 +43,14 @@ const toBase64 = file => new Promise(resolve => {
     reader.onload = () => resolve(reader.result)
 })
 
+const header = document.querySelector('header')
+
+header.onpointerup = e => {
+    if (e.target === header) {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+}
+
 const showMessage = (type, text) => {
     const typeToColor = {
         error: ['rgba(220, 20, 60, .9)', 'rgb(250, 250, 250)'],
@@ -1043,11 +1051,7 @@ const fillSelectedMenuItem = e => {
     currentPage = 1
     setTimeout(() => hideModal(menu), 1)
 
-    if (isMobile) {
-        document.body.style.height = 'fit-content'
-    }
-
-    document.querySelector('header').style.display = ''
+    header.style.display = ''
     main.style.background = 'unset'
     main.classList.remove('sale-padding')
 
