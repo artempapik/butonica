@@ -1422,6 +1422,12 @@ const notesModal = document.querySelector('.notes-modal')
 const notes = JSON.parse(localStorage.getItem('notes'))
 
 document.querySelector('.notes').onpointerup = () => {
+    if (!notes) {
+        notesModal.querySelector('li').style.display = 'flex'
+        notesModal.style.display = 'flex'
+        return
+    }
+
     hideBodyOverflow()
 
     const ul = notesModal.querySelector('ul')
@@ -1459,9 +1465,7 @@ const hideNoteCreation = () => {
     notesModal.querySelector('textarea').value = ''
 }
 
-const createNote = () => {
-    notesModal.querySelector('li').style.display = 'flex'
-}
+const createNote = () => notesModal.querySelector('li').style.display = 'flex'
 
 const saveNote = () => {
     const text = notesModal.querySelector('textarea').value.trim()
@@ -1473,12 +1477,16 @@ const saveNote = () => {
 
     notes.push({ text, author: loginInfo.fullName })
     localStorage.setItem('notes', JSON.stringify(notes))
-    
+
     showMessage('success', 'Замітку збережено')
     hideNoteCreation()
 }
 
-const cancelNote = () => hideNoteCreation()
+const cancelNote = () => {
+    if (notes) {
+        hideNoteCreation()
+    }
+}
 
 const getElementContentHeight = node => {
     const styles = window.getComputedStyle(node)
