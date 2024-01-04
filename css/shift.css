@@ -1,4 +1,16 @@
+@keyframes animate-translate-y {
+    from {
+        opacity: 0;
+        transform: translateY(1rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .shift-info-modal-content {
+    /* transition: height .15s; */
     width: calc(var(--modal-content-width) + 11.5rem);
     padding: 1.4rem;
     padding-top: 0;
@@ -76,7 +88,7 @@
                 &:hover {
                     background: rgb(230, 230, 230);
                 }
-                
+
                 & div {
                     display: flex;
                     gap: 1.2rem;
@@ -131,6 +143,7 @@
             }
 
             & .inner-content {
+                animation: animate-translate-y .15s;
                 display: none;
                 padding-left: .5rem;
                 color: rgb(70, 70, 70);
