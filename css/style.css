@@ -826,7 +826,7 @@ table {
     align-items: center;
 }
 
-@keyframes opacity {
+@keyframes modal-content {
     from {
         opacity: 0;
         transform: translateY(1.5rem);
@@ -848,7 +848,7 @@ table {
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
-    animation: opacity .15s;
+    animation: modal-content .15s;
 
     & .modal-content-name {
         display: flex;
