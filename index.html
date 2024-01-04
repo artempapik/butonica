@@ -41,6 +41,7 @@
         </div>
         <div class="theme-profile">
             <span class="theme material-symbols-outlined">dark_mode</span>
+            <span class="notes material-symbols-outlined">notes</span>
             <div class="profile" onpointerup="openProfile()"></div>
             <div class="profile-info">
                 <div>
@@ -2048,6 +2049,23 @@
                 <div class="label-colors"></div>
             </div>
             <button>Зберегти</button>
+        </div>
+    </div>
+    <div class="notes-modal">
+        <div class="notes-modal-content">
+            <h1>
+                <span>Замітки</span>
+                <span class="material-symbols-outlined" onpointerup="createNote()">add_notes</span>
+            </h1>
+            <ul>
+                <li>
+                    <textarea placeholder="Текст замітки" maxlength="100" rows="4"></textarea>
+                    <div>
+                        <button onpointerup="saveNote()">Зберегти</button>
+                        <button onpointerup="cancelNote()">Відмінити</button>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
     <div id="message">
