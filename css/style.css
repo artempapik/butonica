@@ -1436,15 +1436,19 @@ table {
         padding: .1rem .5rem;
 
         & .logo-panel {
-            gap: .2rem;
+            gap: .3rem;
 
-            & .logo .logo-text span {
-                &:first-child {
-                    font-size: 1.6rem;
-                }
+            & .logo {
+                gap: .3rem;
 
-                &:last-child {
-                    font-size: .6rem;
+                & .logo-text span {
+                    &:first-child {
+                        font-size: 1.6rem;
+                    }
+    
+                    &:last-child {
+                        font-size: .6rem;
+                    }
                 }
             }
 
