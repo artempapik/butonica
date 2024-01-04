@@ -9,6 +9,7 @@
     --white: rgb(255, 255, 255);
     --search-input-width: 12rem;
     --last-page-color: rgb(180, 180, 180);
+    --delete-action-color: 194, 30, 86;
 }
 
 ::-webkit-scrollbar {
@@ -220,6 +221,17 @@ img {
     border-radius: .4rem;
 }
 
+@keyframes profile-info-animate {
+    from {
+        opacity: 0;
+        top: 3.5rem;
+    }
+    to {
+        opacity: 1;
+        top: 4.1rem;
+    }
+}
+
 header {
     z-index: 1;
     position: sticky;
@@ -290,7 +302,7 @@ header {
 
     & .theme-profile {
         display: flex;
-        gap: 1.5rem;
+        gap: 1.2rem;
         align-items: center;
 
         & .theme {
@@ -299,6 +311,16 @@ header {
         
             &:hover {
                 color: rgb(255, 69, 0);
+            }
+        }
+
+        & .notes {
+            border-radius: 50%;
+            padding: .3rem;
+            cursor: pointer;
+
+            &:hover {
+                background: rgb(170, 170, 170);
             }
         }
         
@@ -323,6 +345,7 @@ header {
         }
 
         & .profile-info {
+            animation: profile-info-animate .2s;
             z-index: 1;
             position: fixed;
             top: 4.1rem;
@@ -649,12 +672,12 @@ main {
 }
 
 @keyframes background-animation {
-    0% {
+    from {
         transform: translateY(0) rotate(0deg);
         opacity: 1;
         border-radius: 0;
     }
-    100% {
+    to {
         transform: translateY(-63rem) rotate(720deg);
         opacity: 0;
         border-radius: 50%;
@@ -733,7 +756,6 @@ table {
             background: rgb(252, 252, 252);
             transition: .1s;
             --edit-action-color: 50, 50, 178;
-            --delete-action-color: 194, 30, 86;
             --action-hover-color: 240, 240, 240;
 
             &:first-child {
@@ -804,6 +826,17 @@ table {
     align-items: center;
 }
 
+@keyframes opacity {
+    from {
+        opacity: 0;
+        transform: translateY(1.5rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 [class$="modal-content"] {
     max-height: calc(100vh - 7rem);
     overflow-y: auto;
@@ -815,6 +848,7 @@ table {
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
+    animation: opacity .15s;
 
     & .modal-content-name {
         display: flex;
@@ -1064,7 +1098,7 @@ table {
 #message {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     padding: 1.1rem 2.5rem;
     border-radius: .7rem;
     top: 3%;
@@ -1128,8 +1162,8 @@ table {
 }
 
 @keyframes moveX {
-    0% { left: calc(100% - 14.1rem); }
-    100% { left: 0; }
+    from { left: calc(100% - 14.2rem); }
+    to { left: 0; }
 }
 
 @keyframes moveY {
@@ -1157,8 +1191,109 @@ table {
 }
 
 @keyframes rotation {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.notes-modal {
+    background: rgba(0, 0, 0, .9);
+
+    & .notes-modal-content {
+        width: calc(var(--modal-content-width) + 3rem);
+        gap: 1.9rem;
+
+        & h1 {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+    
+            & span:first-child {
+                font-size: 1.6rem;
+            }
+    
+            & span:last-child {
+                font-size: 1.9rem;
+                color: rgb(0, 55, 140);
+                cursor: pointer;
+                padding: .3rem;
+                border-radius: 50%;
+    
+                &:hover {
+                    background: rgb(215, 215, 215);
+                }
+            }
+        }
+    
+        & ul {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            
+            & li {
+                display: flex;
+                gap: 1rem;
+                justify-content: space-between;
+                align-items: center;
+
+                &:first-child {
+                    gap: .7rem;
+                    display: none;
+                }
+
+                & .note {
+                    display: flex;
+                    flex-direction: column;
+                    gap: .3rem;
+
+                    & span:last-child {
+                        font-size: .9rem;
+                        letter-spacing: .04rem;
+                        font-weight: bold;
+                    }
+                }
+
+                & .material-symbols-outlined {
+                    color: rgba(var(--delete-action-color), .9);
+                    cursor: pointer;
+                    padding: .2rem;
+                    border-radius: 50%;
+                    font-size: 1.7rem;
+    
+                    &:hover {
+                        color: rgb(var(--delete-action-color));
+                        background: rgb(215, 215, 215);
+                    }
+                }
+
+                & textarea {
+                    flex: 1;
+                    padding: .4rem;
+                }
+
+                & div {
+                    display: flex;
+                    flex-direction: column;
+                    gap: .5rem;
+
+                    & button {
+                        opacity: .9;
+                        padding: .2rem 0;
+                        width: 5.6rem;
+                        font-size: .9rem;
+
+                        &:last-child {
+                            background: rgb(var(--delete-action-color));
+                        }
+
+                        &:hover {
+                            opacity: 1;
+                            box-shadow: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 @media (hover: none) {
@@ -1216,11 +1351,6 @@ table {
         appearance: none;
         padding: .45rem !important;
         font-size: 1rem;
-    }
-
-    @keyframes moveX {
-        0% { left: calc(100% - 14.2rem); }
-        100% { left: 0; }
     }
 }
 
@@ -1306,6 +1436,8 @@ table {
         padding: .1rem .5rem;
 
         & .logo-panel {
+            gap: .2rem;
+
             & .logo .logo-text span {
                 &:first-child {
                     font-size: 1.6rem;
@@ -1323,6 +1455,8 @@ table {
         }
         
         & .theme-profile {
+            gap: .5rem;
+
             & .profile {
                 width: 2.4rem;
                 height: 2.4rem;
@@ -1455,7 +1589,6 @@ table {
     }
 
     #message {
-        z-index: 2;
         padding: 1rem;
     }
 }
