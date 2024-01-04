@@ -1203,9 +1203,11 @@ window.onpointerup = e => {
         orderInfoModal,
         flavorInfoModal,
         flavorTemplatesModal,
-        employeeInfoModal
+        employeeInfoModal,
+        notesModal
     ]) {
         if (e.target === modal) {
+            // modal.querySelector('div').style.height = 'fit-content'
             setTimeout(() => hideModal(modal), 1)
         }
     }
@@ -1402,6 +1404,7 @@ const toggleScreensaver = () => {
     if (screensaver) {
         screensaver.remove()
         toggleScreensaverButton.style.fontWeight = ''
+        toggleScreensaverButton.style.color = ''
         return
     }
 
@@ -1411,5 +1414,73 @@ const toggleScreensaver = () => {
     root.style.setProperty('--screensaver-move-y', getRandom(8, 14) + getRandom(1, 10) / 10 + 's')
 
     toggleScreensaverButton.style.fontWeight = 'bold'
+    toggleScreensaverButton.style.color = 'rgb(0, 71, 171)'
     document.body.insertAdjacentHTML('beforeend', screensaverMarkup)
+}
+
+const notesModal = document.querySelector('.notes-modal')
+const notes = JSON.parse(localStorage.getItem('notes'))
+
+document.querySelector('.notes').onpointerup = () => {
+    hideBodyOverflow()
+
+    const ul = notesModal.querySelector('ul')
+    const addNoteLi = document.createElement('li')
+    addNoteLi.innerHTML = ul.querySelector('li').innerHTML
+    ul.innerHTML = ''
+    ul.append(addNoteLi)
+
+    for (const note of notes) {
+        const noteText = document.createElement('span')
+        noteText.classList = 'text'
+        noteText.innerHTML = note.text
+
+        const noteAuthor = document.createElement('span')
+        noteAuthor.classList = 'author'
+        noteAuthor.innerHTML = note.author
+
+        const noteSpan = document.createElement('span')
+        noteSpan.classList = 'note'
+        noteSpan.append(noteText, noteAuthor)
+
+        const deleteIcon = createSpan('delete_forever')
+        deleteIcon.classList = 'material-symbols-outlined'
+
+        const li = document.createElement('li')
+        li.append(noteSpan, deleteIcon)
+        ul.append(li)
+    }
+
+    notesModal.style.display = 'flex'
+}
+
+const hideNoteCreation = () => {
+    notesModal.querySelector('li').style.display = ''
+    notesModal.querySelector('textarea').value = ''
+}
+
+const createNote = () => {
+    notesModal.querySelector('li').style.display = 'flex'
+}
+
+const saveNote = () => {
+    const text = notesModal.querySelector('textarea').value.trim()
+
+    if (!text) {
+        showMessage('error', 'Текст замітки порожній')
+        return
+    }
+
+    notes.push({ text, author: loginInfo.fullName })
+    localStorage.setItem('notes', JSON.stringify(notes))
+    
+    showMessage('success', 'Замітку збережено')
+    hideNoteCreation()
+}
+
+const cancelNote = () => hideNoteCreation()
+
+const getElementContentHeight = node => {
+    const styles = window.getComputedStyle(node)
+    return node.clientHeight - parseFloat(styles.paddingTop) - parseFloat(styles.paddingBottom)
 }
