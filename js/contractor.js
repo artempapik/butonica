@@ -166,6 +166,8 @@ const createContractorRow = contractor => {
                 const supplyPayDateDiv = document.createElement('div')
                 supplyPayDateDiv.classList = 'form'
                 supplyPayDateDiv.append(supplyPayDateHeader, supplyPayDateSubHeader)
+                supplyPayDateDiv.style.display = supplyPayDateSubHeader.textContent ? '' : 'none'
+
                 suppliesInfo.append(supplyPayDateDiv)
 
                 const supplyCommentHeader = document.createElement('h2')
@@ -178,7 +180,8 @@ const createContractorRow = contractor => {
                 supplyCommentDiv.classList = 'form'
                 supplyCommentDiv.append(supplyCommentHeader, supplyCommentSubHeader)
                 suppliesInfo.append(supplyCommentDiv)
-
+                supplyCommentDiv.style.display = supply.comment ? '' : 'none'
+                
                 const suppliesProducts = document.createElement('div')
                 suppliesProducts.classList = 'contractor-supplies-products'
 
