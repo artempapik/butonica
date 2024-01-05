@@ -1483,7 +1483,7 @@ const saveNote = () => {
 }
 
 const cancelNote = () => {
-    if (notes) {
+    if (notes.length) {
         hideNoteCreation()
     }
 }
