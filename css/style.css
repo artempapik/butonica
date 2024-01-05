@@ -1465,10 +1465,10 @@ table {
         padding: .1rem .5rem;
 
         & .logo-panel {
-            gap: .3rem;
+            gap: .2rem;
 
             & .logo {
-                gap: .3rem;
+                gap: .15rem;
 
                 & .logo-text span {
                     &:first-child {
