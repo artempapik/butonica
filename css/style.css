@@ -455,7 +455,20 @@ aside {
     }
 }
 
+@keyframes submenu-animate {
+    from {
+        opacity: 0;
+        transform: translateY(-1rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .sub-menu {
+    animation: submenu-animate .1s;
+    transition: display .5s;
     display: none;
     flex-direction: column;
     margin-bottom: 1rem;
@@ -1527,6 +1540,17 @@ table {
         }
     }
 
+    @keyframes main-menu-animate {
+        from {
+            opacity: 0;
+            transform: scale(.6);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
     aside {
         display: none;
         z-index: 2;
@@ -1540,6 +1564,7 @@ table {
         align-items: center;
 
         & .main-menu {
+            animation: main-menu-animate .15s;
             max-height: calc(100vh - 8rem);
             overflow-y: auto;
             position: relative;
