@@ -1180,6 +1180,27 @@ table {
     animation: rotation 1.5s linear infinite;
 }
 
+#loader-page {
+    display: none;
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .85);
+    justify-content: center;
+    align-items: center;
+
+    & #loader {
+        width: 3.5rem !important;
+        height: 3.5rem !important;
+        border-bottom-color: transparent;
+        animation-duration: 1s;
+        border-width: .5rem;
+    }
+}
+
 .loader-button {
     display: none;
     width: 1.2rem !important;
@@ -1399,6 +1420,14 @@ table {
 }
 
 @media only screen and (max-width: 1400px) {
+    main .header-items {
+        gap: .8rem;
+
+        & h1 {
+            font-size: 1.8rem;
+        }
+    }
+
     table {
         & td {
             padding: .7rem;
