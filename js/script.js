@@ -1207,7 +1207,6 @@ window.onpointerup = e => {
         notesModal
     ]) {
         if (e.target === modal) {
-            // modal.querySelector('div').style.height = 'fit-content'
             setTimeout(() => hideModal(modal), 1)
         }
     }
@@ -1421,6 +1420,39 @@ const toggleScreensaver = () => {
 const notesModal = document.querySelector('.notes-modal')
 const notes = JSON.parse(localStorage.getItem('notes')) || []
 
+const getNoteMarkup = (text, author, index) => {
+    const noteText = document.createElement('span')
+    noteText.classList = 'text'
+    noteText.textContent = text
+
+    const noteAuthor = document.createElement('span')
+    noteAuthor.classList = 'author'
+    noteAuthor.textContent = author
+
+    const noteSpan = document.createElement('span')
+    noteSpan.classList = 'note'
+    noteSpan.append(noteText, noteAuthor)
+
+    const deleteIcon = createSpan('delete_forever')
+    deleteIcon.classList = 'material-symbols-outlined'
+
+    const li = document.createElement('li')
+    li.append(noteSpan, deleteIcon)
+
+    deleteIcon.onpointerup = () => {
+        li.remove()
+        notes.splice(index, 1)
+        localStorage.setItem('notes', JSON.stringify(notes))
+        showMessage('info', 'Замітку видалено')
+
+        if (!notes.length) {
+            createNote()
+        }
+    }
+
+    return li
+}
+
 document.querySelector('.notes').onpointerup = () => {
     if (!notes.length) {
         notesModal.querySelector('li').style.display = 'flex'
@@ -1436,28 +1468,12 @@ document.querySelector('.notes').onpointerup = () => {
     ul.innerHTML = ''
     ul.append(addNoteLi)
 
-    for (const note of notes) {
-        const noteText = document.createElement('span')
-        noteText.classList = 'text'
-        noteText.innerHTML = note.text
-
-        const noteAuthor = document.createElement('span')
-        noteAuthor.classList = 'author'
-        noteAuthor.innerHTML = note.author
-
-        const noteSpan = document.createElement('span')
-        noteSpan.classList = 'note'
-        noteSpan.append(noteText, noteAuthor)
-
-        const deleteIcon = createSpan('delete_forever')
-        deleteIcon.classList = 'material-symbols-outlined'
-
-        const li = document.createElement('li')
-        li.append(noteSpan, deleteIcon)
-        ul.append(li)
+    for (let i = 0; i < notes.length; i++) {
+        ul.append(getNoteMarkup(notes[i].text, notes[i].author, i))
     }
 
     notesModal.style.display = 'flex'
+    notesModal.querySelector('div').scroll(0, 0)
 }
 
 const hideNoteCreation = () => {
@@ -1475,6 +1491,7 @@ const saveNote = () => {
         return
     }
 
+    notesModal.querySelector('ul').append(getNoteMarkup(text, loginInfo.fullName, notes.length))
     notes.push({ text, author: loginInfo.fullName })
     localStorage.setItem('notes', JSON.stringify(notes))
 
