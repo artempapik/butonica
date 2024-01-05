@@ -1488,7 +1488,7 @@ table {
         }
         
         & .theme-profile {
-            gap: .5rem;
+            gap: .3rem;
 
             & .profile {
                 width: 2.4rem;
