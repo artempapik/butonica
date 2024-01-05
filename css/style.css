@@ -1214,6 +1214,11 @@ table {
     }
 }
 
+@keyframes rotation {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
 .loader-button {
     display: none;
     width: 1.2rem !important;
@@ -1222,11 +1227,6 @@ table {
     border-bottom-color: transparent;
     border-radius: 50%;
     animation: rotation .7s linear infinite;
-}
-
-@keyframes rotation {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
 }
 
 @keyframes notes-animate {
