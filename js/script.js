@@ -1505,11 +1505,6 @@ const cancelNote = () => {
     }
 }
 
-const getElementContentHeight = node => {
-    const styles = window.getComputedStyle(node)
-    return node.clientHeight - parseFloat(styles.paddingTop) - parseFloat(styles.paddingBottom)
-}
-
 const loaderPage = document.querySelector('#loader-page')
 
 const showPageLoad = () => loaderPage.style.display = 'flex'
