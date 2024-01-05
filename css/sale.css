@@ -1239,6 +1239,16 @@
                 display: flex;
                 gap: .3rem;
                 align-items: baseline;
+
+                & span {
+                    &.checkout-label {
+                        border-bottom: .15rem rgb(58, 143, 118) solid;
+                    }
+
+                    &.withdrawal-label {
+                        border-bottom: .15rem rgb(239, 1, 7) solid;
+                    }
+                }
             }
         }
 
