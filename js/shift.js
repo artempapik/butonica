@@ -180,14 +180,10 @@ const createShiftRow = shift => {
                     if (expandIcon.innerHTML === 'expand_more') {
                         expandIcon.innerHTML = 'expand_less'
                         cashRegisterOperation.querySelector('.inner-content').style.display = 'block'
-                        // shiftModalContent.style.overflow = 'hidden'
-                        // shiftModalContent.style.height = getElementContentHeight(shiftModalContent) + cashRegisterOperation.querySelector('.inner-content').clientHeight + 11.2 + 'px'
-                        // setTimeout(() => shiftModalContent.style.overflow = 'auto', 200)
                         return
                     }
 
                     expandIcon.innerHTML = 'expand_more'
-                    // shiftModalContent.style.height = getElementContentHeight(shiftModalContent) - cashRegisterOperation.querySelector('.inner-content').clientHeight - 11.2 + 'px'
                     cashRegisterOperation.querySelector('.inner-content').style.display = ''
                 }
 
@@ -201,7 +197,6 @@ const createShiftRow = shift => {
             shiftEndSums.querySelector('.bonus-cash .end-sum').textContent = shift.shiftEndBonusCash.toFixed(2) + ' грн'
 
             shiftInfoModal.style.display = 'flex'
-            // shiftModalContent.style.height = getElementContentHeight(shiftModalContent) + 'px'
         }).catch(() => showMessage('error', getErrorMessage('зміну')))
     }
 
