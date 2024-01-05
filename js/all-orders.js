@@ -575,6 +575,10 @@ const createInternetOrderModal = () => {
     }
 
     clientPhones.forEach(ch => ch.oninput = () => {
+        if (saveClient.checked) {
+            return
+        }
+        
         const searchQuery = ch.value.trim()
 
         if (!searchQuery) {
