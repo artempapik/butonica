@@ -197,6 +197,7 @@ const createShiftRow = shift => {
             shiftEndSums.querySelector('.bonus-cash .end-sum').textContent = shift.shiftEndBonusCash.toFixed(2) + ' грн'
 
             shiftInfoModal.style.display = 'flex'
+            shiftModalContent.scroll(0, 0)
         }).catch(() => showMessage('error', getErrorMessage('зміну')))
     }
 
