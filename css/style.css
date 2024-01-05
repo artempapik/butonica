@@ -468,7 +468,6 @@ aside {
 
 .sub-menu {
     animation: submenu-animate .1s;
-    transition: display .5s;
     display: none;
     flex-direction: column;
     margin-bottom: 1rem;
@@ -1230,13 +1229,18 @@ table {
     to { transform: rotate(360deg); }
 }
 
+@keyframes notes-animate {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
 .notes-modal {
     background: rgba(0, 0, 0, .9);
 
     & .notes-modal-content {
-        padding: .6rem 1rem;
+        padding: .6rem 1rem .8rem 1rem;
         width: calc(var(--modal-content-width) + 3rem);
-        gap: 1.9rem;
+        gap: 1.4rem;
 
         & h1 {
             display: flex;
@@ -1274,6 +1278,7 @@ table {
                 &:first-child {
                     gap: .7rem;
                     display: none;
+                    animation: notes-animate .3s;
                 }
 
                 & .note {
@@ -1626,13 +1631,17 @@ table {
         padding: .6rem .5rem;
     }
 
-    .sub-menu li {
-        &.main-padding, &.sale-padding {
-            margin-left: 2.2rem;
-        }
+    .sub-menu {
+        animation-duration: .2s;
 
-        & div {
-            padding: .5rem;
+        & li {
+            &.main-padding, &.sale-padding {
+                margin-left: 2.2rem;
+            }
+    
+            & div {
+                padding: .5rem;
+            }
         }
     }
 
