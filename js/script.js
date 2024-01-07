@@ -53,7 +53,7 @@ header.onpointerup = e => {
 
 const animations = [
     { opacity: '1', transform: 'translateY(0)' }, 
-    { opacity: '.4', transform: 'translateY(1.5rem)' }
+    { opacity: '.3', transform: 'translateY(1.5rem)' }
 ]
 
 const showMessage = (type, text) => {
