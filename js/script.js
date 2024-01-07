@@ -18,7 +18,7 @@ const Environment = {
     PROD: 'https://botanice.user30503.realhost-free.net'
 }
 
-const BASE_URL = Environment.PROD
+const BASE_URL = Environment.DEV
 const EMPTY_IMAGE_URL = 'img/empty-flower.webp'
 
 let imageData, currentPage
@@ -972,6 +972,7 @@ const menuItemsContents = {
                         <div>за:</div>
                         <select onchange="getStatisticsValues(event.target.selectedIndex)">
                             <option>поточний місяць</option>
+                            <option>всі місяці</option>
                             <option>січень</option>
                             <option>лютий</option>
                             <option>березень</option>
@@ -1035,6 +1036,12 @@ const menuItemsContents = {
                 </span>
             </li>
         </ul>
+        <div class="pie-charts">
+            <canvas id="expenses-pie-chart"></canvas>
+            <canvas id="income-pie-chart"></canvas>
+            <canvas id="income-by-label-pie-chart"></canvas>
+            <canvas id="expenses-income-pie-chart"></canvas>
+        </div>
     `
 }
 
