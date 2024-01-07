@@ -33,6 +33,19 @@
     }
 }
 
+.pie-charts {
+    margin-top: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .2rem;
+}
+
+[id$="pie-chart"] {
+    --pie-chart-size: 17rem;
+    height: var(--pie-chart-size) !important;
+    width: var(--pie-chart-size) !important;
+}
+
 @media only screen and (max-width: 700px) and (orientation: portrait) {
     .general-statistics-info li {
         & .stat-title {
