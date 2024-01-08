@@ -142,13 +142,14 @@ const createClientRow = client => {
             const fillClientOrder = index => {
                 if (index === 0) {
                     toggleArrowsVisibility('hidden', 'visible')
-                } else if (index < response.orders.length - 1) {
+                } else if (index > -1 && index < response.orders.length - 1) {
                     toggleArrowsVisibility('visible', 'visible')
-                } else {
+                } else if (index > response.orders.length - 1) {
                     toggleArrowsVisibility('visible', 'hidden')
                 }
 
                 if (index < 0 || index > response.orders.length - 1) {
+                    orderIndex = index < 0 ? 0 : response.orders.length - 1
                     return
                 }
 
@@ -164,8 +165,8 @@ const createClientRow = client => {
             }
 
             const productsTable = clientInfoModal.querySelector('table')
-            let index = 0
-            fillClientOrder(index)
+            let orderIndex = 0
+            fillClientOrder(orderIndex)
 
             if (response.orders.length === 1) {
                 ordersBlock.style.display = 'none'
@@ -173,8 +174,8 @@ const createClientRow = client => {
             }
 
             ordersBlock.style.display = ''
-            orderArrows.item(0).onpointerup = () => fillClientOrder(--index)
-            orderArrows.item(1).onpointerup = () => fillClientOrder(++index)
+            orderArrows.item(0).onpointerup = () => fillClientOrder(--orderIndex)
+            orderArrows.item(1).onpointerup = () => fillClientOrder(++orderIndex)
         }).catch(() => {
             hidePageLoad()
             showMessage('error', getErrorMessage(`замовлення клієнта`))
