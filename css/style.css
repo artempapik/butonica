@@ -1435,11 +1435,7 @@ table {
 
 @media only screen and (max-width: 1400px) {
     main .header-items {
-        gap: .5rem;
-
-        & h1 {
-            font-size: 1.7rem;
-        }
+        flex-wrap: wrap;   
     }
 
     table {
@@ -1532,10 +1528,6 @@ table {
 
         & h1 {
             font-size: 1.5rem;
-        }
-
-        & .header-items {
-            flex-wrap: wrap;
         }
     }
 
