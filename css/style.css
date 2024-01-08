@@ -1688,7 +1688,6 @@ table {
     }
 
     [class$="date-filter"] {
-        flex-direction: column;
         gap: .7rem;
         margin-bottom: 1rem;
 
