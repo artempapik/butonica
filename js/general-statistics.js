@@ -34,7 +34,7 @@ const getStatisticsValues = month => {
     }).catch(() => showMessage('error', getErrorMessage('статистику')))
 }
 
-const getPieChart = (selector, ...labels) => new Chart(document.querySelector(`#${selector}-pie-chart`), {
+const getPieChart = (selector, title, ...labels) => new Chart(document.querySelector(`#${selector}-pie-chart`), {
     type: 'pie',
     data: {
         labels,
@@ -46,6 +46,14 @@ const getPieChart = (selector, ...labels) => new Chart(document.querySelector(`#
     },
     options: {
         plugins: {
+            title: {
+                display: true,
+                text: title,
+                font: {
+                    family: "'Roboto', 'Helvetica', monospace",
+                    size: 14
+                }
+            },
             legend: {
                 position: 'bottom',
                 align: 'start'
@@ -70,8 +78,8 @@ const showGeneralStatisticsInfo = e => {
     main.innerHTML = menuItemsContents['generalstatistics']
     getStatisticsValues(0)
 
-    expensesPieChart = getPieChart('expenses', 'витрати магазину', 'витрати на товар')
-    incomePieChart = getPieChart('income', 'продажі', 'інтернет-замовлення')
-    incomeByLabelPieChart = getPieChart('income-by-label')
-    expensesIncomePieChart = getPieChart('expenses-income', 'доходи', 'витрати')
+    expensesPieChart = getPieChart('expenses', 'Розподіл витрат', 'витрати магазину', 'витрати на товар')
+    incomePieChart = getPieChart('income', 'Розподіл доходів по Продажам', 'продажі', 'інтернет-замовлення')
+    incomeByLabelPieChart = getPieChart('income-by-label', 'Розподіл доходів по Міткам',)
+    expensesIncomePieChart = getPieChart('expenses-income', 'Відношення доходів до витрат', 'доходи', 'витрати')
 }
