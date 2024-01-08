@@ -187,12 +187,8 @@ const createShiftRow = shift => {
                         return
                     }
 
-                    const cashRegisterContentAnimate = cashRegisterContent.animate(animations, 150)
-                    
-                    cashRegisterContentAnimate.onfinish = () => {
-                        expandIcon.innerHTML = 'expand_more'
-                        cashRegisterContent.style.display = ''
-                    }
+                    expandIcon.innerHTML = 'expand_more'
+                    cashRegisterContent.style.display = ''
                 }
 
                 operations.append(cashRegisterOperation)
