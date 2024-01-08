@@ -331,6 +331,7 @@
             color: rgb(215, 215, 215);
             font-size: .9rem;
             text-align: center;
+            width: 2.5rem;
         }
 
         &:nth-child(2) {
