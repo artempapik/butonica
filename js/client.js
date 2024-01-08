@@ -148,6 +148,10 @@ const createClientRow = client => {
                     toggleArrowsVisibility('visible', 'hidden')
                 }
 
+                if (index < 0 || index > response.orders.length - 1) {
+                    return
+                }
+
                 productsTable.innerHTML = productsTable.querySelector('tbody').innerHTML
 
                 for (const product of response.orders[index].products) {
