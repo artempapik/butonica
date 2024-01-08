@@ -1,0 +1,64 @@
+.general-statistics-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    & li {
+        display: flex;
+        align-items: center;
+
+        & .stat-title {
+            width: 12rem;
+            font-size: 1.2rem;
+        }
+
+        & .stat-value {
+            font-size: 1.1rem;
+            font-family: monospace, 'SF Mono';
+        }
+
+        &.sub-value {
+            margin-top: .6rem;
+            padding: 0 1rem;
+            justify-content: space-between;
+
+            & .stat-title {
+                font-size: .9rem;
+            }
+
+            & .stat-value {
+                font-size: 1rem;
+            }
+        }
+    }
+}
+
+.pie-charts {
+    margin-top: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .2rem;
+}
+
+[id$="pie-chart"] {
+    --pie-chart-size: 17rem;
+    height: var(--pie-chart-size) !important;
+    width: var(--pie-chart-size) !important;
+}
+
+@media only screen and (max-width: 700px) and (orientation: portrait) {
+    .general-statistics-info li {
+        & .stat-title {
+            width: 11rem;
+            font-size: 1.1rem;
+        }
+
+        & .stat-value {
+            font-size: 1rem;
+        }
+    }
+
+    .pie-charts {
+        justify-content: center;
+    }
+}
