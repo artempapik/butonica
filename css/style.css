@@ -1229,11 +1229,6 @@ table {
     animation: rotation .7s linear infinite;
 }
 
-@keyframes notes-animate {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
 .notes-modal {
     background: rgba(0, 0, 0, .9);
 
@@ -1278,7 +1273,6 @@ table {
                 &:first-child {
                     gap: .7rem;
                     display: none;
-                    animation: notes-animate .3s;
                 }
 
                 & .note {
