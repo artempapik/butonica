@@ -51,11 +51,6 @@ header.onpointerup = e => {
     }
 }
 
-const animations = [
-    { opacity: '1', transform: 'translateY(0)' }, 
-    { opacity: '.3', transform: 'translateY(1.5rem)' }
-]
-
 const showMessage = (type, text) => {
     const typeToColor = {
         error: ['rgba(220, 20, 60, .9)', 'rgb(250, 250, 250)'],
@@ -249,15 +244,13 @@ menuItems.forEach(menuItem => menuItem.onpointerup = () => {
     const expandIcon = menuItem.parentNode.querySelector('.menu-item').children.item(1)
 
     if (submenu.style.display) {
-        const submenuAnimate = submenu.animate(animations, 150)
-        submenuAnimate.onfinish = () => {
-            submenu.style.display = ''
-            expandIcon.innerHTML = 'expand_more'
-        }
-    } else {
-        submenu.style.display = 'flex'
-        expandIcon.innerHTML = 'expand_less'
+        submenu.style.display = ''
+        expandIcon.innerHTML = 'expand_more'
+        return
     }
+
+    submenu.style.display = 'flex'
+    expandIcon.innerHTML = 'expand_less'
 })
 
 const menuItemsContents = {
@@ -1197,8 +1190,7 @@ document.querySelectorAll('.close-modal').forEach(b => b.onpointerup = () => {
         labelModal
     ]) {
         if (modal) {
-            const modalAnimate = modal.querySelector('div').animate(animations, 150)
-            modalAnimate.onfinish = () => hideModal(modal)
+            setTimeout(() => hideModal(modal), 1)
         }
     }
 })
@@ -1222,8 +1214,7 @@ window.onpointerup = e => {
         notesModal
     ]) {
         if (e.target === modal) {
-            const modalAnimate = modal.querySelector(e.target.tagName === 'ASIDE' ? 'ul' : 'div').animate(animations, 150)
-            modalAnimate.onfinish = () => hideModal(modal)
+            setTimeout(() => hideModal(modal), 1)
         }
     }
 }
@@ -1342,24 +1333,7 @@ const login = () => {
 }
 
 const profileInfo = document.querySelector('.profile-info')
-
-const animateProfileInfo = () => {
-    const profileAnimate = profileInfo.animate([
-        { opacity: '1', transform: 'translateY(0)' }, 
-        { opacity: '0', transform: 'translateY(-.6rem)' }
-    ], 200)
-
-    profileAnimate.onfinish = () => profileInfo.style.display = ''
-}
-
-const openProfile = () => {
-    if (profileInfo.style.display === 'flex') {
-        animateProfileInfo()
-        return
-    }
-
-    profileInfo.style.display = 'flex'
-}
+const openProfile = () => profileInfo.style.display = profileInfo.style.display === 'flex' ? '' : 'flex'
 
 document.onscroll = () => profileInfo.style.display = ''
 document.ondblclick = e => e.preventDefault()
@@ -1381,7 +1355,7 @@ document.onpointerup = e => {
         return
     }
 
-    animateProfileInfo()
+    profileInfo.style.display = ''
 }
 
 const logout = () => {
