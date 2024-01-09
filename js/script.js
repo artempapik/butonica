@@ -948,7 +948,7 @@ const menuItemsContents = {
                     <h1>Загальна статистика</h1>
                     <div class="month-filter">
                         <div>за:</div>
-                        <select onchange="getStatisticsValues(event.target.selectedIndex)">
+                        <select onchange="getStatisticsValues()">
                             <option>поточний місяць</option>
                             <option>всі місяці</option>
                             <option>січень</option>
@@ -964,6 +964,13 @@ const menuItemsContents = {
                             <option>листопад</option>
                             <option>грудень</option>
                         </select>
+                        <div class="year-filter">
+                            <select onchange="getStatisticsValues()">
+                                <option>2024</option>
+                                <option>2023</option>
+                            </select>
+                            <div>року</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1014,6 +1021,11 @@ const menuItemsContents = {
                 </span>
             </li>
         </ul>
+        <div class="bar-charts">
+            <canvas id="year-gain-bar-chart"></canvas>
+            <canvas id="year-income-expense-bar-chart"></canvas>
+            <canvas id="year-profitability-line-chart"></canvas>
+        </div>
         <div class="pie-charts">
             <canvas id="expenses-pie-chart"></canvas>
             <canvas id="income-pie-chart"></canvas>
