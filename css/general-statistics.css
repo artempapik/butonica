@@ -45,11 +45,17 @@
 }
 
 .pie-charts {
-    margin-top: 3rem;
+    margin: 3rem 0 1rem 0;
     display: flex;
     flex-wrap: wrap;
     gap: .8rem;
     justify-content: center;
+
+    & canvas {
+        --pie-chart-size: 17rem;
+        height: var(--pie-chart-size) !important;
+        width: var(--pie-chart-size) !important;
+    }
 }
 
 .bar-charts {
@@ -62,12 +68,6 @@
     & canvas {
         box-shadow: rgba(3, 102, 214, .4) 0 0 0 3px;
     }
-}
-
-[id$="pie-chart"] {
-    --pie-chart-size: 17rem;
-    height: var(--pie-chart-size) !important;
-    width: var(--pie-chart-size) !important;
 }
 
 @media screen and (min-width: 1025px) {
