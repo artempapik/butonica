@@ -269,10 +269,6 @@ const updateChartsFontSize = () => {
         yearProfitabilityLineChart
     ]
 
-    if (isMobile) {
-        // barCharts.forEach(c => c.options.responsive = true)
-    }
-
     const setFontSize = (charts, size) => charts.forEach(c => c.options.plugins.title.font.size = size)
 
     setFontSize(pieCharts, 16)
