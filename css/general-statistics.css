@@ -54,7 +54,7 @@
 
 .bar-charts {
     display: none;
-    margin: 3rem 0 1rem 0;
+    margin: 1.5rem 0 1rem 0;
     flex-wrap: wrap;
     gap: 2rem;
     justify-content: center;
@@ -68,6 +68,13 @@
     --pie-chart-size: 17rem;
     height: var(--pie-chart-size) !important;
     width: var(--pie-chart-size) !important;
+}
+
+@media screen and (min-width: 1025px) {
+    .bar-charts canvas {
+        width: 66rem !important;
+        height: 33rem !important;
+    }
 }
 
 @media only screen and (max-width: 700px) and (orientation: portrait) {
