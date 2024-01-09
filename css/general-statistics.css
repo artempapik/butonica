@@ -58,6 +58,10 @@
     flex-wrap: wrap;
     gap: 2rem;
     justify-content: center;
+
+    & canvas {
+        box-shadow: rgba(3, 102, 214, .4) 0 0 0 3px;
+    }
 }
 
 [id$="pie-chart"] {
