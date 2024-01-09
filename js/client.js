@@ -144,7 +144,7 @@ const createClientRow = client => {
                     toggleArrowsVisibility('hidden', 'visible')
                 } else if (index > -1 && index < response.orders.length - 1) {
                     toggleArrowsVisibility('visible', 'visible')
-                } else if (index > response.orders.length - 1) {
+                } else if (index === response.orders.length - 1) {
                     toggleArrowsVisibility('visible', 'hidden')
                 }
 
