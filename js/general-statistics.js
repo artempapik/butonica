@@ -120,7 +120,7 @@ const getChartDatasets = (size, borderWidth) => {
     const datasets = []
 
     for (let i = 0; i < size; i++) {
-        datasets.push({ borderWidth, borderRadius: window.innerWidth <= 900 ? 2 : 5 })
+        datasets.push({ borderWidth, borderRadius: window.innerWidth <= 900 ? 2 : 4 })
     }
 
     return datasets
@@ -133,12 +133,13 @@ const getBarChart = (selector, title, datasetsAmount = 1) => new Chart(document.
         datasets: getChartDatasets(datasetsAmount, 2)
     },
     options: {
+        responsive: isMobile,
         layout: {
             padding: {
-                top: 30,
-                bottom: 30,
-                left: 50,
-                right: 50
+                top: 20,
+                bottom: 20,
+                left: 30,
+                right: 30
             }
         },
         plugins: {
@@ -168,12 +169,13 @@ const getLineChart = (selector, title, datasetsAmount = 1) => new Chart(document
         datasets: getChartDatasets(datasetsAmount, 3)
     },
     options: {
+        responsive: isMobile,
         layout: {
             padding: {
-                top: 30,
-                bottom: 30,
-                left: 50,
-                right: 50
+                top: 20,
+                bottom: 20,
+                left: 30,
+                right: 30
             }
         },
         plugins: {
@@ -266,6 +268,10 @@ const updateChartsFontSize = () => {
         yearIncomeExpenseBarChart,
         yearProfitabilityLineChart
     ]
+
+    if (isMobile) {
+        // barCharts.forEach(c => c.options.responsive = true)
+    }
 
     const setFontSize = (charts, size) => charts.forEach(c => c.options.plugins.title.font.size = size)
 
