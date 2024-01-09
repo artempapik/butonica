@@ -120,7 +120,7 @@ const getChartDatasets = (size, borderWidth) => {
     const datasets = []
 
     for (let i = 0; i < size; i++) {
-        datasets.push({ borderWidth, borderRadius: 5 })
+        datasets.push({ borderWidth, borderRadius: window.innerWidth <= 900 ? 2 : 5 })
     }
 
     return datasets
