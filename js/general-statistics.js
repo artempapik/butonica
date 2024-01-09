@@ -116,11 +116,11 @@ const getStatisticsValues = () => {
     }).catch(() => showMessage('error', getErrorMessage('статистику')))
 }
 
-const getBarChartDatasets = size => {
+const getChartDatasets = (size, borderWidth) => {
     const datasets = []
 
     for (let i = 0; i < size; i++) {
-        datasets.push({ borderWidth: 1 })
+        datasets.push({ borderWidth, borderRadius: 5 })
     }
 
     return datasets
@@ -130,16 +130,23 @@ const getBarChart = (selector, title, datasetsAmount = 1) => new Chart(document.
     type: 'bar',
     data: {
         labels: ['січень', 'лютий', 'березень', 'квітень', 'травень', 'червень', 'липень', 'серпень', 'вересень', 'жовтень', 'листопад', 'грудень'],
-        datasets: getBarChartDatasets(datasetsAmount)
+        datasets: getChartDatasets(datasetsAmount, 2)
     },
     options: {
+        layout: {
+            padding: {
+                top: 30,
+                bottom: 30,
+                left: 50,
+                right: 50
+            }
+        },
         plugins: {
             title: {
                 display: true,
                 text: title,
                 font: {
-                    family: "'Roboto', 'Helvetica', monospace",
-                    size: 24
+                    family: "'Roboto', 'Helvetica', monospace"
                 }
             },
             legend: {
@@ -158,16 +165,23 @@ const getLineChart = (selector, title, datasetsAmount = 1) => new Chart(document
     type: 'line',
     data: {
         labels: ['січень', 'лютий', 'березень', 'квітень', 'травень', 'червень', 'липень', 'серпень', 'вересень', 'жовтень', 'листопад', 'грудень'],
-        datasets: getBarChartDatasets(datasetsAmount)
+        datasets: getChartDatasets(datasetsAmount, 3)
     },
     options: {
+        layout: {
+            padding: {
+                top: 30,
+                bottom: 30,
+                left: 50,
+                right: 50
+            }
+        },
         plugins: {
             title: {
                 display: true,
                 text: title,
                 font: {
-                    family: "'Roboto', 'Helvetica', monospace",
-                    size: 24
+                    family: "'Roboto', 'Helvetica', monospace"
                 }
             },
             legend: {
@@ -189,7 +203,7 @@ const getPieChart = (selector, title, ...labels) => new Chart(document.querySele
         datasets: [
         {
             data: new Array(labels.length).fill(0),
-            borderWidth: 2
+            borderWidth: 3
         }]
     },
     options: {
@@ -198,8 +212,7 @@ const getPieChart = (selector, title, ...labels) => new Chart(document.querySele
                 display: true,
                 text: title,
                 font: {
-                    family: "'Roboto', 'Helvetica', monospace",
-                    size: 16
+                    family: "'Roboto', 'Helvetica', monospace"
                 }
             },
             legend: {
@@ -235,6 +248,38 @@ const showGeneralStatisticsInfo = e => {
 
     get(`Label/${loginInfo.companyId}/ids`).then(response => {
         incomeByLabelPieChart = getPieChart('income-by-label', 'Розподіл доходів по Міткам', ...response)
+        updateChartsFontSize()
         getStatisticsValues()
     })
 }
+
+const updateChartsFontSize = () => {
+    const pieCharts = [
+        expensesPieChart,
+        incomePieChart,
+        expensesIncomePieChart,
+        incomeByLabelPieChart
+    ]
+
+    const barCharts = [
+        yearGainBarChart,
+        yearIncomeExpenseBarChart,
+        yearProfitabilityLineChart
+    ]
+
+    const setFontSize = (charts, size) => charts.forEach(c => c.options.plugins.title.font.size = size)
+
+    setFontSize(pieCharts, 16)
+    setFontSize(barCharts, 24)
+
+    if (window.innerWidth <= 900) {
+        setFontSize(pieCharts, 24)
+        setFontSize(barCharts, 20)
+        barCharts.forEach(c => c.options.layout.padding = null)
+    }
+
+    pieCharts.forEach(c => c.update())
+    barCharts.forEach(c => c.update())
+}
+
+window.onresize = () => updateChartsFontSize()
