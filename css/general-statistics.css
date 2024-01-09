@@ -33,11 +33,31 @@
     }
 }
 
+.statistics-date-filter .year-filter {
+    margin-left: .5rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+
+    & div {
+        font-size: 1rem;
+    }
+}
+
 .pie-charts {
     margin-top: 3rem;
     display: flex;
     flex-wrap: wrap;
-    gap: .2rem;
+    gap: .8rem;
+    justify-content: center;
+}
+
+.bar-charts {
+    display: none;
+    margin: 3rem 0 1rem 0;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
 }
 
 [id$="pie-chart"] {
@@ -59,7 +79,6 @@
     }
 
     .pie-charts {
-        justify-content: center;
         gap: 1.5rem;
     }
 }
