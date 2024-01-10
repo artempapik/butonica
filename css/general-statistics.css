@@ -88,6 +88,12 @@
     }
 }
 
+@media (hover: none) {
+    .bar-charts {
+        align-items: unset;
+    }
+}
+
 @media only screen and (max-width: 700px) and (orientation: portrait) {
     .general-statistics-info li {
         & .stat-title {
