@@ -60,13 +60,23 @@
 
 .bar-charts {
     display: none;
-    margin: 1.7rem 0 1rem 0;
+    margin: 1.2rem 0 1rem 0;
     flex-wrap: wrap;
-    gap: 2rem;
+    gap: 2.5rem;
     justify-content: center;
 
-    & canvas {
-        box-shadow: rgba(3, 102, 214, .4) 0 0 0 3px;
+    & div {
+        padding: .5rem;
+        border: .2rem solid rgba(79, 118, 181, .75);
+        border-radius: 1.5rem;
+        box-shadow: rgba(99, 99, 99, .2) 0 2px 8px 0;
+        transition: .1s;
+        background: var(--white);
+
+        &:hover {
+            border-color: rgb(79, 118, 181);
+            box-shadow: rgba(0, 0, 0, .16) 0 10px 36px 0, rgba(0, 0, 0, .06) 0 0 0 1px;
+        }
     }
 }
 
