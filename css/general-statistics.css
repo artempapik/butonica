@@ -99,15 +99,11 @@
 
 @media only screen and (max-width: 1400px) {
     :root {
-        --pie-chart-size: 19rem;
+        --pie-chart-size: 22rem;
     }
 }
 
 @media only screen and (max-width: 700px) and (orientation: portrait) {
-    :root {
-        --pie-chart-size: 22rem;
-    }
-
     .general-statistics-info li {
         & .stat-title {
             width: 11rem;
