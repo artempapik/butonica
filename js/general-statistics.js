@@ -325,7 +325,7 @@ const updateChartsFontSize = () => {
     setFontSize(pieCharts, 16)
     setFontSize(barCharts, 24)
 
-    if (window.innerWidth <= 900) {
+    if (window.innerWidth <= 1400) {
         setFontSize(pieCharts, 24)
         setFontSize(barCharts, 20)
         barCharts.forEach(c => c.options.layout.padding = null)
