@@ -6,8 +6,12 @@ const getStatisticsValues = () => {
     let month = document.querySelector('.statistics-date-filter .month-filter select').selectedIndex
     const year = document.querySelector('.statistics-date-filter .year-filter select').value
 
+    const pieCharts = document.querySelector('.pie-charts')
+
     if (month === 1) {
         get(`Statistics/general/${loginInfo.companyId}/${year}`).then(response => {
+            pieCharts.style.display = ''
+
             const statValues = document.querySelectorAll('.general-statistics-info .stat-value span:first-child')
             const yearGain = response.reduce((total, current) => total + current.generalNumbers[0], 0)
 
@@ -92,7 +96,7 @@ const getStatisticsValues = () => {
         const statValues = document.querySelectorAll('.general-statistics-info .stat-value span:first-child')
 
         if (response.generalNumbers.every(n => n)) {
-            document.querySelector('.pie-charts').style.display = ''
+            pieCharts.style.display = ''
             const generalNumbers = response.generalNumbers
     
             statValues.item(0).parentNode.classList = `stat-value ${getClassForNumber(generalNumbers[0])}`
@@ -100,7 +104,7 @@ const getStatisticsValues = () => {
             for (let i = 0; i < statValues.length; i++) {
                 statValues.item(i).textContent = (+generalNumbers[i]).toFixed(2)
             }
-            
+
             expensesPieChart.data.datasets[0].data = [generalNumbers[4], generalNumbers[5]]
             expensesPieChart.update()
     
@@ -114,7 +118,7 @@ const getStatisticsValues = () => {
             expensesIncomePieChart.data.datasets[0].data = [generalNumbers[1], generalNumbers[4] + generalNumbers[5]]
             expensesIncomePieChart.update()
         } else {
-            document.querySelector('.pie-charts').style.display = 'none'
+            pieCharts.style.display = 'none'
             statValues.forEach(s => s.textContent = '-')
             statValues.item(0).parentNode.classList = 'stat-value'
             showMessage('info', 'Дані за місяць відсутні')
