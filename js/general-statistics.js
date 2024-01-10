@@ -78,7 +78,7 @@ const getStatisticsValues = () => {
             yearProfitabilityLineChart.data.datasets[0].label = 'рентабельність'
             yearProfitabilityLineChart.data.datasets[0].data = response.map(r => {
                 const expenses = r.generalNumbers[4] + r.generalNumbers[5]
-                return expenses ? r.generalNumbers[1] / expenses : 0
+                return expenses ? r.generalNumbers[1] / expenses : 1
             })
             yearProfitabilityLineChart.update()
 
@@ -149,10 +149,10 @@ const getBarChart = (selector, title, datasetsAmount = 1) => new Chart(document.
         responsive: isMobile,
         layout: {
             padding: {
-                top: 20,
-                bottom: 20,
-                left: 30,
-                right: 30
+                top: 15,
+                bottom: 15,
+                left: 20,
+                right: 20
             }
         },
         plugins: {
@@ -163,13 +163,27 @@ const getBarChart = (selector, title, datasetsAmount = 1) => new Chart(document.
                     family: "'Roboto', 'Helvetica', monospace"
                 }
             },
+            tooltip: {
+                enabled: false
+            },
             legend: {
                 display: false
+            },
+            datalabels: {
+                anchor: 'end',
+                align: 'top',
+                font: {
+                    family: 'monospace, Roboto',
+                    weight: 'bold',
+                    size: 14
+                },
+                formatter: value => value ? value.toFixed(2) : ''
             }
         },
         scales: {
             y: {
-                beginAtZero: true
+                beginAtZero: true,
+                grace: '10%'
             }
         }
     }
@@ -185,10 +199,10 @@ const getLineChart = (selector, title, datasetsAmount = 1) => new Chart(document
         responsive: isMobile,
         layout: {
             padding: {
-                top: 20,
-                bottom: 20,
-                left: 30,
-                right: 30
+                top: 15,
+                bottom: 15,
+                left: 20,
+                right: 20
             }
         },
         plugins: {
@@ -196,16 +210,25 @@ const getLineChart = (selector, title, datasetsAmount = 1) => new Chart(document
                 display: true,
                 text: title,
                 font: {
-                    family: "'Roboto', 'Helvetica', monospace"
+                    family: "Roboto, Helvetica, monospace"
                 }
+            },
+            tooltip: {
+                enabled: false
             },
             legend: {
                 display: false
-            }
-        },
-        scales: {
-            y: {
-                beginAtZero: true
+            },
+            datalabels: {
+                anchor: 'end',
+                align: 'top',
+                font: {
+                    family: 'monospace, Roboto',
+                    weight: 'bold',
+                    size: 14
+                },
+                formatter: value => !value || value === 1 ? '' : (value * 100).toFixed(1) + '%',
+                color: context => context.dataset.data[context.dataIndex] < 1 ? 'rgb(240, 0, 0)' : 'rgb(34, 139, 34)'
             }
         }
     }
@@ -227,7 +250,7 @@ const getPieChart = (selector, title, ...labels) => new Chart(document.querySele
                 display: true,
                 text: title,
                 font: {
-                    family: "'Roboto', 'Helvetica', monospace"
+                    family: "Roboto, Helvetica, monospace"
                 }
             },
             legend: {
@@ -239,11 +262,14 @@ const getPieChart = (selector, title, ...labels) => new Chart(document.querySele
                 callbacks: {
                     footer: tooltip => `${(tooltip[0].parsed * 100 / tooltip[0].dataset.data.reduce((total, current) => total + current, 0)).toFixed(2)}%`
                 }
+            },
+            datalabels: {
+                display: false
             }
         },
         scales: {
             y: {
-                display: false,
+                display: false
             }
         }
     }
@@ -258,7 +284,12 @@ const showGeneralStatisticsInfo = e => {
     expensesIncomePieChart = getPieChart('expenses-income', 'Відношення доходів до витрат', 'всі доходи магазину', 'всі витрати магазину')
 
     yearGainBarChart = getBarChart('year-gain', 'Прибуток за рік')
+    yearGainBarChart.options.plugins.datalabels.color = context => context.dataset.data[context.dataIndex] < 1 ? 'rgb(240, 0, 0)' : 'rgb(34, 139, 34)'
+
     yearIncomeExpenseBarChart = getBarChart('year-income-expense', 'Доходи та витрати за рік', 2)
+    yearIncomeExpenseBarChart.options.plugins.datalabels.font.size = 12
+    yearIncomeExpenseBarChart.options.plugins.legend.display = true
+
     yearProfitabilityLineChart = getLineChart('year-profitability', 'Рентабельність')
 
     get(`Label/${loginInfo.companyId}/ids`).then(response => {
