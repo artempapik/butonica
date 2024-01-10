@@ -183,7 +183,10 @@ const getBarChart = (selector, title, datasetsAmount = 1) => new Chart(document.
         scales: {
             y: {
                 beginAtZero: true,
-                grace: '10%'
+                grace: '10%',
+                ticks: {
+                    padding: 15
+                }
             }
         }
     }
@@ -319,6 +322,13 @@ const updateChartsFontSize = () => {
         yearIncomeExpenseBarChart,
         yearProfitabilityLineChart
     ]
+
+    if (/Android|iPhone/i.test(navigator.userAgent)) {
+        barCharts.forEach(c => {
+            c.options.plugins.datalabels = null
+            c.options.scales.y.ticks.padding = 0
+        })
+    }
 
     const setFontSize = (charts, size) => charts.forEach(c => c.options.plugins.title.font.size = size)
 
