@@ -323,7 +323,7 @@ const updateChartsFontSize = () => {
         yearProfitabilityLineChart
     ]
 
-    if (/Android|iPhone/i.test(navigator.userAgent)) {
+    if (window.innerWidth <= 900) {
         barCharts.forEach(c => {
             c.options.plugins.datalabels = null
             c.options.scales.y.ticks.padding = 0
