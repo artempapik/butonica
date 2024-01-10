@@ -119,7 +119,7 @@ const getStatisticsValues = () => {
             expensesIncomePieChart.update()
         } else {
             pieCharts.style.display = 'none'
-            statValues.forEach(s => s.textContent = '-')
+            statValues.forEach(s => s.textContent = '–')
             statValues.item(0).parentNode.classList = 'stat-value'
             showMessage('info', 'Дані за місяць відсутні')
         }
@@ -133,7 +133,11 @@ const getChartDatasets = (size, borderWidth) => {
     const datasets = []
 
     for (let i = 0; i < size; i++) {
-        datasets.push({ borderWidth, borderRadius: window.innerWidth <= 900 ? 2 : 4, barPercentage: 0.6 })
+        datasets.push({
+            borderWidth,
+            borderRadius: window.innerWidth <= 900 ? 2 : 4,
+            barPercentage: window.innerWidth <= 900 ? 0.9 : 0.6
+        })
     }
 
     return datasets
