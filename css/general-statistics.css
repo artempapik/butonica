@@ -102,4 +102,8 @@
     .pie-charts {
         gap: 1.5rem;
     }
+
+    .bar-charts {
+        flex-direction: column;
+    }
 }
