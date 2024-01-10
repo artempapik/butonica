@@ -196,6 +196,13 @@ const getLineChart = (selector, title, datasetsAmount = 1) => new Chart(document
         datasets: getChartDatasets(datasetsAmount, 3)
     },
     options: {
+        scales:{
+            y: {
+                ticks: {
+                    padding: 15
+                }
+            }
+        },
         responsive: isMobile,
         layout: {
             padding: {
