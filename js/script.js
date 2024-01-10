@@ -1022,9 +1022,15 @@ const menuItemsContents = {
             </li>
         </ul>
         <div class="bar-charts">
-            <canvas id="year-gain-bar-chart"></canvas>
-            <canvas id="year-income-expense-bar-chart"></canvas>
-            <canvas id="year-profitability-line-chart"></canvas>
+            <div>
+                <canvas id="year-gain-bar-chart"></canvas>
+            </div>
+            <div>
+                <canvas id="year-income-expense-bar-chart"></canvas>
+            </div>
+            <div>
+                <canvas id="year-profitability-line-chart"></canvas>
+            </div>
         </div>
         <div class="pie-charts">
             <canvas id="expenses-pie-chart"></canvas>
