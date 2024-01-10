@@ -90,26 +90,35 @@ const getStatisticsValues = () => {
 
     get(`Statistics/general/${loginInfo.companyId}/${year}/${month || new Date().getMonth() + 1}`).then(response => {
         const statValues = document.querySelectorAll('.general-statistics-info .stat-value span:first-child')
-        const generalNumbers = response.generalNumbers
 
-        statValues.item(0).parentNode.classList = `stat-value ${getClassForNumber(generalNumbers[0])}`
-
-        for (let i = 0; i < statValues.length; i++) {
-            statValues.item(i).textContent = (+generalNumbers[i]).toFixed(2)
+        if (response.generalNumbers.every(n => n)) {
+            document.querySelector('.pie-charts').style.display = ''
+            const generalNumbers = response.generalNumbers
+    
+            statValues.item(0).parentNode.classList = `stat-value ${getClassForNumber(generalNumbers[0])}`
+    
+            for (let i = 0; i < statValues.length; i++) {
+                statValues.item(i).textContent = (+generalNumbers[i]).toFixed(2)
+            }
+            
+            expensesPieChart.data.datasets[0].data = [generalNumbers[4], generalNumbers[5]]
+            expensesPieChart.update()
+    
+            incomePieChart.data.datasets[0].data = [generalNumbers[2], generalNumbers[3]]
+            incomePieChart.update()
+    
+            incomeByLabelPieChart.data.labels = response.internetOrdersIncomeByLabel.map(o => o.labelName || 'Без мітки')
+            incomeByLabelPieChart.data.datasets[0].data = response.internetOrdersIncomeByLabel.map(o => o.totalSum)
+            incomeByLabelPieChart.update()
+    
+            expensesIncomePieChart.data.datasets[0].data = [generalNumbers[1], generalNumbers[4] + generalNumbers[5]]
+            expensesIncomePieChart.update()
+        } else {
+            document.querySelector('.pie-charts').style.display = 'none'
+            statValues.forEach(s => s.textContent = '-')
+            statValues.item(0).parentNode.classList = 'stat-value'
+            showMessage('info', 'Дані за місяць відсутні')
         }
-
-        expensesPieChart.data.datasets[0].data = [generalNumbers[4], generalNumbers[5]]
-        expensesPieChart.update()
-
-        incomePieChart.data.datasets[0].data = [generalNumbers[2], generalNumbers[3]]
-        incomePieChart.update()
-
-        incomeByLabelPieChart.data.labels = response.internetOrdersIncomeByLabel.map(o => o.labelName || 'Без мітки')
-        incomeByLabelPieChart.data.datasets[0].data = response.internetOrdersIncomeByLabel.map(o => o.totalSum)
-        incomeByLabelPieChart.update()
-
-        expensesIncomePieChart.data.datasets[0].data = [generalNumbers[1], generalNumbers[4] + generalNumbers[5]]
-        expensesIncomePieChart.update()
 
         document.querySelector('.bar-charts').style.display = ''
         replaceLoadIcons()
