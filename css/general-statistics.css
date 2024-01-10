@@ -62,7 +62,7 @@
 }
 
 .pie-charts {
-    margin: 3rem 0 1rem 0;
+    margin: 4rem 0 1rem 0;
     display: flex;
     flex-wrap: wrap;
     gap: .8rem;
@@ -76,7 +76,7 @@
 
 .bar-charts {
     display: none;
-    margin: 1.5rem 0 1rem 0;
+    margin-top: 1.4rem;
     flex-wrap: wrap;
     gap: 2.5rem;
     align-items: center;
