@@ -1,3 +1,7 @@
+:root {
+    --pie-chart-size: 17rem;
+}
+
 .general-statistics-info {
     display: flex;
     flex-direction: column;
@@ -52,7 +56,6 @@
     justify-content: center;
 
     & canvas {
-        --pie-chart-size: 17rem;
         height: var(--pie-chart-size) !important;
         width: var(--pie-chart-size) !important;
     }
@@ -94,7 +97,17 @@
     }
 }
 
+@media only screen and (max-width: 1400px) {
+    :root {
+        --pie-chart-size: 16rem;
+    }
+}
+
 @media only screen and (max-width: 700px) and (orientation: portrait) {
+    :root {
+        --pie-chart-size: 20rem;
+    }
+
     .general-statistics-info li {
         & .stat-title {
             width: 11rem;
@@ -108,5 +121,14 @@
 
     .pie-charts {
         gap: 1.5rem;
+    }
+
+    .bar-charts {
+        gap: 1.5rem;
+
+        & div {
+            padding: .2rem;
+            border-width: .1rem;
+        }
     }
 }
