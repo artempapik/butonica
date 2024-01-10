@@ -129,12 +129,12 @@ const getStatisticsValues = () => {
     }).catch(() => showMessage('error', getErrorMessage('статистику')))
 }
 
-const getChartDatasets = (size, borderWidth) => {
+const getChartDatasets = size => {
     const datasets = []
 
     for (let i = 0; i < size; i++) {
         datasets.push({
-            borderWidth,
+            borderWidth: 2,
             borderRadius: window.innerWidth <= 900 ? 2 : 4,
             barPercentage: window.innerWidth <= 900 ? 0.9 : 0.6
         })
@@ -147,7 +147,7 @@ const getBarChart = (selector, title, datasetsAmount = 1) => new Chart(document.
     type: 'bar',
     data: {
         labels: ['січень', 'лютий', 'березень', 'квітень', 'травень', 'червень', 'липень', 'серпень', 'вересень', 'жовтень', 'листопад', 'грудень'],
-        datasets: getChartDatasets(datasetsAmount, 2)
+        datasets: getChartDatasets(datasetsAmount)
     },
     options: {
         responsive: isMobile,
@@ -200,7 +200,7 @@ const getLineChart = (selector, title, datasetsAmount = 1) => new Chart(document
     type: 'line',
     data: {
         labels: ['січень', 'лютий', 'березень', 'квітень', 'травень', 'червень', 'липень', 'серпень', 'вересень', 'жовтень', 'листопад', 'грудень'],
-        datasets: getChartDatasets(datasetsAmount, 3)
+        datasets: getChartDatasets(datasetsAmount)
     },
     options: {
         scales: {
