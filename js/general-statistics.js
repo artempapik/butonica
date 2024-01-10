@@ -143,7 +143,7 @@ const getBarChart = (selector, title, datasetsAmount = 1) => new Chart(document.
     type: 'bar',
     data: {
         labels: ['січень', 'лютий', 'березень', 'квітень', 'травень', 'червень', 'липень', 'серпень', 'вересень', 'жовтень', 'листопад', 'грудень'],
-        datasets: getChartDatasets(datasetsAmount, 2),
+        datasets: getChartDatasets(datasetsAmount, 2)
     },
     options: {
         responsive: isMobile,
