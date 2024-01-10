@@ -977,7 +977,7 @@ const menuItemsContents = {
         </div>
         <ul class="general-statistics-info">
             <li>
-                <span class="stat-title">Прибуток:</span>
+                <span class="stat-title gain">Прибуток:</span>
                 <span class="stat-value">
                     <span></span>
                     <span>грн</span>
