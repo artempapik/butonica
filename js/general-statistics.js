@@ -248,7 +248,7 @@ const getLineChart = (selector, title, datasetsAmount = 1) => new Chart(document
     }
 })
 
-const getPieChart = (selector, title, isTooltipEnabled, ...labels) => new Chart(document.querySelector(`#${selector}-pie-chart`), {
+const getPieChart = (selector, title, ...labels) => new Chart(document.querySelector(`#${selector}-pie-chart`), {
     type: 'pie',
     data: {
         labels,
@@ -264,14 +264,14 @@ const getPieChart = (selector, title, isTooltipEnabled, ...labels) => new Chart(
                 display: true,
                 text: title,
                 font: {
-                    family: "Roboto, Helvetica, monospace"
+                    family: "Roboto, Helvetica, monospace, 'SF Mono'"
                 }
             },
             legend: {
                 position: 'bottom'
             },
             tooltip: {
-                enabled: isTooltipEnabled,
+                enabled: true,
                 callbacks: {
                     footer: tooltip => `${(tooltip[0].parsed * 100 / tooltip[0].dataset.data.reduce((total, current) => total + current, 0)).toFixed(2)}%`
                 }
@@ -298,9 +298,9 @@ const showGeneralStatisticsInfo = e => {
     fillSelectedMenuItem(e)
     main.innerHTML = menuItemsContents['generalstatistics']
 
-    expensesPieChart = getPieChart('expenses', 'Розподіл витрат', false, 'витрати магазину', 'витрати на товар')
-    incomePieChart = getPieChart('income', 'Розподіл доходів по Продажам', false, 'продажі на магазині', 'інтернет-замовлення')
-    expensesIncomePieChart = getPieChart('expenses-income', 'Відношення доходів до витрат', false, 'всі доходи магазину', 'всі витрати магазину')
+    expensesPieChart = getPieChart('expenses', 'Розподіл витрат', 'витрати магазину', 'витрати на товар')
+    incomePieChart = getPieChart('income', 'Розподіл доходів по Продажам', 'продажі на магазині', 'інтернет-замовлення')
+    expensesIncomePieChart = getPieChart('expenses-income', 'Відношення доходів до витрат', 'всі доходи магазину', 'всі витрати магазину')
 
     yearGainBarChart = getBarChart('year-gain', 'Прибуток за рік')
     yearGainBarChart.options.plugins.datalabels.color = context => context.dataset.data[context.dataIndex] < 1 ? 'rgb(240, 0, 0)' : 'rgb(34, 139, 34)'
@@ -312,7 +312,7 @@ const showGeneralStatisticsInfo = e => {
     yearProfitabilityLineChart = getLineChart('year-profitability', 'Рентабельність')
 
     get(`Label/${loginInfo.companyId}/ids`).then(response => {
-        incomeByLabelPieChart = getPieChart('income-by-label', 'Розподіл доходів по Міткам', true, ...response)
+        incomeByLabelPieChart = getPieChart('income-by-label', 'Розподіл доходів по Міткам', ...response)
         incomeByLabelPieChart.options.plugins.datalabels = null
         updateChartsFontSize()
         getStatisticsValues()
