@@ -305,7 +305,7 @@ const getPieChart = (selector, title, size) => new Chart(document.querySelector(
                 position: 'bottom',
                 labels: {
                     font: {
-                        size: 13
+                        size: !isMobile && window.innerWidth <= 1500 ? 36 : 13
                     }
                 }
             },
@@ -316,7 +316,7 @@ const getPieChart = (selector, title, size) => new Chart(document.querySelector(
                 font: {
                     family: "monospace, 'SF Mono', Roboto",
                     weight: 'bold',
-                    size: !isMobile && window.innerWidth <= 1500 ? 56 : 14
+                    size: !isMobile && window.innerWidth <= 1500 ? 48 : 14
                 },
                 formatter: value => value.toFixed(0),
                 color: 'rgb(240, 240, 240)'
