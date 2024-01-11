@@ -355,7 +355,7 @@ const updateChartsFontSize = () => {
     setFontSize(barCharts, 24)
 
     if (window.innerWidth <= 1500) {
-        setFontSize(pieCharts, 32)
+        setFontSize(pieCharts, 38)
     }
 
     if (isMobile) {
