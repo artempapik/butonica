@@ -101,7 +101,7 @@
     }
 }
 
-@media only screen and (max-width: 1400px) {
+@media only screen and (max-width: 1500px) {
     :root {
         --pie-chart-size: 14.5rem;
     }
@@ -143,11 +143,12 @@
 
     .general-statistics-info {
         flex-direction: column;
+        padding: 1.5rem;
         gap: 1.5rem;
 
         & li {            
             & .stat-title {
-                width: 11rem;
+                width: 12rem;
                 font-size: 1.1rem;
             }
     
