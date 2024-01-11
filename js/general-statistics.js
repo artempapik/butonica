@@ -15,10 +15,10 @@ const getStatisticsValues = () => {
             const statValues = document.querySelectorAll('.general-statistics-info .stat-value span:first-child')
             const yearGain = response.reduce((total, current) => total + current.generalNumbers[0], 0)
 
-            statValues.item(0).parentNode.classList = `stat-value ${getClassForNumber(yearGain)}`
+            statValues.item(0).parentNode.classList = `stat-value gain ${getClassForNumber(yearGain)}`
     
             for (let i = 0; i < statValues.length; i++) {
-                statValues.item(i).textContent = (response.reduce((total, current) => total + current.generalNumbers[i], 0)).toFixed(2)
+                statValues.item(i).textContent = (response.reduce((total, current) => total + current.generalNumbers[i], 0)).toFixed(0)
             }
             
             expensesPieChart.data.datasets[0].data = [
@@ -99,10 +99,10 @@ const getStatisticsValues = () => {
             pieCharts.style.display = ''
             const generalNumbers = response.generalNumbers
     
-            statValues.item(0).parentNode.classList = `stat-value ${getClassForNumber(generalNumbers[0])}`
+            statValues.item(0).parentNode.classList = `stat-value gain ${getClassForNumber(generalNumbers[0])}`
     
             for (let i = 0; i < statValues.length; i++) {
-                statValues.item(i).textContent = (+generalNumbers[i]).toFixed(2)
+                statValues.item(i).textContent = (+generalNumbers[i]).toFixed(0)
             }
 
             expensesPieChart.data.datasets[0].data = [generalNumbers[4], generalNumbers[5]]
@@ -120,7 +120,7 @@ const getStatisticsValues = () => {
         } else {
             pieCharts.style.display = 'none'
             statValues.forEach(s => s.textContent = '–')
-            statValues.item(0).parentNode.classList = 'stat-value'
+            statValues.item(0).parentNode.classList = 'stat-value gain'
             showMessage('info', 'Дані за місяць відсутні')
         }
 
@@ -177,7 +177,7 @@ const getBarChart = (selector, title, datasetsAmount = 1) => new Chart(document.
                 anchor: 'end',
                 align: 'top',
                 font: {
-                    family: 'monospace, Roboto',
+                    family: "monospace, 'SF Mono', Roboto",
                     weight: 'bold',
                     size: 14
                 },
@@ -237,7 +237,7 @@ const getLineChart = (selector, title, datasetsAmount = 1) => new Chart(document
                 anchor: 'end',
                 align: 'top',
                 font: {
-                    family: 'monospace, Roboto',
+                    family: "monospace, 'SF Mono', Roboto",
                     weight: 'bold',
                     size: 14
                 },
@@ -248,7 +248,7 @@ const getLineChart = (selector, title, datasetsAmount = 1) => new Chart(document
     }
 })
 
-const getPieChart = (selector, title, ...labels) => new Chart(document.querySelector(`#${selector}-pie-chart`), {
+const getPieChart = (selector, title, isTooltipEnabled, ...labels) => new Chart(document.querySelector(`#${selector}-pie-chart`), {
     type: 'pie',
     data: {
         labels,
@@ -268,17 +268,22 @@ const getPieChart = (selector, title, ...labels) => new Chart(document.querySele
                 }
             },
             legend: {
-                position: 'bottom',
-                align: 'start'
+                position: 'bottom'
             },
             tooltip: {
-                enabled: true,
+                enabled: isTooltipEnabled,
                 callbacks: {
                     footer: tooltip => `${(tooltip[0].parsed * 100 / tooltip[0].dataset.data.reduce((total, current) => total + current, 0)).toFixed(2)}%`
                 }
             },
             datalabels: {
-                display: false
+                font: {
+                    family: "monospace, 'SF Mono', Roboto",
+                    weight: 'bold',
+                    size: 14
+                },
+                formatter: value => value.toFixed(0) + (isMobile ? '' : ' грн'),
+                color: 'rgb(240, 240, 240)'
             }
         },
         scales: {
@@ -293,9 +298,9 @@ const showGeneralStatisticsInfo = e => {
     fillSelectedMenuItem(e)
     main.innerHTML = menuItemsContents['generalstatistics']
 
-    expensesPieChart = getPieChart('expenses', 'Розподіл витрат', 'витрати магазину', 'витрати на товар')
-    incomePieChart = getPieChart('income', 'Розподіл доходів по Продажам', 'продажі', 'інтернет-замовлення')
-    expensesIncomePieChart = getPieChart('expenses-income', 'Відношення доходів до витрат', 'всі доходи магазину', 'всі витрати магазину')
+    expensesPieChart = getPieChart('expenses', 'Розподіл витрат', false, 'витрати магазину', 'витрати на товар')
+    incomePieChart = getPieChart('income', 'Розподіл доходів по Продажам', false, 'продажі на магазині', 'інтернет-замовлення')
+    expensesIncomePieChart = getPieChart('expenses-income', 'Відношення доходів до витрат', false, 'всі доходи магазину', 'всі витрати магазину')
 
     yearGainBarChart = getBarChart('year-gain', 'Прибуток за рік')
     yearGainBarChart.options.plugins.datalabels.color = context => context.dataset.data[context.dataIndex] < 1 ? 'rgb(240, 0, 0)' : 'rgb(34, 139, 34)'
@@ -307,7 +312,8 @@ const showGeneralStatisticsInfo = e => {
     yearProfitabilityLineChart = getLineChart('year-profitability', 'Рентабельність')
 
     get(`Label/${loginInfo.companyId}/ids`).then(response => {
-        incomeByLabelPieChart = getPieChart('income-by-label', 'Розподіл доходів по Міткам', ...response)
+        incomeByLabelPieChart = getPieChart('income-by-label', 'Розподіл доходів по Міткам', true, ...response)
+        incomeByLabelPieChart.options.plugins.datalabels = null
         updateChartsFontSize()
         getStatisticsValues()
     })
@@ -336,18 +342,18 @@ const updateChartsFontSize = () => {
 
     const setFontSize = (charts, size) => charts.forEach(c => c.options.plugins.title.font.size = size)
 
-    setFontSize(pieCharts, 16)
+    setFontSize(pieCharts, 18)
     setFontSize(barCharts, 24)
 
     if (isMobile) {
         if (window.innerWidth <= 1400) {
-            setFontSize(pieCharts, 32)
+            setFontSize(pieCharts, 28)
             setFontSize(barCharts, 28)
             barCharts.forEach(c => c.options.layout.padding = null)
         }
 
         if (window.innerWidth <= 900) {
-            setFontSize(pieCharts, 24)
+            setFontSize(pieCharts, 20)
             setFontSize(barCharts, 20)
         }
     }
