@@ -21,12 +21,22 @@ const getStatisticsValues = () => {
                 statValues.item(i).textContent = (response.reduce((total, current) => total + current.generalNumbers[i], 0)).toFixed(0)
             }
             
+            expensesPieChart.data.labels = ['продажі на магазині', 'інтернет-замовлення'].map((l, i) => {
+                const current = response.reduce((total, current) => total + current.generalNumbers[i + 4], 0)
+                const total = response.reduce((total, current) => total + current.generalNumbers[4], 0) + response.reduce((total, current) => total + current.generalNumbers[5], 0)
+                return `${l} (${(current / total * 100).toFixed(2)}%)`
+            })
             expensesPieChart.data.datasets[0].data = [
                 response.reduce((total, current) => total + current.generalNumbers[4], 0),
                 response.reduce((total, current) => total + current.generalNumbers[5], 0)
             ]
             expensesPieChart.update()
-    
+
+            incomePieChart.data.labels = ['продажі на магазині', 'інтернет-замовлення'].map((l, i) => {
+                const current = response.reduce((total, current) => total + current.generalNumbers[i + 2], 0)
+                const total = response.reduce((total, current) => total + current.generalNumbers[2], 0) + response.reduce((total, current) => total + current.generalNumbers[3], 0)
+                return `${l} (${(current / total * 100).toFixed(2)}%)`
+            })
             incomePieChart.data.datasets[0].data = [
                 response.reduce((total, current) => total + current.generalNumbers[2], 0),
                 response.reduce((total, current) => total + current.generalNumbers[3], 0)
@@ -53,10 +63,20 @@ const getStatisticsValues = () => {
                 }
             }
 
-            incomeByLabelPieChart.data.labels = labelsIncome.map(l => l.name || 'Без мітки')
+            const labelsIncomeTotal = labelsIncome.reduce((total, current) => total + current.income, 0)
+
+            incomeByLabelPieChart.data.labels = labelsIncome.map(l => `${(l.name || 'Без мітки')} (${l.income} – ${(l.income / labelsIncomeTotal * 100).toFixed(2)}%)`)
             incomeByLabelPieChart.data.datasets[0].data = labelsIncome.map(l => l.income)
             incomeByLabelPieChart.update()
-    
+
+            const allExpensesIncome =
+                response.reduce((total, current) => total + current.generalNumbers[1], 0) +
+                response.reduce((total, current) => total + current.generalNumbers[4], 0) + response.reduce((total, current) => total + current.generalNumbers[5], 0)
+
+            expensesIncomePieChart.data.labels = [
+                `всі доходи (${(response.reduce((total, current) => total + current.generalNumbers[1], 0) / allExpensesIncome * 100).toFixed(2)}%)`,
+                `всі витрати (${((response.reduce((total, current) => total + current.generalNumbers[4], 0) + response.reduce((total, current) => total + current.generalNumbers[5], 0)) / allExpensesIncome * 100).toFixed(2)}%)`
+            ]
             expensesIncomePieChart.data.datasets[0].data = [
                 response.reduce((total, current) => total + current.generalNumbers[1], 0),
                 response.reduce((total, current) => total + current.generalNumbers[4], 0) + response.reduce((total, current) => total + current.generalNumbers[5], 0)
@@ -105,17 +125,32 @@ const getStatisticsValues = () => {
                 statValues.item(i).textContent = (+generalNumbers[i]).toFixed(0)
             }
 
+            const totalExpenses = generalNumbers[4] + generalNumbers[5]
+
+            expensesPieChart.data.labels = ['витрати магазину', 'витрати на товар'].map((l, i) => `${l} (${(generalNumbers[i + 4] / totalExpenses * 100).toFixed(2)}%)`)
             expensesPieChart.data.datasets[0].data = [generalNumbers[4], generalNumbers[5]]
             expensesPieChart.update()
-    
+
+            incomePieChart.data.labels = ['продажі на магазині', 'інтернет-замовлення'].map((l, i) => `${l} (${(generalNumbers[i + 2] / generalNumbers[1] * 100).toFixed(2)}%)`)
             incomePieChart.data.datasets[0].data = [generalNumbers[2], generalNumbers[3]]
             incomePieChart.update()
+
+            const internetOrdersIncome = response.internetOrdersIncomeByLabel.reduce((total, current) => total + current.totalSum, 0)
     
-            incomeByLabelPieChart.data.labels = response.internetOrdersIncomeByLabel.map(o => o.labelName || 'Без мітки')
+            incomeByLabelPieChart.data.labels = response.internetOrdersIncomeByLabel.map((o, index) => {
+                const totalSum = response.internetOrdersIncomeByLabel[index].totalSum
+                return `${(o.labelName || 'Без мітки')} (${totalSum} – ${(totalSum / internetOrdersIncome * 100).toFixed(2)}%)`
+            })
             incomeByLabelPieChart.data.datasets[0].data = response.internetOrdersIncomeByLabel.map(o => o.totalSum)
             incomeByLabelPieChart.update()
-    
-            expensesIncomePieChart.data.datasets[0].data = [generalNumbers[1], generalNumbers[4] + generalNumbers[5]]
+
+            const expensesIncome = generalNumbers[1] + totalExpenses
+
+            expensesIncomePieChart.data.labels = [
+                `всі доходи (${(generalNumbers[1] / expensesIncome * 100).toFixed(2)}%)`,
+                `всі витрати (${(totalExpenses / expensesIncome * 100).toFixed(2)}%)`
+            ]
+            expensesIncomePieChart.data.datasets[0].data = [generalNumbers[1], totalExpenses]
             expensesIncomePieChart.update()
         } else {
             pieCharts.style.display = 'none'
@@ -248,13 +283,12 @@ const getLineChart = (selector, title, datasetsAmount = 1) => new Chart(document
     }
 })
 
-const getPieChart = (selector, title, ...labels) => new Chart(document.querySelector(`#${selector}-pie-chart`), {
+const getPieChart = (selector, title, size) => new Chart(document.querySelector(`#${selector}-pie-chart`), {
     type: 'pie',
     data: {
-        labels,
         datasets: [
         {
-            data: new Array(labels.length).fill(0),
+            data: new Array(size).fill(0),
             borderWidth: 3
         }]
     },
@@ -268,30 +302,23 @@ const getPieChart = (selector, title, ...labels) => new Chart(document.querySele
                 }
             },
             legend: {
-                position: 'bottom'
+                position: 'bottom',
+                labels: {
+                    font: {
+                        size: 13
+                    }
+                }
             },
             tooltip: {
-                enabled: true,
-                callbacks: {
-                    footer: tooltip => `${(tooltip[0].parsed * 100 / tooltip[0].dataset.data.reduce((total, current) => total + current, 0)).toFixed(2)}%`
-                },
-                titleFont: {
-                    size: window.innerWidth <= 1500 ? 28 : 14
-                },
-                bodyFont: {
-                    size: window.innerWidth <= 1500 ? 28 : 14
-                },
-                footerFont: {
-                    size: window.innerWidth <= 1500 ? 28 : 14
-                }
+                enabled: false
             },
             datalabels: {
                 font: {
                     family: "monospace, 'SF Mono', Roboto",
                     weight: 'bold',
-                    size: !isMobile && window.innerWidth <= 1500 ? 24 : 14
+                    size: !isMobile && window.innerWidth <= 1500 ? 56 : 14
                 },
-                formatter: value => value.toFixed(0) + (isMobile || (!isMobile && window.innerWidth <= 1500) ? '' : ' грн'),
+                formatter: value => value.toFixed(0),
                 color: 'rgb(240, 240, 240)'
             }
         },
@@ -307,9 +334,9 @@ const showGeneralStatisticsInfo = e => {
     fillSelectedMenuItem(e)
     main.innerHTML = menuItemsContents['generalstatistics']
 
-    expensesPieChart = getPieChart('expenses', 'Розподіл витрат', 'витрати магазину', 'витрати на товар')
-    incomePieChart = getPieChart('income', 'Розподіл доходів по Продажам', 'продажі на магазині', 'інтернет-замовлення')
-    expensesIncomePieChart = getPieChart('expenses-income', 'Відношення доходів до витрат', 'всі доходи магазину', 'всі витрати магазину')
+    expensesPieChart = getPieChart('expenses', 'Розподіл витрат', 2)
+    incomePieChart = getPieChart('income', 'Розподіл доходів по Продажам', 2)
+    expensesIncomePieChart = getPieChart('expenses-income', 'Відношення доходів до витрат', 2)
 
     yearGainBarChart = getBarChart('year-gain', 'Прибуток за рік')
     yearGainBarChart.options.plugins.datalabels.color = context => context.dataset.data[context.dataIndex] < 1 ? 'rgb(240, 0, 0)' : 'rgb(34, 139, 34)'
@@ -321,7 +348,7 @@ const showGeneralStatisticsInfo = e => {
     yearProfitabilityLineChart = getLineChart('year-profitability', 'Рентабельність')
 
     get(`Label/${loginInfo.companyId}/ids`).then(response => {
-        incomeByLabelPieChart = getPieChart('income-by-label', 'Розподіл доходів по Міткам', ...response)
+        incomeByLabelPieChart = getPieChart('income-by-label', 'Розподіл доходів по Міткам', response.length)
         incomeByLabelPieChart.options.plugins.datalabels = null
         updateChartsFontSize()
         getStatisticsValues()
