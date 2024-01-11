@@ -978,7 +978,7 @@ const menuItemsContents = {
         <ul class="general-statistics-info">
             <li>
                 <span class="stat-title gain">Прибуток:</span>
-                <span class="stat-value">
+                <span class="stat-value gain">
                     <span></span>
                     <span>грн</span>
                 </span>
@@ -1021,6 +1021,12 @@ const menuItemsContents = {
                 </span>
             </li>
         </ul>
+        <div class="pie-charts">
+            <canvas id="income-by-label-pie-chart"></canvas>
+            <canvas id="income-pie-chart"></canvas>
+            <canvas id="expenses-pie-chart"></canvas>
+            <canvas id="expenses-income-pie-chart"></canvas>
+        </div>
         <div class="bar-charts">
             <div>
                 <canvas id="year-gain-bar-chart"></canvas>
@@ -1031,12 +1037,6 @@ const menuItemsContents = {
             <div>
                 <canvas id="year-profitability-line-chart"></canvas>
             </div>
-        </div>
-        <div class="pie-charts">
-            <canvas id="expenses-pie-chart"></canvas>
-            <canvas id="income-pie-chart"></canvas>
-            <canvas id="income-by-label-pie-chart"></canvas>
-            <canvas id="expenses-income-pie-chart"></canvas>
         </div>
     `
 }
