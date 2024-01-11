@@ -344,7 +344,7 @@ const getPieChart = (selector, title, size) => new Chart(document.querySelector(
                     size: getPieChartFontSize(42, 28, 14)
                 },
                 formatter: value => value.toFixed(0),
-                color: context => context.dataIndex ? 'rgb(250, 250, 250)' : 'rgb(60, 60, 60)'
+                color: context => context.dataIndex ? 'rgb(250, 250, 250)' : 'rgb(50, 50, 50)'
             }
         },
         scales: {
