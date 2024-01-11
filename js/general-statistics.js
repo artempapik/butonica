@@ -280,7 +280,7 @@ const getPieChart = (selector, title, ...labels) => new Chart(document.querySele
                 font: {
                     family: "monospace, 'SF Mono', Roboto",
                     weight: 'bold',
-                    size: !isMobile && window.innerWidth <= 1500 ? 20 : 14
+                    size: !isMobile && window.innerWidth <= 1500 ? 24 : 14
                 },
                 formatter: value => value.toFixed(0) + (isMobile || (!isMobile && window.innerWidth <= 1500) ? '' : ' грн'),
                 color: 'rgb(240, 240, 240)'
@@ -347,7 +347,7 @@ const updateChartsFontSize = () => {
 
     if (isMobile) {
         if (window.innerWidth <= 1500) {
-            setFontSize(pieCharts, 24)
+            setFontSize(pieCharts, 32)
         }
 
         if (window.innerWidth <= 1400) {
