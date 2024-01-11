@@ -103,7 +103,7 @@
 
 @media only screen and (max-width: 1500px) {
     :root {
-        --pie-chart-size: 20rem;
+        --pie-chart-size: 22rem;
     }
 
     .general-statistics-info {
@@ -142,10 +142,6 @@
 }
 
 @media only screen and (max-width: 700px) and (orientation: portrait) {
-    :root {
-        --pie-chart-size: 22rem;
-    }
-
     .general-statistics-info {
         flex-direction: column;
         padding: 1.5rem;
