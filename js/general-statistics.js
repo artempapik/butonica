@@ -280,7 +280,7 @@ const getPieChart = (selector, title, isTooltipEnabled, ...labels) => new Chart(
                 font: {
                     family: "monospace, 'SF Mono', Roboto",
                     weight: 'bold',
-                    size: !isMobile && window.innerWidth <= 1500 ? 16 : 14
+                    size: !isMobile && window.innerWidth <= 1500 ? 15 : 14
                 },
                 formatter: value => value.toFixed(0) + (isMobile || (!isMobile && window.innerWidth <= 1500) ? '' : ' грн'),
                 color: 'rgb(240, 240, 240)'
