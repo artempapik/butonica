@@ -274,6 +274,15 @@ const getPieChart = (selector, title, ...labels) => new Chart(document.querySele
                 enabled: true,
                 callbacks: {
                     footer: tooltip => `${(tooltip[0].parsed * 100 / tooltip[0].dataset.data.reduce((total, current) => total + current, 0)).toFixed(2)}%`
+                },
+                titleFont: {
+                    size: window.innerWidth <= 1500 ? 28 : 14
+                },
+                bodyFont: {
+                    size: window.innerWidth <= 1500 ? 28 : 14
+                },
+                footerFont: {
+                    size: window.innerWidth <= 1500 ? 28 : 14
                 }
             },
             datalabels: {
