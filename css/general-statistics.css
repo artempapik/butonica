@@ -5,7 +5,7 @@
 .general-statistics-info {
     display: flex;
     justify-content: space-between;
-    background: rgba(79, 118, 181, .12);
+    background: rgba(79, 118, 181, .1);
     gap: 1rem;
     padding: 1.5rem;
     border-radius: 1.1rem;
@@ -18,7 +18,7 @@
 
         & .stat-title {
             font-size: 1.2rem;
-            color: rgb(70, 70, 70);
+            color: rgb(80, 80, 80);
             font-weight: bold;
 
             &.gain {
@@ -76,15 +76,15 @@
 
     & div {
         padding: .5rem;
-        border: .2rem solid rgba(79, 118, 181, .75);
+        border: .2rem solid rgb(100, 100, 100);
         border-radius: 1.5rem;
         box-shadow: rgba(99, 99, 99, .2) 0 2px 8px 0;
         transition: .1s;
         background: var(--white);
 
         &:hover {
-            border-color: rgb(79, 118, 181);
-            box-shadow: rgba(0, 0, 0, .16) 0 10px 36px 0, rgba(0, 0, 0, .06) 0 0 0 1px;
+            border-color: rgba(68, 33, 175, .6);
+            box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
         }
     }
 }
@@ -144,7 +144,7 @@
 
 @media only screen and (max-width: 900px) {
     :root {
-        --pie-chart-size: 22rem;
+        --pie-chart-size: 18rem;
     }
 
     .general-statistics-info {
@@ -180,5 +180,11 @@
             padding: .2rem;
             border-width: .1rem;
         }
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    :root {
+        --pie-chart-size: 22rem;
     }
 }
