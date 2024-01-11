@@ -103,7 +103,7 @@
 
 @media only screen and (max-width: 1500px) {
     :root {
-        --pie-chart-size: 14.5rem;
+        --pie-chart-size: 20rem;
     }
 
     .general-statistics-info {
@@ -133,6 +133,11 @@
                 }
             }
         }
+    }
+
+    .pie-charts {
+        justify-content: center;
+        gap: 2rem;
     }
 }
 
