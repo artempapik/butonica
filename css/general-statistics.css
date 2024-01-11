@@ -22,6 +22,7 @@
             font-weight: bold;
 
             &.gain {
+                text-decoration: underline;
                 font-size: 1.3rem;
                 color: rgb(0, 0, 0);
             }
@@ -147,6 +148,7 @@
     }
 
     .general-statistics-info {
+        align-self: center;
         flex-direction: column;
         padding: 1.5rem;
         gap: 1.5rem;
