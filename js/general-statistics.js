@@ -164,14 +164,17 @@ const getStatisticsValues = () => {
     }).catch(() => showMessage('error', getErrorMessage('статистику')))
 }
 
-const getChartDatasets = size => {
+const getChartDatasets = (size, isLine = false) => {
+    const colors = ['26, 83, 255', '90, 212, 90']
     const datasets = []
 
     for (let i = 0; i < size; i++) {
         datasets.push({
             borderWidth: 2,
             borderRadius: window.innerWidth <= 900 ? 2 : 4,
-            barPercentage: window.innerWidth <= 900 ? 0.9 : 0.6
+            barPercentage: window.innerWidth <= 900 ? 0.9 : 0.6,
+            backgroundColor: `rgba(${colors[i]}, .45)`,
+            borderColor: isLine ? 'rgba(68, 33, 175, .7)' : `rgb(${colors[i]})`
         })
     }
 
@@ -185,6 +188,7 @@ const getBarChart = (selector, title, datasetsAmount = 1) => new Chart(document.
         datasets: getChartDatasets(datasetsAmount)
     },
     options: {
+        events: null,
         responsive: isMobile,
         layout: {
             padding: {
@@ -200,6 +204,9 @@ const getBarChart = (selector, title, datasetsAmount = 1) => new Chart(document.
                 text: title,
                 font: {
                     family: "'Roboto', 'Helvetica', monospace"
+                },
+                padding: {
+                    bottom: 20
                 }
             },
             tooltip: {
@@ -235,9 +242,10 @@ const getLineChart = (selector, title, datasetsAmount = 1) => new Chart(document
     type: 'line',
     data: {
         labels: ['січень', 'лютий', 'березень', 'квітень', 'травень', 'червень', 'липень', 'серпень', 'вересень', 'жовтень', 'листопад', 'грудень'],
-        datasets: getChartDatasets(datasetsAmount)
+        datasets: getChartDatasets(datasetsAmount, true)
     },
     options: {
+        events: null,
         scales: {
             y: {
                 ticks: {
@@ -260,6 +268,9 @@ const getLineChart = (selector, title, datasetsAmount = 1) => new Chart(document
                 text: title,
                 font: {
                     family: "Roboto, Helvetica, monospace"
+                },
+                padding: {
+                    bottom: 25
                 }
             },
             tooltip: {
@@ -283,16 +294,30 @@ const getLineChart = (selector, title, datasetsAmount = 1) => new Chart(document
     }
 })
 
+const getPieChartFontSize = (s1, s2, s3) => {
+    if ((!isMobile && window.innerWidth <= 1500) || (isMobile && window.innerWidth >= 900 && window.innerWidth <= 1500)) {
+        return s1
+    }
+
+    if (isMobile && window.innerWidth < 900 && window.innerWidth > 500) {
+        return s2
+    }
+
+    return s3
+}
+
 const getPieChart = (selector, title, size) => new Chart(document.querySelector(`#${selector}-pie-chart`), {
     type: 'pie',
     data: {
         datasets: [
         {
             data: new Array(size).fill(0),
-            borderWidth: 3
+            borderWidth: 3,
+            backgroundColor: ['#ffb55a', '#7eb0d5', '#b2e061', '#bd7ebe']
         }]
     },
     options: {
+        events: null,
         plugins: {
             title: {
                 display: true,
@@ -305,7 +330,7 @@ const getPieChart = (selector, title, size) => new Chart(document.querySelector(
                 position: 'bottom',
                 labels: {
                     font: {
-                        size: (!isMobile && window.innerWidth <= 1500) || (isMobile && window.innerWidth >= 900 && window.innerWidth <= 1500) ? 28 : 13
+                        size: getPieChartFontSize(28, 24, 13)
                     }
                 }
             },
@@ -316,10 +341,10 @@ const getPieChart = (selector, title, size) => new Chart(document.querySelector(
                 font: {
                     family: "monospace, 'SF Mono', Roboto",
                     weight: 'bold',
-                    size: (!isMobile && window.innerWidth <= 1500) || (isMobile && window.innerWidth >= 900 && window.innerWidth <= 1500) ? 42 : 14
+                    size: getPieChartFontSize(42, 28, 14)
                 },
                 formatter: value => value.toFixed(0),
-                color: 'rgb(240, 240, 240)'
+                color: context => context.dataIndex ? 'rgb(250, 250, 250)' : 'rgb(60, 60, 60)'
             }
         },
         scales: {
@@ -387,12 +412,17 @@ const updateChartsFontSize = () => {
 
     if (isMobile) {
         if (window.innerWidth <= 1400) {
-            setFontSize(pieCharts, 36)
+            setFontSize(pieCharts, 38)
             setFontSize(barCharts, 28)
             barCharts.forEach(c => c.options.layout.padding = null)
         }
 
         if (window.innerWidth <= 900) {
+            setFontSize(pieCharts, 36)
+            setFontSize(barCharts, 24)
+        }
+
+        if (window.innerWidth <= 500) {
             setFontSize(pieCharts, 20)
             setFontSize(barCharts, 20)
         }
