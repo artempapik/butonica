@@ -55,7 +55,7 @@
 
 .pie-charts {
     justify-content: space-between;
-    margin-top: 3rem;
+    margin: 3rem 0 1rem 0;
     display: flex;
     flex-wrap: wrap;
 
