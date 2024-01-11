@@ -1,51 +1,43 @@
 :root {
-    --pie-chart-size: 17rem;
-}
-
-.general-statistics-header {
-    align-self: center;
+    --pie-chart-size: 19.5rem;
 }
 
 .general-statistics-info {
     display: flex;
-    flex-direction: column;
-    align-self: center;
+    justify-content: space-between;
     background: rgba(79, 118, 181, .12);
-    gap: 1.5rem;
-    padding: 1.5rem 1.7rem;
+    gap: 1rem;
+    padding: 1.5rem;
     border-radius: 1.1rem;
     box-shadow: rgba(0, 0, 0, .12) 0 1px 3px, rgba(0, 0, 0, .24) 0 1px 2px;
 
     & li {
         display: flex;
         align-items: center;
+        gap: 1rem;
 
         & .stat-title {
-            width: 12rem;
             font-size: 1.2rem;
+            color: rgb(70, 70, 70);
+            font-weight: bold;
 
             &.gain {
-                font-weight: bold;
+                font-size: 1.3rem;
+                color: rgb(0, 0, 0);
             }
         }
 
         & .stat-value {
             font-size: 1.1rem;
             font-family: monospace, 'SF Mono';
+
+            &.gain {
+                font-size: 1.2rem;
+            }
         }
 
         &.sub-value {
-            margin-top: .6rem;
-            padding: 0 1rem;
-            justify-content: space-between;
-
-            & .stat-title {
-                font-size: .9rem;
-            }
-
-            & .stat-value {
-                font-size: 1rem;
-            }
+            display: none;
         }
     }
 }
@@ -62,11 +54,10 @@
 }
 
 .pie-charts {
-    margin: 4rem 0 1rem 0;
+    justify-content: space-between;
+    margin-top: 3rem;
     display: flex;
     flex-wrap: wrap;
-    gap: .8rem;
-    justify-content: center;
 
     & canvas {
         height: var(--pie-chart-size) !important;
@@ -76,9 +67,9 @@
 
 .bar-charts {
     display: none;
-    margin-top: 1.6rem;
+    margin: 2.5rem 0 1.2rem 0;
     flex-wrap: wrap;
-    gap: 2.5rem;
+    gap: 1.5rem;
     align-items: center;
     flex-direction: column;
 
@@ -112,7 +103,36 @@
 
 @media only screen and (max-width: 1400px) {
     :root {
-        --pie-chart-size: 24rem;
+        --pie-chart-size: 14.5rem;
+    }
+
+    .general-statistics-info {
+        padding: 1rem;
+        border-radius: .9rem;
+    
+        & li {
+            gap: .5rem;
+    
+            & .stat-title {
+                font-size: 1rem;
+    
+                &.gain {
+                    font-size: 1.1rem;
+                }
+            }
+    
+            & .stat-value {
+                font-size: 1rem;
+    
+                &.gain {
+                    font-size: 1.1rem;
+                }
+
+                & span:last-child {
+                    display: none;
+                }
+            }
+        }
     }
 }
 
@@ -121,14 +141,23 @@
         --pie-chart-size: 22rem;
     }
 
-    .general-statistics-info li {
-        & .stat-title {
-            width: 11rem;
-            font-size: 1.1rem;
-        }
+    .general-statistics-info {
+        flex-direction: column;
+        gap: 1.5rem;
 
-        & .stat-value {
-            font-size: 1rem;
+        & li {            
+            & .stat-title {
+                width: 11rem;
+                font-size: 1.1rem;
+            }
+    
+            & .stat-value {
+                font-size: 1rem;
+
+                & span:last-child {
+                    display: inline;
+                }
+            }
         }
     }
 
