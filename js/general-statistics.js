@@ -280,7 +280,7 @@ const getPieChart = (selector, title, isTooltipEnabled, ...labels) => new Chart(
                 font: {
                     family: "monospace, 'SF Mono', Roboto",
                     weight: 'bold',
-                    size: !isMobile && window.innerWidth <= 1500 ? 20 : 14
+                    size: !isMobile && window.innerWidth <= 1500 ? 16 : 14
                 },
                 formatter: value => value.toFixed(0) + (isMobile ? '' : ' грн'),
                 color: 'rgb(240, 240, 240)'
@@ -347,7 +347,7 @@ const updateChartsFontSize = () => {
 
     if (isMobile) {
         if (window.innerWidth <= 1400) {
-            setFontSize(pieCharts, 28)
+            setFontSize(pieCharts, 24)
             setFontSize(barCharts, 28)
             barCharts.forEach(c => c.options.layout.padding = null)
         }
