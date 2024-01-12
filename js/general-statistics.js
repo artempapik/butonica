@@ -294,16 +294,22 @@ const getLineChart = (selector, title, datasetsAmount = 1) => new Chart(document
     }
 })
 
-const getPieChartFontSize = (s1, s2, s3) => {
+const getPieChartFontSize = (s1, s2, s3, s4) => {
     if ((!isMobile && window.innerWidth <= 1500) || (isMobile && window.innerWidth >= 900 && window.innerWidth <= 1500)) {
         return s1
     }
 
-    if (isMobile && window.innerWidth < 900 && window.innerWidth > 500) {
-        return s2
+    if (isMobile) {
+        if (window.innerWidth > 500 && window.innerWidth < 900) {
+            return s2
+        }
+
+        if (window.innerWidth <= 500) {
+            return s3
+        }
     }
 
-    return s3
+    return s4
 }
 
 const getPieChart = (selector, title, size) => new Chart(document.querySelector(`#${selector}-pie-chart`), {
@@ -330,7 +336,7 @@ const getPieChart = (selector, title, size) => new Chart(document.querySelector(
                 position: 'bottom',
                 labels: {
                     font: {
-                        size: getPieChartFontSize(28, 24, 13)
+                        size: getPieChartFontSize(28, 24, 14, 13)
                     }
                 }
             },
@@ -341,7 +347,7 @@ const getPieChart = (selector, title, size) => new Chart(document.querySelector(
                 font: {
                     family: "monospace, 'SF Mono', Roboto",
                     weight: 'bold',
-                    size: getPieChartFontSize(42, 28, 14)
+                    size: getPieChartFontSize(42, 28, 18, 14)
                 },
                 formatter: value => value.toFixed(0),
                 color: context => context.dataIndex ? 'rgb(250, 250, 250)' : 'rgb(50, 50, 50)'
