@@ -1471,13 +1471,13 @@ const getNoteMarkup = (text, author, index) => {
 }
 
 document.querySelector('.notes').onpointerup = () => {
+    hideBodyOverflow()
+
     if (!notes.length) {
         notesModal.querySelector('li').style.display = 'flex'
         notesModal.style.display = 'flex'
         return
     }
-
-    hideBodyOverflow()
 
     const ul = notesModal.querySelector('ul')
     const addNoteLi = document.createElement('li')
