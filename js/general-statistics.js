@@ -347,7 +347,7 @@ const getPieChart = (selector, title, size) => new Chart(document.querySelector(
                 font: {
                     family: "monospace, 'SF Mono', Roboto",
                     weight: 'bold',
-                    size: getPieChartFontSize(42, 28, 18, 14)
+                    size: getPieChartFontSize(42, 28, 18, 15)
                 },
                 formatter: value => value.toFixed(0),
                 color: context => context.dataIndex ? 'rgb(250, 250, 250)' : 'rgb(50, 50, 50)'
