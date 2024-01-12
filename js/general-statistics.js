@@ -411,6 +411,13 @@ const updateChartsFontSize = () => {
 
     setFontSize(pieCharts, 18)
     setFontSize(barCharts, 24)
+    pieCharts.forEach(c => {
+        c.options.plugins.legend.labels.font.size = getPieChartFontSize(28, 24, 14, 13)
+        
+        if (c.options.plugins.datalabels) {
+            c.options.plugins.datalabels.font.size = getPieChartFontSize(42, 28, 18, 15)
+        }
+    })
 
     if (window.innerWidth <= 1500) {
         setFontSize(pieCharts, 38)
@@ -437,8 +444,8 @@ const updateChartsFontSize = () => {
         }
     }
 
-    pieCharts.forEach(c => c.update())
-    barCharts.forEach(c => c.update())
+    pieCharts.forEach(c => c.update('none'))
+    barCharts.forEach(c => c.update('none'))
 }
 
 window.onresize = () => updateChartsFontSize()
