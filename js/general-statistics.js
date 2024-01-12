@@ -440,3 +440,5 @@ const updateChartsFontSize = () => {
     pieCharts.forEach(c => c.update())
     barCharts.forEach(c => c.update())
 }
+
+window.onresize = () => updateChartsFontSize()
