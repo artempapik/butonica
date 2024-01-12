@@ -1657,6 +1657,15 @@ table {
             & .change-page {
                 margin-left: 0;
                 margin-top: .5rem;
+                gap: 1rem;
+
+                & .page-number span {
+                    font-size: .8rem;
+
+                    &:nth-child(2) {
+                        font-size: 1rem;
+                    }
+                }
             }
         }
     }
