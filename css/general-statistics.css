@@ -102,6 +102,32 @@
     }
 }
 
+@media only screen and (max-width: 1700px) {
+    :root {
+        --pie-chart-size: 18rem;
+    }
+
+    .general-statistics-info li {
+        gap: .7rem;
+
+        & .stat-title {
+            font-size: 1.1rem;
+
+            &.gain {
+                font-size: 1.2rem;
+            }
+        }
+
+        & .stat-value {
+            font-size: 1rem;
+
+            &.gain {
+                font-size: 1.1rem;
+            }
+        }
+    }
+}
+
 @media only screen and (max-width: 1500px) {
     :root {
         --pie-chart-size: 24rem;
