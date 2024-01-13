@@ -428,19 +428,23 @@ const updateChartsFontSize = () => {
             setFontSize(pieCharts, 38)
             setFontSize(barCharts, 28)
             barCharts.forEach(c => {
-                c.options.layout.padding = { top: 1 }
-                c.options.plugins.title.padding = { bottom: 1 }
+                c.options.layout.padding = { top: 5 }
+                c.options.plugins.title.padding = { bottom: 5 }
             })
         }
 
         if (window.innerWidth <= 900) {
             setFontSize(pieCharts, 36)
             setFontSize(barCharts, 24)
+            barCharts.forEach(c => {
+                c.options.layout.padding = { top: 1 }
+                c.options.plugins.title.padding = { bottom: 1 }
+            })
         }
 
         if (window.innerWidth <= 500) {
             setFontSize(pieCharts, 20)
-            setFontSize(barCharts, 16)
+            setFontSize(barCharts, 14)
         }
     }
 
