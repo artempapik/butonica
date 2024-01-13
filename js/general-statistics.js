@@ -317,7 +317,7 @@ const getPieChart = (selector, title, size) => new Chart(document.querySelector(
     data: {
         datasets: [
         {
-            data: new Array(size).fill(0),
+            data: new Array(size).fill(null),
             borderWidth: 3,
             backgroundColor: ['#ffb55a', '#7eb0d5', '#b2e061', '#bd7ebe']
         }]
@@ -349,7 +349,7 @@ const getPieChart = (selector, title, size) => new Chart(document.querySelector(
                     weight: 'bold',
                     size: getPieChartFontSize(42, 28, 18, 15)
                 },
-                formatter: value => value.toFixed(0),
+                formatter: value => value ? value.toFixed(0) : '',
                 color: context => context.dataIndex ? 'rgb(250, 250, 250)' : 'rgb(50, 50, 50)'
             }
         },
