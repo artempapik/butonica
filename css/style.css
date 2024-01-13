@@ -204,8 +204,8 @@ select {
     transition: .1s;
     background: var(--input-background-color);
     border: .1rem var(--input-border-color) solid;
-    border-radius: .7rem;
-    padding: .3rem;
+    border-radius: 1rem;
+    padding: .4rem .5rem;
 
     &:hover, &:focus {
         background: var(--white);
