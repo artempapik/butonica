@@ -1081,7 +1081,7 @@
         & h2 {
             margin-bottom: 1.5rem;
         }
-
+        
         & table td:nth-child(2) {
             width: 5rem;
             text-align: center;
@@ -1095,9 +1095,10 @@
     & .sale-order-total-sum {
         align-items: center;
         color: rgb(20, 20, 20) !important;
-        background: none !important;
-        box-shadow: none !important;
-        border: .1rem solid rgb(150, 150, 150);
+        background: rgba(79, 118, 181, .1) !important;
+        gap: .7rem !important;
+        padding: .8rem 1.2rem !important;
+        border-radius: .9rem !important;
 
         & input {
             padding: .1rem;
@@ -1106,7 +1107,7 @@
         }
 
         & span:last-child {
-            color: rgb(50, 50, 50) !important;
+            color: rgb(20, 20, 20) !important;
         }
     }
 
