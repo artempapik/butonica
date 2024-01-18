@@ -1030,10 +1030,10 @@ const getAllOrdersByDate = e => {
     const date = e.target.value ? new Date(e.target.value) : false
     const query = date ?
         `${loginInfo.companyId}/${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}` :
-        `${loginInfo.companyId}`
+        `${loginInfo.companyId}/${currentPage}`
 
     get('Order/' + query).then(response => {
-        document.querySelector('.change-page')?.remove()
+        document.querySelector('.change-page').style.display = date ? 'none' : 'flex'
         allOrdersTable.innerHTML = allOrdersTable.querySelector('tbody').innerHTML
         replaceLoadIcons()
 
