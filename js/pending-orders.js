@@ -28,14 +28,14 @@ const getPendingOrdersByDate = e => {
         `${loginInfo.companyId}`
 
     get('Order/pending/' + query).then(response => {
-            pendingOrdersTable.innerHTML = pendingOrdersTable.querySelector('tbody').innerHTML
-            replaceLoadIcons()
+        pendingOrdersTable.innerHTML = pendingOrdersTable.querySelector('tbody').innerHTML
+        replaceLoadIcons()
 
-            if (!response.length) {
-                pendingOrdersTable.append(createEmptyDataDiv())
-                return
-            }
+        if (!response.length) {
+            pendingOrdersTable.append(createEmptyDataDiv())
+            return
+        }
 
-            response.forEach(o => fillPendingOrdersTable(o))
-        }).catch(() => showMessage('error', getErrorMessage('замовлення за цією датою')))
+        response.forEach(o => fillPendingOrdersTable(o))
+    }).catch(() => showMessage('error', getErrorMessage('замовлення за цією датою')))
 }
