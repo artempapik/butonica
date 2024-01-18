@@ -183,7 +183,7 @@
             & .end-sum-title {
                 display: flex;
                 align-items: end;
-                width: 12rem;
+                width: 11rem;
                 gap: .5rem;
             }
 
@@ -271,6 +271,10 @@
             &:not(&.cash-register-operation) .content .bonus-paid {
                 display: none;
             }
+        }
+
+        & .end-sum {
+            min-width: 8rem !important;
         }
     }
 
