@@ -172,7 +172,7 @@ const getChartDatasets = (size, isLine = false) => {
         datasets.push({
             borderWidth: 2,
             borderRadius: window.innerWidth <= 900 ? 2 : 4,
-            barPercentage: window.innerWidth <= 900 ? 0.9 : 0.6,
+            barPercentage: window.innerWidth <= 900 ? 0.9 : 0.5,
             backgroundColor: `rgba(${colors[i]}, .45)`,
             borderColor: isLine ? 'rgba(68, 33, 175, .7)' : `rgb(${colors[i]})`
         })
