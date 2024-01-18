@@ -2023,14 +2023,14 @@
         <div class="notes-modal-content">
             <h1>
                 <span>Замітки</span>
-                <span class="material-symbols-outlined" onpointerup="createNote()">add_notes</span>
+                <img src="img/add_note.png" onpointerup="createNote()">
             </h1>
             <ul>
                 <li>
-                    <textarea placeholder="Текст замітки" maxlength="100" rows="4"></textarea>
+                    <textarea placeholder="Текст замітки" maxlength="150" rows="5"></textarea>
                     <div>
-                        <button onpointerup="saveNote()">Зберегти</button>
-                        <button onpointerup="cancelNote()">Відмінити</button>
+                        <img src="img/save.png" onpointerup="saveNote()">
+                        <img src="img/unsave.png" onpointerup="cancelNote()">
                     </div>
                 </li>
             </ul>
