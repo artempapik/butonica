@@ -205,7 +205,14 @@
         }
     }
 
-    .contractor-supply-products table tr td:first-child {
-        min-width: unset;
+    .contractor-supply-products table td {
+        &:first-child {
+            min-width: 10.5rem !important;
+            word-wrap: break-word;
+        }
+
+        &:not(:last-child) {
+            white-space: unset;
+        }
     }
 }
