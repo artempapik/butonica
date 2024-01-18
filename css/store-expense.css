@@ -1,0 +1,48 @@
+.create-store-expense-modal-content {
+    gap: 1.7rem;
+
+    & .store-expense-date {
+        padding: .45rem;
+        width: 8rem;
+    }
+
+    & .store-expense-stock {
+        width: 11rem;
+    }
+
+    & .form div {
+        display: flex;
+        align-items: center;
+        gap: .6rem;
+
+        & input {
+            padding: .35rem;
+            width: 6rem;
+        }
+    }
+}
+
+.store-expense-table table tr:not(:first-child) td {
+    &:first-child {
+        text-align: center;
+    }
+
+    &:nth-child(3) {
+        font-weight: bold;
+        color: rgb(20, 20, 20);
+    }
+
+    &:nth-child(4) {
+        max-width: 17rem;
+    }
+}
+
+@media only screen and (max-width: 700px) and (orientation: portrait) {
+    .store-expense-header button {
+        align-self: start;
+    }
+    
+    .store-expense-table table td:nth-child(2) {
+        display: none;
+    }
+}
