@@ -183,8 +183,8 @@
             & .end-sum-title {
                 display: flex;
                 align-items: end;
-                width: 11rem;
-                gap: .7rem;
+                width: 12rem;
+                gap: .5rem;
             }
 
             & .end-sum {
@@ -286,6 +286,10 @@
 
         &:nth-child(5) {
             font-weight: normal !important;
+
+            & span {
+                font-size: .8rem !important;
+            }
         }
     }
 }
