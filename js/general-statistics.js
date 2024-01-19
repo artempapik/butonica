@@ -249,7 +249,7 @@ const getLineChart = (selector, title, datasetsAmount = 1) => new Chart(document
         scales: {
             y: {
                 ticks: {
-                    padding: 15
+                    padding: 25
                 }
             }
         },
@@ -258,7 +258,6 @@ const getLineChart = (selector, title, datasetsAmount = 1) => new Chart(document
             padding: {
                 top: 15,
                 bottom: 15,
-                left: 20,
                 right: 20
             }
         },
