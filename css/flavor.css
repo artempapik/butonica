@@ -13,6 +13,7 @@
 
         &:hover {
             background: rgb(80, 85, 95);
+            box-shadow: none;
         }
     }
 
