@@ -146,19 +146,7 @@ const showAllOrderInfo = e => {
 
     const calendarComponent = document.querySelector('.calendar-component')
 
-    calendarComponent.onpointerup = () => {
-        if (calendarComponent.classList.contains('active')) {
-            setTimeout(() => hideModal(calendarModal), 1)
-            calendarComponent.classList.remove('active')
-            return
-        }
-        
-        calendarComponent.classList.add('active')
-        calendar.style.top = calendarComponent.offsetTop + 50 + 'px'
-        calendar.style.left = calendarComponent.offsetLeft + 'px'
-        hideBodyOverflow()
-        calendarModal.style.display = 'flex'
-    }
+    
 }
 
 const calculateInternetOrderTotalSum = () => {
