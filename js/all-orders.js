@@ -143,6 +143,22 @@ const showAllOrderInfo = e => {
     }).catch(() => showMessage('error', getErrorMessage('замовлення')))
 
     fillDatalists()
+
+    const calendarComponent = document.querySelector('.calendar-component')
+
+    calendarComponent.onpointerup = () => {
+        if (calendarComponent.classList.contains('active')) {
+            setTimeout(() => hideModal(calendarModal), 1)
+            calendarComponent.classList.remove('active')
+            return
+        }
+        
+        calendarComponent.classList.add('active')
+        calendar.style.top = calendarComponent.offsetTop + 50 + 'px'
+        calendar.style.left = calendarComponent.offsetLeft + 'px'
+        hideBodyOverflow()
+        calendarModal.style.display = 'flex'
+    }
 }
 
 const calculateInternetOrderTotalSum = () => {
@@ -434,7 +450,7 @@ const createOrderRow = (order, table) => {
         if (days < 0 || hours < 0) {
             return {
                 text: '!',
-                background: 'rgb(255, 0, 0)'
+                background: 'rgb(240, 0, 0)'
             }
         }
 
