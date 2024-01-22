@@ -23,7 +23,7 @@ const getStatisticsValues = () => {
             
             expensesPieChart.data.labels = ['продажі на магазині', 'інтернет-замовлення'].map((l, i) => {
                 const current = response.reduce((total, current) => total + current.generalNumbers[i + 4], 0)
-                const total = response.reduce((total, current) => total + current.generalNumbers[4], 0) + response.reduce((total, current) => total + current.generalNumbers[5], 0)
+                const total = response.reduce((total, current) => total + current.generalNumbers[4], 0) + response.reduce((total, current) => total + current.generalNumbers[5], 0) || 1
                 return `${l} (${(current / total * 100).toFixed(2)}%)`
             })
             expensesPieChart.data.datasets[0].data = [
@@ -34,7 +34,7 @@ const getStatisticsValues = () => {
 
             incomePieChart.data.labels = ['продажі на магазині', 'інтернет-замовлення'].map((l, i) => {
                 const current = response.reduce((total, current) => total + current.generalNumbers[i + 2], 0)
-                const total = response.reduce((total, current) => total + current.generalNumbers[2], 0) + response.reduce((total, current) => total + current.generalNumbers[3], 0)
+                const total = response.reduce((total, current) => total + current.generalNumbers[2], 0) + response.reduce((total, current) => total + current.generalNumbers[3], 0) || 1
                 return `${l} (${(current / total * 100).toFixed(2)}%)`
             })
             incomePieChart.data.datasets[0].data = [
@@ -74,8 +74,8 @@ const getStatisticsValues = () => {
                 response.reduce((total, current) => total + current.generalNumbers[4], 0) + response.reduce((total, current) => total + current.generalNumbers[5], 0)
 
             expensesIncomePieChart.data.labels = [
-                `всі доходи (${(response.reduce((total, current) => total + current.generalNumbers[1], 0) / allExpensesIncome * 100).toFixed(2)}%)`,
-                `всі витрати (${((response.reduce((total, current) => total + current.generalNumbers[4], 0) + response.reduce((total, current) => total + current.generalNumbers[5], 0)) / allExpensesIncome * 100).toFixed(2)}%)`
+                `всі доходи (${(response.reduce((total, current) => total + current.generalNumbers[1], 0) / (allExpensesIncome || 1) * 100).toFixed(2)}%)`,
+                `всі витрати (${((response.reduce((total, current) => total + current.generalNumbers[4], 0) + response.reduce((total, current) => total + current.generalNumbers[5], 0)) / (allExpensesIncome || 1) * 100).toFixed(2)}%)`
             ]
             expensesIncomePieChart.data.datasets[0].data = [
                 response.reduce((total, current) => total + current.generalNumbers[1], 0),
@@ -127,7 +127,7 @@ const getStatisticsValues = () => {
 
             const totalExpenses = generalNumbers[4] + generalNumbers[5]
 
-            expensesPieChart.data.labels = ['витрати магазину', 'витрати на товар'].map((l, i) => `${l} (${(generalNumbers[i + 4] / totalExpenses * 100).toFixed(2)}%)`)
+            expensesPieChart.data.labels = ['витрати магазину', 'витрати на товар'].map((l, i) => `${l} (${(generalNumbers[i + 4] / (totalExpenses || 1) * 100).toFixed(2)}%)`)
             expensesPieChart.data.datasets[0].data = [generalNumbers[4], generalNumbers[5]]
             expensesPieChart.update()
 
