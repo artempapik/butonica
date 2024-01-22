@@ -115,7 +115,7 @@ const getStatisticsValues = () => {
     get(`Statistics/general/${loginInfo.companyId}/${year}/${month || new Date().getMonth() + 1}`).then(response => {
         const statValues = document.querySelectorAll('.general-statistics-info .stat-value span:first-child')
 
-        if (response.generalNumbers.every(n => n)) {
+        if (response.generalNumbers.some(n => n)) {
             pieCharts.style.display = ''
             const generalNumbers = response.generalNumbers
     
