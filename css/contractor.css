@@ -1,0 +1,218 @@
+.create-contractor-modal-content {
+    gap: 1.8rem;
+    width: calc(var(--modal-content-width) + 1.5rem);
+
+    & .contractor-comment {
+        padding: .5rem;
+    }
+}
+
+.contractor-info-modal-content {
+    padding: 1rem;
+    padding-top: 0;
+    display: flex;
+    flex-direction: row;
+    width: 58rem;
+    height: 90vh;
+
+    & .contractor-sums {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        border-top: .1rem rgb(150, 150, 150) solid;
+        width: fit-content;
+        padding: 2rem 0 1rem 0;
+    }
+
+    & .contractor-debt,
+    & .contractor-overpayment {
+        font-weight: bold !important;
+    }
+
+    & .contractor-debt {
+        color: rgb(255, 0, 0);
+    }
+
+    & .contractor-overpayment {
+        color: rgb(0, 128, 0);
+    }
+
+    & .all-supplies {
+        display: flex;
+    }
+
+    & .contractor-supplies {
+        & .contractor-supplies-info {
+            flex: 1;
+        }
+
+        & .contractor-supplies-products {
+            flex: 2;
+        }
+    }
+
+    & .contractor-details,
+    & .contractor-supplies,
+    & .contractor-supplies .contractor-supplies-info {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    & .contractor-details {
+        flex: 1;
+    }
+
+    & .contractor-supplies {
+        flex: 3;
+
+        & .contractor-supplies-header {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            & div:first-child {
+                margin-top: 1rem;
+                display: flex;
+                gap: 1.5rem;
+
+                & h1 {
+                    margin-top: 0;
+                }
+
+                & input {
+                    padding: 0 .7rem;
+                    border-radius: .7rem;
+                }
+            }
+
+            & .arrows-block {
+                display: none;
+                gap: 1.5rem;
+
+                & span {
+                    font-size: 1.7rem;
+                    cursor: pointer;
+                    border-radius: 50%;
+                    transition: .1s;
+
+                    &:hover {
+                        background: rgb(50, 50, 50);
+                        color: rgb(230, 230, 230);
+                    }
+                }
+            }
+        }
+
+        & .total-sum {
+            font-size: 1.3rem;
+            align-self: end;
+
+            &:last-child {
+                padding-bottom: 1rem;
+            }
+
+            & span:last-child {
+                font-weight: normal;
+            }
+        }
+    }
+
+    & .contractor-details,
+    & .contractor-supplies {
+        & .form {
+            & h2 {
+                font-weight: bold;
+            }
+
+            & h3 {
+                font-weight: normal;
+                font-size: 1.1rem;
+            }
+        }
+    }
+}
+
+.contractor-supply-products table {
+    display: block;
+    width: 100%;
+    margin: .5rem 0;
+
+    & tbody {
+        font-size: 1rem;
+    }
+
+    & tr td {
+        padding: .5rem .4rem;
+        text-align: center;
+    }
+
+    & tr td:first-child {
+        min-width: 14rem;
+        text-align: left;
+    }
+
+    & td:not(:last-child) {
+        white-space: nowrap;
+    }
+
+    & td:last-child {
+        width: 100%;
+    }
+}
+
+.contractor-table table tr:not(:first-child) {
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 700px) {
+    .contractor-info-modal-content {
+        padding: .2rem;
+        padding-top: 0;
+    }
+}
+
+@media only screen and (max-width: 700px) and (orientation: portrait) {
+    .contractor-info-modal-content {
+        padding: 0 .5rem .8rem .5rem;
+        flex-direction: column;
+
+        & .contractor-details,
+        & .contractor-supplies,
+        & .contractor-supplies .contractor-supplies-info {
+            gap: 1.2rem;
+        }
+
+        & .contractor-sums {
+            gap: 1.2rem;
+        }
+
+        & .all-supplies {
+            flex-direction: column;
+
+            & .contractor-supplies-products {
+                margin-top: 1.5rem;
+            }
+        }
+
+        & .total-sum {
+            font-size: 1rem !important;
+
+            &:last-child {
+                padding-bottom: .5rem !important;
+            }
+        }
+    }
+
+    .contractor-supply-products table td {
+        &:first-child {
+            min-width: 10.5rem !important;
+            word-wrap: break-word;
+        }
+
+        &:not(:last-child) {
+            white-space: unset;
+        }
+    }
+}
