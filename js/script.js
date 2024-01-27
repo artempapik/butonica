@@ -1684,6 +1684,7 @@ const checkDate = f => {
 
     if (monthSelect.selectedIndex === 12) {
         dateQueryString = yearSelect.value
+        f()
         return
     }
 
@@ -1693,6 +1694,7 @@ const checkDate = f => {
         document.querySelector('.calendar-component div').textContent = newDateString
         dateString = newDateString
         dateQueryString = `${date.getMonth() + 1}/${date.getFullYear()}`
+        f()
         return
     }
 
