@@ -481,7 +481,10 @@
                 </h2>
                 <input class="category-name" maxlength="25">
             </div>
-            <button>Зберегти</button>
+            <button type="button">
+                <div class="loader-button"></div>
+                <span>Зберегти</span>
+            </button>
         </div>
     </div>
     <div class="create-product-modal">
@@ -557,7 +560,10 @@
                     <span>Ціни продажу для складів</span>
                 </h2>
             </div>
-            <button>Зберегти</button>
+            <button type="button">
+                <div class="loader-button"></div>
+                <span>Зберегти</span>
+            </button>
         </div>
     </div>
     <div class="product-info-modal">
@@ -1689,11 +1695,11 @@
                 <form>
                     <label>
                         <input type="radio" name="operation-type" value="Внесення" checked>
-                        <span class="checkout-label">Внесення</span>
+                        <span>Внесення</span>
                     </label>
                     <label>
                         <input type="radio" name="operation-type" value="Винесення">
-                        <span class="withdrawal-label">Винесення</span>
+                        <span>Винесення</span>
                     </label>
                 </form>
                 <div>
@@ -1905,7 +1911,10 @@
                     <span class="material-symbols-outlined">auto_awesome_motion</span>
                     <span>Зберегти шаблон</span>
                 </button>
-                <button>Зберегти</button>
+                <button type="button">
+                    <div class="loader-button"></div>
+                    <span>Зберегти</span>
+                </button>
             </div>
         </div>
     </div>
@@ -2028,10 +2037,7 @@
             <ul>
                 <li>
                     <textarea placeholder="Текст замітки" maxlength="150" rows="5"></textarea>
-                    <div>
-                        <img src="img/save.png" onpointerup="saveNote()">
-                        <img src="img/unsave.png" onpointerup="cancelNote()">
-                    </div>
+                    <img src="img/save.png" onpointerup="saveNote()">
                 </li>
             </ul>
         </div>
@@ -2043,19 +2049,100 @@
     <div id="loader-page">
         <div id="loader"></div>
     </div>
-    <script>
-        [
-            'delivery.png',
-            'pickup.png',
-            'cancel.png',
-            'empty-box.webp',
-            'empty-flower.webp',
-            'calendar.png',
-            'period.png',
-            'check.png',
-            'decline.png'
-        ].forEach(src => new Image().src = 'img/' + src)
-    </script>
+    <div class="calendar-modal">
+        <div id="calendar">
+            <div class="month-year-select">
+                <select>
+                    <option>січень</option>
+                    <option>лютий</option>
+                    <option>березень</option>
+                    <option>квітень</option>
+                    <option>травень</option>
+                    <option>червень</option>
+                    <option>липень</option>
+                    <option>серпень</option>
+                    <option>вересень</option>
+                    <option>жовтень</option>
+                    <option>листопад</option>
+                    <option>грудень</option>
+                    <option>всі місяці</option>
+                </select>
+                <select>
+                    <option>2024</option>
+                    <option>2023</option>
+                </select>
+            </div>
+            <div class="week-names">
+                <span>пн</span>
+                <span>вт</span>
+                <span>ср</span>
+                <span>чт</span>
+                <span>пт</span>
+                <span>сб</span>
+                <span>нд</span>
+            </div>
+            <div class="week-days">
+                <div class="week">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="week">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="week">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="week">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="week">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="week">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div class="buttons">
+                <button onpointerup="setToday()">Сьогодні</button>
+                <img src="img/check.png">
+            </div>
+        </div>
+    </div>
     <script src="js/script.js"></script>
     <script src="js/company.js"></script>
     <script src="js/stock.js"></script>
@@ -2080,8 +2167,6 @@
     <script src="js/general-statistics.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
-    <script>
-        Chart.register(ChartDataLabels)
-    </script>
+    <script>Chart.register(ChartDataLabels)</script>
 </body>
 </html>
