@@ -3,8 +3,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand&family=Roboto&display=swap');
 
 @font-face {
-    font-family: 'Timetraveler';
-    src: url('../font/Timetraveler.ttf') format('truetype');
+    font-family: 'TimeTraveler';
+    src: url('../font/TimeTraveler.ttf') format('truetype');
 }
 
 :root {
