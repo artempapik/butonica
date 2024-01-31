@@ -378,7 +378,7 @@ header {
             transition: .1s;
 
             &:hover {
-                animation: logo-scale .7s;
+                animation: logo-scale .5s;
             }
 
             & img {
