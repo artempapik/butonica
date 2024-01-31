@@ -41,7 +41,14 @@
         </div>
         <div class="theme-profile">
             <span class="theme material-symbols-outlined">dark_mode</span>
-            <span class="notes material-symbols-outlined">notes</span>
+            <div class="clock-screensaver">
+                <span class="hours"></span>
+                <span>:</span>
+                <span class="minutes"></span>
+                <span>:</span>
+                <span class="seconds"></span>
+            </div>
+            <img class="notes" src="img/note.png">
             <div class="profile" onpointerup="openProfile()"></div>
             <div class="profile-info">
                 <div>
@@ -342,7 +349,10 @@
                 </h2>
                 <input class="stock-address" maxlength="35">
             </div>
-            <button>Зберегти</button>
+            <button type="button">
+                <div class="loader-button"></div>
+                <span>Зберегти</span>
+            </button>
         </div>
     </div>
     <div class="create-cash-register-modal">
@@ -366,7 +376,10 @@
                 </h2>
                 <select class="cash-register-stock"></select>
             </div>
-            <button>Зберегти</button>
+            <button type="button">
+                <div class="loader-button"></div>
+                <span>Зберегти</span>
+            </button>
         </div>
     </div>
     <div class="create-employee-modal">
@@ -431,7 +444,10 @@
                 <h2>День народження</h2>
                 <input class="employee-birth-date" type="date">
             </div>
-            <button>Зберегти</button>
+            <button type="button">
+                <div class="loader-button"></div>
+                <span>Зберегти</span>
+            </button>
         </div>
     </div>
     <div class="employee-info-modal">
@@ -627,7 +643,10 @@
                 <h2>Коментар</h2>
                 <textarea class="contractor-comment" maxlength="100" rows="4"></textarea>
             </div>
-            <button>Зберегти</button>
+            <button type="button">
+                <div class="loader-button"></div>
+                <span>Зберегти</span>
+            </button>
         </div>
     </div>
     <div class="contractor-info-modal">
@@ -905,7 +924,10 @@
                 <h2>Коментар</h2>
                 <textarea class="client-comment" maxlength="150" rows="6"></textarea>
             </div>
-            <button>Зберегти</button>
+            <button type="button">
+                <div class="loader-button"></div>
+                <span>Зберегти</span>
+            </button>
         </div>
     </div>
     <div class="client-info-modal">
@@ -1011,7 +1033,10 @@
                 </div>
             </div>
             <button class="one-more-product" onpointerup="addWasteProduct()">Додати товар</button>
-            <button>Зберегти</button>
+            <button type="button">
+                <div class="loader-button"></div>
+                <span>Зберегти</span>
+            </button>
         </div>
     </div>
     <div class="waste-info-modal">
@@ -1323,7 +1348,10 @@
                         </div>
                     </div>
                 </div>
-                <button>Оплата</button>
+                <button type="button">
+                    <div class="loader-button"></div>
+                    <span>Оплата</span>
+                </button>
             </div>
         </div>
     </div>
@@ -1598,7 +1626,10 @@
                         </div>
                     </div>
                 </div>
-                <button>Оплата</button>
+                <button type="button">
+                    <div class="loader-button"></div>
+                    <span>Оплата</span>
+                </button>
             </div>
         </div>
     </div>
@@ -1618,7 +1649,10 @@
             </div>
             <div class="shift-choices">
                 <button onpointerup="location.reload()">На головну</button>
-                <button onpointerup="createEmployeeShift()">Почати зміну</button>
+                <button type="button" onpointerup="createEmployeeShift()">
+                    <div class="loader-button"></div>
+                    <span>Почати зміну</span>
+                </button>
             </div>
         </div>
     </div>
@@ -1693,7 +1727,7 @@
             </div>
             <div class="cash-register-operations">
                 <form>
-                    <label>
+                    <label class="checked">
                         <input type="radio" name="operation-type" value="Внесення" checked>
                         <span>Внесення</span>
                     </label>
@@ -1721,7 +1755,10 @@
                 </div>
                 <textarea maxlength="50"></textarea>
             </div>
-            <button onpointerup="performCashRegisterOperation()">Провести операцію</button>
+            <button type="button" onpointerup="performCashRegisterOperation()">
+                <div class="loader-button"></div>
+                <span>Провести операцію</span>
+            </button>
         </div>
     </div>
     <div class="order-info-modal">
@@ -2001,7 +2038,10 @@
                 </h2>
                 <textarea class="store-expense-comment" maxlength="150" rows="6"></textarea>
             </div>
-            <button>Зберегти</button>
+            <button type="button">
+                <div class="loader-button"></div>
+                <span>Зберегти</span>
+            </button>
         </div>
     </div>
     <div class="create-label-modal">
@@ -2025,7 +2065,10 @@
                 </h2>
                 <div class="label-colors"></div>
             </div>
-            <button>Зберегти</button>
+            <button type="button">
+                <div class="loader-button"></div>
+                <span>Зберегти</span>
+            </button>
         </div>
     </div>
     <div class="notes-modal">
@@ -2036,8 +2079,7 @@
             </h1>
             <ul>
                 <li>
-                    <textarea placeholder="Текст замітки" maxlength="150" rows="5"></textarea>
-                    <img src="img/save.png" onpointerup="saveNote()">
+                    <textarea placeholder="Текст" maxlength="150" rows="5"></textarea>
                 </li>
             </ul>
         </div>
@@ -2142,6 +2184,25 @@
                 <img src="img/check.png">
             </div>
         </div>
+    </div>
+    <div class="confirm-modal">
+        <div class="confirm-modal-content">
+            <div class="text">
+                <span></span>
+                <span></span>
+            </div>
+            <div class="confirm-buttons">
+                <button>Так</button>
+                <button onpointerup="setTimeout(() => hideModal(confirmModal), 1)">Ні</button>
+            </div>
+        </div>
+    </div>
+    <div class="clock-modal">
+        <span class="hours"></span>
+        <span>:</span>
+        <span class="minutes"></span>
+        <span>:</span>
+        <span class="seconds"></span>
     </div>
     <script src="js/script.js"></script>
     <script src="js/company.js"></script>
