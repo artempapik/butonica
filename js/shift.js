@@ -58,145 +58,192 @@ const createShiftRow = shift => {
         if (shift.end) {
             setDisplayForShiftEnd('block')
             shiftInfoModal.querySelector('.shift-time span:last-child').textContent = formatDate(shift.end)
+            shiftInfoModal.querySelector('.shift-time img').style.filter = 'grayscale()'
         } else {
+            shiftInfoModal.querySelector('.shift-time img').style.filter = ''
             setDisplayForShiftEnd('none')
         }
 
         get(`Shift/${shift.id}/operations`).then(response => {
             hidePageLoad()
-            const operations = shiftInfoModal.querySelector('.operations')
-            operations.innerHTML = ''
 
-            for (const operation of response) {
-                const time = document.createElement('span')
-                time.textContent = operation.time
+            const setShiftStartLabel = () => {
+                operationsBlock.querySelector('.form:first-child').classList.add('shift-start')
+                operationsBlock.querySelector('.types span').textContent = 'Початок зміни:'
+            }
 
-                const type = createSpan(cashRegisterOperationTypeToName[operation.type])
+            const operationsBlock = shiftInfoModal.querySelector('.operations')
+            operationsBlock.innerHTML = ''
 
-                if (operation.type === 4) {
-                    const orderSpan = createSpan(`(зам. №${operation.orderId})`)
-                    orderSpan.classList = 'order-number'
-                    type.append(orderSpan)
-                }
+            const fillShiftOperations = operations => {
+                operationsBlock.innerHTML = ''
 
-                const payType = createSpan(operation.payType === null ? '' : payTypeToName[operation.payType])
+                for (const operation of operations) {
+                    const time = document.createElement('span')
+                    time.textContent = operation.time
 
-                const types = document.createElement('span')
-                types.classList = 'types'
-                types.append(type, payType)
+                    const type = createSpan(cashRegisterOperationTypeToName[operation.type])
 
-                const header = document.createElement('div')
-                header.append(time, types)
-
-                const info = document.createElement('div')
-
-                if (operation.bonusSum) {
-                    const bonusPaidIcon = document.createElement('span')
-                    bonusPaidIcon.classList = 'material-symbols-outlined'
-                    bonusPaidIcon.textContent = 'savings'
-    
-                    const bonusPaid = document.createElement('span')
-                    const bonusSum = operation.bonusSum || 0
-                    bonusPaid.classList = getClassForNumber(bonusSum)
-                    bonusPaid.textContent = bonusSum.toFixed(2) + ' грн'
-    
-                    const bonusPaidSpan = document.createElement('span')
-                    bonusPaidSpan.classList = 'bonus-paid'
-                    bonusPaidSpan.append(bonusPaidIcon, bonusPaid)
-
-                    info.append(bonusPaidSpan)
-                }
-
-                const moneyPaidIcon = document.createElement('span')
-                moneyPaidIcon.classList = 'material-symbols-outlined'
-                moneyPaidIcon.textContent = operation.payType === 0 ? 'attach_money' : 'contactless'
-
-                const moneyPaid = document.createElement('span')
-                const moneySum = operation.products ? operation.products.length ? operation.sum : operation.type ? -operation.sum : operation.sum : operation.sum
-                moneyPaid.classList = getClassForNumber(moneySum)
-                moneyPaid.textContent = moneySum.toFixed(2) + ' грн'
-
-                const moneyPaidSpan = document.createElement('span')
-                moneyPaidSpan.classList = 'money-paid'
-                moneyPaidSpan.append(moneyPaidIcon, moneyPaid)
-
-                const expandIcon = document.createElement('span')
-                expandIcon.classList = 'expand-shift material-symbols-outlined'
-                expandIcon.innerHTML = 'expand_more'
-
-                if (operation.payType === 2) {
-                    info.append(expandIcon)
-                } else {
-                    info.append(moneyPaidSpan, expandIcon)
-                }
-                
-                const content = document.createElement('div')
-                content.classList = 'content'
-                content.append(header, info)
-
-                const innerContent = document.createElement('div')
-                innerContent.classList = 'inner-content'
-
-                const cashRegisterOperation = document.createElement('div')
-                cashRegisterOperation.classList = 'form'
-
-                if (operation.type < 2) {
-                    innerContent.textContent = operation.comment ? 'Коментар: ' + operation.comment : 'Коментар відсутній'
-                } else if (operation.type === 4) {
-                    cashRegisterOperation.classList.add('surcharge')
-                } else {
-                    const table = document.createElement('table')
-                    const tr = document.createElement('tr')
-                    tr.append(
-                        createTd('Назва'),
-                        createTd('К-ть'),
-                        createTd('Сума')
-                    )
-
-                    const tbody = document.createElement('tbody')
-                    tbody.append(tr)
-                    table.append(tbody)
-
-                    for (const product of operation.products) {
-                        const tr = document.createElement('tr')
-                        tr.append(
-                            createTd(product.name),
-                            createTd(product.amount),
-                            createTd(product.sum.toFixed(2))
-                        )
-                        table.append(tr)
+                    if (operation.type === 4) {
+                        const orderSpan = createSpan(`(зам. №${operation.orderId})`)
+                        orderSpan.classList = 'order-number'
+                        type.append(orderSpan)
                     }
 
-                    innerContent.append(table)
+                    const payType = createSpan(operation.payType === null ? '' : payTypeToName[operation.payType])
+
+                    const types = document.createElement('span')
+                    types.classList = 'types'
+                    types.append(type, payType)
+
+                    const header = document.createElement('div')
+                    header.append(time, types)
+
+                    const info = document.createElement('div')
+
+                    if (operation.bonusSum) {
+                        const bonusPaidIcon = document.createElement('span')
+                        bonusPaidIcon.classList = 'material-symbols-outlined'
+                        bonusPaidIcon.textContent = 'savings'
+        
+                        const bonusPaid = document.createElement('span')
+                        const bonusSum = operation.bonusSum || 0
+                        bonusPaid.classList = getClassForNumber(bonusSum)
+                        bonusPaid.textContent = bonusSum.toFixed(2) + ' грн'
+        
+                        const bonusPaidSpan = document.createElement('span')
+                        bonusPaidSpan.classList = 'bonus-paid'
+                        bonusPaidSpan.append(bonusPaidIcon, bonusPaid)
+
+                        info.append(bonusPaidSpan)
+                    }
+
+                    const moneyPaidIcon = document.createElement('span')
+                    moneyPaidIcon.classList = 'material-symbols-outlined'
+                    moneyPaidIcon.textContent = operation.payType === 0 ? 'attach_money' : 'contactless'
+
+                    const moneyPaid = document.createElement('span')
+                    const moneySum = operation.products ? operation.products.length ? operation.sum : operation.type ? -operation.sum : operation.sum : operation.sum
+                    moneyPaid.classList = getClassForNumber(moneySum)
+                    moneyPaid.textContent = moneySum.toFixed(2) + ' грн'
+
+                    const moneyPaidSpan = document.createElement('span')
+                    moneyPaidSpan.classList = 'money-paid'
+                    moneyPaidSpan.append(moneyPaidIcon, moneyPaid)
+
+                    const expandIcon = document.createElement('span')
+                    expandIcon.classList = 'expand-shift material-symbols-outlined'
+                    expandIcon.innerHTML = 'expand_more'
+
+                    if (operation.payType === 2) {
+                        info.append(expandIcon)
+                    } else {
+                        info.append(moneyPaidSpan, expandIcon)
+                    }
+                    
+                    const content = document.createElement('div')
+                    content.classList = 'content'
+                    content.append(header, info)
+
+                    const innerContent = document.createElement('div')
+                    innerContent.classList = 'inner-content'
+
+                    const cashRegisterOperation = document.createElement('div')
+                    cashRegisterOperation.classList = 'form'
+
+                    if (operation.type < 2) {
+                        innerContent.textContent = operation.comment ? 'Коментар: ' + operation.comment : 'Коментар відсутній'
+                    } else if (operation.type === 4) {
+                        cashRegisterOperation.classList.add('surcharge')
+                    } else {
+                        const table = document.createElement('table')
+                        const tr = document.createElement('tr')
+                        tr.append(
+                            createTd('Назва'),
+                            createTd('К-ть'),
+                            createTd('Сума')
+                        )
+
+                        const tbody = document.createElement('tbody')
+                        tbody.append(tr)
+                        table.append(tbody)
+
+                        for (const product of operation.products) {
+                            const tr = document.createElement('tr')
+                            tr.append(
+                                createTd(product.name),
+                                createTd(product.amount),
+                                createTd(product.sum.toFixed(2))
+                            )
+                            table.append(tr)
+                        }
+
+                        innerContent.append(table)
+                    }
+
+                    if (operation.type === 0 ||
+                        operation.type === 1 ||
+                        operation.type === 4) {
+                        cashRegisterOperation.classList.add('cash-register-operation')
+                    }
+
+                    cashRegisterOperation.append(content, innerContent)
+
+                    content.onpointerup = () => {
+                        const cashRegisterContent = cashRegisterOperation.querySelector('.inner-content')
+
+                        if (expandIcon.innerHTML === 'expand_more') {
+                            content.classList.add('active')
+                            expandIcon.innerHTML = 'expand_less'
+                            cashRegisterContent.style.display = 'block'
+                            return
+                        }
+
+                        content.classList.remove('active')
+                        expandIcon.innerHTML = 'expand_more'
+                        cashRegisterContent.style.display = ''
+                    }
+
+                    operationsBlock.append(cashRegisterOperation)
                 }
+            }
 
-                if (operation.type === 0 ||
-                    operation.type === 1 ||
-                    operation.type === 4) {
-                    cashRegisterOperation.classList.add('cash-register-operation')
-                }
+            const viewTypes = shiftInfoModal.querySelectorAll('.shift-view-by .view')
+            viewTypes.forEach(vt => vt.classList.remove('active'))
+            const types = [0, 1, 3, 2, 4]
 
-                cashRegisterOperation.append(content, innerContent)
-
-                content.onpointerup = () => {
-                    const cashRegisterContent = cashRegisterOperation.querySelector('.inner-content')
-
-                    if (expandIcon.innerHTML === 'expand_more') {
-                        content.classList.add('active')
-                        expandIcon.innerHTML = 'expand_less'
-                        cashRegisterContent.style.display = 'block'
+            for (const [index, viewType] of viewTypes.entries()) {
+                viewType.onpointerup = () => {
+                    if (viewType.classList.contains('active')) {
+                        viewType.classList.remove('active')
+                        fillShiftOperations(response)
+                        setShiftStartLabel()
                         return
                     }
 
-                    content.classList.remove('active')
-                    expandIcon.innerHTML = 'expand_more'
-                    cashRegisterContent.style.display = ''
-                }
+                    viewTypes.forEach(vt => vt.classList.remove('active'))
+                    viewType.classList.add('active')
 
-                operations.append(cashRegisterOperation)
+                    const filteredOperations = response.filter(o => o.type === types[index])
+
+                    if (filteredOperations.length) {
+                        fillShiftOperations(filteredOperations)
+
+                        if (!index) {
+                            setShiftStartLabel()
+                        }
+
+                        return
+                    }
+
+                    operationsBlock.innerHTML = ''
+                    operationsBlock.append(createEmptyDataDiv())
+                }
             }
 
-            operations.querySelector('.types span').textContent = 'Початок зміни:'
+            fillShiftOperations(response)
+
+            setShiftStartLabel()
             const shiftEndSums = shiftInfoModal.querySelector('.shift-end-sums')
             shiftEndSums.querySelector('.cash .end-sum').textContent = shift.shiftEndCash.toFixed(2) + ' грн'
             shiftEndSums.querySelector('.terminal-cash .end-sum').textContent = shift.shiftEndTerminalCash.toFixed(2) + ' грн'
