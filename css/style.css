@@ -18,6 +18,7 @@
     --profile-info-top: 4.1rem;
     --time-size: 22rem;
     --time-letter-spacing: 1rem;
+    --time-gap: 4rem;
     --time-width: 27rem;
 }
 
@@ -926,7 +927,7 @@ aside {
     color: rgb(50, 50, 50);
     font-family: TimeTraveler;
     letter-spacing: var(--time-letter-spacing);
-    gap: 4rem;
+    gap: var(--time-gap);
     z-index: 3 !important;
 
     & .hours, & .minutes, & .seconds {
@@ -1163,7 +1164,7 @@ table {
     }
 
     & tbody {
-        box-shadow: rgba(0, 0, 0, .16) 0 3px 6px, rgba(0, 0, 0, .23) 0 3px 6px;
+        box-shadow: rgba(0, 0, 0, .1) 0 3px 6px, rgba(0, 0, 0, .17) 0 3px 6px;
         background: rgb(50, 50, 50);
         color: rgb(235, 235, 235);
         font-size: 1.2rem;
@@ -1878,9 +1879,10 @@ table {
 
 @media only screen and (max-width: 1400px) {
     :root {
-        --time-size: 10rem;
+        --time-size: 12rem;
         --time-letter-spacing: .7rem;
-        --time-width: 13.5rem;
+        --time-gap: 3rem;
+        --time-width: 15rem;
     }
 
     main .header-items {
@@ -1914,12 +1916,21 @@ table {
     }
 }
 
+@media only screen and (max-width: 1100px) {
+    :root {
+        --time-size: 10rem;
+        --time-gap: 2.5rem;
+        --time-width: 13.5rem;
+    }
+}
+
 @media only screen and (max-width: 900px) {
     :root {
         --profile-info-top: 3.4rem;
-        --time-size: 5rem;
+        --time-size: 8rem;
         --time-letter-spacing: .5rem;
-        --time-width: 7rem;
+        --time-gap: 1.5rem;
+        --time-width: 10rem;
     }
 
     .login-modal .login-modal-content {
@@ -2095,15 +2106,26 @@ table {
 }
 
 @media only screen and (max-width: 700px) and (orientation: portrait) {
+    :root {
+        --time-size: 4rem;
+        --time-letter-spacing: .3rem;
+        --time-gap: .7rem;
+        --time-width: 5.5rem;
+    }
+
     .clock-screensaver {
-        display: none !important;
+        margin-right: 0;
+        padding: .1rem;
+        gap: 0;
+        border-radius: .3rem;
+        font-size: .8rem;
     }
 
     .calendar-component {
         padding: .2rem .4rem;
         border-radius: .7rem;
         font-size: .9rem;
-        width: 14rem;
+        width: 14.5rem;
 
         & .calendar-icons {
             gap: .3rem;
