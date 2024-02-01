@@ -320,8 +320,12 @@
         padding: 1rem;
         padding-top: 0;
 
-        .shift-title-time .shift-view-by .view-group {
-            gap: .8rem;
+        .shift-title-time .shift-view-by {
+            gap: 1rem;
+
+            & .view-group {
+                gap: .8rem;
+            }
         }
 
         & .operations .form .content div .money-paid {
