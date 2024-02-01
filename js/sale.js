@@ -148,6 +148,8 @@ const showSaleInfo = e => {
             cashRegistersSelect.value = ''
         })
     }).catch(e => {
+        hidePageLoad()
+        
         if (e.message.startsWith('403')) {
             showMessage('error', `Зміна відкрита співробітником:\n${e.message.substring(e.message.indexOf('403') + 4)}`)
             return
