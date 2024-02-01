@@ -16,6 +16,9 @@
     --last-page-color: rgb(180, 180, 180);
     --delete-action-color: 194, 30, 86;
     --profile-info-top: 4.1rem;
+    --time-size: 22rem;
+    --time-letter-spacing: 1rem;
+    --time-width: 27rem;
 }
 
 ::-webkit-scrollbar {
@@ -919,15 +922,15 @@ aside {
     animation: clock-animation .7s;
     cursor: pointer;
     background: rgb(250, 250, 250) !important;
-    font-size: 22rem;
+    font-size: var(--time-size);
     color: rgb(50, 50, 50);
     font-family: TimeTraveler;
-    letter-spacing: 1rem;
+    letter-spacing: var(--time-letter-spacing);
     gap: 4rem;
     z-index: 3 !important;
 
     & .hours, & .minutes, & .seconds {
-        width: 27rem;
+        width: var(--time-width);
     }
 }
 
@@ -1160,6 +1163,7 @@ table {
     }
 
     & tbody {
+        box-shadow: rgba(0, 0, 0, .16) 0 3px 6px, rgba(0, 0, 0, .23) 0 3px 6px;
         background: rgb(50, 50, 50);
         color: rgb(235, 235, 235);
         font-size: 1.2rem;
@@ -1816,6 +1820,14 @@ table {
     }
 }
 
+@media only screen and (max-width: 1600px) {
+    :root {
+        --time-size: 16rem;
+        --time-letter-spacing: .8rem;
+        --time-width: 20rem;
+    }
+}
+
 @media only screen and (max-width: 1500px) {
     header {
         padding: .3rem 1.2rem;
@@ -1865,6 +1877,12 @@ table {
 }
 
 @media only screen and (max-width: 1400px) {
+    :root {
+        --time-size: 10rem;
+        --time-letter-spacing: .7rem;
+        --time-width: 13.5rem;
+    }
+
     main .header-items {
         flex-wrap: wrap;   
     }
@@ -1899,6 +1917,9 @@ table {
 @media only screen and (max-width: 900px) {
     :root {
         --profile-info-top: 3.4rem;
+        --time-size: 5rem;
+        --time-letter-spacing: .5rem;
+        --time-width: 7rem;
     }
 
     .login-modal .login-modal-content {
@@ -2037,13 +2058,17 @@ table {
         padding: .6rem .5rem;
     }
 
-    .sub-menu li {
-        &.main-padding, &.sale-padding {
-            margin-left: 2.2rem;
-        }
+    .sub-menu {
+        margin-bottom: 0;
 
-        & div {
-            padding: .5rem;
+        & li {
+            &.main-padding, &.sale-padding {
+                margin-left: 2.2rem;
+            }
+    
+            & div {
+                padding: .5rem;
+            }
         }
     }
 
@@ -2070,6 +2095,29 @@ table {
 }
 
 @media only screen and (max-width: 700px) and (orientation: portrait) {
+    .clock-screensaver {
+        display: none !important;
+    }
+
+    .calendar-component {
+        padding: .2rem .4rem;
+        border-radius: .7rem;
+        font-size: .9rem;
+        width: 14rem;
+
+        & .calendar-icons {
+            gap: .3rem;
+
+            & img:first-child {
+                width: 1.3rem;
+            }
+
+            & img:last-child {
+                width: 1.5rem;
+            }
+        }
+    }
+
     #calendar {
         --calendar-padding: 1rem;
         top: 0 !important;
