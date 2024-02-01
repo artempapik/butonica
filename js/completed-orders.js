@@ -104,7 +104,7 @@ const showCompletedOrderInfo = e => {
         replaceLoadIcons()
     }).catch(() => showMessage('error', getErrorMessage('замовлення')))
 
-    fillDatalists()
+    fillDatalistsLabels()
 }
 
 const fillCompletedOrdersTable = order => completedOrdersTable.append(createOrderRow(order, completedOrdersTable))
