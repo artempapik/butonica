@@ -2117,6 +2117,7 @@ table {
         margin-right: 0;
         padding: .3rem 2rem;
         position: fixed;
+        top: 0;
         left: .4rem;
         gap: .5rem;
     }
