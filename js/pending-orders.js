@@ -14,7 +14,7 @@ const showPendingOrderInfo = e => {
         replaceLoadIcons()
     }).catch(() => showMessage('error', getErrorMessage('замовлення')))
 
-    fillDatalists()
+    fillDatalistsLabels()
 }
 
 const fillPendingOrdersTable = order => pendingOrdersTable.append(createOrderRow(order, pendingOrdersTable))
