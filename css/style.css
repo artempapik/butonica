@@ -1476,6 +1476,7 @@ table {
 
         &.active {
             background: var(--active-type-color);
+            box-shadow: rgba(50, 50, 93, .25) 0 2px 5px -1px, rgba(0, 0, 0, .3) 0 1px 3px -1px;
 
             & span {
                 font-weight: bold;
@@ -2117,7 +2118,7 @@ table {
         margin-right: 0;
         padding: .3rem 2rem;
         position: fixed;
-        top: 0;
+        top: .1rem;
         left: .4rem;
         gap: .5rem;
     }
