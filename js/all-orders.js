@@ -4,7 +4,11 @@ const orderInfoModal = document.querySelector('.order-info-modal')
 const internetOrderModal = document.querySelector('.create-internet-order-modal')
 const internetTotalSumElement = internetOrderModal.querySelector('.sale-order-total-sum input')
 
-const fillDatalists = () => {
+const fillDatalistsLabels = () => {
+    get(`Label/${loginInfo.companyId}`)
+        .then(response => labels = response)
+        .catch(() => showMessage('error', getErrorMessage('мітки')))
+
     get(`Product/ids-names-costs/${loginInfo.companyId}`).then(response => {
         orderProducts = response
         
@@ -123,10 +127,6 @@ const showAllOrderInfo = e => {
     main.innerHTML = menuItemsContents['allorder']
     allOrdersTable = document.querySelector('.all-order-table table')
 
-    get(`Label/${loginInfo.companyId}`)
-        .then(response => labels = response)
-        .catch(() => showMessage('error', getErrorMessage('мітки')))
-
     get(`Order/${loginInfo.companyId}/pages-count`).then(response => {
         if (!response) {
             return
@@ -146,7 +146,7 @@ const showAllOrderInfo = e => {
         replaceLoadIcons()
     }).catch(() => showMessage('error', getErrorMessage('замовлення')))
 
-    fillDatalists()
+    fillDatalistsLabels()
 
     calendar.querySelector('img').onpointerup = () => {
         checkDate(getAllOrdersByDate)
