@@ -2115,10 +2115,10 @@ table {
 
     .clock-screensaver {
         margin-right: 0;
-        padding: .3rem 2.6rem;
+        padding: .3rem 2rem;
         position: fixed;
         left: .4rem;
-        gap: .8rem;
+        gap: .5rem;
     }
 
     .calendar-component {
