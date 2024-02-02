@@ -239,6 +239,7 @@
 
             & tbody {
                 position: relative;
+                box-shadow: none;
 
                 & td {
                     color: #000;
