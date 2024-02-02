@@ -12,7 +12,7 @@
     padding-top: 0;
     display: flex;
     flex-direction: row;
-    width: 58rem;
+    width: 59rem;
     height: 90vh;
 
     & .contractor-sums {
@@ -48,6 +48,8 @@
 
         & .contractor-supplies-products {
             flex: 2;
+            overflow-y: auto;
+            max-height: calc(100vh - 16rem);
         }
     }
 
@@ -135,6 +137,8 @@
 }
 
 .contractor-supply-products table {
+    border-left: .1rem solid rgb(170, 170, 170);
+    border-right: .1rem solid rgb(170, 170, 170);
     display: block;
     width: 100%;
     margin: .5rem 0;
@@ -190,8 +194,11 @@
 
         & .all-supplies {
             flex-direction: column;
+            overflow-y: unset;
 
             & .contractor-supplies-products {
+                overflow-y: unset;
+                max-height: unset;
                 margin-top: 1.5rem;
             }
         }
