@@ -7,7 +7,7 @@
         margin: .5rem 0;
         justify-content: unset;
         gap: 3rem;
-        
+
         & select {
             padding: .55rem;
         }
@@ -83,14 +83,29 @@
     }
 }
 
+@media only screen and (max-width: 700px) {
+    .create-inventory-modal-content {
+        gap: 0;
+        padding: 0;
+
+        & .inventory-header {
+            margin: 0;
+
+            & .form {
+                gap: 0;
+            }
+        }
+    }
+}
+
 @media only screen and (max-width: 700px) and (orientation: portrait) {
     .inventory-header button {
         align-self: start;
     }
     
     .create-inventory-modal-content {
-        padding: .4rem .2rem;
-        gap: .5rem;
+        padding: .1rem .1rem;
+        gap: .1rem;
 
         & .inventory-header {
             margin: 0;
