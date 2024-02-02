@@ -50,6 +50,10 @@
                 border-radius: .6rem;
                 box-shadow: rgba(0, 0, 0, .02) 0 1px 3px 0px, rgba(27, 31, 35, .15) 0 0 0 1px;
 
+                &:first-child img {
+                    opacity: .9;
+                }
+
                 & .view {
                     display: flex;
                     flex-direction: column;
@@ -64,16 +68,16 @@
                     opacity: .95;
 
                     &:hover, &.active {
-                        opacity: 1;
                         background: rgb(220, 220, 220);
                     }
 
                     &.active {
                         box-shadow: rgba(50, 50, 93, .25) 0 2px 5px -1px, rgba(0, 0, 0, .3) 0 1px 3px -1px;
                     }
-    
+                    
                     & img {
                         width: 2.3rem;
+                        filter: drop-shadow(1px 1px 1px rgb(220, 220, 220));
                     }
                 }
             }
