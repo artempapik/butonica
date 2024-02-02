@@ -1,11 +1,13 @@
 .create-inventory-modal-content {
     gap: 1.5rem;
-    width: calc(var(--modal-content-width) + 13rem);
+    width: calc(var(--modal-content-width) + 30rem);
     padding: 1rem;
 
     & .inventory-header {
         margin: .5rem 0;
-
+        justify-content: unset;
+        gap: 3rem;
+        
         & select {
             padding: .55rem;
         }
