@@ -155,7 +155,7 @@ const createInventoryModal = () => {
                 const productFactAmount = document.createElement('input')
                 productFactAmount.onchange = () => {
                     const delta = +productFactAmount.value - inventoryProduct.amount
-                    deltaColumn.textContent = delta
+                    deltaColumn.textContent = delta.toFixed(2)
 
                     const sum = delta * inventoryProduct.buyingCost
                     sumColumn.classList = getClassForNumber(sum)
