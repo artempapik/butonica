@@ -121,6 +121,7 @@
 
             &:hover {
                 background: #fff;
+                outline: none;
             }
 
             & .remove-supply-product {
