@@ -74,6 +74,8 @@
                     <span class="material-symbols-outlined">logout</span>
                     <span>Вийти</span>
                 </div>
+                <div id="version" onpointerup="showChangelog()">
+                </div>
             </div>
         </div>
     </header>
@@ -2117,6 +2119,12 @@
         <div></div>
         <div></div>
     </div>
+    <div id="loader-page-load">
+        <div class="loader">
+            <img src="img/parsley.png">
+            <span>Butonica</span>
+        </div>
+    </div>
     <div id="loader-page">
         <div id="loader"></div>
     </div>
@@ -2232,6 +2240,19 @@
         <span class="minutes"></span>
         <span>:</span>
         <span class="seconds"></span>
+    </div>
+    <div class="changelog-modal">
+        <div class="changelog-modal-content">
+            <h1>
+                <img src="img/git.png">
+                <span>Changelog</span>
+            </h1>
+            <div class="logs"></div>
+        </div>
+    </div>
+    <div class="no-internet-modal">
+        <img src="img/no-signal.png">
+        <h1>Проблеми? Зі зв'язком</h1>
     </div>
     <script src="js/script.js"></script>
     <script src="js/company.js"></script>
