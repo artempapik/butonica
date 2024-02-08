@@ -1564,7 +1564,7 @@ table {
 #message {
     display: none;
     position: fixed;
-    z-index: 2;
+    z-index: 3;
     padding: 1.1rem 2.5rem;
     border-radius: .7rem;
     top: 3%;
@@ -1966,7 +1966,7 @@ table {
 .no-internet-modal {
     flex-direction: column;
     gap: 2rem;
-    background: rgba(255, 255, 255, .95);
+    background: rgba(255, 255, 255, .97);
     animation: no-internet 10s linear infinite;
 
     & h1 {
@@ -2283,7 +2283,6 @@ table {
 
     .no-internet-modal {
         gap: 1.5rem;
-        background: rgba(255, 255, 255, .97);
 
         & img {
             width: 5rem;
