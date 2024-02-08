@@ -1855,7 +1855,7 @@ const changelogs = [
         changes: [
             {
                 type: CHANGELOG_TYPES.bug,
-                text: 'фікс бага у меню продаж, який виникав при відкритті зміни'
+                text: 'фікс багу у меню продаж, який виникав при відкритті зміни'
             },
             {
                 type: CHANGELOG_TYPES.bug,
@@ -1908,7 +1908,7 @@ const changelogs = [
                 text: 'тепер система забороняє створювати 2 однакові категорії або товара'
             },
             {
-                text: 'невеликий редизайн іконок'
+                text: 'мінорний редизайн іконок'
             }
         ]
     },
@@ -1926,7 +1926,7 @@ const changelogs = [
             },
             {
                 type: CHANGELOG_TYPES.bug,
-                text: 'фікс бага із входом у систему з довільним регістром'
+                text: 'фікс багу із входом у систему з довільним регістром'
             }
         ]
     },
@@ -1936,7 +1936,7 @@ const changelogs = [
         changes: [
             {
                 type: CHANGELOG_TYPES.bug,
-                text: 'фікс багу, коди інколи при створенні товару виникало дублювання складів'
+                text: 'фікс багу, коли інколи при створенні товару виникало дублювання складів'
             },
             {
                 type: CHANGELOG_TYPES.bug,
@@ -2641,7 +2641,7 @@ window.onload = () => setTimeout(() => {
 const noInternetModal = document.querySelector('.no-internet-modal')
 
 const noInternetPhrases = [
-    "Проблеми маєш? Зі зв'язком",
+    "Маєш проблеми зі зв'язком?",
     "Очікуємо, поки між нами знову буде зв'язок",
     "Проблеми зі зв'язком – але не в житті",
     'Butonica сумує від нашого дисконекту'
@@ -2649,12 +2649,12 @@ const noInternetPhrases = [
 
 window.onoffline = () => {
     hideBodyOverflow()
-    noInternetModal.querySelector('h1').textContent = noInternetPhrases[getRandom(0, noInternetPhrases.length - 1)]
+    noInternetModal.querySelector('h1').textContent = noInternetPhrases[getRandom(0, noInternetPhrases.length - 1)] + ' 💔'
     noInternetModal.style.display = 'flex'
 }
 
 window.ononline = () => {
     document.body.style.overflow = ''
     noInternetModal.style.display = ''
-    showMessage('success', 'Ви знову в мережі!')
+    showMessage('success', 'Ви знову в мережі 🔥')
 }
