@@ -2081,7 +2081,7 @@ const changelogs = [
             },
             {
                 type: CHANGELOG_TYPES.exclamation,
-                text: "тепер у меню «Продаж» у розділі «Каса» для внесень і винесень можна додавати швидкі коментарі, використовуючи стікери («Вода», «Сміття», «Кур'єр», «Аренда приміщення» та «Розмін»)"
+                text: "тепер у меню «Продаж» у розділі «Каса» для внесень і винесень можна додавати швидкі коментарі, використовуючи стікери («Кур'єр», «Сміття», «Вода», «Аренда приміщення» та «Розмін»)"
             },
             {
                 type: CHANGELOG_TYPES.exclamation,
@@ -2639,9 +2639,22 @@ window.onload = () => setTimeout(() => {
 }, 1000)
 
 const noInternetModal = document.querySelector('.no-internet-modal')
-window.onoffline = () => noInternetModal.style.display = 'flex'
+
+const noInternetPhrases = [
+    "Проблеми маєш? Зі зв'язком",
+    "Очікуємо, поки між нами знову буде зв'язок",
+    "Проблеми зі зв'язком – але не в житті",
+    'Butonica сумує від нашого дисконекту'
+]
+
+window.onoffline = () => {
+    hideBodyOverflow()
+    noInternetModal.querySelector('h1').textContent = noInternetPhrases[getRandom(0, noInternetPhrases.length - 1)]
+    noInternetModal.style.display = 'flex'
+}
 
 window.ononline = () => {
+    document.body.style.overflow = ''
     noInternetModal.style.display = ''
     showMessage('success', 'Ви знову в мережі!')
 }
