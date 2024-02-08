@@ -1049,14 +1049,15 @@
             & input[list=internet-product], & input[list=internet-flavor] {
                 width: 12rem;
             }
-        
+            
             & tr {
                 background: #fff;
         
                 &:hover {
                     background: #fff;
+                    outline: none;
                 }
-        
+
                 & .remove-internet-product, & .remove-internet-flavor {
                     transition: .1s;
         
@@ -1097,9 +1098,15 @@
             margin-bottom: 1.5rem;
         }
         
-        & table td:nth-child(2) {
-            width: 5rem;
-            text-align: center;
+        & table {
+            & tr:hover {
+                outline: none;
+            }
+
+            & td:nth-child(2) {
+                width: 5rem;
+                text-align: center;
+            }
         }
     }
 
