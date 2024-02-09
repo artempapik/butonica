@@ -1191,7 +1191,7 @@ const hideBodyOverflow = () => document.body.style.overflow = 'hidden'
 const hideModal = modal => {
     modal.style.display = ''
 
-    if (!intervalId) {
+    if (!intervalId && modal !== calculatorModal) {
         document.body.style.overflow = ''
     }
 }
@@ -1243,7 +1243,8 @@ window.onpointerup = e => {
         employeeInfoModal,
         notesModal,
         calendarModal,
-        changelogModal
+        changelogModal,
+        calculatorModal
     ]) {
         if (e.target === modal) {
             setTimeout(() => hideModal(modal), 1)
@@ -2659,3 +2660,65 @@ window.ononline = () => {
     noInternetModal.style.display = ''
     showMessage('success', 'Ви знову в мережі 🔥')
 }
+
+const calculatorModal = document.querySelector('.calculator-modal')
+const calculator = document.querySelector('#calculator')
+let enterInput
+
+const calculatorNumbers = calculator.querySelectorAll('span')
+
+const keyToCalculatorNumber = {
+    0: 9,
+    1: 6,
+    2: 7,
+    3: 8,
+    4: 3,
+    5: 4,
+    6: 5,
+    7: 0,
+    8: 1,
+    9: 2
+}
+
+window.onkeyup = e => {
+    if (calculatorModal.style.display !== 'flex') {
+        return
+    }
+
+    calculatorNumbers.forEach(n => n.classList.remove('active'))
+
+    if (e.key === 'Backspace') {
+        calculatorNumbers[calculatorNumbers.length - 1].classList.add('active')
+        enterInput.textContent = enterInput.textContent.slice(0, -1)
+        return
+    }
+
+    if (enterInput.textContent.length > 8) {
+        return
+    }
+
+    if (e.key === ',' || e.key === '.') {
+        calculatorNumbers[calculatorNumbers.length - 2].classList.add('active')
+        enterInput.textContent += ','
+    }
+
+    if (isNaN(Number(e.key)) || e.key === null || e.key === ' ') {
+        return
+    }
+
+    calculatorNumbers[keyToCalculatorNumber[e.key]].classList.add('active')
+    enterInput.textContent += e.key
+}
+
+calculatorNumbers.forEach(e => e.onpointerup = () => {
+    if (e.textContent === 'backspace') {
+        enterInput.textContent = enterInput.textContent.slice(0, -1)
+        return
+    }
+
+    if (enterInput.textContent.length > 8) {
+        return
+    }
+
+    enterInput.textContent += e.textContent
+})
