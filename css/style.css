@@ -476,13 +476,15 @@ header {
                 align-items: center;
                 padding: .5rem .8rem;
                 cursor: pointer;
+                transition: .1s;
 
                 &:hover {
                     background: rgba(var(--table-hover-color), .15);
                 }
 
                 &:nth-child(5):hover {
-                    font-weight: bold;
+                    padding-left: 1.7rem;
+                    gap: .3rem;
                 }
 
                 &:nth-child(3).screensaver {
