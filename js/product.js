@@ -125,12 +125,23 @@ const createProductModal = () => {
         const stockHeader = document.createElement('h4')
         stockHeader.textContent = stock.name
 
-        const stockPriceInput = document.createElement('input')
+        const stockPriceInput = document.createElement('span')
+        stockPriceInput.classList = 'enter-value'
         stockPriceInput.dataset.id = stock.id
-        stockPriceInput.type = 'number'
-        stockPriceInput.min = '0'
-        stockPriceInput.max = '1000'
-        stockPriceInput.oninput = e => handlePriceInput(e)
+
+        stockPriceInput.onpointerup = e => {
+            calculatorNumbers.forEach(n => n.classList.remove('active'))
+            enterInput = stockPriceInput
+
+            calculatorModal.style.display = 'flex'
+            const calculatorRect = calculator.getBoundingClientRect()
+            calculator.style.top = (e.clientY - calculatorRect.height * 1.6) + 'px'
+            calculator.style.left = (e.clientX - calculatorRect.width * .7) + 'px'
+
+            if (e.clientX + calculatorRect.width > window.innerWidth) {
+                calculator.style.left = (window.innerWidth - calculatorRect.width * 1.5) + 'px'
+            }
+        }
 
         const stockPriceBlock = document.createElement('div')
         stockPriceBlock.append(stockHeader, stockPriceInput)
@@ -209,14 +220,25 @@ const createProductRow = product => {
                     const stockHeader = document.createElement('h4')
                     stockHeader.textContent = productStockPrice.stockName
             
-                    const stockPriceInput = document.createElement('input')
+                    const stockPriceInput = document.createElement('span')
+                    stockPriceInput.classList = 'enter-value'
                     stockPriceInput.dataset.id = productStockPrice.id
                     stockPriceInput.dataset.stockId = productStockPrice.stockId
-                    stockPriceInput.value = productStockPrice.sellingCost
-                    stockPriceInput.type = 'number'
-                    stockPriceInput.min = '0'
-                    stockPriceInput.max = '1000'
-                    stockPriceInput.oninput = e => handlePriceInput(e)
+                    stockPriceInput.textContent = productStockPrice.sellingCost
+
+                    stockPriceInput.onpointerup = e => {
+                        calculatorNumbers.forEach(n => n.classList.remove('active'))
+                        enterInput = stockPriceInput
+
+                        calculatorModal.style.display = 'flex'
+                        const calculatorRect = calculator.getBoundingClientRect()
+                        calculator.style.top = (e.clientY - calculatorRect.height * 1.6) + 'px'
+                        calculator.style.left = (e.clientX - calculatorRect.width * .7) + 'px'
+
+                        if (e.clientX + calculatorRect.width > window.innerWidth) {
+                            calculator.style.left = (window.innerWidth - calculatorRect.width * 1.5) + 'px'
+                        }
+                    }
     
                     const stockPriceBlock = document.createElement('div')
                     stockPriceBlock.append(stockHeader, stockPriceInput)
@@ -315,7 +337,7 @@ const createProduct = () => {
     }
 
     for (const stockPriceBlock of stockPricesBlock) {
-        if (!stockPriceBlock.querySelector('input').value) {
+        if (!stockPriceBlock.querySelector('span').textContent) {
             showMessage('error', 'Введіть ціну продажу для усіх складів')
             return
         }
@@ -327,8 +349,8 @@ const createProduct = () => {
     const stockPrices = []
 
     for (const stockPriceBlock of stockPricesBlock) {
-        const input = stockPriceBlock.querySelector('input')
-        const sellingCost = +input.value            
+        const input = stockPriceBlock.querySelector('span')
+        const sellingCost = +input.textContent
 
         stockPrices.push({
             stockId: input.dataset.id,
