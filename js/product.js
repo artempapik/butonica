@@ -405,7 +405,7 @@ const editProduct = (id, oldRow) => {
     const stockPricesBlock = productModal.querySelectorAll('.stock-prices div')
 
     for (const stockPriceBlock of stockPricesBlock) {
-        if (!stockPriceBlock.querySelector('input').value) {
+        if (!stockPriceBlock.querySelector('span').textContent) {
             showMessage('error', 'Введіть ціну продажу для усіх складів')
             return
         }
@@ -417,8 +417,8 @@ const editProduct = (id, oldRow) => {
     const stockPrices = []
 
     for (const stockPriceBlock of stockPricesBlock) {
-        const input = stockPriceBlock.querySelector('input')
-        const sellingCost = +input.value
+        const input = stockPriceBlock.querySelector('span')
+        const sellingCost = +input.textContent
 
         stockPrices.push({
             id: input.dataset.id,
