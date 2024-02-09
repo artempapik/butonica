@@ -2697,9 +2697,9 @@ window.onkeyup = e => {
         return
     }
 
-    if (e.key === ',' || e.key === '.') {
+    if (e.key === '.' || e.key === ',') {
         calculatorNumbers[calculatorNumbers.length - 2].classList.add('active')
-        enterInput.textContent += ','
+        enterInput.textContent += '.'
     }
 
     if (isNaN(Number(e.key)) || e.key === null || e.key === ' ') {
@@ -2711,6 +2711,8 @@ window.onkeyup = e => {
 }
 
 calculatorNumbers.forEach(e => e.onpointerup = () => {
+    calculatorNumbers.forEach(n => n.classList.remove('active'))
+
     if (e.textContent === 'backspace') {
         enterInput.textContent = enterInput.textContent.slice(0, -1)
         return
