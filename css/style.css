@@ -1978,6 +1978,76 @@ table {
     }
 }
 
+.enter-value {
+    cursor: pointer;
+    text-align: center;
+    font-family: 'Roboto Mono', monospace;
+    width: 5.5rem;
+    height: 1rem;
+    padding: .3rem 0;
+    border-bottom: .1rem rgb(100, 100, 100) dashed;
+
+    &:hover {
+        outline: .1rem rgb(100, 100, 100) dashed;
+        background: rgb(235, 235, 235);
+    }
+}
+
+.calculator-modal {
+    background: rgb(255, 255, 255, .25);
+
+    & #calculator {
+        animation: calendar-transition .15s;
+        position: fixed;
+        background: #fff;
+        width: fit-content;
+        display: flex;
+        flex-direction: column;
+        border: .15rem rgb(30, 30, 30) solid;
+        font-family: 'Roboto Mono', monospace;
+        font-size: 1.1rem;
+        box-shadow: rgba(60, 64, 67, .3) 0 1px 2px 0, rgba(60, 64, 67, .15) 0 2px 6px 2px;
+        
+        &::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -10px;
+            border-width: 10px;
+            border-style: solid;
+            border-color: rgb(50, 50, 50) transparent transparent transparent;
+        }
+
+        & .calculator-row {
+            display: flex;
+    
+            &:last-child span:last-child {
+                background: rgba(220, 0, 0, .85);
+                color: rgb(245, 245, 245);
+    
+                &:hover, &.active {
+                    font-weight: normal;
+                    background: rgb(255, 49, 49);
+                }
+            }
+
+            & span {
+                text-align: center;
+                width: 2.3rem;
+                padding: .7rem;
+                border: .1rem rgb(100, 100, 100) solid;
+                cursor: pointer;
+    
+                &:hover, &.active {
+                    font-weight: bold;
+                    background: rgb(220, 220, 220);
+                }
+            }
+        }
+    }
+}
+
 @media (hover: none) {
     :root {
         touch-action: pan-x pan-y;
@@ -2297,6 +2367,10 @@ table {
             text-align: center;
             font-size: 1.5rem;
         }
+    }
+
+    .calculator-modal #calculator .calculator-row span {
+        padding: .3rem 0;
     }
 }
 
