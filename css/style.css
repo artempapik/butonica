@@ -2370,7 +2370,8 @@ table {
     }
 
     .calculator-modal #calculator .calculator-row span {
-        padding: .3rem 0;
+        padding: .4rem 0;
+        width: 2.5rem;
     }
 }
 
