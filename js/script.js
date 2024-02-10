@@ -2724,3 +2724,11 @@ calculatorNumbers.forEach(e => e.onpointerup = () => {
 
     enterInput.textContent += e.textContent
 })
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('js/sw.js')
+            .then(_ => console.log('registered'))
+            .catch(e => console.log(`${e}`))
+    })
+}
