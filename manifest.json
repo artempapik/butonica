@@ -1,8 +1,8 @@
 {
     "name": "Butonica",
     "short_name": "Butonica",
-    "theme_color": "#fff",
-    "background_color": "#fff",
+    "background_color": "#fdfdfd",
+    "theme_color": "#db4938",
     "display": "standalone",
     "orientation": "any",
     "scope": "/",
