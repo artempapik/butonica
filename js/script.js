@@ -2727,8 +2727,8 @@ calculatorNumbers.forEach(e => e.onpointerup = () => {
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('js/sw.js')
-            .then(_ => console.log('registered'))
+        navigator.serviceWorker.register('./sw.js')
+            .then(_ => {})
             .catch(e => console.log(`${e}`))
     })
 }
