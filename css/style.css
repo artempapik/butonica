@@ -2016,7 +2016,7 @@ table {
             margin-left: -10px;
             border-width: 10px;
             border-style: solid;
-            border-color: rgb(50, 50, 50) transparent transparent transparent;
+            border-color: rgb(100, 100, 100) transparent transparent transparent;
         }
 
         & .calculator-row {
@@ -2036,7 +2036,7 @@ table {
                 text-align: center;
                 width: 2.3rem;
                 padding: .7rem;
-                border: .1rem rgb(100, 100, 100) solid;
+                outline: .1rem rgb(150, 150, 150) solid;
                 cursor: pointer;
     
                 &:hover, &.active {
