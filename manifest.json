@@ -1,6 +1,6 @@
 {
-    "name": "calculator",
-    "short_name": "calculator",
+    "name": "Butonica",
+    "short_name": "Butonica",
     "theme_color": "#fff",
     "background_color": "#fff",
     "display": "standalone",
@@ -8,10 +8,10 @@
     "scope": "/",
     "start_url": "index.html",
     "icons": [
-      {
-        "src": "img/parsley.png",
-        "sizes": "64x64",
-        "type": "image/png"
-      }
+        {
+            "src": "img/parsley.png",
+            "sizes": "64x64",
+            "type": "image/png"
+        }
     ]
-  }
+}
