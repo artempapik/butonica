@@ -1,15 +1,13 @@
 {
     "name": "Butonica",
     "short_name": "Butonica",
-    "background_color": "#fdfdfd",
-    "theme_color": "#db4938",
     "display": "standalone",
     "orientation": "any",
     "scope": "/",
     "start_url": "index.html",
     "icons": [
         {
-            "src": "img/parsley.png",
+            "src": "img/parsley_pwa.png",
             "sizes": "64x64",
             "type": "image/png"
         }
