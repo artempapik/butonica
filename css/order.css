@@ -398,6 +398,10 @@
 }
 
 @media only screen and (max-width: 700px) {
+    .order-info-modal-content .order-status .statuses .status.active-order-status {
+        font-weight: unset;
+    }
+
     [class$="order-table"] table {
         & tr:not(:first-child) {
             & td:nth-child(6) span, & td:nth-child(7) span {
@@ -447,7 +451,7 @@
 
         & .customer, & .recipient {
             width: fit-content;
-            min-width: 50%;
+            min-width: 65%;
             margin: 0 auto;
             flex-direction: column;
             gap: 1.4rem;
