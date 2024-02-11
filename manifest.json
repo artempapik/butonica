@@ -12,13 +12,8 @@
             "type": "image/png"
         },
         {
-            "src": "img/parsley_pwa.png",
+            "src": "img/parsley_pwa_192.png",
             "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "img/parsley_pwa.png",
-            "sizes": "512x512",
             "type": "image/png"
         }
     ]
