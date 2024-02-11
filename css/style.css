@@ -2237,11 +2237,15 @@ table {
 
     main {
         &.main-padding, &.sale-padding {
-            padding: 0 .3rem;
+            padding: 0;
         }
 
         & h1 {
             font-size: 1.5rem;
+        }
+
+        input[type=search] {
+            margin-left: .5rem;
         }
     }
 
@@ -2290,6 +2294,7 @@ table {
         & [class$="actions"] {
             & span {
                 font-size: 1rem;
+                padding: .3rem .5rem;
 
                 &:first-child {
                     margin-right: .3rem;
@@ -2339,6 +2344,7 @@ table {
     }
 
     [class$="filters"] {
+        padding: 0 .5rem;
         width: unset;
 
         & button {
@@ -2438,6 +2444,8 @@ table {
     }
 
     main [class$="header"] {
+        padding: 0 .5rem;
+
         & .header-items {
             & span:not(.change-page span, [class$="view-type"] span, .period-filter span) {
                 display: none !important;
