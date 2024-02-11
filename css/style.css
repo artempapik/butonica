@@ -2278,7 +2278,7 @@ table {
     }
 
     main table tbody {
-        top: 2.9rem;
+        top: 3rem;
     }
 
     table {
@@ -2295,10 +2295,6 @@ table {
             & span {
                 font-size: 1rem;
                 padding: .3rem .5rem;
-
-                &:first-child {
-                    margin-right: .3rem;
-                }
             }
         }
 
@@ -2473,10 +2469,6 @@ table {
 
     main .order-header {
         align-items: start;
-    }
-
-    table [class$="actions"] span:first-child {
-        margin-right: 0;
     }
 
     [class$="modal-content"] {
