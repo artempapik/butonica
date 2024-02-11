@@ -1815,7 +1815,7 @@ const changelogs = [
         changes: [
             {
                 type: CHANGELOG_TYPES.success,
-                text: 'Butonica тепер наявна у вигляді PWA (Progressive Web Application)! Тепер ви можете встановити сервіс на домашній екран і користуватися ним, як мобільним додатком'
+                text: 'Butonica тепер доступна у вигляді PWA (Progressive Web Application)! Тепер ви можете встановити сервіс на домашній екран і користуватися ним, як мобільним додатком'
             },
             {
                 type: CHANGELOG_TYPES.fire,
