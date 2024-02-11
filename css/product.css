@@ -111,3 +111,9 @@
 .product-table table tr:not(:first-child) {
     cursor: pointer;
 }
+
+@media only screen and (max-width: 700px) and (orientation: portrait) {
+    .product-table table td:first-child {
+        max-width: 9.5rem;
+    }
+}
