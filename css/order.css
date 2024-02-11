@@ -421,10 +421,6 @@
                 padding-left: .3rem;
                 padding-right: .3rem;
             }
-
-            &:last-child span {
-                padding: .2rem .5rem;
-            }
         }
     }
 }
