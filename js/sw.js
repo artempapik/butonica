@@ -1,7 +1,6 @@
 const cacheName = 'butonica'
 
 const cacheAsset = [
-    'img/add_note.png',
     'img/calendar.png',
     'img/cart.png',
     'img/check.png',
@@ -14,10 +13,8 @@ const cacheAsset = [
     'img/empty-box.webp',
     'img/empty-flower.webp',
     'img/exchange.png',
-    'img/git.png',
     'img/instagram.png',
     'img/no-signal.png',
-    'img/note.png',
     'img/order.png',
     'img/parsley.png',
     'img/period.png',
@@ -26,7 +23,7 @@ const cacheAsset = [
     'img/rent.png',
     'img/search.png',
     'img/surcharge.png',
-    'img/time_left.png',
+    'img/time-left.png',
     'img/today.png',
     'img/trash.png',
     'img/water.png',
