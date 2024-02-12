@@ -1859,10 +1859,17 @@ window.onoffline = () => {
     noInternetModal.style.display = 'flex'
 }
 
+const internetPhrases = [
+    "Зв'язок відновлено",
+    'Ми знову в мережі',
+    'Можна знову працювати',
+    'Проблеми відсутні'
+]
+
 window.ononline = () => {
     document.body.style.overflow = ''
     noInternetModal.style.display = ''
-    showMessage('success', 'Ви знову в мережі 🔥')
+    showMessage('success', internetPhrases[getRandom(0, internetPhrases.length - 1)] + ' 🔥')
 }
 
 const calculatorModal = document.querySelector('.calculator-modal')
