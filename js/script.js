@@ -1940,6 +1940,6 @@ if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js')
             .then(_ => {})
-            .catch(e => console.log(`${e}`))
+            .catch(e => console.log(e))
     })
 }
