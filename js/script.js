@@ -1953,7 +1953,10 @@ Notification.requestPermission().then(permission => {
 })
 
 navigator.serviceWorker.ready.then(registration => {
-    registration.pushManager.subscribe({ userVisibleOnly: true })
+    registration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: 'BFmkGFeE0h2F6QF6MA3DoP35vJlCVu-op-YbrNNFMLe7hYj6p7kzjCGwWZuRll0_GRtLwTre6EV9U0nja-fQwW4'
+    })
         .then(subscription => console.log('Subscribed for push: ' + subscription.endpoint))
         .catch(e => console.log(e))
 })
