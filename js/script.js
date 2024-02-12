@@ -790,7 +790,7 @@ const menuItemsContents = {
                 <tr>
                     <td>№</td>
                     <td>
-                        <img src="img/time_left.png">
+                        <img src="img/time-left.png">
                     </td>
                     <td>Дата</td>
                     <td>Замовник</td>
@@ -817,7 +817,7 @@ const menuItemsContents = {
                 <tr>
                     <td>№</td>
                     <td>
-                        <img src="img/time_left.png">
+                        <img src="img/time-left.png">
                     </td>
                     <td>Дата</td>
                     <td>Замовник</td>
