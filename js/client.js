@@ -198,8 +198,8 @@ const createClientRow = client => {
         clientModal.querySelector('.client-email').value = client.email
         clientModal.querySelector('.client-birth-date').value = client.birthDate ? getDate(client.birthDate) : ''
         const sexs = clientModal.querySelectorAll('input[type=radio]')
-        sexs.item(0).checked = client.isMale
-        sexs.item(1).checked = !client.isMale
+        sexs.item(0).checked = client.isMale || client.isMale === null
+        sexs.item(1).checked = client.isMale === false
         clientModal.querySelector('.client-instagram').value = client.instagram
         clientModal.querySelector('.client-comment').value = client.comment
         clientModal.querySelector('button').onpointerup = () => editClient(client, tr)
