@@ -1943,3 +1943,17 @@ if ('serviceWorker' in navigator) {
             .catch(e => console.log(e))
     })
 }
+
+Notification.requestPermission().then(permission => {
+    if (permission === 'granted') {
+        console.log('Notification permission granted.')
+    } else {
+        console.log('Unable to get permission to notify.')
+    }
+})
+
+navigator.serviceWorker.ready.then(registration => {
+    registration.pushManager.subscribe({ userVisibleOnly: true })
+        .then(subscription => console.log('Subscribed for push: ' + subscription.endpoint))
+        .catch(e => console.log(e))
+})
