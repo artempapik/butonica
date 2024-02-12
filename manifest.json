@@ -2,7 +2,7 @@
     "name": "Butonica",
     "short_name": "Butonica",
     "display": "standalone",
-    "gcm_sender_id": 71562645621,
+    "gcm_sender_id": "71562645621",
     "orientation": "any",
     "scope": "/",
     "start_url": "index.html",
