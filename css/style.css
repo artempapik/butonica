@@ -655,11 +655,11 @@ aside {
 
 .calendar-component {
     display: flex;
-    width: 16rem;
+    width: 15.5rem;
     align-items: center;
     justify-content: space-between;
     background: #fff;
-    padding: .4rem .8rem;
+    padding: .4rem .6rem;
     border-radius: 1rem;
     border: .1rem rgb(150, 150, 150) solid;
     cursor: pointer;
@@ -2390,17 +2390,13 @@ table {
     }
 
     .calendar-component {
-        padding: .2rem .4rem;
+        padding: .2rem .3rem;
         border-radius: .7rem;
         font-size: .9rem;
-        width: 14.5rem;
+        width: 14rem;
 
         & .calendar-icons {
             gap: .3rem;
-
-            & img:last-child {
-                width: 1.5rem;
-            }
         }
     }
 
@@ -2434,7 +2430,7 @@ table {
         padding: 0 .5rem;
 
         & .header-items {
-            & span:not(.change-page span, [class$="view-type"] span, .period-filter span) {
+            & span:not(.change-page span, [class$="view-type"] span, .period-filter span, .calendar-component span) {
                 display: none !important;
             }
             
