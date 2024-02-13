@@ -1,11 +1,9 @@
 const cacheName = 'butonica'
 
 const cacheAsset = [
-    'img/calendar.png',
     'img/cart.png',
     'img/check.png',
     'img/checkout.png',
-    'img/clock.png',
     'img/close.png',
     'img/courier.png',
     'img/decline.png',
@@ -17,13 +15,10 @@ const cacheAsset = [
     'img/no-signal.png',
     'img/order.png',
     'img/parsley.png',
-    'img/period.png',
     'img/pickup.png',
-    'img/refresh.png',
     'img/rent.png',
     'img/search.png',
     'img/surcharge.png',
-    'img/time-left.png',
     'img/today.png',
     'img/trash.png',
     'img/water.png',
@@ -46,8 +41,8 @@ self.addEventListener('activate', e => e.waitUntil(
 
 self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => caches.match(e.request))))
 
-self.addEventListener('push', e => {
-    e.waitUntil(self.registration.showNotification('Test Message from Butonica', {
-        body: 'Hello from Notification API beach'
-    }))
-})
+// self.addEventListener('push', e => {
+//     e.waitUntil(self.registration.showNotification('Test Message from Butonica', {
+//         body: 'Hello from Notification API beach'
+//     }))
+// })
