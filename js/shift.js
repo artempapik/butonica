@@ -48,7 +48,7 @@ const createShiftRow = shift => {
         hideBodyOverflow()
 
         shiftInfoModal.querySelector('.shift-title span').textContent = shift.employee
-        shiftInfoModal.querySelector('.shift-time span').textContent = formatDate(shift.start)
+        shiftInfoModal.querySelector('.shift-time .time span').textContent = formatDate(shift.start)
 
         const setDisplayForShiftEnd = display => {
             document.querySelector('.shift-time span:nth-child(2)').style.display = display
@@ -58,9 +58,9 @@ const createShiftRow = shift => {
         if (shift.end) {
             setDisplayForShiftEnd('block')
             shiftInfoModal.querySelector('.shift-time span:last-child').textContent = formatDate(shift.end)
-            shiftInfoModal.querySelector('.shift-time img').style.filter = 'grayscale()'
+            shiftInfoModal.querySelector('.shift-time span').style.color = 'rgb(200, 200, 200)'
         } else {
-            shiftInfoModal.querySelector('.shift-time img').style.filter = ''
+            shiftInfoModal.querySelector('.shift-time span').style.color = 'rgb(50, 50, 50)'
             setDisplayForShiftEnd('none')
         }
 
