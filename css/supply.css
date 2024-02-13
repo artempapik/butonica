@@ -262,10 +262,6 @@
     }
 
     .supply-header {
-        .header-items span {
-            align-self: start !important;
-        }
-
         & button:not(& .header-items button) {
             align-self: start;
         }
