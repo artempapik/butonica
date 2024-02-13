@@ -434,11 +434,11 @@ const menuItemsContents = {
                     <h1>Поставки</h1>
                     <div class="supply-view-type">
                         <div class="type active">
-                            <img src="img/calendar.png">
+                            <span class="material-symbols-outlined">calendar_month</span>
                             <span>за місяць</span>
                         </div>
                         <div class="type">
-                            <img src="img/period.png">
+                            <span class="material-symbols-outlined">date_range</span>
                             <span>за період</span>
                         </div>
                     </div>
@@ -759,12 +759,12 @@ const menuItemsContents = {
                 <span class="material-symbols-outlined">list_alt</span>
                 <h1>Всі замовлення</h1>
                 <div class="calendar-component">
-                <div>виберіть дату</div>
-                <div class="calendar-icons">
-                    <img src="img/refresh.png">
-                    <img src="img/calendar.png">
+                    <div>виберіть дату</div>
+                    <div class="calendar-icons">
+                        <span class="material-symbols-outlined">refresh</span>
+                        <span class="material-symbols-outlined">calendar_month</span>
+                    </div>
                 </div>
-            </div>
                 <div class="change-page">
                     <div class="arrows">
                         <span class="arrow-group">
@@ -790,7 +790,7 @@ const menuItemsContents = {
                 <tr>
                     <td>№</td>
                     <td>
-                        <img src="img/time-left.png">
+                        <span class="material-symbols-outlined">history_toggle_off</span>
                     </td>
                     <td>Дата</td>
                     <td>Замовник</td>
@@ -817,7 +817,7 @@ const menuItemsContents = {
                 <tr>
                     <td>№</td>
                     <td>
-                        <img src="img/time-left.png">
+                        <span class="material-symbols-outlined">history_toggle_off</span>
                     </td>
                     <td>Дата</td>
                     <td>Замовник</td>
@@ -1760,7 +1760,7 @@ const checkDate = f => {
     dayValue = day
     monthIndex = monthSelect.selectedIndex
     yearValue = yearSelect.value
-    document.querySelector('.calendar-component img').classList.add('active')
+    document.querySelector('.calendar-component span').classList.add('active')
 
     if (monthSelect.selectedIndex === 12) {
         dateQueryString = yearSelect.value
@@ -1944,17 +1944,11 @@ if ('serviceWorker' in navigator) {
     })
 }
 
-Notification.requestPermission().then(permission => {
-    if (permission === 'granted') {
-        console.log('Notification permission granted.')
-    } else {
-        console.log('Unable to get permission to notify.')
-    }
-})
+// Notification.requestPermission().then(permission => console.log(permission))
 
-navigator.serviceWorker.ready.then(registration => registration.pushManager.subscribe({
-    userVisibleOnly: true,
-    applicationServerKey: 'BFmkGFeE0h2F6QF6MA3DoP35vJlCVu-op-YbrNNFMLe7hYj6p7kzjCGwWZuRll0_GRtLwTre6EV9U0nja-fQwW4'
-})
-    .then(subscription => console.log(subscription))
-    .catch(e => console.log(e)))
+// navigator.serviceWorker.ready.then(registration => registration.pushManager.subscribe({
+//     userVisibleOnly: true,
+//     applicationServerKey: 'BFmkGFeE0h2F6QF6MA3DoP35vJlCVu-op-YbrNNFMLe7hYj6p7kzjCGwWZuRll0_GRtLwTre6EV9U0nja-fQwW4'
+// })
+//     .then(subscription => console.log(subscription))
+//     .catch(e => console.log(e)))
