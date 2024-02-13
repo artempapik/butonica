@@ -682,9 +682,9 @@ aside {
     & .calendar-icons {
         display: flex;
         align-items: center;
-        gap: .7rem;
+        gap: .5rem;
 
-        & img {
+        & span {
             &:first-child {
                 pointer-events: none;
                 opacity: .3;
@@ -693,17 +693,14 @@ aside {
                 &.active {
                     pointer-events: all;
                     opacity: 1;
-                    animation: rotation2 1.5s linear infinite;
+                    animation: rotation 1.5s linear infinite;
                     animation-play-state: paused;
+                    color: rgb(240, 30, 30);
 
                     &:hover {
                         animation-play-state: running;
                     }
                 }
-            }
-
-            &:last-child {
-                width: 1.7rem;
             }
         }
     }
@@ -974,13 +971,13 @@ main {
         align-items: center;
         gap: 1.4rem;
 
-        & span:not(& .change-page span, & [class$="view-type"] span, & .period-filter span) {
+        & span:not(& .change-page span, & [class$="view-type"] span, & .period-filter span, .calendar-icons span) {
             display: none;
             text-align: right;
             font-size: 1.9rem;
         }
     
-        & span:not(& .change-page span, & [class$="view-type"] span, & .period-filter span), & #loader {
+        & span:not(& .change-page span, & [class$="view-type"] span, & .period-filter span, & .calendar-icons span), & #loader {
             width: 2.3rem;
         }
     
@@ -1478,20 +1475,19 @@ table {
     gap: .5rem;
 
     & .type {
-        --active-type-color: rgb(220, 220, 220);
+        --active-type-color: rgb(230, 230, 230);
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: .2rem;
         padding: .3rem .5rem;
         border-radius: .5rem;
-        transition: .02s;
 
-        & img {
-            width: 2.2rem;
+        & span:first-child {
+            font-size: 2rem;
         }
 
-        & span {
+        & span:last-child {
             font-size: .8rem;
         }
 
@@ -1499,9 +1495,13 @@ table {
             background: var(--active-type-color);
             box-shadow: rgba(50, 50, 93, .25) 0 2px 5px -1px, rgba(0, 0, 0, .3) 0 1px 3px -1px;
 
-            & span {
+            & span:first-child {
+                color: rgb(0, 71, 171);
+            }
+
+            & span:last-child {
                 font-weight: bold;
-                color: rgb(30, 30, 30);
+                color: rgb(70, 70, 70);
             }
         }
 
@@ -1765,11 +1765,6 @@ table {
     to { transform: rotate(360deg); }
 }
 
-@keyframes rotation2 {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(-360deg); }
-}
-
 .loader-button {
     display: none;
     width: .9rem !important;
@@ -1794,16 +1789,16 @@ table {
             justify-content: space-between;
     
             & span {
-                font-size: 1.6rem;
-            }
+                font-size: 1.5rem;
 
-            & img {
-                width: 1.8rem;
-                opacity: .8;
-                cursor: pointer;
+                &:last-child {
+                    font-size: 1.8rem;
+                    color: rgb(120, 120, 120);
+                    cursor: pointer;
 
-                &:hover {
-                    opacity: 1;
+                    &:hover {
+                        color: #000;
+                    }
                 }
             }
         }
@@ -2402,10 +2397,6 @@ table {
 
         & .calendar-icons {
             gap: .3rem;
-
-            & img:first-child {
-                width: 1.3rem;
-            }
 
             & img:last-child {
                 width: 1.5rem;
