@@ -269,6 +269,10 @@
         & .supplies-date-filter {
             flex-direction: column;
             align-items: start;
+
+            & .supply-view-type .type.active span:last-child {
+                font-weight: unset;
+            }
         }
     }
 }
