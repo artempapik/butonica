@@ -158,7 +158,7 @@ const showAllOrderInfo = e => {
             return
         }
 
-        if (e.target.tagName.toLowerCase() === 'img' && e.target.classList.contains('active')) {
+        if (e.target.tagName.toLowerCase() === 'span' && e.target.classList.contains('active')) {
             showLoadAnimation()
 
             get(`Order/${loginInfo.companyId}/page/${currentPage}`).then(response => {
