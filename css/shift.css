@@ -24,12 +24,10 @@
         & .shift-time {
             display: flex;
             align-items: center;
-            gap: .7rem;
+            gap: .4rem;
 
-            & img {
-                width: 2rem;
-                opacity: .9;
-                filter: drop-shadow(1px 1px 1px rgb(180, 180, 180));
+            & span.material-symbols-outlined {
+                font-size: 2rem;
             }
 
             & .time {
