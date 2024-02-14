@@ -41,6 +41,10 @@
         padding-left: 2.9rem;
         background-size: 1.7rem;
         border-radius: 1.5rem;
+
+        &::-webkit-search-cancel-button {
+            transform: scale(1.7);
+        }
     }
 }
 
@@ -1040,7 +1044,7 @@
             & td:nth-child(3), & td:nth-child(4) {
                 text-align: center;
             }
-        
+            
             & input {
                 font-size: .9rem;
                 width: 5rem;
