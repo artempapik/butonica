@@ -2272,13 +2272,15 @@ table {
         }
     }
 
-    main table tbody {
-        top: 3rem;
+    main table {
+        margin-bottom: 0;
+
+        & tbody {
+            top: 3rem;
+        }
     }
 
     table {
-        margin-bottom: 0;
-
         & tbody span.material-symbols-outlined {
             font-size: 1.1rem;
         }
