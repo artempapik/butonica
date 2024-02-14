@@ -360,7 +360,25 @@
         }
     }
 
-    .flavor-table table td:nth-child(4) {
-        display: none;
+    .flavor-table table {
+        & td:first-child {
+            max-width: 3rem;
+        }
+
+        & td:nth-child(2) {
+            max-width: 10.2rem;
+        }
+
+        & td:nth-child(4) {
+            display: none;
+        }
+
+        & ul {
+            font-size: .8rem;
+    
+            & li {
+                gap: .8rem;
+            }
+        }
     }
 }
