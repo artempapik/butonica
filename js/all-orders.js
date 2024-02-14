@@ -439,6 +439,10 @@ const createOrderRow = (order, table) => {
         }
 
         if (from && till) {
+            if (from === till) {
+                return `${orderDate}, ${from}`
+            }
+            
             return `${orderDate}, з ${from} до ${till}`
         }
 
