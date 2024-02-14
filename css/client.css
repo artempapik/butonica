@@ -6,7 +6,7 @@
     display: flex;
     align-items: center;
     gap: .7rem;
-    margin-bottom: 1.6rem;
+    margin-bottom: 1.2rem;
     
     & span:first-child {
         font-weight: bold;
@@ -186,6 +186,10 @@
 }
 
 @media only screen and (max-width: 700px) {
+    .client-bonus {
+        padding-left: .5rem;
+    }
+
     .client-info-modal-content .client-info .form .client-orders-total-sum {
         font-size: .9rem;
 
