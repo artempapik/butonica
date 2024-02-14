@@ -39,8 +39,9 @@
         gap: .4rem;
         font-size: 1.1rem;
         font-weight: bold;
-        margin-top: 1.7rem;
+        margin-top: 1.2rem;
         margin-bottom: 1rem;
+        align-items: center;
 
         & span:last-child {
             font-family: 'Roboto Mono', monospace;
@@ -67,8 +68,12 @@
 
     .leftover-table {
         & div:not(table div) {
-            gap: .2rem;
             font-size: 1rem;
+            padding: 0 .5rem;
+
+            & span:last-child {
+                font-size: .9rem;
+            }
         }
     }
 }
