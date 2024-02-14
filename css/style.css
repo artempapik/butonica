@@ -135,6 +135,7 @@ input[type=search] {
         appearance: none;
         height: 1rem;
         width: 1rem;
+        transform: scale(1.15);
         background: url('../img/close.svg') no-repeat 50% 50%;
         opacity: 0;
         pointer-events: none;
