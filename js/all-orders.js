@@ -182,7 +182,7 @@ const showAllOrderInfo = e => {
         }
 
         calendarComponent.classList.add('active')
-        calendar.style.top = calendarComponent.offsetTop + 50 + 'px'
+        calendar.style.top = calendarComponent.offsetTop + 45 + 'px'
         calendar.style.left = calendarComponent.offsetLeft + 'px'
         hideBodyOverflow()
 
@@ -442,7 +442,7 @@ const createOrderRow = (order, table) => {
             if (from === till) {
                 return `${orderDate}, ${from}`
             }
-            
+
             return `${orderDate}, з ${from} до ${till}`
         }
 
