@@ -2278,7 +2278,7 @@ table {
 
     table {
         margin-bottom: 0;
-        
+
         & tbody span.material-symbols-outlined {
             font-size: 1.1rem;
         }
@@ -2307,6 +2307,17 @@ table {
                 letter-spacing: .02rem;
                 word-spacing: .2rem;
             }
+        }
+    }
+
+    .category-table table tbody tr td:first-child,
+    .product-table table tbody tr td:first-child,
+    .product-table table tbody tr td:nth-child(4),
+    .contractor-table table tbody tr td:first-child,
+    .leftover-table table tbody tr td:first-child,
+    .leftover-table table tbody tr td:nth-child(3) {
+        & span:first-child {
+            margin-right: .5rem;
         }
     }
 
