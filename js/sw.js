@@ -11,7 +11,6 @@ const cacheAsset = [
     'img/empty-flower.webp',
     'img/exchange.png',
     'img/instagram.png',
-    'img/no-signal.png',
     'img/order.png',
     'img/parsley.png',
     'img/pickup.png',
