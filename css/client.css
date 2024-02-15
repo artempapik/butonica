@@ -208,7 +208,7 @@
 
     .client-table table {
         & td:first-child {
-            max-width: 10rem;
+            max-width: 10.5rem;
         }
 
         & td:nth-child(2) {
