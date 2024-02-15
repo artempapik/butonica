@@ -1957,17 +1957,15 @@ table {
     }
 }
 
-@keyframes no-internet {
-    0% { filter: none; }
-    50% { filter: grayscale(); }
-    100% { filter: none; }
-}
-
 .no-internet-modal {
     flex-direction: column;
     gap: 2rem;
     background: rgba(255, 255, 255, .97);
-    animation: no-internet 10s linear infinite;
+
+    & span {
+        color: rgb(30, 30, 30);
+        font-size: 7rem;
+    }
 
     & h1 {
         font-size: 1.8rem;
@@ -2371,8 +2369,8 @@ table {
     .no-internet-modal {
         gap: 1.5rem;
 
-        & img {
-            width: 5rem;
+        & span {
+            font-size: 5rem;
         }
 
         & h1 {
