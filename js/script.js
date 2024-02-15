@@ -664,7 +664,10 @@ const menuItemsContents = {
             <table>
                 <tr>
                     <td>ПІБ</td>
-                    <td>Email</td>
+                    <td>
+                        <img src="img/instagram.png">
+                        <span>Instagram<span>
+                    </td>
                     <td>Телефон(и)</td>
                     <td></td>
                 </tr>
