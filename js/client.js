@@ -68,6 +68,8 @@ const createClientModal = (addCreateEvent = true) => {
     clientModal.style.display = 'flex'
 }
 
+const formatInstagramLink = link => link[0] === '@' ? link.substring(1) : link
+
 const createClientRow = client => {
     const editAction = createEditSpan('client')
     const deleteAction = createDeleteSpan('client')
@@ -105,8 +107,8 @@ const createClientRow = client => {
         if (client.instagram) {
             instagram.parentNode.style.display = ''
             const link = document.createElement('a')
-            link.textContent = client.instagram
-            link.href = `https://www.instagram.com/${client.instagram[0] === '@' ? client.instagram.substring(1) : client.instagram}`
+            link.textContent = formatInstagramLink(client.instagram)
+            link.href = 'https://www.instagram.com/' + link.textContent
             link.target = 'blank'
             
             instagram.innerHTML = ''
@@ -220,7 +222,7 @@ const createClientRow = client => {
 
     tr.append(
         createTd(client.fullName),
-        createTd(client.email),
+        createTd(client.instagram ? formatInstagramLink(client.instagram) : ''),
         createTd(formatPhoneNumber(client.phone.split('\n')[0])),
         actionsColumn
     )
