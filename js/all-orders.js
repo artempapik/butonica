@@ -170,7 +170,7 @@ const showAllOrderInfo = e => {
             dayValue = null
             monthIndex = null
             yearValue = null
-            dateString = 'виберіть дату'
+            dateString = 'виберіть день'
 
             calendarComponent.querySelector('div').textContent = dateString
             setDefaultDateSelects()
