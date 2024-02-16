@@ -221,8 +221,8 @@
     .client-info-modal-content .client-info .form .client-orders-total-sum {
         font-size: .9rem;
 
-        & span:last-child {
-            font-size: .9rem;
+        & div {
+            font-size: .8rem;
         }
     }
 }
