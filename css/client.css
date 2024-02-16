@@ -220,10 +220,6 @@
 
     .client-info-modal-content .client-info .form .client-orders-total-sum {
         font-size: 1rem;
-
-        & div {
-            font-size: 1rem;
-        }
     }
 }
 
