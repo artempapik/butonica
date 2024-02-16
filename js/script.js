@@ -1373,7 +1373,7 @@ const login = () => {
         localStorage.setItem('login-info', JSON.stringify(loggedUser))
         loginInfo = loggedUser
 
-        showMessage('success', 'Ви в Butonica 🌸')
+        showMessage('success', '🌸 Вітаємо в Butonica,\n' + loggedUser.fullName)
 
         removeMenus(loggedUser.title)
         document.querySelector('.profile').textContent = getInitials(loggedUser.fullName)
