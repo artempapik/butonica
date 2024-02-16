@@ -1747,6 +1747,22 @@ const setToday = () => {
     checkDate(getAllOrdersByDate)
 }
 
+const setTomorrow = () => {
+    setDefaultDateSelects()
+    fillCalendarDays()
+    const day = (new Date().getDate() + 1).toString()
+
+    for (const calendarDay of calendarDays) {
+        if (calendarDay.textContent === day) {
+            calendarDay.classList = 'active'
+            document.querySelector('.calendar-component div').textContent = `${day} ${calendarMonthToText[monthSelect.selectedIndex]}, ${yearSelect.value}`
+            break
+        }
+    }
+
+    checkDate(getAllOrdersByDate)
+}
+
 const checkDate = f => {
     dateString = document.querySelector('.calendar-component div').textContent
     setTimeout(() => hideModal(calendarModal), 1)
