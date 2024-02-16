@@ -2,7 +2,6 @@ const cacheName = 'butonica'
 
 const cacheAsset = [
     'img/cart.png',
-    'img/check.png',
     'img/checkout.png',
     'img/courier.png',
     'img/decline.png',
