@@ -140,7 +140,7 @@ const createClientRow = client => {
             clientOrders.style.display = 'block'
 
             const clientOrdersTotalSum = clientInfoModal.querySelector('.client-orders-total-sum')
-            clientOrdersTotalSum.querySelector('span:last-child').textContent = response.totalSum.toFixed(2) + ' грн'
+            clientOrdersTotalSum.querySelector('div').textContent = response.totalSum.toFixed(2) + ' грн'
 
             const ordersBlock = clientInfoModal.querySelector('.order-arrows')
             const orderArrows = ordersBlock.querySelectorAll('.order-arrows span')
