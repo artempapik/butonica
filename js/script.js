@@ -6,7 +6,7 @@ const Environment = {
 const BASE_URL = Environment.PROD
 const EMPTY_IMAGE_URL = 'img/empty-flower.webp'
 
-let imageData, currentPage, dayValue, monthIndex, yearValue, dateString = 'виберіть дату', dateQueryString
+let imageData, currentPage, dayValue, monthIndex, yearValue, dateString = 'виберіть день', dateQueryString
 
 const uploadImage = e => {
     const image = e.target.files[0]
@@ -762,7 +762,7 @@ const menuItemsContents = {
                 <span class="material-symbols-outlined">list_alt</span>
                 <h1>Всі замовлення</h1>
                 <div class="calendar-component">
-                    <div>виберіть дату</div>
+                    <div>виберіть день</div>
                     <div class="calendar-icons">
                         <span class="material-symbols-outlined">refresh</span>
                         <span class="material-symbols-outlined">calendar_month</span>
@@ -1078,7 +1078,7 @@ const fillSelectedMenuItem = e => {
     dayValue = null
     monthIndex = null
     yearValue = null
-    dateString = 'виберіть дату'
+    dateString = 'виберіть день'
     setTimeout(() => hideModal(menu), 1)
 
     header.style.display = ''
@@ -1771,7 +1771,7 @@ const checkDate = f => {
         return
     }
 
-    if (dateString === 'виберіть дату') {
+    if (dateString === 'виберіть день') {
         const date = new Date()
         const newDateString = `${monthSelect.value} ${date.getFullYear()}`
         document.querySelector('.calendar-component div').textContent = newDateString
