@@ -444,7 +444,7 @@
 
         & .customer, & .recipient {
             width: fit-content;
-            min-width: 75%;
+            width: 75%;
             margin: 0 auto;
             flex-direction: column;
             gap: 1.4rem;
