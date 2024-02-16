@@ -206,14 +206,8 @@
         padding-left: .5rem;
     }
 
-    .client-table table {
-        & td:first-child {
-            max-width: 10.5rem;
-        }
-
-        & td:nth-child(2) {
-            display: none !important;
-        }
+    .client-table table td:first-child {
+        max-width: 10.5rem;
     }
 
     .client-info-modal-content .client-info .form .client-orders-total-sum {
@@ -222,5 +216,11 @@
         & span:last-child {
             font-size: .9rem;
         }
+    }
+}
+
+@media only screen and (max-width: 700px) and (orientation: portrait) {
+    .client-table table td:nth-child(2) {
+        display: none !important;
     }
 }
