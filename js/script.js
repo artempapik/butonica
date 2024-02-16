@@ -1373,7 +1373,7 @@ const login = () => {
         localStorage.setItem('login-info', JSON.stringify(loggedUser))
         loginInfo = loggedUser
 
-        showMessage('success', 'Ви увійшли в систему')
+        showMessage('success', 'Ви в Butonica 🌸')
 
         removeMenus(loggedUser.title)
         document.querySelector('.profile').textContent = getInitials(loggedUser.fullName)
@@ -1651,7 +1651,7 @@ const setDefaultDateSelects = (monthIndex, yearValue) => {
 const fillCalendarDays = () => {
     calendarDays.forEach(d => {
         d.classList = 'inactive'
-        d.textContent = '–'
+        d.textContent = ''
     })
 
     const startDay = new Date(+yearSelect.value, monthSelect.selectedIndex, 1).getDay() || 7
