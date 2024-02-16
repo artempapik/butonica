@@ -151,10 +151,13 @@ const showAllOrderInfo = e => {
     const calendarComponent = document.querySelector('.calendar-component')
     calendarComponent.onpointerup = e => {
         if (calendarComponent.classList.contains('active')) {
+            showRefreshCalendarIcon()
             setTimeout(() => hideModal(calendarModal), 1)
             calendarComponent.classList.remove('active')
             return
         }
+
+        hideRefreshCalendarIcon()
 
         if (e.target.tagName.toLowerCase() === 'span' && e.target.classList.contains('active')) {
             showLoadAnimation()
