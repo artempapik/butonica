@@ -817,6 +817,15 @@ aside {
         & button {
             padding: .5rem .9rem;
             font-size: .9rem;
+            gap: .5rem;
+
+            &:nth-child(2) {
+                background: linear-gradient(180deg, rgb(85, 165, 255) 0%, rgb(74, 152, 255) 100%);
+            }
+
+            & span:first-child {
+                font-size: 1.3rem;
+            }
         }
 
         & img {
