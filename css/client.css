@@ -164,6 +164,7 @@
 
             & .client-orders-total-sum {
                 display: flex;
+                align-items: center;
                 gap: .4rem;
                 justify-content: space-between;
                 border-top: .1rem rgb(150, 150, 150) dashed;
@@ -173,7 +174,13 @@
                 font-weight: bold;
                 color: rgb(30, 30, 30);
 
-                & span:last-child {
+                & .total-sum {
+                    display: flex;
+                    align-items: center;
+                    gap: .5rem;
+                }
+
+                & div {
                     font-size: 1rem;
                     font-family: 'Roboto Mono', monospace;
                 }
