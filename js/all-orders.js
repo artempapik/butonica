@@ -148,9 +148,7 @@ const showAllOrderInfo = e => {
 
     fillDatalistsLabels()
 
-    calendar.querySelector('img').onpointerup = () => checkDate(getAllOrdersByDate)
     const calendarComponent = document.querySelector('.calendar-component')
-
     calendarComponent.onpointerup = e => {
         if (calendarComponent.classList.contains('active')) {
             setTimeout(() => hideModal(calendarModal), 1)
