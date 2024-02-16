@@ -1728,6 +1728,7 @@ calendarDays.forEach(d => d.onpointerup = () => {
     calendarDays.forEach(d => d.classList.remove('active'))
     d.classList = 'active'
     calendarText.textContent = `${d.textContent} ${calendarMonthToText[monthSelect.selectedIndex]}, ${yearSelect.value}`
+    checkDate(getAllOrdersByDate)
 })
 
 const setToday = () => {
