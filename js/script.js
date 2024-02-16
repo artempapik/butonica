@@ -1197,6 +1197,10 @@ const hideModal = modal => {
     if (!intervalId && modal !== calculatorModal) {
         document.body.style.overflow = ''
     }
+
+    if (modal === calendarModal) {
+        showRefreshCalendarIcon()
+    }
 }
 
 const hideModalEnableButton = (modal, button) => {
@@ -1806,6 +1810,10 @@ const checkDate = f => {
 
     f()
 }
+
+const setRefreshCalendarIconDisplay = display => document.querySelector('.calendar-icons span').style.display = display
+const hideRefreshCalendarIcon = () => setRefreshCalendarIconDisplay('none')
+const showRefreshCalendarIcon = () => setRefreshCalendarIconDisplay('')
 
 const clocks = [...document.querySelectorAll('.clock-screensaver, .clock-modal')]
 clocks[0].onpointerup = () => clocks[1].style.display = 'flex'
