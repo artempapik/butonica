@@ -90,7 +90,7 @@
 
 @media only screen and (max-width: 700px) and (orientation: portrait) {
     .employee-info-modal-content {
-        gap: .75rem;
+        gap: .7rem;
 
         & .form {
             gap: .3rem;
