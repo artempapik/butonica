@@ -89,7 +89,19 @@
 }
 
 @media only screen and (max-width: 700px) and (orientation: portrait) {
+    .employee-info-modal-content {
+        gap: 1rem;
+
+        & .form {
+            gap: .45rem;
+        }
+    }
+
     .employee-table table td {
+        &:first-child {
+            max-width: 6.7rem;
+        }
+
         &:nth-child(2), &:nth-child(5) {
             display: none;
         }
