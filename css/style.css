@@ -1597,7 +1597,7 @@ table {
     }
 
     & img {
-        width: 9rem;
+        width: 10rem;
         filter: drop-shadow(1px 1px 2px rgb(130, 130, 130));
     }
 }
