@@ -297,9 +297,6 @@ select {
     border: .1rem var(--input-border-color) solid;
     border-radius: 1rem;
     padding: .6rem;
-    font-weight: bold;
-    font-size: 1rem;
-    color: rgb(50, 50, 50);
 
     &:hover, &:focus {
         border-color: rgb(70, 70, 70);
@@ -342,6 +339,11 @@ img {
     }
 }
 
+@keyframes animate-hover {
+    from { opacity: .3; }
+    to { opacity: 1; }
+}
+
 header {
     z-index: 1;
     position: sticky;
@@ -382,7 +384,7 @@ header {
             gap: .8rem;
             transition: .1s;
 
-            &:hover {
+            &.animate:hover {
                 animation: logo-scale .5s;
             }
 
@@ -457,7 +459,6 @@ header {
         }
 
         & .profile-info {
-            animation: profile-info-animate .2s;
             z-index: 1;
             border-radius: .4rem;
             position: fixed;
@@ -471,6 +472,10 @@ header {
             background: rgb(250, 250, 250);
             padding-top: .2rem;
 
+            &.animate {
+                animation: profile-info-animate .2s;
+            }
+
             & div {
                 display: flex;
                 gap: .8rem;
@@ -483,12 +488,24 @@ header {
                     background: rgba(var(--table-hover-color), .15);
                 }
 
-                &:nth-child(5):hover {
-                    padding-left: 1.7rem;
-                    gap: .3rem;
+                &:nth-child(5).animate:hover {
+                    animation: animate-hover .9s infinite;
                 }
 
-                &:nth-child(3).screensaver {
+                &:nth-child(6):hover {
+                    font-weight: bold;
+                }
+
+                &:nth-child(7) {
+                    color: rgb(255, 69, 0);
+
+                    &.animate:hover {
+                        padding-left: 1.7rem;
+                        gap: .3rem;
+                    }
+                }
+
+                &:nth-child(4).screensaver {
                     background: rgb(0, 71, 171);
                     color: rgb(240, 240, 240);
 
@@ -527,10 +544,6 @@ header {
                 & span:last-child {
                     font-weight: bold;
                 }
-            }
-
-            & div:nth-child(5) {
-                color: rgb(255, 69, 0);
             }
         }
     }
@@ -614,11 +627,14 @@ aside {
 }
 
 .sub-menu {
-    animation: submenu-animate .15s;
     display: none;
     flex-direction: column;
     margin-bottom: 1rem;
     gap: .5rem;
+
+    &.animate {
+        animation: submenu-animate .15s;
+    }
 
     & li {
         padding: 0;
@@ -718,12 +734,15 @@ aside {
     --day-size: 2.5rem;
 
     position: fixed;
-    animation: calendar-transition .15s;
     border: .1rem var(--calendar-border-color) solid;
     background: #fff;
     border-radius: 1rem;
     box-shadow: rgba(0, 0, 0, .24) 0 3px 8px;
     width: fit-content;
+
+    &.animate {
+        animation: calendar-transition .15s;
+    }
 
     & .month-year-select {
         display: flex;
@@ -914,8 +933,6 @@ aside {
 .clock-screensaver {
     display: none;
     cursor: pointer;
-    margin-right: 1rem;
-    animation: clock-appear .5s;
     font-family: 'Roboto Mono', monospace;
     gap: .3rem;
     font-weight: bold;
@@ -927,6 +944,10 @@ aside {
     border-radius: 1rem;
     box-shadow: rgba(0, 0, 0, .16) 0 3px 6px, rgba(0, 0, 0, .23) 0 3px 6px;
     transition: .1s;
+
+    &.animate {
+        animation: clock-appear .5s;
+    }
 
     &:hover {
         background: rgb(50, 50, 50);
@@ -1044,6 +1065,10 @@ main {
         font-size: 2rem;
     }
 
+    & table.animate {
+        animation: table-animate .15s;
+    }
+
     & div.bg-animate {
         position: fixed;
         width: 1.2rem;
@@ -1144,6 +1169,17 @@ main {
 
 .required {
     color: rgb(245, 0, 0);
+}
+
+@keyframes table-animate {
+    from {
+        opacity: .1;
+        transform: translateY(1rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 table {
@@ -1308,8 +1344,11 @@ table {
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
-    animation: modal-content-animate .15s;
     box-shadow: 0 14px 28px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .22);
+
+    &.animate {
+        animation: modal-content-animate .15s;
+    }
 
     & .modal-content-name {
         display: flex;
@@ -1558,7 +1597,7 @@ table {
     }
 
     & img {
-        width: 6rem;
+        width: 9rem;
         filter: drop-shadow(1px 1px 2px rgb(130, 130, 130));
     }
 }
@@ -1571,8 +1610,11 @@ table {
     border-radius: .7rem;
     top: 3%;
     left: 50%;
-    animation: animate-top .4s;
     transform: translate(-50%, 0);
+
+    &.animate {
+        animation: animate-top .4s;
+    }
 
     & div:last-child {
         font-weight: bold;
@@ -2399,7 +2441,7 @@ table {
         padding: .2rem .3rem;
         border-radius: .7rem;
         font-size: .9rem;
-        width: 14rem;
+        width: 15rem;
 
         & .calendar-icons {
             gap: .3rem;
@@ -2429,7 +2471,6 @@ table {
     header {
         position: sticky;
         top: 0;
-        z-index: 2;
     }
 
     main [class$="header"] {
