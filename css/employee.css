@@ -1,0 +1,114 @@
+.create-employee-modal-content {
+    gap: 1.2rem;
+
+    & div:first-child {
+        margin-bottom: 1rem;
+    }
+
+    & .form {
+        gap: .5rem;
+
+        & input {
+            padding: .4rem;
+        }
+
+        &.active-employee {
+            flex-direction: row;
+            align-items: center;
+            gap: .7rem;
+            margin: .5rem 0;
+        }
+    }
+}
+
+.employee-info-modal-content {
+    padding: 1rem;
+    padding-top: 0;
+    gap: 1.5rem;
+
+    & .form {
+        & h2 {
+            font-weight: bold;
+        }
+
+        & h3 {
+            font-weight: normal;
+            font-size: 1.1rem;
+        }
+    }
+}
+
+.employee-table table {
+    & tr:nth-child(2) td:last-child span:last-child {
+        display: none;
+    }
+
+    & tr:not(:first-child) {
+        cursor: pointer;
+
+        & td {
+            &:nth-child(3) span {
+                font-size: .9rem;
+                color: rgb(240, 240, 240);
+                padding: .2rem .7rem;
+                border-radius: .5rem;
+                box-shadow: rgba(0, 0, 0, .12) 0 1px 2px, rgba(0, 0, 0, .12) 0 1px 2px;
+            }
+
+            &:nth-child(2), &:nth-child(4) {
+                text-align: center;
+            }
+
+            &:nth-child(4) img {
+                width: 1.3rem;
+
+                &.scaled {
+                    width: 1.7rem;
+                }
+            }
+        }
+    }
+
+    & tr td:nth-child(3) {
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 1400px) {
+    .employee-table table {
+        & td {
+            padding: .7rem .4rem;
+        }
+        
+        & tr:not(:first-child) {
+            & td:first-child, & td:nth-child(2) {
+                font-size: .9rem;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 700px) and (orientation: portrait) {
+    .employee-info-modal-content {
+        gap: .7rem;
+
+        & .form {
+            gap: .3rem;
+        }
+    }
+
+    .employee-table table td {
+        &:first-child {
+            max-width: 6.7rem;
+        }
+
+        &:nth-child(2), &:nth-child(5) {
+            display: none;
+        }
+
+        &:nth-child(3) span {
+            padding: .2rem .4rem !important;
+            border-radius: .3rem !important;
+        }
+    }
+}
