@@ -32,7 +32,7 @@
     <header>
         <div class="logo-panel">
             <span class="material-symbols-outlined">menu</span>
-            <div class="logo" onpointerup="location.reload()">
+            <div class="logo animate-item animate" onpointerup="location.reload()">
                 <img src="img/parsley.png">
                 <span class="logo-text">
                     <span>Butonica</span>
@@ -42,16 +42,15 @@
         </div>
         <div class="theme-profile">
             <span class="theme material-symbols-outlined">dark_mode</span>
-            <div class="clock-screensaver">
+            <div class="clock-screensaver animate-item animate">
                 <span class="hours"></span>
                 <span>:</span>
                 <span class="minutes"></span>
                 <span>:</span>
                 <span class="seconds"></span>
             </div>
-            <img class="notes" src="img/note.png">
             <div class="profile" onpointerup="openProfile()"></div>
-            <div class="profile-info">
+            <div class="profile-info animate-item animate">
                 <div>
                     <span class="material-symbols-outlined">person</span>
                     <span></span>
@@ -63,15 +62,23 @@
                         <span></span>
                     </span>
                 </div>
+                <div onpointerup="showNotesModal()">
+                    <span class="material-symbols-outlined">sticky_note_2</span>
+                    <span>Замітки</span>
+                </div>
                 <div onpointerup="toggleScreensaver()">
-                    <span class="material-symbols-outlined">animation</span>
+                    <span class="material-symbols-outlined">pending</span>
                     <span>Режим очікування</span>
+                </div>
+                <div class="animate-item animate" onpointerup="toggleAnimations()">
+                    <span class="material-symbols-outlined">toggle_on</span>
+                    <span>Анімації</span>
                 </div>
                 <div onpointerup="window.open('https://butonica.notion.site/butonica/1e0bff1a5d9c4632b40b3ce815e45a81?v=430499fe652b44318cd465f34c34f6f7')">
                     <span class="material-symbols-outlined">help</span>
                     <span>Довідкові матеріали</span>
                 </div>
-                <div onpointerup="logout()">
+                <div class="animate-item animate" onpointerup="logout()">
                     <span class="material-symbols-outlined">logout</span>
                     <span>Вийти</span>
                 </div>
@@ -99,7 +106,7 @@
                         </div>
                         <span class="material-symbols-outlined">expand_more</span>
                     </div>
-                    <ul class="sub-menu">
+                    <ul class="sub-menu animate-item animate">
                         <li class="main-padding" onpointerup="showAllOrderInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">list_alt</span>
@@ -136,7 +143,7 @@
                         </div>
                         <span class="material-symbols-outlined">expand_more</span>
                     </div>
-                    <ul class="sub-menu">
+                    <ul class="sub-menu animate-item animate">
                         <li class="main-padding" onpointerup="showContractorInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">group_add</span>
@@ -177,7 +184,7 @@
                         </div>
                         <span class="material-symbols-outlined">expand_more</span>
                     </div>
-                    <ul class="sub-menu">
+                    <ul class="sub-menu animate-item animate">
                         <li class="main-padding" onpointerup="showCategoryInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">list</span>
@@ -214,7 +221,7 @@
                         </div>
                         <span class="material-symbols-outlined">expand_more</span>
                     </div>
-                    <ul class="sub-menu">
+                    <ul class="sub-menu animate-item animate">
                         <li class="main-padding" onpointerup="showClientInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">person_add</span>
@@ -237,7 +244,7 @@
                         </div>
                         <span class="material-symbols-outlined">expand_more</span>
                     </div>
-                    <ul class="sub-menu">
+                    <ul class="sub-menu animate-item animate">
                         <li class="main-padding" onpointerup="showGeneralStatisticsInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">show_chart</span>
@@ -260,7 +267,7 @@
                         </div>
                         <span class="material-symbols-outlined">expand_more</span>
                     </div>
-                    <ul class="sub-menu">
+                    <ul class="sub-menu animate-item animate">
                         <li class="main-padding" onpointerup="showCompanyInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">info</span>
@@ -303,7 +310,7 @@
         </main>
     </div>
     <div class="login-modal">
-        <div class="login-modal-content">
+        <div class="animate login-modal-content">
             <h1>
                 <img src="img/parsley.png">
                 <span class="logo-text">
@@ -332,7 +339,7 @@
         </div>
     </div>
     <div class="create-stock-modal">
-        <div class="create-stock-modal-content">
+        <div class="animate create-stock-modal-content">
             <div class="modal-content-name">
                 <span class="material-symbols-outlined">history</span>
                 <h1></h1>
@@ -359,7 +366,7 @@
         </div>
     </div>
     <div class="create-cash-register-modal">
-        <div class="create-cash-register-modal-content">
+        <div class="animate create-cash-register-modal-content">
             <div class="modal-content-name">
                 <span class="material-symbols-outlined">history</span>
                 <h1></h1>
@@ -386,7 +393,7 @@
         </div>
     </div>
     <div class="create-employee-modal">
-        <div class="create-employee-modal-content">
+        <div class="animate create-employee-modal-content">
             <div class="modal-content-name">
                 <span class="material-symbols-outlined">history</span>
                 <h1></h1>
@@ -454,7 +461,7 @@
         </div>
     </div>
     <div class="employee-info-modal">
-        <div class="employee-info-modal-content">
+        <div class="animate employee-info-modal-content">
             <h1>Працівник</h1>
             <div class="form">
                 <h2>ПІБ</h2>
@@ -487,7 +494,7 @@
         </div>
     </div>
     <div class="create-category-modal">
-        <div class="create-category-modal-content">
+        <div class="animate create-category-modal-content">
             <div class="modal-content-name">
                 <span class="material-symbols-outlined">history</span>
                 <h1></h1>
@@ -507,7 +514,7 @@
         </div>
     </div>
     <div class="create-product-modal">
-        <div class="create-product-modal-content">
+        <div class="animate create-product-modal-content">
             <div class="modal-content-name">
                 <span class="material-symbols-outlined">history</span>
                 <h1></h1>
@@ -517,9 +524,9 @@
                 <img>
                 <span class="files-buttons">
                     <label for="product-files">
-                        <span class="material-symbols-outlined">attach_file</span>
+                        <span class="material-symbols-outlined">upload</span>
                     </label>
-                    <span class="remove-image material-symbols-outlined" onpointerup="removeImage(event)">delete_forever</span>
+                    <span class="remove-image material-symbols-outlined" onpointerup="removeImage(event)">delete_sweep</span>
                 </span>
                 <input id="product-files" type="file" onchange="uploadImage(event)">
             </div>
@@ -586,7 +593,7 @@
         </div>
     </div>
     <div class="product-info-modal">
-        <div class="product-info-modal-content">
+        <div class="animate product-info-modal-content">
             <div class="form product-content">
                 <div class="form product-info">
                     <h1>Товар</h1>
@@ -621,7 +628,7 @@
         </div>
     </div>
     <div class="create-contractor-modal">
-        <div class="create-contractor-modal-content">
+        <div class="animate create-contractor-modal-content">
             <div class="modal-content-name">
                 <span class="material-symbols-outlined">history</span>
                 <h1></h1>
@@ -653,7 +660,7 @@
         </div>
     </div>
     <div class="contractor-info-modal">
-        <div class="contractor-info-modal-content">
+        <div class="animate contractor-info-modal-content">
             <div class="contractor-details">
                 <h1>Постачальник</h1>
                 <div class="form">
@@ -692,7 +699,7 @@
         </div>
     </div>
     <div class="create-supply-modal">
-        <div class="create-supply-modal-content">
+        <div class="animate create-supply-modal-content">
             <div class="modal-content-name">
                 <span class="material-symbols-outlined">history</span>
                 <h1></h1>
@@ -778,7 +785,7 @@
         </div>
     </div>
     <div class="supply-info-modal">
-        <div class="supply-info-modal-content">
+        <div class="animate supply-info-modal-content">
             <h1>Поставка</h1>
             <div class="form">
                 <h2>Дата</h2>
@@ -835,7 +842,7 @@
         </div>
     </div>
     <div class="create-inventory-modal">
-        <div class="create-inventory-modal-content">
+        <div class="animate create-inventory-modal-content">
             <div class="modal-content-name">
                 <span class="material-symbols-outlined">history</span>
                 <h1></h1>
@@ -881,7 +888,7 @@
         </div>
     </div>
     <div class="create-client-modal">
-        <div class="create-client-modal-content">
+        <div class="animate create-client-modal-content">
             <div class="modal-content-name">
                 <span class="material-symbols-outlined">history</span>
                 <h1></h1>
@@ -934,7 +941,7 @@
         </div>
     </div>
     <div class="client-info-modal">
-        <div class="client-info-modal-content">
+        <div class="animate client-info-modal-content">
             <div class="form client-content">
                 <div class="form client-info">
                     <h1>Клієнт</h1>
@@ -1002,7 +1009,7 @@
         </div>
     </div>
     <div class="create-waste-modal">
-        <div class="create-waste-modal-content">
+        <div class="animate create-waste-modal-content">
             <div class="modal-content-name">
                 <span class="material-symbols-outlined">history</span>
                 <h1></h1>
@@ -1046,7 +1053,7 @@
         </div>
     </div>
     <div class="waste-info-modal">
-        <div class="waste-info-modal-content">
+        <div class="animate waste-info-modal-content">
             <h1>Списання</h1>
             <div class="form">
                 <h2>Дата</h2>
@@ -1076,7 +1083,7 @@
         </div>
     </div>
     <div class="create-sale-modal">
-        <div class="create-sale-modal-content">
+        <div class="animate create-sale-modal-content">
             <div class="sale-checkout">
                 <div class="sale-pay-sum">
                     <span>Сума оплати:</span>
@@ -1116,7 +1123,7 @@
         </div>
     </div>
     <div class="create-sale-order-modal">
-        <div class="create-sale-order-modal-content">
+        <div class="animate create-sale-order-modal-content">
             <div class="modal-content-name">
                 <span class="material-symbols-outlined">history</span>
                 <h1>Оформити замовлення</h1>
@@ -1162,9 +1169,9 @@
                         <img>
                         <span class="files-buttons">
                             <label for="delivery-files">
-                                <span class="material-symbols-outlined">attach_file</span>
+                                <span class="material-symbols-outlined">upload</span>
                             </label>
-                            <span class="remove-image material-symbols-outlined" onpointerup="removeImage(event)">delete_forever</span>
+                            <span class="remove-image material-symbols-outlined" onpointerup="removeImage(event)">delete_sweep</span>
                         </span>
                         <input id="delivery-files" type="file" onchange="uploadImage(event)">
                     </div>
@@ -1210,9 +1217,9 @@
                         <img>
                         <span class="files-buttons">
                             <label for="pickup-files">
-                                <span class="material-symbols-outlined">attach_file</span>
+                                <span class="material-symbols-outlined">upload</span>
                             </label>
-                            <span class="remove-image material-symbols-outlined" onpointerup="removeImage(event)">delete_forever</span>
+                            <span class="remove-image material-symbols-outlined" onpointerup="removeImage(event)">delete_sweep</span>
                         </span>
                         <input id="pickup-files" type="file" onchange="uploadImage(event)">
                     </div>
@@ -1362,7 +1369,7 @@
         </div>
     </div>
     <div class="create-internet-order-modal">
-        <div class="create-internet-order-modal-content">
+        <div class="animate create-internet-order-modal-content">
             <div class="modal-content-name">
                 <span class="material-symbols-outlined">history</span>
                 <h1>Оформити online-замовлення</h1>
@@ -1410,9 +1417,9 @@
                         <img>
                         <span class="files-buttons">
                             <label for="internet-delivery-files">
-                                <span class="material-symbols-outlined">attach_file</span>
+                                <span class="material-symbols-outlined">upload</span>
                             </label>
-                            <span class="remove-image material-symbols-outlined" onpointerup="removeImage(event)">delete_forever</span>
+                            <span class="remove-image material-symbols-outlined" onpointerup="removeImage(event)">delete_sweep</span>
                         </span>
                         <input id="internet-delivery-files" type="file" onchange="uploadImage(event)">
                     </div>
@@ -1458,9 +1465,9 @@
                         <img>
                         <span class="files-buttons">
                             <label for="pickup-files">
-                                <span class="material-symbols-outlined">attach_file</span>
+                                <span class="material-symbols-outlined">upload</span>
                             </label>
-                            <span class="remove-image material-symbols-outlined" onpointerup="removeImage(event)">delete_forever</span>
+                            <span class="remove-image material-symbols-outlined" onpointerup="removeImage(event)">delete_sweep</span>
                         </span>
                         <input id="pickup-files" type="file" onchange="uploadImage(event)">
                     </div>
@@ -1640,7 +1647,7 @@
         </div>
     </div>
     <div class="create-shift-modal">
-        <div class="create-shift-modal-content">
+        <div class="animate create-shift-modal-content">
             <h1>Вхід</h1>
             <div class="form">
                 <h2>Оберіть касу:</h2>
@@ -1663,7 +1670,7 @@
         </div>
     </div>
     <div class="shift-info-modal">
-        <div class="shift-info-modal-content">
+        <div class="animate shift-info-modal-content">
             <div class="shift-title-time">
                 <div class="shift-title">
                     <h1>Робоча зміна</h1>
@@ -1731,7 +1738,7 @@
         </div>
     </div>
     <div class="cash-register-operations-modal">
-        <div class="cash-register-operations-modal-content">
+        <div class="animate cash-register-operations-modal-content">
             <h1>Каса</h1>
             <div class="cash-register-cash">
                 <div class="form">
@@ -1797,7 +1804,7 @@
         </div>
     </div>
     <div class="order-info-modal">
-        <div class="order-info-modal-content">
+        <div class="animate order-info-modal-content">
             <div class="order-main-info">
                 <div class="order-title">
                     <div class="order-number-date">
@@ -1823,9 +1830,9 @@
                         <img>
                         <span class="files-buttons">
                             <label for="order-info-files">
-                                <span class="material-symbols-outlined">attach_file</span>
+                                <span class="material-symbols-outlined">upload</span>
                             </label>
-                            <span class="remove-image material-symbols-outlined" onpointerup="removeImage(event)">delete_forever</span>
+                            <span class="remove-image material-symbols-outlined" onpointerup="removeImage(event)">delete_sweep</span>
                         </span>
                         <input id="order-info-files" type="file" onchange="uploadImage(event)">
                     </div>
@@ -1860,6 +1867,10 @@
                             <span>Термінал</span>
                         </span>
                     </div>
+                </div>
+                <div class="payed-block">
+                    <img src="img/check.png">
+                    <span>Оплачено</span>
                 </div>
             </div>
             <div class="customer">
@@ -1906,7 +1917,7 @@
         </div>
     </div>
     <div class="create-flavor-modal">
-        <div class="create-flavor-modal-content">
+        <div class="animate create-flavor-modal-content">
             <div class="modal-content-name">
                 <span class="material-symbols-outlined">history</span>
                 <h1></h1>
@@ -1917,9 +1928,9 @@
                 <img>
                 <span class="files-buttons">
                     <label for="flavor-files">
-                        <span class="material-symbols-outlined">attach_file</span>
+                        <span class="material-symbols-outlined">upload</span>
                     </label>
-                    <span class="remove-image material-symbols-outlined" onpointerup="removeImage(event)">delete_forever</span>
+                    <span class="remove-image material-symbols-outlined" onpointerup="removeImage(event)">delete_sweep</span>
                 </span>
                 <input id="flavor-files" type="file" onchange="uploadImage(event)">
             </div>
@@ -1991,7 +2002,7 @@
         </div>
     </div>
     <div class="flavor-info-modal">
-        <div class="flavor-info-modal-content">
+        <div class="animate flavor-info-modal-content">
             <div class="form flavor-content">
                 <div class="form flavor-info">
                     <h1></h1>
@@ -2031,12 +2042,12 @@
         </div>
     </div>
     <div class="flavor-templates-modal">
-        <div class="flavor-templates-modal-content">
+        <div class="animate flavor-templates-modal-content">
             <ul></ul>
         </div>
     </div>
     <div class="create-store-expense-modal">
-        <div class="create-store-expense-modal-content">
+        <div class="animate create-store-expense-modal-content">
             <div class="modal-content-name">
                 <span class="material-symbols-outlined">history</span>
                 <h1></h1>
@@ -2080,7 +2091,7 @@
         </div>
     </div>
     <div class="create-label-modal">
-        <div class="create-label-modal-content">
+        <div class="animate create-label-modal-content">
             <div class="modal-content-name">
                 <span class="material-symbols-outlined">history</span>
                 <h1></h1>
@@ -2107,7 +2118,7 @@
         </div>
     </div>
     <div class="notes-modal">
-        <div class="notes-modal-content">
+        <div class="animate notes-modal-content">
             <h1>
                 <span>Замітки</span>
                 <span class="material-symbols-outlined" onpointerup="createNote()">add_circle</span>
@@ -2119,7 +2130,7 @@
             </ul>
         </div>
     </div>
-    <div id="message">
+    <div class="animate-item animate" id="message">
         <div></div>
         <div></div>
     </div>
@@ -2133,7 +2144,7 @@
         <div id="loader"></div>
     </div>
     <div class="calendar-modal">
-        <div id="calendar">
+        <div id="calendar" class="animate-item animate">
             <div class="month-year-select">
                 <select>
                     <option>січень</option>
@@ -2233,7 +2244,7 @@
         </div>
     </div>
     <div class="calculator-modal">
-        <div id="calculator">
+        <div id="calculator" class="animate-item animate">
             <div class="calculator-row">
                 <span>7</span>
                 <span>8</span>
@@ -2257,7 +2268,7 @@
         </div>
     </div>
     <div class="confirm-modal">
-        <div class="confirm-modal-content">
+        <div class="animate confirm-modal-content">
             <div class="text">
                 <span></span>
                 <span></span>
@@ -2276,7 +2287,7 @@
         <span class="seconds"></span>
     </div>
     <div class="changelog-modal">
-        <div class="changelog-modal-content">
+        <div class="animate changelog-modal-content">
             <h1>
                 <span class="material-symbols-outlined">memory</span>
                 <span>Changelog</span>
