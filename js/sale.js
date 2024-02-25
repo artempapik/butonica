@@ -206,6 +206,7 @@ const createSaleModal = () => {
     saleModal.querySelector('.sale-checkout').style.display = 'flex'
     saleModal.querySelector('.sale-checkout').classList.remove('free-terminal')
     saleModal.querySelector('.sale-checkout .sale-change').style.display = ''
+    hideBodyOverflow()
     saleModal.style.display = 'flex'
 
     const paidSumInput = saleModal.querySelector('.sale-checkout input')
