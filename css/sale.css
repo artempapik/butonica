@@ -1543,6 +1543,10 @@
             padding-left: 2.6rem;
             border-radius: .7rem;
             font-size: .9rem;
+
+            &::-webkit-search-cancel-button {
+                transform: scale(1.2);
+            }
         }
 
         & div {
