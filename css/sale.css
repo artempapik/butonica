@@ -298,7 +298,7 @@
                             }
                         }
                     }
-    
+
                     & .sale-products {
                         display: flex;
                         flex-direction: column;
@@ -1382,6 +1382,14 @@
     .cash-register-operations-modal-content {
         padding: .7rem .5rem;
         gap: .8rem;
+
+        & h1 {
+            font-size: 1.3rem;
+        }
+
+        & .cash-register-cash {
+            gap: .8rem;
+        }
     }
 }
 
@@ -1452,7 +1460,7 @@
         & .sale-panel {
             min-width: unset;
             width: 100%;
-            height: 90vh;
+            min-height: 91vh;
             position: unset;
             border-radius: 0;
 
@@ -1474,7 +1482,7 @@
                         }
 
                         & .sale-products {
-                            max-height: 41vh;
+                            max-height: 49vh;
 
                             & .sale-product, & .sale-flavor {
                                 & div {
