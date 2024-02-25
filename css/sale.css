@@ -1372,6 +1372,17 @@
         padding: .8rem 1.4rem .4rem 1.4rem;
         gap: 1.7rem;
     }
+
+    .create-sale-order-modal-content, .create-internet-order-modal-content {
+        & .sale-order-date-header .sale-order-image div img {
+            width: 7rem;
+        }
+    }
+
+    .cash-register-operations-modal-content {
+        padding: .9rem;
+        gap: 1rem;
+    }
 }
 
 @media only screen and (max-width: 700px) and (orientation: portrait) {
@@ -1426,6 +1437,116 @@
             & .cash h1 {
                 border-top-right-radius: 0;
             }
+        }
+    }
+
+    .sale-content {
+        flex-direction: column-reverse;
+        gap: .5rem;
+
+        & .sale-products {
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        & .sale-panel {
+            min-width: unset;
+            width: 100%;
+            height: 90vh;
+            position: unset;
+            border-radius: 0;
+
+            & .sale-cash-register {
+                padding: .2rem .3rem;
+
+                & .cash-register-products {
+                    & .shifts {
+                        margin-bottom: .4rem;
+                    }
+
+                    & .empty-cart {
+                        gap: .5rem;
+                    }
+
+                    & .products {
+                        & .products-header {
+                            display: none;
+                        }
+
+                        & .sale-products {
+                            max-height: 41vh;
+
+                            & .sale-product, & .sale-flavor {
+                                & div {
+                                    width: unset;
+                                }
+                            }
+
+                            & .sale-product-content {
+                                & .sale-product, & .sale-flavor {
+                                    padding: .1rem .2rem;
+
+                                    & .sale-product-buttons button {
+                                        display: none;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                & .cash-register {
+                    gap: .7rem;
+
+                    & button {
+                        padding: .2rem 0;
+                        font-size: .9rem;
+                    }
+                }
+            }
+
+            & .sale-pay-buttons {
+                & .to-pay {
+                    padding: .2rem;
+                }
+
+                & .checkout {
+                    padding: .4rem 0;
+                    font-size: 1rem;
+                }
+
+                & .sale-payment {
+                    padding: .6rem 0;
+                    font-size: 1.3rem;
+                }
+
+                & .checkout-clients {
+                    padding: .2rem .1rem;
+
+                    & .select-client {
+                        flex-direction: column;
+                        gap: .2rem;
+                    }
+                }
+            }
+        }
+    }
+
+    .sale-header {
+        justify-content: space-between;
+        padding: .3rem .6rem !important;
+        border-radius: 0;
+
+        & input[type=search] {
+            width: 15rem;
+            padding: .4rem;
+            padding-left: 2.6rem;
+            border-radius: .7rem;
+            font-size: .9rem;
+        }
+
+        & div {
+            display: none;
         }
     }
 }
