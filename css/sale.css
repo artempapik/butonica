@@ -1538,8 +1538,8 @@
         border-radius: 0;
 
         & input[type=search] {
-            width: 15rem;
-            padding: .4rem;
+            width: 15.5rem;
+            padding: .3rem;
             padding-left: 2.6rem;
             border-radius: .7rem;
             font-size: .9rem;
