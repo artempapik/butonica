@@ -26,7 +26,7 @@
         & img {
             margin-top: .8rem;
             width: 8rem;
-            height: max-content;
+            height: fit-content;
         }   
     }
 
