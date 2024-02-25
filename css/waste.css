@@ -105,7 +105,8 @@
         & table {
             display: block;
             width: 100%;
-    
+            margin-bottom: 0;
+            
             & td {
                 font-size: 1rem;
 
@@ -142,6 +143,12 @@
         & .waste-products .waste-product div {
             gap: .5rem;
         }
+    }
+
+    .waste-info-modal-content {
+        gap: .8rem;
+        padding: .7rem;
+        padding-top: 0;
     }
 
     .waste-table table td:nth-child(3) {
