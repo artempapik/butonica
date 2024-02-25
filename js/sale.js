@@ -1135,6 +1135,7 @@ const showCashRegisterOperations = () => {
         const iconTexts = ["Кур'єр", 'Сміття', 'Вода', 'Оренда приміщення', 'Розмін']
         document.querySelectorAll('.cash-register-comment-icons li').forEach((icon, i) => icon.onpointerup = () => textarea.value = iconTexts[i])
 
+        hideBodyOverflow()
         cashRegisterOperationsModal.style.display = 'flex'
     }).catch(() => showMessage('error', getErrorMessage('касу')))
 }
