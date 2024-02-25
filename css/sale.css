@@ -1380,8 +1380,8 @@
     }
 
     .cash-register-operations-modal-content {
-        padding: .9rem;
-        gap: 1rem;
+        padding: .7rem .5rem;
+        gap: .8rem;
     }
 }
 
