@@ -2022,15 +2022,10 @@ if ('serviceWorker' in navigator) {
     })
 }
 
-const animateChange = item => item.animate([
-    { opacity: '.4' },
+const animateChange = (item, opacity = '.4') => item.animate([
+    { opacity },
     { opacity: '1' }
 ], 200)
-
-const animateChange2 = item => item.animate([
-    { transform: 'scale(.98)' },
-    { transform: 'scale(1)' }
-], 100)
 
 // Notification.requestPermission().then(permission => console.log(permission))
 
