@@ -54,7 +54,7 @@
     }
 
     .create-store-expense-modal-content {
-        padding: .8rem;
-        gap: 1rem;
+        padding: .5rem 1rem;
+        gap: .8rem;
     }
 }
