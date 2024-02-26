@@ -222,10 +222,6 @@ const createShiftRow = shift => {
 
             for (const [index, viewType] of viewTypes.entries()) {
                 viewType.onpointerup = () => {
-                    if (!(localStorage.getItem('animations-disabled') || false)) {
-                        animateChange2(shiftModalContent)
-                    }
-
                     if (viewType.classList.contains('active')) {
                         viewTypes.forEach(vt => vt.classList.remove('not-active'))
                         viewType.classList.remove('active')
