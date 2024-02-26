@@ -2022,8 +2022,8 @@ if ('serviceWorker' in navigator) {
     })
 }
 
-const animateChange = (item, opacity = '.4') => item.animate([
-    { opacity },
+const animateChange = item => item.animate([
+    { opacity: '.4' },
     { opacity: '1' }
 ], 200)
 
