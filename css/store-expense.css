@@ -52,4 +52,9 @@
             max-width: 7.2rem !important;
         }
     }
+
+    .create-store-expense-modal-content {
+        padding: .8rem;
+        gap: 1rem;
+    }
 }
