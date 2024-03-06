@@ -89,7 +89,7 @@ const createShiftRow = shift => {
                     }
 
                     if (operation.type === 4) {
-                        const orderSpan = createSpan(`(зам. №${operation.orderId})`)
+                        const orderSpan = createSpan(`(зам. ${operation.orderId})`)
                         orderSpan.classList = 'order-number'
                         type.append(orderSpan)
                     }
