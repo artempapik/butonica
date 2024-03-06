@@ -403,7 +403,7 @@
         width: unset;
         margin-top: 0;
         padding-left: 0;
-        gap: .6rem;
+        gap: .5rem;
         align-self: center;
 
         & .calendar-day {
@@ -425,7 +425,7 @@
     .order-calendar {
         justify-content: center;
         margin-top: .8rem;
-        gap: .4rem;
+        gap: .5rem;
 
         & .order-calendar-category {
             width: 11.3rem;
