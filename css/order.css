@@ -22,7 +22,6 @@
 
                     & span {
                         font-family: 'Roboto Mono', monospace;
-                        text-decoration: underline;
                     }
                 }
                 
@@ -353,7 +352,7 @@
         &:nth-child(2), &:nth-child(5), &:nth-child(6), &:nth-child(7) {
             text-align: center;
         }
-    
+        
         &:first-child {
             padding: 0 .5rem;
             background: rgba(0, 0, 0, .75);
