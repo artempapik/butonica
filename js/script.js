@@ -2127,6 +2127,10 @@ calculatorNumbers.forEach(e => e.onpointerup = () => {
         return
     }
 
+    if (calculator.classList.contains('mode-search') && enterInput.textContent.length > 4) {
+        return
+    }
+
     if (enterInput.textContent.length > 8) {
         return
     }
