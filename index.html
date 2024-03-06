@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Butonica – Облік Вашого бізнесу</title>
+    <title>Butonica – Облік Твоєї квіткарні</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="manifest" href="manifest.json">
@@ -23,6 +23,9 @@
     <link rel="stylesheet" href="css/waste.css">
     <link rel="stylesheet" href="css/shift.css">
     <link rel="stylesheet" href="css/order.css">
+    <link rel="stylesheet" href="css/pending-order.css">
+    <link rel="stylesheet" href="css/completed-order.css">
+    <link rel="stylesheet" href="css/order-calendar.css">
     <link rel="stylesheet" href="css/flavor.css">
     <link rel="stylesheet" href="css/store-expense.css">
     <link rel="stylesheet" href="css/label.css">
@@ -36,7 +39,7 @@
                 <img src="img/parsley.png">
                 <span class="logo-text">
                     <span>Butonica</span>
-                    <span>Облік Вашого бізнесу</span>
+                    <span>Облік Твоєї квіткарні</span>
                 </span>
             </div>
         </div>
@@ -82,7 +85,7 @@
                     <span class="material-symbols-outlined">logout</span>
                     <span>Вийти</span>
                 </div>
-                <div id="version" onpointerup="showChangelog()">
+                <div class="animate-item animate" id="version" onpointerup="showChangelog()">
                 </div>
             </div>
         </div>
@@ -123,6 +126,12 @@
                             <div>
                                 <span class="material-symbols-outlined">done</span>
                                 <span>Виконані</span>
+                            </div>
+                        </li>
+                        <li class="main-padding" onpointerup="showOrderCalendarInfo(event)">
+                            <div>
+                                <span class="material-symbols-outlined">calendar_month</span>
+                                <span>Календар</span>
                             </div>
                         </li>
                     </ul>
@@ -315,7 +324,7 @@
                 <img src="img/parsley.png">
                 <span class="logo-text">
                     <span>Butonica</span>
-                    <span>Облік Вашого бізнесу</span>
+                    <span>Облік Твоєї квіткарні</span>
                 </span>
             </h1>
             <div class="form">
@@ -489,7 +498,7 @@
             </div>
             <div class="form">
                 <h2>Телефон</h2>
-                <h3 class="employee-phone"></h3>
+                <a class="employee-phone"></a>
             </div>
         </div>
     </div>
@@ -1808,7 +1817,7 @@
             <div class="order-main-info">
                 <div class="order-title">
                     <div class="order-number-date">
-                        <div class="order-number">Замовлення № <span></span></div>
+                        <div class="order-number">Замовлення <span></span></div>
                         <div class="order-date">
                             <span>Дата</span>
                             <input type="date">
@@ -2244,7 +2253,7 @@
         </div>
     </div>
     <div class="calculator-modal">
-        <div id="calculator" class="animate-item animate">
+        <div id="calculator">
             <div class="calculator-row">
                 <span>7</span>
                 <span>8</span>
@@ -2319,6 +2328,7 @@
     <script src="js/all-orders.js"></script>
     <script src="js/pending-orders.js"></script>
     <script src="js/completed-orders.js"></script>
+    <script src="js/order-calendar.js"></script>
     <script src="js/flavor.js"></script>
     <script src="js/store-expense.js"></script>
     <script src="js/label.js"></script>
