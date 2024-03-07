@@ -1,3 +1,5 @@
+let movingOrder
+
 const showOrderCalendarInfo = e => {
     main.innerHTML = menuItemsContents['ordercalendar']
     fillSelectedMenuItem(e)
@@ -159,7 +161,7 @@ const fillOrderCalendar = (day, month, year, isWeek = false) => {
     
                     const cancelButton = createSpan('close')
                     cancelButton.classList = 'material-symbols-outlined'
-    
+
                     const doneButton = createSpan(i ? 'local_shipping' : 'done')
                     doneButton.style.background = i ? 'rgb(255, 100, 30)' : 'rgb(48, 133, 108)'
                     doneButton.classList = 'material-symbols-outlined'
@@ -205,17 +207,42 @@ const fillOrderCalendar = (day, month, year, isWeek = false) => {
                     orderBody.append(buttons)
     
                     const orderCard = document.createElement('div')
+                    orderCard.classList = 'order animate'
                     orderCard.id = order.id
                     orderCard.draggable = true
-                    orderCard.ondragstart = e => e.dataTransfer.setData('order-id', order.id)
 
-                    orderCard.classList = 'order animate'
+                    orderCard.ondragstart = e => {
+                        movingOrder = order
+
+                        categories.forEach(c => {
+                            c.classList.remove('not-moving')
+                            c.classList.add('moving')
+                        })
+
+                        for (const category of categories) {
+                            if (category.contains(orderCard)) {
+                                category.classList.remove('moving')
+                                category.classList.add('not-moving')
+                                break
+                            }
+                        }
+
+                        orderCard.classList.add('moving')
+                        e.dataTransfer.setData('order-id', order.id)
+                    }
+
+                    orderCard.ondragend = () => {
+                        categories.forEach(c => {
+                            c.classList.remove('not-moving')
+                            c.classList.remove('moving')
+                        })
+
+                        orderCard.classList.remove('moving')
+                    }
 
                     if (animationsDisabled) {
                         orderCard.classList.remove('animate')
                     }
-
-                    orderCard.classList.add(!i ? 'processed' : i === 1 ? 'completed' : 'delivered')
 
                     orderCard.append(orderNumberBlock, orderBody)
                     categories.item(i).append(orderCard)
@@ -225,14 +252,47 @@ const fillOrderCalendar = (day, month, year, isWeek = false) => {
         .catch(() => showMessage('error', 'Не вдалося завантажити календар'))
 }
 
+const indexToMovedOrderStatus = {
+    0: 'прийняті',
+    1: 'зроблені',
+    2: 'доставлені'
+}
+
 const moveOrder = (e, index) => {
     e.preventDefault()
 
     const categories = document.querySelectorAll('.order-calendar-category')
+    categories.forEach(c => c.classList.remove('moving'))
     const order = document.getElementById(e.dataTransfer.getData('order-id'))
 
     if (categories.item(index).contains(order)) {
         return
+    }
+
+    const button = order.querySelector('.buttons span:last-child')
+    button.textContent = index ? 'local_shipping' : 'done'
+    button.style.background = index ? 'rgb(255, 100, 30)' : 'rgb(48, 133, 108)'
+    const leftTime = order.querySelector('.left')
+
+    if (index === 2) {
+        button.style.visibility = 'hidden'
+        leftTime.style.visibility = 'hidden'
+    } else {
+        button.style.visibility = ''
+        leftTime.style.visibility = ''
+
+        const timeLeft = movingOrder.timeFrom ?
+            convertMsToTime(new Date(movingOrder.date.replace('00', movingOrder.timeFrom.substring(0, 2)).replace('00', movingOrder.timeFrom.substring(3))) - new Date()) :
+            { text: calculateDaysLeft(movingOrder.date) }
+
+        leftTime.textContent = timeLeft.text
+
+        if ('background' in timeLeft) {
+            leftTime.style.background = timeLeft.background
+        } else {
+            leftTime.style.fontWeight = 'bold'
+            leftTime.style.color = 'rgb(50, 50, 50)'
+        }
     }
 
     for (const category of categories) {
@@ -240,9 +300,9 @@ const moveOrder = (e, index) => {
             const emptyBox = category.querySelector('.table-no-data')
     
             if (emptyBox) {
-                category.removeChild(emptyBox)
+                emptyBox.remove()
             }
-    
+
             category.firstElementChild.after(order)
         }
     }
@@ -252,4 +312,6 @@ const moveOrder = (e, index) => {
             category.firstElementChild.after(createEmptyDataDiv())
         }
     }
+
+    showMessage('info', `Замовлення ${order.id} переведено у ${indexToMovedOrderStatus[index]}`)
 }
