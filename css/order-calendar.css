@@ -101,6 +101,28 @@
 
     & .order-calendar-category {
         width: 17rem;
+        transition: .2s;
+
+        &.not-moving {
+            filter: grayscale();
+            transform: translateY(.5rem);
+        }
+
+        &.moving {
+            transform: translateY(-.7rem);
+        }
+
+        &.processed .order:hover {
+            outline-color: rgb(var(--table-hover-color));
+        }
+
+        &.completed .order:hover {
+            outline-color: rgb(48, 133, 108);
+        }
+
+        &.delivered .order:hover {
+            outline-color: rgba(255, 100, 30, .5);
+        }
 
         & .category {
             box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
@@ -181,6 +203,11 @@
                 transition: .1s;
             }
 
+            &.moving {
+                transform: scale(1) !important;
+                opacity: .25;
+            }
+
             &:last-child {
                 margin-bottom: 1rem;
             }
@@ -188,18 +215,6 @@
             &.animate:hover {
                 transform: scale(1.03);
                 box-shadow: rgba(60, 64, 67, .3) 0 1px 2px 0, rgba(60, 64, 67, .15) 0 2px 6px 2px;
-            }
-
-            &.processed:hover {
-                outline-color: rgb(var(--table-hover-color));
-            }
-
-            &.completed:hover {
-                outline-color: rgb(48, 133, 108);
-            }
-
-            &.delivered:hover {
-                outline-color: rgba(255, 100, 30, .5);
             }
 
             & .order-number {
