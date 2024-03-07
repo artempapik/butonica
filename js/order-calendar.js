@@ -205,7 +205,10 @@ const fillOrderCalendar = (day, month, year, isWeek = false) => {
                     orderBody.append(buttons)
     
                     const orderCard = document.createElement('div')
+                    orderCard.id = order.id
                     orderCard.draggable = true
+                    orderCard.ondragstart = e => e.dataTransfer.setData('order-id', order.id)
+
                     orderCard.classList = 'order animate'
 
                     if (animationsDisabled) {
@@ -220,4 +223,33 @@ const fillOrderCalendar = (day, month, year, isWeek = false) => {
             }
         })
         .catch(() => showMessage('error', 'Не вдалося завантажити календар'))
+}
+
+const moveOrder = (e, index) => {
+    e.preventDefault()
+
+    const categories = document.querySelectorAll('.order-calendar-category')
+    const order = document.getElementById(e.dataTransfer.getData('order-id'))
+
+    if (categories.item(index).contains(order)) {
+        return
+    }
+
+    for (const category of categories) {
+        if (category.contains(e.target)) {
+            const emptyBox = category.querySelector('.table-no-data')
+    
+            if (emptyBox) {
+                category.removeChild(emptyBox)
+            }
+    
+            category.firstElementChild.after(order)
+        }
+    }
+
+    for (const category of categories) {
+        if (category.children.length === 1) {
+            category.firstElementChild.after(createEmptyDataDiv())
+        }
+    }
 }
