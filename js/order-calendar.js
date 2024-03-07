@@ -25,6 +25,7 @@ const showOrderCalendarInfo = e => {
     })
 
     fillOrderCalendar(4, 3, 2024)
+    fillDatalistsLabels()
 }
 
 const fillOrderCalendar = (day, month, year, isWeek = false) => {
@@ -204,6 +205,7 @@ const fillOrderCalendar = (day, month, year, isWeek = false) => {
                     orderBody.append(buttons)
     
                     const orderCard = document.createElement('div')
+                    orderCard.draggable = true
                     orderCard.classList = 'order animate'
 
                     if (animationsDisabled) {
