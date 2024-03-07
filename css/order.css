@@ -230,8 +230,13 @@
                 gap: .7rem;
                 align-items: center;
 
-                & span:first-child {
+                & span {
                     font-size: 1.3rem;
+                }
+
+                & a {
+                    font-weight: bold;
+                    color: rgb(0, 71, 171);
                 }
             }
         }
