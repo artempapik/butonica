@@ -455,6 +455,14 @@
         & .order-calendar-category {
             width: 11.3rem;
 
+            &.not-moving {
+                transform: translateY(.2rem);
+            }
+
+            &.moving {
+                transform: translateY(-.4rem);
+            }
+
             &:last-child {
                 display: none;
             }
