@@ -38,7 +38,8 @@ const createContractorRow = contractor => {
 
     const tr = document.createElement('tr')
     tr.onpointerup = e => {
-        if (e.target.tagName.toLowerCase() === 'span') {
+        const tagName = e.target.tagName.toLowerCase()
+        if (tagName === 'a' || tagName === 'span') {
             return
         }
 
@@ -47,6 +48,7 @@ const createContractorRow = contractor => {
 
         contractorInfoModal.querySelector('.contractor-name').textContent = contractor.name
         showHideNodeInfo(contractorInfoModal, 'contractor-email', contractor.email)
+        contractorInfoModal.querySelector('.contractor-phone').href = 'tel:' + contractor.phone
         showHideNodeInfo(contractorInfoModal, 'contractor-phone', formatPhoneNumber(contractor.phone))
         showHideNodeInfo(contractorInfoModal, 'contractor-comment', contractor.comment)
         contractorInfoModal.querySelector('.contractor-product-sum').textContent = contractor.productSum.toFixed(2) + ' грн'
@@ -318,10 +320,14 @@ const createContractorRow = contractor => {
             }
         }).catch(() => showMessage('error', deleteErrorMessage('постачальника'))))
 
+    const phoneLink = document.createElement('a')
+    phoneLink.href = 'tel:' + contractor.phone
+    phoneLink.textContent = formatPhoneNumber(contractor.phone)
+
     tr.append(
         createTd(contractor.name),
         createTd(contractor.email),
-        createTd(formatPhoneNumber(contractor.phone)),
+        createTd(phoneLink),
         actionsColumn
     )
     return tr
