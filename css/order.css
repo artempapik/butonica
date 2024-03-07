@@ -416,6 +416,16 @@
     display: none;
 }
 
+@media only screen and (max-width: 1500px) {
+    .order-info-modal-content {
+        & .customer, & .recipient {
+            & .phones .phone {
+                gap: .4rem;
+            }
+        }
+    }
+}
+
 @media only screen and (max-width: 700px) {
     .order-info-modal-content .order-status .statuses .status.active-order-status {
         font-weight: unset;
