@@ -149,13 +149,15 @@ const createContractorRow = contractor => {
                 const supplyPaidSumHeader = document.createElement('h2')
                 supplyPaidSumHeader.textContent = 'Сума оплати'
 
-                const supplyPaidSumSubHeader = document.createElement('h3')
-                supplyPaidSumSubHeader.textContent = supply.paidSum.toFixed(2) + ' грн'
-
-                const supplyPaidSumDiv = document.createElement('div')
-                supplyPaidSumDiv.classList = 'form'
-                supplyPaidSumDiv.append(supplyPaidSumHeader, supplyPaidSumSubHeader)
-                suppliesInfo.append(supplyPaidSumDiv)
+                if (supply.paidSum) {
+                    const supplyPaidSumSubHeader = document.createElement('h3')
+                    supplyPaidSumSubHeader.textContent = supply.paidSum.toFixed(2) + ' грн'
+    
+                    const supplyPaidSumDiv = document.createElement('div')
+                    supplyPaidSumDiv.classList = 'form'
+                    supplyPaidSumDiv.append(supplyPaidSumHeader, supplyPaidSumSubHeader)
+                    suppliesInfo.append(supplyPaidSumDiv)
+                }
 
                 const supplyPayDateHeader = document.createElement('h2')
                 supplyPayDateHeader.textContent = 'Дата оплати'
