@@ -307,12 +307,13 @@ const createOrderRow = (order, table) => {
                     callIcon.classList = 'material-symbols-outlined'
                     callIcon.textContent = 'call'
 
-                    const phoneText = document.createElement('span')
-                    phoneText.textContent = formatPhoneNumber(phone)
-    
+                    const phoneLink = document.createElement('a')
+                    phoneLink.href = 'tel:' + phone
+                    phoneLink.textContent = formatPhoneNumber(phone)
+                    
                     const phoneBlock = document.createElement('div')
                     phoneBlock.classList = 'phone'
-                    phoneBlock.append(callIcon, phoneText)
+                    phoneBlock.append(callIcon, phoneLink)
                     phonesBlock.append(phoneBlock)
                 }
 
