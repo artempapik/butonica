@@ -172,6 +172,7 @@ const getClassForNumber = number => {
 
 const createEmptyDataDiv = () => {
     const emptyImage = document.createElement('img')
+    emptyImage.draggable = false
     emptyImage.src = 'img/empty-box.webp'
 
     const noDataSpan = document.createElement('span')
@@ -180,6 +181,7 @@ const createEmptyDataDiv = () => {
     const emptyDataDiv = document.createElement('div')
     emptyDataDiv.classList = 'table-no-data'
     emptyDataDiv.append(emptyImage, noDataSpan)
+
     return emptyDataDiv
 }
 
@@ -941,19 +943,19 @@ const menuItemsContents = {
             </span>
         </div>
         <div class="order-calendar">
-            <div class="order-calendar-category" ondrop="moveOrder(event, 0)" ondragover="event.preventDefault()">
+            <div class="order-calendar-category processed" ondrop="moveOrder(event, 0)" ondragover="event.preventDefault()">
                 <div class="category">
                     <span class="material-symbols-outlined">sync</span>
                     <span>Прийняті</span>
                 </div>
             </div>
-            <div class="order-calendar-category" ondrop="moveOrder(event, 1)" ondragover="event.preventDefault()">
+            <div class="order-calendar-category completed" ondrop="moveOrder(event, 1)" ondragover="event.preventDefault()">
                 <div class="category">
                     <span class="material-symbols-outlined">done</span>
                     <span>Зібрані</span>
                 </div>
             </div>
-            <div class="order-calendar-category" ondrop="moveOrder(event, 2)" ondragover="event.preventDefault()">
+            <div class="order-calendar-category delivered" ondrop="moveOrder(event, 2)" ondragover="event.preventDefault()">
                 <div class="category">
                     <span class="material-symbols-outlined">local_shipping</span>
                     <span>Доставлені</span>
