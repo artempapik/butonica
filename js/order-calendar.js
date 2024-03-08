@@ -212,24 +212,23 @@ const fillOrderCalendar = (day, month, year, isWeek = false) => {
                     orderCard.draggable = true
 
                     orderCard.ondragstart = e => {
+                        movingOrder = order
+
+                        categories.forEach(c => {
+                            c.classList.remove('not-moving')
+                            c.classList.add('moving')
+                        })
+
+                        for (const category of categories) {
+                            if (category.contains(orderCard)) {
+                                category.classList.remove('moving')
+                                category.classList.add('not-moving')
+                                break
+                            }
+                        }
+
+                        orderCard.classList.add('moving')
                         e.dataTransfer.setData('order-id', order.id)
-
-                        // movingOrder = order
-
-                        // categories.forEach(c => {
-                        //     c.classList.remove('not-moving')
-                        //     c.classList.add('moving')
-                        // })
-
-                        // for (const category of categories) {
-                        //     if (category.contains(orderCard)) {
-                        //         category.classList.remove('moving')
-                        //         category.classList.add('not-moving')
-                        //         break
-                        //     }
-                        // }
-
-                        // orderCard.classList.add('moving')
                     }
 
                     orderCard.ondragend = () => {
