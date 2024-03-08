@@ -209,7 +209,7 @@ const fillOrderCalendar = (day, month, year, isWeek = false) => {
                     const orderCard = document.createElement('div')
                     orderCard.classList = 'order animate'
                     orderCard.id = order.id
-                    orderCard.draggable = true
+                    orderCard.draggable = 'true'
 
                     orderCard.ondragstart = e => {
                         movingOrder = order
