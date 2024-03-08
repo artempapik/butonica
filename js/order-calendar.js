@@ -231,9 +231,9 @@ const fillOrderCalendar = (day, month, year, isWeek = false) => {
                         e.dataTransfer.setData('order-id', order.id)
                     }
 
-                    orderCard.ondragover = e => {
-                        e.preventDefault()
-                    }
+                    orderCard.addEventListener('dragover', event => {
+                        event.preventDefault()
+                    })
 
                     orderCard.ondragend = () => {
                         categories.forEach(c => {
