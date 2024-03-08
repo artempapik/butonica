@@ -211,7 +211,7 @@ const fillOrderCalendar = (day, month, year, isWeek = false) => {
                     orderCard.id = order.id
                     orderCard.draggable = true
 
-                    orderCard.ondragstart = e => {
+                    orderCard.addEventListener('dragstart', e => {
                         movingOrder = order
 
                         categories.forEach(c => {
@@ -229,20 +229,16 @@ const fillOrderCalendar = (day, month, year, isWeek = false) => {
 
                         orderCard.classList.add('moving')
                         e.dataTransfer.setData('order-id', order.id)
-                    }
-
-                    orderCard.addEventListener('dragover', event => {
-                        event.preventDefault()
                     })
 
-                    orderCard.ondragend = () => {
-                        categories.forEach(c => {
-                            c.classList.remove('not-moving')
-                            c.classList.remove('moving')
-                        })
+                    // orderCard.ondragend = () => {
+                    //     categories.forEach(c => {
+                    //         c.classList.remove('not-moving')
+                    //         c.classList.remove('moving')
+                    //     })
 
-                        orderCard.classList.remove('moving')
-                    }
+                    //     orderCard.classList.remove('moving')
+                    // }
 
                     if (animationsDisabled) {
                         orderCard.classList.remove('animate')
