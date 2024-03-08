@@ -269,49 +269,53 @@ const moveOrder = (e, index) => {
         return
     }
 
-    const button = order.querySelector('.buttons span:last-child')
-    button.textContent = index ? 'local_shipping' : 'done'
-    button.style.background = index ? 'rgb(255, 100, 30)' : 'rgb(48, 133, 108)'
-    const leftTime = order.querySelector('.left')
+    put(`Order/status/${order.id}/${index}`)
+        .then(() => {
+            const button = order.querySelector('.buttons span:last-child')
+            button.textContent = index ? 'local_shipping' : 'done'
+            button.style.background = index ? 'rgb(255, 100, 30)' : 'rgb(48, 133, 108)'
+            const leftTime = order.querySelector('.left')
 
-    if (index === 2) {
-        button.style.visibility = 'hidden'
-        leftTime.style.visibility = 'hidden'
-    } else {
-        button.style.visibility = ''
-        leftTime.style.visibility = ''
+            if (index === 2) {
+                button.style.visibility = 'hidden'
+                leftTime.style.visibility = 'hidden'
+            } else {
+                button.style.visibility = ''
+                leftTime.style.visibility = ''
 
-        const timeLeft = movingOrder.timeFrom ?
-            convertMsToTime(new Date(movingOrder.date.replace('00', movingOrder.timeFrom.substring(0, 2)).replace('00', movingOrder.timeFrom.substring(3))) - new Date()) :
-            { text: calculateDaysLeft(movingOrder.date) }
+                const timeLeft = movingOrder.timeFrom ?
+                    convertMsToTime(new Date(movingOrder.date.replace('00', movingOrder.timeFrom.substring(0, 2)).replace('00', movingOrder.timeFrom.substring(3))) - new Date()) :
+                    { text: calculateDaysLeft(movingOrder.date) }
 
-        leftTime.textContent = timeLeft.text
+                leftTime.textContent = timeLeft.text
 
-        if ('background' in timeLeft) {
-            leftTime.style.background = timeLeft.background
-        } else {
-            leftTime.style.fontWeight = 'bold'
-            leftTime.style.color = 'rgb(50, 50, 50)'
-        }
-    }
-
-    for (const category of categories) {
-        if (category.contains(e.target)) {
-            const emptyBox = category.querySelector('.table-no-data')
-    
-            if (emptyBox) {
-                emptyBox.remove()
+                if ('background' in timeLeft) {
+                    leftTime.style.background = timeLeft.background
+                } else {
+                    leftTime.style.fontWeight = 'bold'
+                    leftTime.style.color = 'rgb(50, 50, 50)'
+                }
             }
 
-            category.firstElementChild.after(order)
-        }
-    }
+            for (const category of categories) {
+                if (category.contains(e.target)) {
+                    const emptyBox = category.querySelector('.table-no-data')
+            
+                    if (emptyBox) {
+                        emptyBox.remove()
+                    }
 
-    for (const category of categories) {
-        if (category.children.length === 1) {
-            category.firstElementChild.after(createEmptyDataDiv())
-        }
-    }
+                    category.firstElementChild.after(order)
+                }
+            }
 
-    showMessage('info', `Замовлення ${order.id} переведено у ${indexToMovedOrderStatus[index]}`)
+            for (const category of categories) {
+                if (category.children.length === 1) {
+                    category.firstElementChild.after(createEmptyDataDiv())
+                }
+            }
+            
+            showMessage('info', `Замовлення ${order.id} переведено у ${indexToMovedOrderStatus[index]}`)
+        })
+        .catch(() => showMessage('error', 'Не вдалося змінити статус замовлення'))
 }
