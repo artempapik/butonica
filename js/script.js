@@ -3,7 +3,7 @@ const Environment = {
     PROD: 'https://botanice.user30503.realhost-free.net'
 }
 
-const BASE_URL = Environment.PROD
+const BASE_URL = Environment.DEV
 const EMPTY_IMAGE_URL = 'img/empty-flower.png'
 
 let imageData, currentPage, dayValue, monthIndex, yearValue, dateString = 'виберіть день', dateQueryString
@@ -14,7 +14,7 @@ const uploadImage = e => {
         e.target.parentNode.querySelector('input').value = ''
         e.target.parentNode.querySelector('img').src = response
         imageData = response
-    }).catch(() => console.log('Error converting company image to base64.'))
+    }).catch(() => console.error('error converting company image'))
 }
 
 const removeImage = e => {
@@ -943,7 +943,7 @@ const menuItemsContents = {
             </span>
         </div>
         <div class="order-calendar">
-            <div class="order-calendar-category processed" ondrop="moveOrder(event, 0)" ondragover="event.preventDefault()">
+            <div class="order-calendar-category processed" ondrop="moveOrder(event, 0)" ondragover="showMessage('info', 'dragover')">
                 <div class="category">
                     <span class="material-symbols-outlined">sync</span>
                     <span>Прийняті</span>
