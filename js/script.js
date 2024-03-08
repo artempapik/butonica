@@ -942,7 +942,7 @@ const menuItemsContents = {
                 <span>10 бер</span>
             </span>
         </div>
-        <div class="draggable one" draggable="true">
+        <div class="draggable one" draggable="true" ondragstart="event.dataTransfer.setData('t', '1')">
     drag me
   </div>
         <div class="order-calendar">
