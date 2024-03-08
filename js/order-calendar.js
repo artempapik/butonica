@@ -212,7 +212,6 @@ const fillOrderCalendar = (day, month, year, isWeek = false) => {
                     orderCard.draggable = true
 
                     orderCard.ondragstart = e => {
-                        showMessage('info', 'dragstart')
                         movingOrder = order
 
                         categories.forEach(c => {
@@ -230,10 +229,10 @@ const fillOrderCalendar = (day, month, year, isWeek = false) => {
 
                         orderCard.classList.add('moving')
                         e.dataTransfer.setData('order-id', order.id)
+                        showMessage('info', e.dataTransfer.getData('order-id'))
                     }
 
                     orderCard.ondragend = () => {
-                        showMessage('info', 'dragend')
                         categories.forEach(c => {
                             c.classList.remove('not-moving')
                             c.classList.remove('moving')
@@ -261,7 +260,6 @@ const indexToMovedOrderStatus = {
 }
 
 const moveOrder = (e, index) => {
-    showMessage('info', 'moved order')
     e.preventDefault()
 
     const categories = document.querySelectorAll('.order-calendar-category')
