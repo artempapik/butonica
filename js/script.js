@@ -942,9 +942,6 @@ const menuItemsContents = {
                 <span>10 бер</span>
             </span>
         </div>
-        <div class="draggable one" draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '1')">
-    drag me
-  </div>
         <div class="order-calendar">
             <div class="order-calendar-category processed" ondrop="moveOrder(event, 0)" ondragover="event.preventDefault()">
                 <div class="category">
