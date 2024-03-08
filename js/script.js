@@ -943,7 +943,7 @@ const menuItemsContents = {
             </span>
         </div>
         <div class="order-calendar">
-            <div class="order-calendar-category processed" ondrop="moveOrder(event, 0)" ondragover="showMessage('info', 'dragover')">
+            <div class="order-calendar-category processed" ondrop="moveOrder(event, 0)" ondragover="event.preventDefault()">
                 <div class="category">
                     <span class="material-symbols-outlined">sync</span>
                     <span>Прийняті</span>
