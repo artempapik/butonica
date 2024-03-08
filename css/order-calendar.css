@@ -161,7 +161,7 @@
 
         & .table-no-data {
             margin-top: 1rem;
-            outline: .15rem rgb(150, 150, 150) solid;
+            outline: .1rem rgb(150, 150, 150) solid;
             border-radius: .7rem;
             display: flex;
             flex-direction: column;
