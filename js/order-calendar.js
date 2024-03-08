@@ -229,7 +229,10 @@ const fillOrderCalendar = (day, month, year, isWeek = false) => {
 
                         orderCard.classList.add('moving')
                         e.dataTransfer.setData('order-id', order.id)
-                        showMessage('info', e.dataTransfer.getData('order-id'))
+                    }
+
+                    orderCard.ondragover = e => {
+                        e.preventDefault()
                     }
 
                     orderCard.ondragend = () => {
