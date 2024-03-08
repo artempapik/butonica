@@ -228,7 +228,7 @@ const fillOrderCalendar = (day, month, year, isWeek = false) => {
                         }
 
                         orderCard.classList.add('moving')
-                        e.dataTransfer.setData('order-id', order.id)
+                        e.dataTransfer.setData('text/plain', order.id)
                     }
 
                     orderCard.ondragend = () => {
@@ -263,7 +263,7 @@ const moveOrder = (e, index) => {
 
     const categories = document.querySelectorAll('.order-calendar-category')
     categories.forEach(c => c.classList.remove('moving'))
-    const order = document.getElementById(e.dataTransfer.getData('order-id'))
+    const order = document.getElementById(e.dataTransfer.getData('text/plain'))
 
     if (categories.item(index).contains(order)) {
         return
