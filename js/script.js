@@ -3,7 +3,7 @@ const Environment = {
     PROD: 'https://botanice.user30503.realhost-free.net'
 }
 
-const BASE_URL = Environment.DEV
+const BASE_URL = Environment.PROD
 const EMPTY_IMAGE_URL = 'img/empty-flower.png'
 
 let imageData, currentPage, dayValue, monthIndex, yearValue, dateString = 'виберіть день', dateQueryString
