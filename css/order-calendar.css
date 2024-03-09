@@ -101,15 +101,17 @@
 
     & .order-calendar-category {
         width: 17rem;
-        transition: .2s;
 
-        &.not-moving {
+        &.not-moving .category {
             filter: grayscale();
-            transform: translateY(.5rem);
+            transform: translateY(.4rem);
         }
 
         &.moving {
-            transform: translateY(-.7rem);
+            & .table-no-data, & .order {
+                opacity: .6;
+                outline: .15rem rgb(0, 71, 171) dashed;
+            }
         }
 
         &.processed .order:hover {
@@ -125,6 +127,7 @@
         }
 
         & .category {
+            transition: .1s;
             box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
             padding: .3rem 0;
             color: rgb(225, 225, 225);
@@ -455,16 +458,8 @@
         & .order-calendar-category {
             width: 11.3rem;
 
-            &.not-moving {
+            &.not-moving .category {
                 transform: translateY(.2rem);
-            }
-
-            &.moving {
-                transform: translateY(-.4rem);
-            }
-
-            &:last-child {
-                display: none;
             }
 
             & .category {
@@ -548,5 +543,11 @@
                 }
             }
         }
+    }
+}
+
+@media only screen and (max-width: 700px) and (orientation: portrait) {
+    .order-calendar .order-calendar-category:last-child {
+        display: none;
     }
 }
