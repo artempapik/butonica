@@ -81,8 +81,9 @@ const fillOrderCalendar = (day, month, year, isWeek = false) => {
                 for (const order of response[i]) {
                     const orderNumber = createSpan(order.id)
                     orderNumber.classList = 'number'
-    
+                    
                     const orderNumberImg = document.createElement('img')
+                    orderNumberImg.draggable = false
                     orderNumberImg.src = `img/${order.isPickup ? 'pickup' : 'delivery'}.png`
     
                     const orderNumberBlock = document.createElement('div')
