@@ -103,7 +103,7 @@
         width: 17rem;
 
         &.not-moving .category {
-            filter: grayscale();
+            background: rgb(120, 120, 120) !important;
             transform: translateY(.4rem);
         }
 
@@ -196,7 +196,7 @@
         & .order {
             margin-top: 1rem;
             background: #fff;
-            outline: .15rem solid rgb(100, 100, 100);
+            outline: .15rem solid rgb(150, 150, 150);
             border-radius: .7rem;
             padding: .5rem .55rem .4rem .55rem;
             cursor: pointer;
@@ -209,6 +209,7 @@
             &.moving {
                 transform: scale(1) !important;
                 opacity: .25;
+                outline: none;
             }
 
             &:last-child {
