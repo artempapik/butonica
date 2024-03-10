@@ -20,7 +20,7 @@
                 & .order-number {
                     font-size: 1.4rem;
 
-                    & span {
+                    & span:last-child {
                         font-family: 'Roboto Mono', monospace;
                     }
                 }
