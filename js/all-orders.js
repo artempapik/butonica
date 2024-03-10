@@ -291,8 +291,6 @@ const createOrderRow = (order, table) => {
         get(`Order/order/${order.id}`).then(response => {
             hidePageLoad()
 
-
-
             const fillClient = (selector, text) => {
                 const clientBlock = orderInfoModal.querySelector('.' + selector)
                 clientBlock.querySelector('.name span:last-child').textContent = text || 'Не вказано'
