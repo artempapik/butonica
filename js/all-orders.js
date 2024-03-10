@@ -291,6 +291,8 @@ const createOrderRow = (order, table) => {
         get(`Order/order/${order.id}`).then(response => {
             hidePageLoad()
 
+
+
             const fillClient = (selector, text) => {
                 const clientBlock = orderInfoModal.querySelector('.' + selector)
                 clientBlock.querySelector('.name span:last-child').textContent = text || 'Не вказано'
@@ -321,7 +323,8 @@ const createOrderRow = (order, table) => {
             }
 
             const orderNumberDate = orderInfoModal.querySelector('.order-number-date')
-            orderNumberDate.querySelector('.order-number span').textContent = order.id
+            orderNumberDate.querySelector('.order-number span').textContent = (order.isInternet ? 'Online-замовлення' : 'Замовлення') + ' '
+            orderNumberDate.querySelector('.order-number span:last-child').textContent = order.id
             orderNumberDate.querySelector('.order-date input').value = getDate(response.date)
 
             const orderTime = orderInfoModal.querySelectorAll('.order-time input')
