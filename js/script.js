@@ -266,27 +266,28 @@ const menuItemsContents = {
                 <div class="inputs">
                     <div class="form">
                         <h2>
-                            <span>
-                                <span class="required">*</span>
-                                <span>Назва</span>
-                            </span>
-                            <span class="material-symbols-outlined" onpointerup="copyToClipboard('company-name')">content_copy</span>
+                            <span class="required">*</span>
+                            <span>Назва</span>
                         </h2>
                         <input class="company-name" maxlength="30">
                     </div>
                     <div class="form">
-                        <h2>
-                            <span>Контактні дані</span>
-                            <span class="material-symbols-outlined" onpointerup="copyToClipboard('company-contact-info')">content_copy</span>
-                        </h2>
+                        <h2>Контактні дані</h2>
                         <textarea class="company-contact-info" maxlength="100" rows="3"></textarea>
                     </div>
                 </div>
             </div>
-            <button class="save" type="button" onpointerup="updateCompanyInfo()">
-                <div class="loader-button"></div>
-                <span>Зберегти</span>
-            </button>
+            <div class="company-buttons">
+                <button type="button" onpointerup="copyToClipboard()">
+                    <span class="material-symbols-outlined">content_copy</span>
+                    <span>Скопіювати</span>
+                </button>
+                </button>
+                <button class="save" type="button" onpointerup="updateCompanyInfo()">
+                    <div class="loader-button"></div>
+                    <span>Зберегти</span>
+                </button>
+            </div>
         </div>
     `,
     stock: `
@@ -1143,11 +1144,6 @@ const menuItemsContents = {
             </div>
         </div>
     `
-}
-
-const copyToClipboard = className => {
-    navigator.clipboard.writeText(document.querySelector('.' + className).value)
-    showMessage('info', 'Скопійовано')
 }
 
 const menuButton = document.querySelector('.logo-panel span')
