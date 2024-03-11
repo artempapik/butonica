@@ -66,6 +66,13 @@
             font-weight: normal;
         }
     }
+
+    & .product-prices-history div {
+        font-weight: bold;
+        text-align: center;
+        font-size: 1.2rem;
+        margin: 1rem 0 .5rem 0;
+    }
 }
 
 .create-product-modal-content {
