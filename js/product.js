@@ -1,4 +1,4 @@
-let productsTable, productsInput, productsFiltersBlock, products, stocksNames
+let productsTable, productsInput, productsFiltersBlock, products, stocksNames, productPricesHistoryLineChart
 
 const showProductInfo = e => {
     main.innerHTML = menuItemsContents['product']
@@ -92,6 +92,32 @@ const showProductInfo = e => {
     
         productCategories.value = ''
     })
+
+    productPricesHistoryLineChart = new Chart(document.querySelector(`#product-prices-history-line-chart`), {
+        type: 'line',
+        data: {
+            datasets: getChartDatasets(1, true)
+        },
+        options: {
+            scales: {
+                x: {
+                    display: false
+                }
+            },
+            // responsive: isMobile,
+            plugins: {
+                tooltip: {
+                    enabled: true
+                },
+                legend: {
+                    display: false
+                },
+                datalabels: {
+                    display: false
+                }
+            }
+        }
+    })
 }
 
 const showAllProducts = () => {
@@ -179,7 +205,6 @@ const createProductRow = product => {
         showPageLoad()
         hideBodyOverflow()
 
-        productInfoModal.querySelector('img').src = product.imageData ? product.imageData : EMPTY_IMAGE_URL
         productInfoModal.querySelector('.product-name').textContent = product.name
         productInfoModal.querySelector('.product-category').textContent = product.category
         productInfoModal.querySelector('.product-type').textContent = productIndexToType[product.type]
@@ -188,10 +213,12 @@ const createProductRow = product => {
         const stockPricesTable = productInfoModal.querySelector('table')
         stockPricesTable.innerHTML = stockPricesTable.querySelector('tbody').innerHTML
 
-        get(`Product/stock-prices/${product.id}`).then(response => {
+        get(`Product/product/${product.id}`).then(response => {
             hidePageLoad()
 
-            for (const stockPrice of response) {
+            productInfoModal.querySelector('img').src = response.imageData ? response.imageData : EMPTY_IMAGE_URL
+
+            for (const stockPrice of response.productStockPrices) {
                 const tr = document.createElement('tr')
                 tr.append(
                     createTd(stockPrice.stockName),
@@ -200,11 +227,37 @@ const createProductRow = product => {
                 )
                 stockPricesTable.append(tr)
             }
-            
+
+            const productPricesHistory = productInfoModal.querySelector('.product-prices-history')
+
+            if (response.pricesHistory.length < 2) {
+                productPricesHistory.style.display = 'none'
+            } else {
+                productPricesHistory.style.display = ''
+                
+                productPricesHistoryLineChart.options.plugins.tooltip.callbacks.title = context => {
+                    if (context[0].dataIndex === 0) {
+                        return ''
+                    }
+    
+                    const difference = response.pricesHistory[context[0].dataIndex] - response.pricesHistory[context[0].dataIndex - 1]
+    
+                    if (difference === 0) {
+                        return ''
+                    }
+    
+                    return difference > 0 ? '+' + difference.toFixed(2) : '-' + Math.abs(difference).toFixed(2)
+                }
+    
+                productPricesHistoryLineChart.data.labels = response.pricesHistory
+                productPricesHistoryLineChart.data.datasets[0].data = response.pricesHistory
+                productPricesHistoryLineChart.update()
+            }
+
             productInfoModal.style.display = 'flex'
         }).catch(() => {
             hidePageLoad()
-            showMessage('error', getErrorMessage('ціни для товару'))
+            showMessage('error', getErrorMessage('товар'))
         })
     }
 
