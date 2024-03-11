@@ -236,13 +236,13 @@ const createProductRow = product => {
 
                 productPricesHistoryLineChart.options.plugins.tooltip.callbacks.title = context => {
                     const index = context[0].dataIndex
+                    const date = formatDate(response.pricesHistory[index].date, false)
 
                     if (index === 0) {
-                        return ''
+                        return date
                     }
                     
                     const difference = response.pricesHistory[index].price - response.pricesHistory[index - 1].price
-                    const date = formatDate(response.pricesHistory[index].date, false)
     
                     if (difference === 0) {
                         return date
