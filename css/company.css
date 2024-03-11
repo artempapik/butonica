@@ -81,8 +81,8 @@
             }
         }
 
-        & .save {
-            margin-top: .9rem;
+        & .company-buttons {
+            margin-top: .7rem;
         }
     }
 }
