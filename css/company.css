@@ -3,7 +3,7 @@
     flex-direction: column;
     box-shadow: rgba(0, 0, 0, .02) 0 1px 3px 0, rgba(27, 31, 35, .15) 0 0 0 1px;
     background: #fff;
-    padding: 1.5rem 2rem;
+    padding: 1.2rem 1.8rem;
     border-radius: 1rem;
     justify-content: space-between;
     width: 20rem;
@@ -14,24 +14,14 @@
     }
 
     & h2 {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
         padding: 0 .3rem;
-        margin: .7rem 0;
+        margin: .6rem 0;
         font-size: 1.2rem;
         font-weight: normal;
 
         & span:last-child {
-            cursor: pointer;
             color: rgb(30, 30, 30);
-            border-radius: 50%;
-            padding: .25rem .3rem;
-            transition: .05s;
-
-            &:hover {
-                background: rgb(220, 220, 220);
-            }
+            padding: 0 .2rem;
         }
     }
 
@@ -39,7 +29,7 @@
         display: flex;
         flex-direction: column;
         justify-self: center;
-        gap: 2rem;
+        gap: 1.8rem;
 
         & div {
             display: flex;
@@ -52,9 +42,20 @@
         }
     }
 
-    & button {
-        align-self: end;
+    & .company-buttons {
         margin-top: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+
+        & button {
+            padding: .45rem 1.1rem;
+
+            &:first-child {
+                background: linear-gradient(180deg, rgb(85, 165, 255) 0%, rgb(74, 152, 255) 100%);
+                padding: .45rem .9rem;
+                gap: .5rem;
+            }
+        }
     }
 }
 
