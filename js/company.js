@@ -1,5 +1,16 @@
 let uploadImageBlock
 
+const copyToClipboard = () => {
+    navigator.clipboard.writeText(
+        '🌸 ' +
+        document.querySelector('.company-name').value +
+        '\n' +
+        document.querySelector('.company-contact-info').value
+    )
+    
+    showMessage('info', 'Скопійовано')
+}
+
 const showCompanyInfo = e => {
     main.innerHTML = menuItemsContents['company']
     fillSelectedMenuItem(e)
