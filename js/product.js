@@ -254,6 +254,7 @@ const createProductRow = product => {
             }
 
             productInfoModal.style.display = 'flex'
+            productInfoModal.querySelector('div').scroll(0, 0)
         }).catch(() => {
             hidePageLoad()
             showMessage('error', getErrorMessage('товар'))
