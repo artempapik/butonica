@@ -229,27 +229,32 @@ const createProductRow = product => {
 
             const productPricesHistory = productInfoModal.querySelector('.product-prices-history')
 
-            if (response.pricesHistory.length < 2) {
+            if (response.pricesHistory.length < 2 || loginInfo.title > 1) {
                 productPricesHistory.style.display = 'none'
             } else {
                 productPricesHistory.style.display = ''
 
                 productPricesHistoryLineChart.options.plugins.tooltip.callbacks.title = context => {
-                    if (context[0].dataIndex === 0) {
+                    const index = context[0].dataIndex
+
+                    if (index === 0) {
                         return ''
                     }
-    
-                    const difference = response.pricesHistory[context[0].dataIndex] - response.pricesHistory[context[0].dataIndex - 1]
+                    
+                    const difference = response.pricesHistory[index].price - response.pricesHistory[index - 1].price
+                    const date = formatDate(response.pricesHistory[index].date, false)
     
                     if (difference === 0) {
-                        return ''
+                        return date
                     }
-    
-                    return difference > 0 ? '+' + difference.toFixed(2) : '-' + Math.abs(difference).toFixed(2)
+
+                    const change = difference > 0 ? '+' + difference.toFixed(2) : '-' + Math.abs(difference).toFixed(2)
+                    return date + '\n' + change
                 }
     
-                productPricesHistoryLineChart.data.labels = response.pricesHistory
-                productPricesHistoryLineChart.data.datasets[0].data = response.pricesHistory
+                const pricesHistory = response.pricesHistory.map(ph => ph.price)
+                productPricesHistoryLineChart.data.labels = pricesHistory
+                productPricesHistoryLineChart.data.datasets[0].data = pricesHistory
                 productPricesHistoryLineChart.update()
             }
 
