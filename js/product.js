@@ -251,7 +251,7 @@ const createProductRow = product => {
                     const change = difference > 0 ? '+' + difference.toFixed(2) : '-' + Math.abs(difference).toFixed(2)
                     return date + '\n' + change
                 }
-    
+                
                 const pricesHistory = response.pricesHistory.map(ph => ph.price)
                 productPricesHistoryLineChart.data.labels = pricesHistory
                 productPricesHistoryLineChart.data.datasets[0].data = pricesHistory
