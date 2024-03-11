@@ -104,7 +104,6 @@ const showProductInfo = e => {
                     display: false
                 }
             },
-            // responsive: isMobile,
             plugins: {
                 tooltip: {
                     enabled: true
@@ -234,7 +233,7 @@ const createProductRow = product => {
                 productPricesHistory.style.display = 'none'
             } else {
                 productPricesHistory.style.display = ''
-                
+
                 productPricesHistoryLineChart.options.plugins.tooltip.callbacks.title = context => {
                     if (context[0].dataIndex === 0) {
                         return ''
