@@ -214,8 +214,12 @@
 
     .contractor-supply-products table td {
         &:first-child {
-            min-width: 10.5rem !important;
+            min-width: 10rem !important;
             word-wrap: break-word;
+        }
+
+        &:nth-child(2) {
+            min-width: 2rem;
         }
 
         &:not(:last-child) {
