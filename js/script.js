@@ -900,13 +900,13 @@ const menuItemsContents = {
                 <h1>Календар замовлень</h1>
                 <div class="order-calendar-months">
                     <div class="order-calendar-month">
-                        <span class="material-symbols-outlined">chevron_left</span>
-                        <span>4 бер</span>
+                        <span class="material-symbols-outlined" onpointerup="getPreviousCalendarWeek()">chevron_left</span>
+                        <span></span>
                     </div>
-                    <span class="separator">2024</span>
+                    <span class="separator"></span>
                     <div class="order-calendar-month">
-                        <span>10 бер</span>
-                        <span class="material-symbols-outlined">chevron_right</span>
+                        <span></span>
+                        <span class="material-symbols-outlined" onpointerup="getNextCalendarWeek()">chevron_right</span>
                     </div>
                 </div>
             </div>
@@ -914,33 +914,33 @@ const menuItemsContents = {
         </div>
         <div class="order-calendar-days">
             <span class="calendar-day">Тиждень</span>
-            <span class="calendar-day active">
+            <span class="calendar-day">
                 <span>пн</span>
-                <span>4 бер</span>
+                <span></span>
             </span>
             <span class="calendar-day">
                 <span>вт</span>
-                <span>5 бер</span>
+                <span></span>
             </span>
             <span class="calendar-day">
                 <span>ср</span>
-                <span>6 бер</span>
+                <span></span>
             </span>
             <span class="calendar-day">
                 <span>чт</span>
-                <span>7 бер</span>
+                <span></span>
             </span>
             <span class="calendar-day">
                 <span>пт</span>
-                <span>8 бер</span>
+                <span></span>
             </span>
             <span class="calendar-day">
                 <span>сб</span>
-                <span>9 бер</span>
+                <span></span>
             </span>
             <span class="calendar-day">
                 <span>нд</span>
-                <span>10 бер</span>
+                <span></span>
             </span>
         </div>
         <div class="order-calendar">
