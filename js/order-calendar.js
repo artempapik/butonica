@@ -1,32 +1,95 @@
-let movingOrder
+let movingOrder, calendarDate = new Date()
+
+const calendarMonthIndexToName = {
+    0: 'січ',
+    1: 'лют',
+    2: 'бер',
+    3: 'кві',
+    4: 'тра',
+    5: 'чер',
+    6: 'лип',
+    7: 'сер',
+    8: 'вер',
+    9: 'жов',
+    10: 'лис',
+    11: 'гру'
+}
+
+const calendarMonthNameToIndex = {
+    'січ': 1,
+    'лют': 2,
+    'бер': 3,
+    'кві': 4,
+    'тра': 5,
+    'чер': 6,
+    'лип': 7,
+    'сер': 8,
+    'вер': 9,
+    'жов': 10,
+    'лис': 11,
+    'гру': 12,
+}
 
 const showOrderCalendarInfo = e => {
     main.innerHTML = menuItemsContents['ordercalendar']
     fillSelectedMenuItem(e)
 
+    const separator = document.querySelector('.separator')
+    separator.textContent = calendarDate.getFullYear()
+
     const calendarDays = document.querySelectorAll('.calendar-day')
 
-    calendarDays.forEach(day => day.onpointerup = () => {
-        if (day.classList.contains('active')) {
-            return
-        }
-        
-        showLoadAnimation()
-        calendarDays.forEach(day => day.classList.remove('active'))
-        day.classList.add('active')
+    const currentDayNumber = calendarDate.getDate()
+    const date = new Date(calendarDate)
 
+    const day = date.getDay()
+    const diff = date.getDate() - day + (!day ? -6 : 1)
+    const today = new Date(date.setDate(diff))
+    
+    const orderCalendarMonths = document.querySelectorAll('.order-calendar-month')
+    orderCalendarMonths.item(0).querySelector('span:last-child').textContent = `${today.getDate()} ${calendarMonthIndexToName[today.getMonth()]}`
+
+    calendarDays.forEach(day => {
         const daySpan = day.querySelector('span:last-child')
 
-        if (!daySpan) {
-            const firstDay = calendarDays.item(1).querySelector('span:last-child').textContent
-            fillOrderCalendar(firstDay.substring(0, firstDay.indexOf(' ')), 3, 2024, true)
-            return
+        if (daySpan) {
+            const currentDay = today.getDate()
+            
+            if (currentDay === currentDayNumber) {
+                day.classList.add('active')
+                fillOrderCalendar(currentDay, today.getMonth() + 1, today.getFullYear())
+            }
+
+            day.querySelector('span:last-child').textContent = `${currentDay} ${calendarMonthIndexToName[today.getMonth()]}`
+            today.setDate(currentDay + 1)
         }
 
-        fillOrderCalendar(daySpan.textContent.substring(0, daySpan.textContent.indexOf(' ')), 3, 2024)
+        day.onpointerup = () => {
+            if (day.classList.contains('active')) {
+                return
+            }
+            
+            showLoadAnimation()
+            calendarDays.forEach(day => day.classList.remove('active'))
+            day.classList.add('active')
+
+            const daySpan = day.querySelector('span:last-child')
+
+            if (!daySpan) {
+                const firstDay = calendarDays.item(1).querySelector('span:last-child').textContent
+                fillOrderCalendar(firstDay.substring(0, firstDay.indexOf(' ')), calendarMonthNameToIndex[firstDay.substring(firstDay.indexOf(' ') + 1)], separator.textContent, true)
+                return
+            }
+
+            const dayText = daySpan.textContent
+            fillOrderCalendar(dayText.substring(0, dayText.indexOf(' ')), calendarMonthNameToIndex[dayText.substring(dayText.indexOf(' ') + 1)], separator.textContent)
+        }
     })
 
-    fillOrderCalendar(4, 3, 2024)
+    today.setDate(today.getDate() - 1)
+    orderCalendarMonths.item(1).querySelector('span').textContent = `${today.getDate()} ${calendarMonthIndexToName[today.getMonth()]}`
+    today.setDate(today.getDate() - 6)
+
     fillDatalistsLabels()
 }
 
@@ -38,7 +101,7 @@ const fillOrderCalendar = (day, month, year, isWeek = false) => {
         c.append(category)
     })
 
-    const animationsDisabled = (localStorage.getItem('animations-disabled') || false)
+    const animationsDisabled = localStorage.getItem('animations-disabled') || false
 
     get(`Order/calendar/${isWeek ? 'week/' : ''}${loginInfo.companyId}/${day}/${month}/${year}`)
         .then(response => {
@@ -319,4 +382,12 @@ const moveOrder = (e, index) => {
             showMessage('info', `Замовлення ${order.id} переведено у ${indexToMovedOrderStatus[index]}`)
         })
         .catch(() => showMessage('error', 'Не вдалося змінити статус замовлення'))
+}
+
+const getPreviousCalendarWeek = () => {
+
+}
+
+const getNextCalendarWeek = () => {
+
 }
