@@ -432,7 +432,7 @@
         width: unset;
         margin-top: 0;
         padding-left: 0;
-        gap: .5rem;
+        gap: .3rem;
         align-self: center;
 
         & .calendar-day {
