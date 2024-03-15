@@ -63,8 +63,28 @@
 }
 
 @media only screen and (max-width: 1400px) {
-    .leftover-table table tr:not(:first-child) td:nth-child(2) {
-        font-size: .9rem;
+    .leftover-table table {
+        & td:nth-child(3) {
+            width: 7rem;
+        }
+        
+        & td:nth-child(4) {
+            text-align: center;
+        }
+
+        & tr:first-child {
+            font-size: 1rem;
+        }
+
+        & tr:not(:first-child) td:nth-child(2) {
+            font-size: .9rem;
+        }
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .leftover-table table tr:not(:first-child) td:last-child span {
+        width: 6rem;
     }
 }
 
@@ -82,11 +102,7 @@
             font-size: .8rem !important;
         }
 
-        & td:nth-child(4) {
-            text-align: center;
-        }
-
-        & td:last-child {
+        & td:nth-child(5), & td:last-child {
             display: none;
         }
     }
