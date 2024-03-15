@@ -524,7 +524,8 @@ const menuItemsContents = {
                         <span class="material-symbols-outlined">unfold_more</span>
                     </td>
                     <td>Ціна закупівлі</td>
-                    <td>Використано</td>
+                    <td>У букетах</td>
+                    <td>У прийнятих замовленнях</td>
                 </tr>
             </table>
             <div>
