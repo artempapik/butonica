@@ -1,6 +1,4 @@
 .order-calendar-header {
-    margin: 1.5rem 0;
-
     .order-calendar-months {
         display: flex;
         gap: .9rem;
