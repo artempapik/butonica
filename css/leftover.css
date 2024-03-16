@@ -4,6 +4,10 @@
     margin-bottom: 1.1rem;
 }
 
+.leftover-category-filters {
+    width: 47rem;
+}
+
 .leftover-table {
     & table {
         & tr:not(:first-child) {
@@ -85,6 +89,10 @@
 @media only screen and (max-width: 900px) {
     .leftover-table table tr:not(:first-child) td:last-child span {
         width: 6rem;
+    }
+
+    .leftover-category-filters {
+        width: unset;
     }
 }
 
