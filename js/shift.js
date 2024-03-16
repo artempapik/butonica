@@ -48,7 +48,7 @@ const createShiftRow = shift => {
         hideBodyOverflow()
 
         shiftInfoModal.querySelector('.shift-title span').textContent = shift.employee
-        shiftInfoModal.querySelector('.shift-time .time span').textContent = formatDate(shift.start)
+        shiftInfoModal.querySelector('.shift-time .time span').textContent = formatShiftDate(shift.start, true)
 
         const setDisplayForShiftEnd = display => {
             document.querySelector('.shift-time span:nth-child(2)').style.display = display
@@ -57,7 +57,7 @@ const createShiftRow = shift => {
 
         if (shift.end) {
             setDisplayForShiftEnd('block')
-            shiftInfoModal.querySelector('.shift-time span:last-child').textContent = formatDate(shift.end)
+            shiftInfoModal.querySelector('.shift-time span:last-child').textContent = formatShiftDate(shift.end, true)
             shiftInfoModal.querySelector('.shift-time span').style.color = 'rgb(200, 200, 200)'
         } else {
             shiftInfoModal.querySelector('.shift-time span').style.color = 'rgb(50, 50, 50)'
@@ -295,7 +295,7 @@ const createShiftRow = shift => {
         6: 'сб'
     }
 
-    const formatShiftDate = date => {
+    const formatShiftDate = (date, onlyText = false) => {
         const td = createTd()
 
         if (!date) {
@@ -305,9 +305,16 @@ const createShiftRow = shift => {
         date = new Date(date)
         const formattedDate = date.toLocaleDateString('ru')
 
+        const timeText = indexToDayOfWeek[date.getDay()]
+        const dateText = `${formattedDate.substring(0, 2)} ${calendarMonthIndexToName[+formattedDate.substring(3, 5) - 1]}, ${padTime(date.getHours())}:${padTime(date.getMinutes())}`
+
+        if (onlyText) {
+            return timeText + ' ' + dateText
+        }
+
         td.append(
-            createSpan(indexToDayOfWeek[date.getDay()]),
-            createSpan(`${formattedDate.substring(0, 2)} ${calendarMonthIndexToName[+formattedDate.substring(3, 5) - 1]}, ${padTime(date.getHours())}:${padTime(date.getMinutes())}`)
+            createSpan(timeText),
+            createSpan(dateText)
         )
         return td
     }
