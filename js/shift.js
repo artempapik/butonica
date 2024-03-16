@@ -301,13 +301,13 @@ const createShiftRow = shift => {
         if (!date) {
             return td
         }
-    
+        
         date = new Date(date)
         const formattedDate = date.toLocaleDateString('ru')
 
         td.append(
             createSpan(indexToDayOfWeek[date.getDay()]),
-            createSpan(`${+formattedDate.substring(0, 2)} ${calendarMonthIndexToName[+formattedDate.substring(3, 5) - 1]}, ${padTime(date.getHours())}:${padTime(date.getMinutes())}`)
+            createSpan(`${formattedDate.substring(0, 2)} ${calendarMonthIndexToName[+formattedDate.substring(3, 5) - 1]}, ${padTime(date.getHours())}:${padTime(date.getMinutes())}`)
         )
         return td
     }
