@@ -285,11 +285,38 @@ const createShiftRow = shift => {
     const revenueTd = createTd(shift.revenue.toFixed(2))
     revenueTd.append(createSpan('грн'))
 
+    const indexToDayOfWeek = {
+        0: 'нд',
+        1: 'пн',
+        2: 'вт',
+        3: 'ср',
+        4: 'чт',
+        5: 'пт',
+        6: 'сб'
+    }
+
+    const formatShiftDate = date => {
+        const td = createTd()
+
+        if (!date) {
+            return td
+        }
+    
+        date = new Date(date)
+        const formattedDate = date.toLocaleDateString('ru')
+
+        td.append(
+            createSpan(indexToDayOfWeek[date.getDay()]),
+            createSpan(`${+formattedDate.substring(0, 2)} ${calendarMonthIndexToName[+formattedDate.substring(3, 5) - 1]}, ${padTime(date.getHours())}:${padTime(date.getMinutes())}`)
+        )
+        return td
+    }
+
     tr.append(
         createTd(shift.cashRegister),
         createTd(shift.employee),
-        createTd(formatDate(shift.start)),
-        createTd(formatDate(shift.end)),
+        formatShiftDate(shift.start),
+        formatShiftDate(shift.end),
         revenueTd,
         statusTd
     )
