@@ -289,7 +289,26 @@
 
 .shift-table table {
     & td {
-        &:nth-child(3), &:nth-child(4), &:last-child {
+        &:nth-child(3), &:nth-child(4) {
+            text-align: center;
+
+            & span {
+                display: inline-block;
+                text-align: left;
+
+                &:first-child {
+                    font-weight: bold;
+                    color: rgb(70, 70, 70);
+                    width: 1.5rem;
+                }
+
+                &:last-child {
+                    width: 6.5rem;
+                }
+            }
+        }
+
+        &:last-child {
             text-align: center;
         }
     }
@@ -394,6 +413,16 @@
         &:nth-child(2) {
             max-width: 4.5rem;
             word-wrap: break-word;
+        }
+
+        &:nth-child(3), &:nth-child(4) {
+            & span {
+                display: unset;
+    
+                &:first-child {
+                    margin-right: .3rem;
+                }
+            }
         }
 
         &:nth-child(5) {
