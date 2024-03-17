@@ -2,6 +2,10 @@
     --pie-chart-size: 19.5rem;
 }
 
+.general-statistics-header {
+    margin-bottom: 1.2rem;
+}
+
 .general-statistics-info {
     display: flex;
     justify-content: space-between;
@@ -61,7 +65,7 @@
 
 .pie-charts {
     justify-content: space-between;
-    margin: 3rem 0 1rem 0;
+    margin: 1.5rem 0 1rem 0;
     display: flex;
     flex-wrap: wrap;
 
@@ -72,12 +76,16 @@
 }
 
 .bar-charts {
-    display: none;
-    margin: 2.5rem 0 1.2rem 0;
+    margin: .5rem 0;
     flex-wrap: wrap;
     gap: 1.5rem;
     align-items: center;
     flex-direction: column;
+
+    &:last-child {
+        margin: 2.5rem 0 1.2rem 0;
+        display: none;
+    }
 
     & div {
         padding: .5rem;
@@ -87,6 +95,11 @@
         transition: .1s;
         background: #fff;
 
+        &.month-line-chart {
+            width: fit-content;
+            margin: 0 auto;
+        }
+
         &:hover {
             border-color: rgba(68, 33, 175, .6);
             box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
@@ -95,7 +108,7 @@
 }
 
 @media screen and (min-width: 1025px) {
-    .bar-charts canvas {
+    .bar-charts canvas, #income-by-shift-line-chart {
         width: 66rem !important;
         height: 33rem !important;
     }
@@ -210,6 +223,10 @@
         & div {
             padding: .2rem;
             border-width: .1rem;
+
+            &.month-line-chart {
+                width: unset;
+            }
         }
     }
 }
