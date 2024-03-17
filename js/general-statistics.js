@@ -1,4 +1,4 @@
-let expensesPieChart, incomePieChart, incomeByLabelPieChart, expensesIncomePieChart, yearGainBarChart, yearIncomeExpenseBarChart, yearProfitabilityLineChart
+let expensesPieChart, incomePieChart, incomeByLabelPieChart, expensesIncomePieChart, incomeByShiftLineChart, yearGainBarChart, yearIncomeExpenseBarChart, yearProfitabilityLineChart
 
 const getStatisticsValues = () => {
     const animate = (localStorage.getItem('animations-disabled') || false) ? 'none' : ''
@@ -12,6 +12,7 @@ const getStatisticsValues = () => {
     if (month === 1) {
         get(`Statistics/general/${loginInfo.companyId}/${year}`).then(response => {
             pieCharts.style.display = ''
+            document.querySelector('.bar-charts').style.display = 'none'
 
             const statValues = document.querySelectorAll('.general-statistics-info .stat-value span:first-child')
             const yearGain = response.reduce((total, current) => total + current.generalNumbers[0], 0)
@@ -84,7 +85,7 @@ const getStatisticsValues = () => {
             ]
             expensesIncomePieChart.update(animate)
 
-            document.querySelector('.bar-charts').style.display = 'flex'
+            document.querySelector('.bar-charts:last-child').style.display = 'flex'
 
             yearGainBarChart.data.datasets[0].label = 'прибуток'
             yearGainBarChart.data.datasets[0].data = response.map(r => r.generalNumbers[0])
@@ -118,6 +119,7 @@ const getStatisticsValues = () => {
 
         if (response.generalNumbers.some(n => n)) {
             pieCharts.style.display = ''
+            document.querySelector('.bar-charts').style.display = ''
             const generalNumbers = response.generalNumbers
     
             statValues.item(0).parentNode.classList = `stat-value gain ${getClassForNumber(generalNumbers[0])}`
@@ -153,14 +155,38 @@ const getStatisticsValues = () => {
             ]
             expensesIncomePieChart.data.datasets[0].data = [generalNumbers[1], totalExpenses]
             expensesIncomePieChart.update(animate)
+
+            const monthNumbers = Array.from({ length: new Date(year, month || new Date().getMonth() + 1, 0).getDate() }, (_, i) => i + 1)
+            const monthToIncome = []
+
+            for (const monthNumber of monthNumbers) {
+                let found = false
+
+                for (const shiftIncome of response.shiftsIncome) {
+                    if (shiftIncome.day === monthNumber) {
+                        found = true
+                        monthToIncome.push(shiftIncome.sum)
+                        break
+                    }
+                }
+
+                if (!found) {
+                    monthToIncome.push(0)
+                }
+            }
+
+            incomeByShiftLineChart.data.datasets[0].data = monthToIncome
+            updateShiftsLineChartLabels(month || new Date().getMonth() + 1, year)
+            incomeByShiftLineChart.update(animate)
         } else {
             pieCharts.style.display = 'none'
+            document.querySelector('.bar-charts').style.display = 'none'
             statValues.forEach(s => s.textContent = '–')
             statValues.item(0).parentNode.classList = 'stat-value gain'
             showMessage('info', 'Дані за місяць відсутні')
         }
 
-        document.querySelector('.bar-charts').style.display = ''
+        document.querySelector('.bar-charts:last-child').style.display = ''
         replaceLoadIcons()
     }).catch(() => showMessage('error', getErrorMessage('статистику')))
 }
@@ -361,6 +387,12 @@ const getPieChart = (selector, title, size) => new Chart(document.querySelector(
     }
 })
 
+const updateShiftsLineChartLabels = (month, year) => {
+    month--
+    const monthName = calendarMonthIndexToName[month]
+    incomeByShiftLineChart.data.labels = Array.from({ length: new Date(year, month + 1, 0).getDate() }, (_, i) => (i + 1) + ' ' + monthName)
+}
+
 const showGeneralStatisticsInfo = e => {
     main.innerHTML = menuItemsContents['generalstatistics']
     fillSelectedMenuItem(e)
@@ -368,6 +400,11 @@ const showGeneralStatisticsInfo = e => {
     expensesPieChart = getPieChart('expenses', 'Розподіл витрат', 2)
     incomePieChart = getPieChart('income', 'Розподіл доходів по Продажам', 2)
     expensesIncomePieChart = getPieChart('expenses-income', 'Відношення доходів до витрат', 2)
+
+    incomeByShiftLineChart = getLineChart('income-by-shift', 'Виручка змін за місяць')
+    incomeByShiftLineChart.options.layout.padding = { top: 10 }
+    incomeByShiftLineChart.options.plugins.datalabels.formatter = value => value || null
+    incomeByShiftLineChart.update()
 
     yearGainBarChart = getBarChart('year-gain', 'Прибуток за рік')
     yearGainBarChart.options.plugins.datalabels.color = context => context.dataset.data[context.dataIndex] < 1 ? 'rgb(240, 0, 0)' : 'rgb(34, 139, 34)'
@@ -395,6 +432,7 @@ const updateChartsFontSize = () => {
     ]
 
     const barCharts = [
+        incomeByShiftLineChart,
         yearGainBarChart,
         yearIncomeExpenseBarChart,
         yearProfitabilityLineChart
