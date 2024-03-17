@@ -7,6 +7,16 @@ const CHANGELOG_TYPES = {
 
 const changelogs = [
     {
+        v: '2.2',
+        date: '19.03.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'у розділ «Загальна статистика» до місячної статистики додано графік, який відображає виручку змін за кожен день'
+            }
+        ]
+    },
+    {
         v: '2.1.1',
         date: '16.03.24',
         changes: [
