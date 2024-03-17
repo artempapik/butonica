@@ -1134,6 +1134,11 @@ const menuItemsContents = {
             <canvas id="expenses-income-pie-chart"></canvas>
         </div>
         <div class="bar-charts">
+            <div class="month-line-chart">
+                <canvas id="income-by-shift-line-chart"></canvas>
+            </div>
+        </div>
+        <div class="bar-charts">
             <div>
                 <canvas id="year-gain-bar-chart"></canvas>
             </div>
