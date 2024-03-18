@@ -436,7 +436,7 @@
         & .calendar-day {
             padding-bottom: .3rem;
             flex-direction: column;
-            font-size: .8rem;
+            font-size: .75rem;
             gap: .3rem;
 
             &:first-child {
