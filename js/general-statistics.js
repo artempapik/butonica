@@ -23,7 +23,7 @@ const getStatisticsValues = () => {
                 statValues.item(i).textContent = (response.reduce((total, current) => total + current.generalNumbers[i], 0)).toFixed(0)
             }
             
-            expensesPieChart.data.labels = ['продажі на магазині', 'інтернет-замовлення'].map((l, i) => {
+            expensesPieChart.data.labels = ['витрати магазину', 'витрати на товар'].map((l, i) => {
                 const current = response.reduce((total, current) => total + current.generalNumbers[i + 4], 0)
                 const total = response.reduce((total, current) => total + current.generalNumbers[4], 0) + response.reduce((total, current) => total + current.generalNumbers[5], 0) || 1
                 return `${l} (${(current / total * 100).toFixed(2)}%)`
@@ -34,7 +34,7 @@ const getStatisticsValues = () => {
             ]
             expensesPieChart.update(animate)
 
-            incomePieChart.data.labels = ['продажі на магазині', 'інтернет-замовлення'].map((l, i) => {
+            incomePieChart.data.labels = ['продажі на магазині', 'online-замовлення'].map((l, i) => {
                 const current = response.reduce((total, current) => total + current.generalNumbers[i + 2], 0)
                 const total = response.reduce((total, current) => total + current.generalNumbers[2], 0) + response.reduce((total, current) => total + current.generalNumbers[3], 0) || 1
                 return `${l} (${(current / total * 100).toFixed(2)}%)`
@@ -134,7 +134,7 @@ const getStatisticsValues = () => {
             expensesPieChart.data.datasets[0].data = [generalNumbers[4], generalNumbers[5]]
             expensesPieChart.update(animate)
 
-            incomePieChart.data.labels = ['продажі на магазині', 'інтернет-замовлення'].map((l, i) => `${l} (${(generalNumbers[i + 2] / generalNumbers[1] * 100).toFixed(2)}%)`)
+            incomePieChart.data.labels = ['продажі на магазині', 'online-замовлення'].map((l, i) => `${l} (${(generalNumbers[i + 2] / generalNumbers[1] * 100).toFixed(2)}%)`)
             incomePieChart.data.datasets[0].data = [generalNumbers[2], generalNumbers[3]]
             incomePieChart.update(animate)
 
