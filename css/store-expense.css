@@ -49,7 +49,6 @@
         }
 
         & tr:not(:first-child) td:nth-child(3) {
-            color: rgb(255, 0, 0);
             font-weight: normal;
         }
 
