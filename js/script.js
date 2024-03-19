@@ -1105,7 +1105,7 @@ const menuItemsContents = {
                         </span>
                     </li>
                     <li class="sub-value">
-                        <span class="stat-title">інтернет-замовлення:</span>
+                        <span class="stat-title">online-замовлення:</span>
                         <span class="stat-value">
                             <span></span>
                         </span>
