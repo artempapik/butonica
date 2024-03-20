@@ -1928,12 +1928,13 @@ table {
         gap: .7rem;
         align-items: center;
 
+        & img {
+            width: 2rem;
+        }
+
         & span {
             color: rgb(30, 30, 30);
-
-            &:first-child {
-                font-size: 2.5rem;
-            }
+            font-size: 1.9rem;
         }
     }
 
