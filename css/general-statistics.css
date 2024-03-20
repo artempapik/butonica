@@ -20,6 +20,13 @@
         align-items: center;
         gap: 1rem;
 
+        &:nth-child(3), &:last-child {
+            & .stat-value {
+                font-weight: bold;
+                color: rgb(220, 20, 60);
+            }
+        }
+
         & .stat-title {
             font-size: 1.2rem;
             color: rgb(80, 80, 80);
