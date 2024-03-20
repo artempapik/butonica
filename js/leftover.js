@@ -135,7 +135,7 @@ const fillLeftoversTable = leftoverProducts => {
         productAmountColumn.textContent = product.amount
 
         const productBuyingCostColumn = document.createElement('td')
-        productBuyingCostColumn.textContent = product.buyingCost ? product.buyingCost.toFixed(2) : ''
+        productBuyingCostColumn.textContent = product.buyingCost ? product.buyingCost.toFixed(2) : '–'
 
         const createTdWithText = field => {
             const td = createTd()
