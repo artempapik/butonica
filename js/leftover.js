@@ -137,12 +137,12 @@ const fillLeftoversTable = leftoverProducts => {
         const productBuyingCostColumn = document.createElement('td')
         productBuyingCostColumn.textContent = product.buyingCost ? product.buyingCost.toFixed(2) : ''
 
-        const createTdWithText = (text, field) => {
+        const createTdWithText = field => {
             const td = createTd()
             const value = product['amount' + field]
 
             if (value) {
-                td.append(createSpan(`${value} в ${text}`))
+                td.append(createSpan(`${value} шт`))
             } else {
                 td.textContent = '–'
             }
@@ -156,8 +156,8 @@ const fillLeftoversTable = leftoverProducts => {
             leftoverProductStockColumn,
             productAmountColumn,
             productBuyingCostColumn,
-            createTdWithText('букетах', 'Flavor'),
-            createTdWithText('замовленнях', 'Order')
+            createTdWithText('Flavor'),
+            createTdWithText('Order')
         )
         leftoversTable.append(tr)
     }
