@@ -104,8 +104,9 @@
             & tr:not(:first-child) {
                 & td:nth-child(5), & td:last-child {
                     word-spacing: .2rem;
-    
+                    
                     & span {
+                        margin: 0 auto;
                         font-size: .8rem;
                         padding: .2rem .6rem;
                         width: 3rem;
