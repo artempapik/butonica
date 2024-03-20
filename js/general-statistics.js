@@ -20,7 +20,8 @@ const getStatisticsValues = () => {
             statValues.item(0).parentNode.classList = `stat-value gain ${getClassForNumber(yearGain)}`
     
             for (let i = 0; i < statValues.length; i++) {
-                statValues.item(i).textContent = (response.reduce((total, current) => total + current.generalNumbers[i], 0)).toFixed(0)
+                const statValue = (response.reduce((total, current) => total + current.generalNumbers[i], 0)).toFixed(0)
+                statValues.item(i).textContent = i > 1 ? '-' + statValue : statValue
             }
             
             expensesPieChart.data.labels = ['витрати магазину', 'витрати на товар'].map((l, i) => {
@@ -125,7 +126,8 @@ const getStatisticsValues = () => {
             statValues.item(0).parentNode.classList = `stat-value gain ${getClassForNumber(generalNumbers[0])}`
     
             for (let i = 0; i < statValues.length; i++) {
-                statValues.item(i).textContent = (+generalNumbers[i]).toFixed(0)
+                const statValue = (+generalNumbers[i]).toFixed(0)
+                statValues.item(i).textContent = i > 1 ? '-' + statValue : statValue
             }
 
             const totalExpenses = generalNumbers[4] + generalNumbers[5]
