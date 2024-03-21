@@ -200,7 +200,7 @@
     .general-statistics-info {
         align-self: center;
         flex-direction: column;
-        padding: 1.2rem;
+        padding: 1.1rem;
         gap: 1.5rem;
 
         & li {            
