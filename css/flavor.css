@@ -193,22 +193,6 @@
     width: calc(var(--modal-content-width) + 5rem);
     gap: 1.5rem;
 
-    & h1 {
-        & span:nth-child(2) {
-            font-family: 'Roboto Mono', monospace;
-        }
-
-        & span:last-child {
-            vertical-align: text-top;
-            cursor: pointer;
-            color: rgb(96, 130, 182);
-
-            &:hover {
-                color: rgb(0, 71, 171);
-            }
-        }
-    }
-
     & .flavor-content {
         flex-direction: row;
         justify-content: space-between;
