@@ -467,7 +467,6 @@ const addFlavorProduct = (product = null) => {
         flavorProductSelect.add(option)
     }
 
-    flavorProductSelect.value = ''
     const productPriceColumn = createTd()
 
     if (product) {
@@ -479,6 +478,8 @@ const addFlavorProduct = (product = null) => {
                 break
             }
         }
+    } else {
+        flavorProductSelect.value = ''
     }
 
     const flavorProductColumn = document.createElement('td')
