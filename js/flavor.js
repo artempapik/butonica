@@ -467,6 +467,7 @@ const addFlavorProduct = (product = null) => {
         flavorProductSelect.add(option)
     }
 
+    flavorProductSelect.value = ''
     const productPriceColumn = createTd()
 
     if (product) {
@@ -557,7 +558,9 @@ const addFlavorProduct = (product = null) => {
     flavorProductsTable.append(tr)
     flavorModal.querySelector('table tbody').style.display = 'contents'
 
-    flavorProductSelect.addEventListener('change', () => {
+    $(flavorProductSelect).select2()
+
+    $(flavorProductSelect).on('select2:select', () => {
         for (const option of flavorProductsOptions) {
             if (+option.dataset.id === +flavorProductSelect.selectedOptions[0].dataset.id) {
                 productPriceColumn.textContent = (+option.dataset.cost).toFixed(2)
@@ -566,8 +569,6 @@ const addFlavorProduct = (product = null) => {
             }
         }
     })
-
-    $(flavorProductSelect).select2()
 }
 
 const viewFlavorTemplates = () => {
