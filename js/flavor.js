@@ -1,7 +1,13 @@
-let flavorsTable, flavorProductsOptions
+let flavorsTable, flavorProductsOptions, myOptions
 
-const showFlavorInfo = e => {
-    main.innerHTML = menuItemsContents['flavor']
+const showFlavorInfo = (e, menuContent) => {
+    if (activeMenuItem === menuContent) {
+        pressSameMenuItem()
+        return
+    }
+
+    activeMenuItem = menuContent
+    main.innerHTML = menuItemsContents[menuContent]
     fillSelectedMenuItem(e)
     flavorsTable = document.querySelector('.flavor-table table')
 
@@ -32,6 +38,7 @@ const showFlavorInfo = e => {
 
         for (const product of response) {
             const option = document.createElement('option')
+            option.text = product.name
             option.value = product.name
             option.dataset.id = product.id
             option.dataset.buyingCost = product.buyingCost
@@ -40,6 +47,7 @@ const showFlavorInfo = e => {
         }
 
         flavorProductsOptions = flavorModal.querySelectorAll(`#flavor-product option`)
+        myOptions = response
     })
 }
 
@@ -55,7 +63,7 @@ const calculateFlavorTotalSum = () => {
 
     for (const tr of flavorModal.querySelectorAll('tr:not(:first-child)')) {
         for (const option of flavorProductsOptions) {
-            if (+option.dataset.id === +tr.querySelector('input').dataset.id) {
+            if (+option.dataset.id === +tr.querySelector('select').selectedOptions[0].dataset.id) {
                 totalBuyingSum += +option.dataset.buyingCost * +tr.querySelector('.product-amount').value
                 break
             }
@@ -140,7 +148,7 @@ const createFlavorModal = () => {
     flavorModal.style.display = 'flex'
 }
 
-const getFlavorName = flavor => flavor.name || ((flavor.isFlavor ? 'Букет' : 'Композиція') + ` #${flavor.id}`)
+const getFlavorName = flavor => flavor.name || ((flavor.isFlavor ? 'Букет' : 'Композиція') + ` ${flavor.id}`)
 
 const createFlavorRow = flavor => {
     const editAction = createEditSpan('flavor')
@@ -165,9 +173,9 @@ const createFlavorRow = flavor => {
             flavorInfoModal.querySelector('img').src = response.imageData ? response.imageData : EMPTY_IMAGE_URL
             flavorInfoModal.querySelector('h1').textContent = getFlavorName(flavor)
             flavorInfoModal.querySelector('.flavor-employee').textContent = response.employee
-            flavorInfoModal.querySelector('.flavor-date').textContent = formatDate(response.date)
+            flavorInfoModal.querySelector('.flavor-date').textContent = formatWeekDate(response.date, true)
             flavorInfoModal.querySelector('.flavor-stock').textContent = flavor.stock
-    
+            
             const flavorProducts = flavorInfoModal.querySelector('table')
             flavorProducts.innerHTML = flavorProducts.querySelector('tbody').innerHTML
     
@@ -446,16 +454,24 @@ const addFlavorProduct = (product = null) => {
     flavorModal.querySelector('.view-flavor-templates').style.display = 'none'
     const flavorProductsTable = flavorModal.querySelector('.flavor-products table')
 
-    const flavorProductSelect = document.createElement('input')
-    const selector = 'flavor-product'
-    flavorProductSelect.setAttribute('list', selector)
+    const flavorProductSelect = document.createElement('select')
+
+    for (const product of myOptions) {
+        const option = document.createElement('option')
+        option.text = product.name
+        option.value = product.name
+        option.dataset.id = product.id
+        option.dataset.buyingCost = product.buyingCost
+        option.dataset.cost = product.cost
+        flavorProductSelect.add(option)
+    }
 
     const productPriceColumn = createTd()
 
     if (product) {
         for (const option of flavorProductsOptions) {
             if (+option.dataset.id === product.productId) {
-                flavorProductSelect.dataset.id = product.productId
+                flavorProductSelect.selectedOptions[0].dataset.id = product.productId
                 flavorProductSelect.value = option.value
                 productPriceColumn.textContent = product.sellingCost.toFixed(2)
                 break
@@ -501,10 +517,10 @@ const addFlavorProduct = (product = null) => {
     removeFlavorProduct.classList = 'material-symbols-outlined'
 
     removeFlavorProduct.onpointerup = e => {
-        const input = e.target.parentNode.parentNode.querySelector('input')
+        const select = e.target.parentNode.parentNode.querySelector('select')
 
         for (const option of flavorProductsOptions) {
-            if (+option.dataset.id === +input.dataset.id) {
+            if (+option.dataset.id === +select.selectedOptions[0].dataset.id) {
                 const buyingCost = +option.dataset.buyingCost * + e.target.parentNode.parentNode.querySelector('.product-amount').value
                 flavorTotalBuyingSumElement.textContent = Math.max(0, +flavorTotalBuyingSumElement.textContent - buyingCost).toFixed(2)
                 break
@@ -539,17 +555,18 @@ const addFlavorProduct = (product = null) => {
 
     flavorProductsTable.append(tr)
     flavorModal.querySelector('table tbody').style.display = 'contents'
-    keepDatalistOptions(selector)
 
     flavorProductSelect.addEventListener('change', () => {
         for (const option of flavorProductsOptions) {
-            if (+option.dataset.id === +flavorProductSelect.dataset.id) {
+            if (+option.dataset.id === +flavorProductSelect.selectedOptions[0].dataset.id) {
                 productPriceColumn.textContent = (+option.dataset.cost).toFixed(2)
                 changeSum()
                 break
             }
         }
     })
+
+    new TomSelect(flavorProductSelect, { maxOptions: null })
 }
 
 const viewFlavorTemplates = () => {
