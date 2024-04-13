@@ -2155,6 +2155,16 @@ const animateChange = item => item.animate([
     { opacity: '1' }
 ], 200)
 
+const indexToDayOfWeek = {
+    0: 'нд',
+    1: 'пн',
+    2: 'вт',
+    3: 'ср',
+    4: 'чт',
+    5: 'пт',
+    6: 'сб'
+}
+
 const formatWeekDate = (date, onlyText = false, includeTime = true) => {
     if (!date) {
         return ''
