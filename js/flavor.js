@@ -567,7 +567,7 @@ const addFlavorProduct = (product = null) => {
         }
     })
 
-    new TomSelect(flavorProductSelect, { maxOptions: null })
+    // new TomSelect(flavorProductSelect, { maxOptions: null })
 }
 
 const viewFlavorTemplates = () => {
