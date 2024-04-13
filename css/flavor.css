@@ -81,10 +81,6 @@
                 }
             }
 
-            & td:first-child {
-                width: 9rem;
-            }
-
             & td:nth-child(3), & td:nth-child(4) {
                 width: 4.3rem;
                 text-align: center;
