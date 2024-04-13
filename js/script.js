@@ -2155,6 +2155,42 @@ const animateChange = item => item.animate([
     { opacity: '1' }
 ], 200)
 
+const formatWeekDate = (date, onlyText = false, includeTime = true) => {
+    if (!date) {
+        return ''
+    }
+    
+    const td = createTd()
+
+    if (!date) {
+        return td
+    }
+    
+    date = new Date(date)
+    const formattedDate = date.toLocaleDateString('ru')
+
+    const dayOfWeekText = indexToDayOfWeek[date.getDay()]
+    let dateText = `${formattedDate.substring(0, 2)} ${calendarMonthIndexToName[+formattedDate.substring(3, 5) - 1]}`
+
+    if (!includeTime) {
+        return dayOfWeekText + ' ' + dateText
+    }
+    
+    if (date.toLocaleTimeString() !== '12:00:00 AM') {
+        dateText += `, ${padTime(date.getHours())}:${padTime(date.getMinutes())}`
+    }
+
+    if (onlyText) {
+        return dayOfWeekText + ' ' + dateText
+    }
+
+    td.append(
+        createSpan(dayOfWeekText),
+        createSpan(dateText)
+    )
+    return td
+}
+
 // Notification.requestPermission().then(permission => console.log(permission))
 
 // navigator.serviceWorker.ready.then(registration => registration.pushManager.subscribe({
