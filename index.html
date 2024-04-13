@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="css/store-expense.css">
     <link rel="stylesheet" href="css/label.css">
     <link rel="stylesheet" href="css/general-statistics.css">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css">
 </head>
 <body>
     <header>
@@ -78,7 +78,7 @@
                     <span class="material-symbols-outlined">toggle_on</span>
                     <span>Анімації</span>
                 </div>
-                <div class="animate-item animate" onpointerup="window.open('https://butonica.notion.site/butonica/1e0bff1a5d9c4632b40b3ce815e45a81?v=430499fe652b44318cd465f34c34f6f7')">
+                <div onpointerup="window.open('https://butonica.notion.site/butonica/1e0bff1a5d9c4632b40b3ce815e45a81?v=430499fe652b44318cd465f34c34f6f7')">
                     <span class="material-symbols-outlined">help</span>
                     <span>Довідкові матеріали</span>
                 </div>
@@ -94,7 +94,7 @@
     <div class="container">
         <aside>
             <ul class="main-menu main-padding">
-                <li onpointerup="showSaleInfo(event, 'sale')">
+                <li onpointerup="showSaleInfo(event)">
                     <div class="menu-item">
                         <div class="menu-item-content">
                             <span class="material-symbols-outlined">terminal</span>
@@ -111,25 +111,25 @@
                         <span class="material-symbols-outlined">expand_more</span>
                     </div>
                     <ul class="sub-menu animate-item animate">
-                        <li class="main-padding" onpointerup="showAllOrderInfo(event, 'allorder')">
+                        <li class="main-padding" onpointerup="showAllOrderInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">list_alt</span>
                                 <span>Всі</span>
                             </div>
                         </li>
-                        <li class="main-padding" onpointerup="showPendingOrderInfo(event, 'pendingorder')">
+                        <li class="main-padding" onpointerup="showPendingOrderInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">hourglass_empty</span>
                                 <span>В очікуванні</span>
                             </div>
                         </li>
-                        <li class="main-padding" onpointerup="showCompletedOrderInfo(event, 'completedorder')">
+                        <li class="main-padding" onpointerup="showCompletedOrderInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">done</span>
                                 <span>Виконані</span>
                             </div>
                         </li>
-                        <li class="main-padding" onpointerup="showOrderCalendarInfo(event, 'ordercalendar')">
+                        <li class="main-padding" onpointerup="showOrderCalendarInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">calendar_month</span>
                                 <span>Календар</span>
@@ -137,7 +137,7 @@
                         </li>
                     </ul>
                 </li>
-                <li onpointerup="showShiftInfo(event, 'shift')">
+                <li onpointerup="showShiftInfo(event)">
                     <div class="menu-item">
                         <div class="menu-item-content">
                             <span class="material-symbols-outlined">fact_check</span>
@@ -154,31 +154,31 @@
                         <span class="material-symbols-outlined">expand_more</span>
                     </div>
                     <ul class="sub-menu animate-item animate">
-                        <li class="main-padding" onpointerup="showContractorInfo(event, 'contractor')">
+                        <li class="main-padding" onpointerup="showContractorInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">group_add</span>
                                 <span>Постачальники</span>
                             </div>
                         </li>
-                        <li class="main-padding" onpointerup="showSupplyInfo(event, 'supply')">
+                        <li class="main-padding" onpointerup="showSupplyInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">local_shipping</span>
                                 <span>Поставки</span>
                             </div>
                         </li>
-                        <li class="main-padding" onpointerup="showWasteInfo(event, 'waste')">
+                        <li class="main-padding" onpointerup="showWasteInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">delete</span>
                                 <span>Списання</span>
                             </div>
                         </li>
-                        <li class="main-padding" onpointerup="showLeftoverInfo(event, 'leftover')">
+                        <li class="main-padding" onpointerup="showLeftoverInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">directory_sync</span>
                                 <span>Залишки</span>
                             </div>
                         </li>
-                        <li class="main-padding" onpointerup="showInventoryInfo(event, 'inventory')">
+                        <li class="main-padding" onpointerup="showInventoryInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">edit_calendar</span>
                                 <span>Інвентаризація</span>
@@ -195,19 +195,19 @@
                         <span class="material-symbols-outlined">expand_more</span>
                     </div>
                     <ul class="sub-menu animate-item animate">
-                        <li class="main-padding" onpointerup="showCategoryInfo(event, 'category')">
+                        <li class="main-padding" onpointerup="showCategoryInfo(event)">
                             <div>
-                                <span class="material-symbols-outlined">format_list_bulleted</span>
+                                <span class="material-symbols-outlined">list</span>
                                 <span>Категорії</span>
                             </div>
                         </li>
-                        <li class="main-padding" onpointerup="showProductInfo(event, 'product')">
+                        <li class="main-padding" onpointerup="showProductInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">filter_vintage</span>
                                 <span>Товари</span>
                             </div>
                         </li>
-                        <li class="main-padding" onpointerup="showFlavorInfo(event, 'flavor')">
+                        <li class="main-padding" onpointerup="showFlavorInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">local_florist</span>
                                 <span>Букети та композиції</span>
@@ -215,28 +215,13 @@
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li onpointerup="showStoreExpenseInfo(event)">
                     <div class="menu-item">
                         <div class="menu-item-content">
                             <span class="material-symbols-outlined">receipt_long</span>
                             <span>Витрати магазину</span>
                         </div>
-                        <span class="material-symbols-outlined">expand_more</span>
                     </div>
-                    <ul class="sub-menu animate-item animate">
-                        <li class="main-padding" onpointerup="showStoreExpensesCategoriesInfo(event, 'storeexpensecategory')">
-                            <div>
-                                <span class="material-symbols-outlined">checklist_rtl</span>
-                                <span>Категорії</span>
-                            </div>
-                        </li>
-                        <li class="main-padding" onpointerup="showStoreExpenseInfo(event, 'storeexpense')">
-                            <div>
-                                <span class="material-symbols-outlined">monetization_on</span>
-                                <span>Витрати</span>
-                            </div>
-                        </li>
-                    </ul>
                 </li>
                 <li>
                     <div class="menu-item">
@@ -247,13 +232,13 @@
                         <span class="material-symbols-outlined">expand_more</span>
                     </div>
                     <ul class="sub-menu animate-item animate">
-                        <li class="main-padding" onpointerup="showClientInfo(event, 'client')">
+                        <li class="main-padding" onpointerup="showClientInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">person_add</span>
                                 <span>Клієнти</span>
                             </div>
                         </li>
-                        <li class="main-padding" onpointerup="showLabelInfo(event, 'label')">
+                        <li class="main-padding" onpointerup="showLabelInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">label</span>
                                 <span>Мітки</span>
@@ -270,7 +255,7 @@
                         <span class="material-symbols-outlined">expand_more</span>
                     </div>
                     <ul class="sub-menu animate-item animate">
-                        <li class="main-padding" onpointerup="showGeneralStatisticsInfo(event, 'generalstatistics')">
+                        <li class="main-padding" onpointerup="showGeneralStatisticsInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">show_chart</span>
                                 <span>Загальна</span>
@@ -293,25 +278,25 @@
                         <span class="material-symbols-outlined">expand_more</span>
                     </div>
                     <ul class="sub-menu animate-item animate">
-                        <li class="main-padding" onpointerup="showCompanyInfo(event, 'company')">
+                        <li class="main-padding" onpointerup="showCompanyInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">info</span>
                                 <span>Компанія</span>
                             </div>
                         </li>
-                        <li class="main-padding" onpointerup="showStockInfo(event, 'stock')">
+                        <li class="main-padding" onpointerup="showStockInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">storefront</span>
                                 <span>Торгові точки</span>
                             </div>
                         </li>
-                        <li class="main-padding" onpointerup="showCashRegisterInfo(event, 'cashregister')">
+                        <li class="main-padding" onpointerup="showCashRegisterInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">account_tree</span>
                                 <span>Каси</span>
                             </div>
                         </li>
-                        <li class="main-padding" onpointerup="showEmployeeInfo(event, 'employee')">
+                        <li class="main-padding" onpointerup="showEmployeeInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">person_apron</span>
                                 <span>Працівники</span>
@@ -322,103 +307,6 @@
             </ul>
         </aside>
         <main class="main-padding">
-            <div class="main-statistics">
-                <div class="main-stat-blocks">
-                    <div class="main-stat-block">
-                        <div class="stat-block">
-                            <div class="stat-title main">Виручка:</div>
-                            <div class="stat-value positive"></div>
-                        </div>
-                        <div class="stat-block">
-                            <div class="stat-title">
-                                <span class="material-symbols-outlined">fact_check</span>
-                                <span>Робоча зміна:</span>
-                            </div>
-                            <div class="stat-value"></div>
-                        </div>
-                        <div class="stat-block">
-                            <div class="stat-title">
-                                <span class="material-symbols-outlined">shopping_bag</span>
-                                <span>Online-замовлення:</span>
-                            </div>
-                            <div class="stat-value"></div>
-                        </div>
-                    </div>
-                    <div class="main-stat-block">
-                        <div class="stat-block">
-                            <div class="stat-title">
-                                <span class="material-symbols-outlined">attach_money</span>
-                                <span>Баланс готівки:</span>
-                            </div>
-                            <div class="stat-value"></div>
-                        </div>
-                        <div class="stat-block">
-                            <div class="stat-title">
-                                <span class="material-symbols-outlined">contactless</span>
-                                <span>Баланс терміналу:</span>
-                            </div>
-                            <div class="stat-value"></div>
-                        </div>
-                    </div>
-                    <div class="main-stat-block">
-                        <div class="stat-block">
-                            <div class="stat-title">
-                                <span class="material-symbols-outlined">sell</span>
-                                <span>Замовлень на магазині:</span>
-                            </div>
-                            <div class="stat-value"></div>
-                        </div>
-                        <div class="stat-block">
-                            <div class="stat-title">
-                                <span class="material-symbols-outlined">shopping_bag</span>
-                                <span>Online-замовлень:</span>
-                            </div>
-                            <div class="stat-value"></div>
-                        </div>
-                        <div class="stat-block">
-                            <div class="stat-title">
-                                <span class="material-symbols-outlined">shopping_cart</span>
-                                <span>Продажів:</span>
-                            </div>
-                            <div class="stat-value"></div>
-                        </div>
-                        <div class="stat-block">
-                            <div class="stat-title">
-                                <span class="material-symbols-outlined">receipt_long</span>
-                                <span>Середній чек:</span>
-                            </div>
-                            <div class="stat-value"></div>
-                        </div>
-                        <div class="stat-block">
-                            <div class="stat-title">
-                                <span class="material-symbols-outlined">receipt</span>
-                                <span>Сер. чек on-зам.:</span>
-                            </div>
-                            <div class="stat-value"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="main-top-sales">
-                    <div class="top-sales">
-                        <div>
-                            <img src="img/parsley.png">
-                            <span>Топ продажів</span>
-                        </div>
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td>Назва</td>
-                                    <td>К-ть</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="fact-day">
-                        <div class="fact"></div>
-                        <div class="fact-date"></div>
-                    </div>
-                </div>
-            </div>
             <div class="bg-animate"></div>
             <div class="bg-animate"></div>
             <div class="bg-animate"></div>
@@ -996,8 +884,8 @@
             <table>
                 <tr>
                     <td>Товар</td>
-                    <td>Запл. зал.</td>
-                    <td>Факт. зал.</td>
+                    <td>Запланований залишок</td>
+                    <td>Фактичний залишок</td>
                     <td>Різниця</td>
                     <td>Сума</td>
                 </tr>
@@ -1011,32 +899,6 @@
                 <div class="loader-button"></div>
                 <span>Провести інвентаризацію</span>
             </button>
-        </div>
-    </div>
-    <div class="inventory-info-modal">
-        <div class="animate inventory-info-modal-content">
-            <h1>Інвентаризація</h1>
-            <div class="form">
-                <h2>Дата</h2>
-                <h3 class="inventory-date"></h3>
-            </div>
-            <div class="form">
-                <h2>Склад</h2>
-                <h3 class="inventory-stock"></h3>
-            </div>
-            <div class="inventory-products">
-                <h2>Товари</h2>
-                <table>
-                    <tr>
-                        <td>Товар</td>
-                        <td>Факт. зал.</td>
-                    </tr>
-                </table>
-            </div>
-            <h3 class="total">
-                <span>Всього:</span>
-                <span></span>
-            </h3>
         </div>
     </div>
     <div class="create-client-modal">
@@ -1808,7 +1670,7 @@
             <div class="form">
                 <h2>Внесіть готівку:</h2>
                 <div>
-                    <span class="enter-value" onpointerup="createCalculatorValueSpan(this, event)"></span>
+                    <input type="number" oninput="handlePriceInput(event)">
                     <span>грн</span>
                 </div>
             </div>
@@ -1845,10 +1707,6 @@
                         <div class="view">
                             <img src="img/withdrawal.png">
                             <span>Винесення</span>
-                        </div>
-                        <div class="view">
-                            <img src="img/receipt.png">
-                            <span>Витрати</span>
                         </div>
                     </div>
                     <div class="view-group">
@@ -1893,13 +1751,6 @@
             </div>
         </div>
     </div>
-    <div class="shift-employees-info-modal">
-        <div class="animate shift-employees-info-modal-content">
-            <h1>Зміни працівників</h1>
-            <ul></ul>
-            <button onpointerup="cancelShiftEmployee()">Скинути</button>
-        </div>
-    </div>
     <div class="cash-register-operations-modal">
         <div class="animate cash-register-operations-modal-content">
             <h1>Каса</h1>
@@ -1931,15 +1782,23 @@
                 </div>
             </div>
             <div class="cash-register-operations">
-                <div class="cash-register-operation-type">
-                    <div class="active">Внесення</div>
-                    <div>Винесення</div>
-                    <div>Витрата</div>
-                </div>
+                <form>
+                    <label class="checked">
+                        <input type="radio" name="operation-type" value="Внесення" checked>
+                        <span>Внесення</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="operation-type" value="Винесення">
+                        <span>Винесення</span>
+                    </label>
+                    <!-- <label>
+                        <input type="radio" name="operation-type" value="Витрата">
+                        <span>Витрата</span>
+                    </label> -->
+                </form>
                 <div>
                     <span class="required">*</span>
-                    <span>Сума</span>
-                    <span class="enter-value" onpointerup="createCalculatorValueSpan(this, event)"></span>
+                    <input type="number" min="0" max="100000" oninput="handlePriceInput(event)">
                     <span>грн</span>
                 </div>
             </div>
@@ -1969,10 +1828,7 @@
                     <div class="order-number-date">
                         <div class="order-number">
                             <span></span>
-                            <span class="number">
-                                <span></span>
-                                <span class="material-symbols-outlined">expand_content</span>
-                            </span>
+                            <span></span>
                         </div>
                         <div class="order-date">
                             <span>Дата</span>
@@ -2492,7 +2348,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <script>Chart.register(ChartDataLabels)</script>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.base.min.js"></script>
 </body>
 </html>
