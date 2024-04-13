@@ -200,10 +200,10 @@ const createFlavorRow = flavor => {
             flavorInfoModal.querySelector('.flavor-total-sum span:last-child').textContent = flavor.totalSum.toFixed(2)
             flavorInfoModal.style.display = 'flex'
             flavorInfoModal.querySelector('.flavor-info-modal-content').scroll(0, 0)
-        })/*.catch(() => {
+        }).catch(() => {
             hidePageLoad()
             showMessage('error', getErrorMessage('букет'))
-        })*/
+        })
     }
 
     editAction.onpointerup = () => {
