@@ -312,6 +312,21 @@ select {
     }
 }
 
+.ts-control {
+    border-radius: .5rem !important;
+
+    &:hover {
+        border-color: rgb(var(--table-hover-color));
+    }
+}
+
+.ts-dropdown {
+    & div.active {
+        background: rgba(var(--table-hover-color), .8);
+        color: rgb(245, 245, 245);
+    }
+}
+
 ul {
     list-style-type: none;
     margin: 0;
