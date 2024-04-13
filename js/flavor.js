@@ -1,13 +1,14 @@
-let flavorsTable, flavorProductsOptions, myOptions
+let flavorsTable, flavorProductsOptions, flavorProductOptionsArray
 
 const showFlavorInfo = (e, menuContent) => {
-    if (activeMenuItem === menuContent) {
-        pressSameMenuItem()
-        return
-    }
+    // if (activeMenuItem === menuContent) {
+    //     pressSameMenuItem()
+    //     return
+    // }
 
     activeMenuItem = menuContent
-    main.innerHTML = menuItemsContents[menuContent]
+    // main.innerHTML = menuItemsContents[menuContent]
+    main.innerHTML = menuItemsContents['flavor']
     fillSelectedMenuItem(e)
     flavorsTable = document.querySelector('.flavor-table table')
 
@@ -47,7 +48,7 @@ const showFlavorInfo = (e, menuContent) => {
         }
 
         flavorProductsOptions = flavorModal.querySelectorAll(`#flavor-product option`)
-        myOptions = response
+        flavorProductOptionsArray = response
     })
 }
 
@@ -456,7 +457,7 @@ const addFlavorProduct = (product = null) => {
 
     const flavorProductSelect = document.createElement('select')
 
-    for (const product of myOptions) {
+    for (const product of flavorProductOptionsArray) {
         const option = document.createElement('option')
         option.text = product.name
         option.value = product.name
