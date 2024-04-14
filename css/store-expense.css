@@ -92,25 +92,20 @@
     .store-expense-table table {
         & td:first-child {
             padding: .3rem .1rem;
-            min-width: 5rem;
             max-width: 5rem;
         }
 
-        & td:nth-child(2), & td:nth-child(3) {
+        & td:nth-child(2), & td:nth-child(5) {
             display: none;
         }
 
         & tr:not(:first-child) td:nth-child(3) {
             font-weight: normal;
         }
-
-        & td:nth-child(5) {
-            max-width: 7rem !important;
-        }
     }
 
     .create-store-expense-modal-content {
-        padding: .25rem .5rem;
-        gap: .75rem;
+        padding: .9rem;
+        gap: 1.2rem;
     }
 }
