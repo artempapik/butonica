@@ -1022,9 +1022,6 @@ const createInternetOrder = saleOrderType => {
         paidSum: +internetOrderModal.querySelector('.cash input').value || 0
     }
 
-    console.log(order)
-    return
-
     post('Order/internet', order)
         .then(() => {
             hideModalEnableButton(internetOrderModal, payButton)
