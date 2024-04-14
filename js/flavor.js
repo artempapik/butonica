@@ -374,7 +374,7 @@ const createFlavor = () => {
 const editFlavor = (id, oldRow, date) => {
     const stockElement = flavorModal.querySelector('.flavor-stock')
 
-    const allProductChoices = [...flavorModal.querySelectorAll('input[list=flavor-product]')].map(i => i.value)
+    const allProductChoices = [...flavorModal.querySelectorAll('.flavor-products select')].map(s => s.value)
     const allProductAmounts = [...flavorModal.querySelectorAll('.product-amount')].map(i => i.value)
 
     if (!allProductChoices.length) {
@@ -402,13 +402,13 @@ const editFlavor = (id, oldRow, date) => {
     const products = []
 
     for (const tr of flavorModal.querySelectorAll('tr:not(:first-child)')) {
-        const flavorProduct = tr.querySelector('td:first-child input')
+        const flavorProduct = tr.querySelector('td:first-child select')
         const amount = +tr.querySelector('td:nth-child(2) input').value
         const price = +tr.querySelector('td:nth-child(3)').textContent
         const sum = +tr.querySelector('td:nth-child(4) span').textContent
 
         products.push({
-            productId: +flavorProduct.dataset.id,
+            productId: +flavorProduct.selectedOptions[0].dataset.id,
             amount,
             price,
             sum
