@@ -1161,6 +1161,11 @@ const performCashRegisterOperation = () => {
 
         type++
     }
+    
+    if (type === 2) {
+        showMessage('error', 'Операція недоступна')
+        return
+    }
 
     const sumInput = cashRegisterOperationsModal.querySelector('.enter-value')
 
@@ -1178,7 +1183,7 @@ const performCashRegisterOperation = () => {
         sum: +sumInput.textContent,
         comment: cashRegisterOperationsModal.querySelector('textarea').value.trim()
     }
-    
+
     post('Shift/operation', cashRegisterOperation)
         .then(() => {
             hideModalEnableButton(cashRegisterOperationsModal, payButton)
