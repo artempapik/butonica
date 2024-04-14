@@ -4,6 +4,7 @@ const getStoreExpenses = month => {
     showLoadAnimation()
 
     get(`StoreExpense/${loginInfo.companyId}/${month || new Date().getMonth() + 1}`).then(response => {
+        console.log(response)
         storeExpensesTable.innerHTML = storeExpensesTable.querySelector('tbody').innerHTML
         storeExpensesTable.style.display = 'block'
         replaceLoadIcons()
@@ -125,6 +126,10 @@ const createStoreExpense = () => {
     }
 
     const date = new Date(dateElement.value)
+    const now = new Date()
+    date.setHours(now.getHours())
+    date.setMinutes(now.getMinutes())
+
     const stockElement = storeExpenseModal.querySelector('.store-expense-stock')
 
     if (!stockElement.value) {
@@ -134,12 +139,12 @@ const createStoreExpense = () => {
 
     const sumElement = storeExpenseModal.querySelector('.store-expense-sum')
 
-    if (!sumElement.value) {
+    if (!sumElement.textContent) {
         showMessage('error', 'Вкажіть суму витрати')
         return
     }
 
-    const sum = +sumElement.value
+    const sum = +sumElement.textContent
 
     const commentElement = storeExpenseModal.querySelector('.store-expense-comment')
     const comment = commentElement.value.trim()
