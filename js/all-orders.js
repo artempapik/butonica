@@ -1,8 +1,23 @@
-let allOrdersTable, orderProducts, internetProductsOptions, internetFlavorsOptions, allOrdersPages
+let allOrdersTable, orderProducts, internetProductsOptions, internetProductsOptionsArray, internetFlavorsOptions, internetFlavorsOptionsArray, allOrdersPages, allOrderIntervalId
 
 const orderInfoModal = document.querySelector('.order-info-modal')
 const internetOrderModal = document.querySelector('.create-internet-order-modal')
 const internetTotalSumElement = internetOrderModal.querySelector('.sale-order-total-sum input')
+
+const updateOrderLeftTime = table => setInterval(() => {
+    for (const td of table.querySelectorAll('td:not(tbody td):nth-child(2)')) {
+        if (!td.dataset.timeFrom) {
+            continue
+        }
+
+        const timeLeft = convertMsToTime(new Date(td.dataset.date.replace('00', td.dataset.timeFrom.substring(0, 2)).replace('00', td.dataset.timeFrom.substring(3))) - new Date())
+
+        if ('background' in timeLeft) {
+            td.style.background = timeLeft.background
+            td.textContent = timeLeft.text
+        }
+    }
+}, 60 * 1000)
 
 const fillDatalistsLabels = () => {
     get(`Label/${loginInfo.companyId}`)
@@ -24,6 +39,7 @@ const fillDatalistsLabels = () => {
         }
 
         internetProductsOptions = internetOrderModal.querySelectorAll(`#internet-product option`)
+        internetProductsOptionsArray = response
     })
 
     get(`Flavor/ids-names-costs/${loginInfo.companyId}`).then(response => {
@@ -39,6 +55,7 @@ const fillDatalistsLabels = () => {
         }
 
         internetFlavorsOptions = internetOrderModal.querySelectorAll(`#internet-flavor option`)
+        internetFlavorsOptionsArray = response
     })
 }
 
@@ -126,7 +143,13 @@ const nextAllOrderPage = e => {
     }).catch(() => showMessage('error', getErrorMessage('замовлення')))
 }
 
-const showAllOrderInfo = e => {
+const showAllOrderInfo = (e, menuContent) => {
+    // if (activeMenuItem === menuContent) {
+    //     pressSameMenuItem()
+    //     return
+    // }
+
+    activeMenuItem = menuContent
     main.innerHTML = menuItemsContents['allorder']
     fillSelectedMenuItem(e)
     allOrdersTable = document.querySelector('.all-order-table table')
@@ -151,19 +174,20 @@ const showAllOrderInfo = e => {
     }).catch(() => showMessage('error', getErrorMessage('замовлення')))
 
     fillDatalistsLabels()
+    allOrderIntervalId = updateOrderLeftTime(allOrdersTable)
 
-    const calendarComponent = document.querySelector('.calendar-component')
+    const calendarComponent = allOrdersTable.querySelector('td:nth-child(3)')
     calendarComponent.onpointerup = e => {
         if (calendarComponent.classList.contains('active')) {
-            showRefreshCalendarIcon()
+            // showRefreshCalendarIcon()
             setTimeout(() => hideModal(calendarModal), 1)
             calendarComponent.classList.remove('active')
             return
         }
 
-        hideRefreshCalendarIcon()
+        // hideRefreshCalendarIcon()
 
-        if (e.target.tagName.toLowerCase() === 'span' && e.target.classList.contains('active')) {
+        if (/*e.target.tagName.toLowerCase() === 'td' &&*/ e.target.classList.contains('active')) {
             showLoadAnimation()
 
             get(`Order/${loginInfo.companyId}/page/${currentPage}`).then(response => {
@@ -178,7 +202,7 @@ const showAllOrderInfo = e => {
             yearValue = null
             dateString = 'виберіть день'
 
-            calendarComponent.querySelector('div').textContent = dateString
+            // calendarComponent.querySelector('div').textContent = dateString
             setDefaultDateSelects()
             fillCalendarDays()
             
@@ -188,8 +212,6 @@ const showAllOrderInfo = e => {
         }
 
         calendarComponent.classList.add('active')
-        calendar.style.top = calendarComponent.offsetTop + 45 + 'px'
-        calendar.style.left = calendarComponent.offsetLeft + 'px'
         hideBodyOverflow()
 
         if (monthSelect.selectedIndex === 12) {
@@ -281,7 +303,8 @@ const createOrderRow = (order, table) => {
 
     const tr = document.createElement('tr')
     tr.onpointerup = e => {
-        if (e.target.tagName.toLowerCase() === 'span' && e.target.className) {
+        const tagName = e.target.tagName.toLowerCase()
+        if (tagName === 'a' || tagName === 'span' && e.target.className) {
             return
         }
 
@@ -293,7 +316,19 @@ const createOrderRow = (order, table) => {
 
             const fillClient = (selector, text) => {
                 const clientBlock = orderInfoModal.querySelector('.' + selector)
-                clientBlock.querySelector('.name span:last-child').textContent = text || 'Не вказано'
+                const nameBlock = clientBlock.querySelector('.name span:last-child')
+                
+                if (!text) {
+                    nameBlock.textContent = 'Не вказано'
+                } else {
+                    const customerInfo = createOrderClientTd(text)
+                    nameBlock.textContent = customerInfo[0]
+
+                    if (customerInfo.length === 2) {
+                        nameBlock.append(customerInfo[1])
+                    }
+                }
+
                 const phonesBlock = clientBlock.querySelector('.phones')
                 phonesBlock.innerHTML = ''
 
@@ -322,7 +357,20 @@ const createOrderRow = (order, table) => {
 
             const orderNumberDate = orderInfoModal.querySelector('.order-number-date')
             orderNumberDate.querySelector('.order-number span').textContent = (order.isInternet ? 'Online-замовлення' : 'Замовлення') + ' '
-            orderNumberDate.querySelector('.order-number span:last-child').textContent = order.id
+
+            const orderId = order.id.toString()
+            const orderNumber = orderNumberDate.querySelector('.order-number .number span')
+            orderNumber.textContent = orderId.length > 4 ? orderId.substring(orderId.length - 4) : orderId
+
+            const expandIdIcon = orderNumberDate.querySelector('.order-number .number span:last-child')
+            expandIdIcon.textContent = 'expand_content'
+            expandIdIcon.style.display = orderId.length > 4 ? '' : 'none'
+
+            expandIdIcon.onpointerup = () => {
+                orderNumber.textContent = orderNumber.textContent.length === 4 ? orderId : orderId.substring(orderId.length - 4)
+                expandIdIcon.textContent = orderNumber.textContent.length === 4 ? 'expand_content' : 'collapse_content'
+            }
+
             orderNumberDate.querySelector('.order-date input').value = getDate(response.date)
 
             const orderTime = orderInfoModal.querySelectorAll('.order-time input')
@@ -462,6 +510,7 @@ const createOrderRow = (order, table) => {
 
             orderInfoModal.style.display = 'flex'
             orderInfoModal.querySelector('.order-info-modal-content').scroll(0, 0)
+            orderInfoModal.querySelector('table').scroll(0, 0)
         }).catch(() => {
             hidePageLoad()
             showMessage('error', getErrorMessage('замовлення'))
@@ -490,7 +539,7 @@ const createOrderRow = (order, table) => {
     }
 
     const formatOrderDate = (date, from, till) => {
-        let orderDate = formatDate(date, false)
+        let orderDate = formatWeekDate(date, true, false)
 
         if (!from && !till) {
             return orderDate
@@ -532,6 +581,11 @@ const createOrderRow = (order, table) => {
             { text: calculateDaysLeft(order.date) }
 
     const timeLeftTd = createTd(timeLeft.text)
+    
+    if (timeLeft.text !== '–' && !timeLeft.text.endsWith('д')) {
+        timeLeftTd.dataset.timeFrom = order.timeFrom
+        timeLeftTd.dataset.date = order.date
+    }
 
     if ('background' in timeLeft) {
         timeLeftTd.style.background = timeLeft.background
@@ -545,11 +599,20 @@ const createOrderRow = (order, table) => {
     img.src = `img/${order.isPickup ? 'pickup' : 'delivery'}.png`
     orderTypeTd.append(img)
 
+    const customerInfo = createOrderClientTd(order.customer)
+    const customerTd = createTd(customerInfo[0])
+
+    if (customerInfo.length === 2) {
+        customerTd.append(customerInfo[1])
+    }
+
+    const orderId = order.id.toString()
+
     tr.append(
-        createTd(order.id),
+        createTd(orderId.length > 4 ? order.id.toString().substring(orderId.length - 4) : orderId),
         timeLeftTd,
         createTd(formatOrderDate(order.date, order.timeFrom, order.timeTill)),
-        createTd(order.customer),
+        customerTd,
         orderTypeTd,
         statusTd,
         labelsTd,
@@ -558,13 +621,28 @@ const createOrderRow = (order, table) => {
     return tr
 }
 
+const createOrderClientTd = customer => {
+    if (customer.includes('@')) {
+        const customerInfo = customer.split('@')
+
+        const link = document.createElement('a')
+        link.textContent = customerInfo[1]
+        link.href = 'https://www.instagram.com/' + link.textContent
+        link.target = 'blank'
+        
+        return [customerInfo[0], link]
+    }
+
+    return [customer]
+}
+
 const fillAllOrdersTable = order => allOrdersTable.append(createOrderRow(order, allOrdersTable))
 
 const editOrderStatus = (order, shouldSurcharge, oldRow, table) => {
     const dateElement = orderInfoModal.querySelector('.order-date input')
 
     if (!dateElement.value) {
-        showMessage('error', 'Введіть дату замовлення')
+        showMessage('error', 'Вкажіть дату замовлення')
         return
     }
 
@@ -610,8 +688,14 @@ const editOrderStatus = (order, shouldSurcharge, oldRow, table) => {
         order.comment = comment
 
         showMessage('info', 'Замовлення відредаговано')
-        const newRow = createOrderRow(order, table)
-        table.replaceChild(newRow, oldRow)
+
+        if (order.status === 2 && activeMenuItem === 'pendingorder') {
+            table.removeChild(oldRow)
+        } else {
+            const newRow = createOrderRow(order, table)
+            table.replaceChild(newRow, oldRow)
+        }
+
         hideModal(orderInfoModal)
     }).catch(() => showMessage('error', 'Не вдалося відредагувати замовлення'))
 }
@@ -622,6 +706,7 @@ const createInternetOrderModal = () => {
     const internetOrderClientsBlock = internetOrderModal.querySelector('.internet-client-info')
 
     const internetOrderClients = internetOrderClientsBlock.querySelector('select')
+    $(internetOrderClients).select2(select2NoResults)
     const clientNames = internetOrderModal.querySelectorAll('.sale-order-customer-name')
     const cashbackBlock = internetOrderModal.querySelector('.cashback')
 
@@ -642,43 +727,6 @@ const createInternetOrderModal = () => {
         }
     }
 
-    clientPhones.forEach(ch => ch.oninput = () => {
-        if (saveClient.checked) {
-            return
-        }
-        
-        const searchQuery = ch.value.trim()
-
-        if (!searchQuery) {
-            fillInternetClientsSelect(clientsWithPhones)
-            internetOrderClients.value = ''
-            clientNames.forEach(cn => cn.value = '')
-            cashbackBlock.style.cssText = 'display:none !important'
-            cashbackBlock.querySelector('.client span:last-child').textContent = ''
-            cashbackBlock.querySelector('.balance span:last-child').textContent = ''
-            cashbackBlock.style.display = ''
-            saveClient.checked = false
-            return
-        }
-
-        fillInternetClientsSelect(clientsWithPhones.filter(c => c.phone.split('\n').some(p => p.includes(searchQuery))))
-
-        if (internetOrderClients.value) {
-            saveClient.checked = false
-            clientNames.forEach(cn => cn.value = internetOrderClients.selectedOptions[0].dataset.name)
-            cashbackBlock.style.cssText = 'display:flex !important'
-            cashbackBlock.querySelector('.client span:last-child').textContent = internetOrderClients.selectedOptions[0].dataset.name
-            cashbackBlock.querySelector('.balance span:last-child').textContent = (+internetOrderClients.selectedOptions[0].dataset.bonusCash).toFixed(2) + ' грн'
-            return
-        }
-        
-        clientNames.forEach(cn => cn.value = '')
-        cashbackBlock.style.cssText = 'display:none !important'
-        cashbackBlock.querySelector('.client span:last-child').textContent = ''
-        cashbackBlock.querySelector('.balance span:last-child').textContent = ''
-        cashbackBlock.style.display = ''
-    })
-
     get(`Client/phones/${loginInfo.companyId}`).then(response => {
         clientsWithPhones = response
         fillInternetClientsSelect(clientsWithPhones)
@@ -697,7 +745,7 @@ const createInternetOrderModal = () => {
     const saveClient = internetOrderClientsBlock.querySelector('input')
     saveClient.onclick = () => {
         if (saveClient.checked) {
-            internetOrderClients.value = ''
+            $(internetOrderClients).val('').select2(select2NoResults)
             clientNames.forEach(cn => cn.value = '')
             clientPhones.forEach(ch => ch.value = '')
             cashbackBlock.style.cssText = 'display:none !important'
@@ -834,7 +882,7 @@ const createInternetOrder = saleOrderType => {
     const dateElement = dateInfo.querySelector('.sale-order-date-date')
 
     if (!dateElement.value) {
-        showMessage('error', 'Введіть дату замовлення')
+        showMessage('error', 'Вкажіть дату замовлення')
         return
     }
 
@@ -897,25 +945,33 @@ const createInternetOrder = saleOrderType => {
     const flavors = []
 
     for (const tr of internetOrderModal.querySelectorAll('.sale-order-flavors tr:not(:first-child)')) {
-        const flavorId = +tr.querySelector('td:first-child input').dataset.id
+        const flavorSelect = tr.querySelector('td:first-child select')
 
-        if (!flavorId) {
+        if (!flavorSelect.value) {
             showMessage('error', 'Оберіть букет(и) або видаліть їх')
             return
         }
 
+        const flavorId = +flavorSelect.selectedOptions[0].dataset.id
         flavors.push({ flavorId })
     }
 
     const products = []
 
     for (const tr of internetOrderModal.querySelectorAll('.sale-order-products tr:not(:first-child)')) {
-        const productId = +tr.querySelector('td:first-child input').dataset.id
+        const productSelect = tr.querySelector('td:first-child select')
+
+        if (!productSelect.value) {
+            showMessage('error', 'Введіть дані для всіх товарів')
+            return
+        }
+
+        const productId = +productSelect.selectedOptions[0].dataset.id
         const amount = +tr.querySelector('td:nth-child(2) input').value
         const price = +tr.querySelector('td:nth-child(3)').textContent
         const sum = +tr.querySelector('td:nth-child(4) span').textContent
 
-        if (!productId || !amount || !price || !sum) {
+        if (!amount || !price || !sum) {
             showMessage('error', 'Введіть дані для всіх товарів')
             return
         }
@@ -965,6 +1021,9 @@ const createInternetOrder = saleOrderType => {
         paidSum: +internetOrderModal.querySelector('.cash input').value || 0
     }
 
+    console.log(order)
+    return
+
     post('Order/internet', order)
         .then(() => {
             hideModalEnableButton(internetOrderModal, payButton)
@@ -978,11 +1037,18 @@ const createInternetOrder = saleOrderType => {
 
 const addInternetOrderProduct = () => {
     const internetProductsTable = internetOrderModal.querySelector('.sale-order-products table')
+    const internetProductSelect = document.createElement('select')
 
-    const internetProductSelect = document.createElement('input')
-    const selector = 'internet-product'
-    internetProductSelect.setAttribute('list', selector)
+    for (const product of internetProductsOptionsArray) {
+        const option = document.createElement('option')
+        option.text = product.name
+        option.value = product.name
+        option.dataset.id = product.id
+        option.dataset.cost = product.cost
+        internetProductSelect.add(option)
+    }
 
+    internetProductSelect.value = ''
     const productPriceColumn = createTd()
 
     const internetProductColumn = document.createElement('td')
@@ -1045,26 +1111,33 @@ const addInternetOrderProduct = () => {
 
     internetProductsTable.append(tr)
     internetProductsTable.querySelector('tbody').style.display = 'contents'
-    keepDatalistOptions(selector)
+    $(internetProductSelect).select2(select2NoResults)
 
-    internetProductSelect.addEventListener('change', () => {
+    internetProductSelect.onchange = () => {
         for (const option of internetProductsOptions) {
-            if (+option.dataset.id === +internetProductSelect.dataset.id) {
+            if (+option.dataset.id === +internetProductSelect.selectedOptions[0].dataset.id) {
                 productPriceColumn.textContent = (+option.dataset.cost).toFixed(2)
                 changeSum()
                 break
             }
         }
-    })
+    }
 }
 
 const addInternetOrderFlavor = () => {
     const internetFlavorsTable = internetOrderModal.querySelector('.sale-order-flavors table')
+    const internetFlavorSelect = document.createElement('select')
 
-    const internetFlavorSelect = document.createElement('input')
-    const selector = 'internet-flavor'
-    internetFlavorSelect.setAttribute('list', selector)
+    for (const flavor of internetFlavorsOptionsArray) {
+        const option = document.createElement('option')
+        option.text = getFlavorName(flavor)
+        option.value = getFlavorName(flavor)
+        option.dataset.id = flavor.id
+        option.dataset.cost = flavor.totalSum
+        internetFlavorSelect.append(option)
+    }
 
+    internetFlavorSelect.value = ''
     const internetFlavorColumn = document.createElement('td')
     internetFlavorColumn.append(internetFlavorSelect)
 
@@ -1103,17 +1176,17 @@ const addInternetOrderFlavor = () => {
 
     internetFlavorsTable.append(tr)
     internetFlavorsTable.querySelector('tbody').style.display = 'contents'
-    keepDatalistOptions(selector)
+    $(internetFlavorSelect).select2(select2NoResults)
 
-    internetFlavorSelect.addEventListener('change', () => {
+    internetFlavorSelect.onchange = () => {
         for (const option of internetFlavorsOptions) {
-            if (+option.dataset.id === +internetFlavorSelect.dataset.id) {
+            if (+option.dataset.id === +internetFlavorSelect.selectedOptions[0].dataset.id) {
                 flavorSumColumn.querySelector('span').textContent = (+option.dataset.cost).toFixed(2)
                 calculateInternetOrderTotalSum()
                 break
             }
         }
-    })
+    }
 }
 
 const getAllOrdersByDate = () => {
