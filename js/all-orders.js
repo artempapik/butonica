@@ -144,13 +144,13 @@ const nextAllOrderPage = e => {
 }
 
 const showAllOrderInfo = (e, menuContent) => {
-    // if (activeMenuItem === menuContent) {
-    //     pressSameMenuItem()
-    //     return
-    // }
+    if (activeMenuItem === menuContent) {
+        pressSameMenuItem()
+        return
+    }
 
     activeMenuItem = menuContent
-    main.innerHTML = menuItemsContents['allorder']
+    main.innerHTML = menuItemsContents[menuContent]
     fillSelectedMenuItem(e)
     allOrdersTable = document.querySelector('.all-order-table table')
 
