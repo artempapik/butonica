@@ -1,14 +1,13 @@
 let flavorsTable, flavorProductsOptions, flavorProductOptionsArray
 
 const showFlavorInfo = (e, menuContent) => {
-    // if (activeMenuItem === menuContent) {
-    //     pressSameMenuItem()
-    //     return
-    // }
+    if (activeMenuItem === menuContent) {
+        pressSameMenuItem()
+        return
+    }
 
     activeMenuItem = menuContent
-    // main.innerHTML = menuItemsContents[menuContent]
-    main.innerHTML = menuItemsContents['flavor']
+    main.innerHTML = menuItemsContents[menuContent]
     fillSelectedMenuItem(e)
     flavorsTable = document.querySelector('.flavor-table table')
 
