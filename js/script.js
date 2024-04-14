@@ -2201,6 +2201,12 @@ const formatWeekDate = (date, onlyText = false, includeTime = true) => {
     return td
 }
 
+const select2NoResults = {
+    'language': {
+        'noResults': () => 'Не знайдено'
+    }
+}
+
 // Notification.requestPermission().then(permission => console.log(permission))
 
 // navigator.serviceWorker.ready.then(registration => registration.pushManager.subscribe({
