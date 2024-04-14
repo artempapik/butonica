@@ -77,12 +77,25 @@
 }
 
 @media only screen and (max-width: 700px) and (orientation: portrait) {
+    .store-expense-type {
+        margin-left: 0;
+
+        & div {
+            width: 7.8rem;
+        }
+    }
+
     .store-expense-header button {
         align-self: start;
     }
     
     .store-expense-table table {
-        & td:nth-child(2) {
+        & td:first-child {
+            padding: .3rem .1rem;
+            max-width: 5rem;
+        }
+
+        & td:nth-child(2), & td:nth-child(3) {
             display: none;
         }
 
@@ -90,8 +103,8 @@
             font-weight: normal;
         }
 
-        & td:nth-child(4) {
-            max-width: 7.1rem !important;
+        & td:nth-child(5) {
+            max-width: 7rem !important;
         }
     }
 
