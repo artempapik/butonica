@@ -550,9 +550,9 @@
             }
 
             &:nth-child(3) {
+                min-width: 4.5rem !important;
                 max-width: 4.5rem !important;
-                width: 4.5rem;
-                font-size: .7rem;
+                font-size: .8rem;
                 padding: 0;
             }
 
