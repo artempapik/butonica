@@ -1152,7 +1152,16 @@ const showCashRegisterOperations = () => {
 }
 
 const performCashRegisterOperation = () => {
-    const type = operationNameToType[cashRegisterOperationsModal.querySelector('input[name=operation-type]:checked').value]
+    let type = 0
+
+    for (const operationType of cashRegisterOperationsModal.querySelectorAll('.cash-register-operation-type div')) {
+        if (operationType.classList.contains('active')) {
+            break
+        }
+
+        type++
+    }
+
     const sumInput = cashRegisterOperationsModal.querySelector('.enter-value')
 
     if (!sumInput.textContent) {
@@ -1169,7 +1178,7 @@ const performCashRegisterOperation = () => {
         sum: +sumInput.textContent,
         comment: cashRegisterOperationsModal.querySelector('textarea').value.trim()
     }
-
+    
     post('Shift/operation', cashRegisterOperation)
         .then(() => {
             hideModalEnableButton(cashRegisterOperationsModal, payButton)
