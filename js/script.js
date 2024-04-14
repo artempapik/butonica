@@ -1331,6 +1331,7 @@ const formatWeekDate = (date, onlyText = false, includeTime = true) => {
         return dayOfWeekText + ' ' + dateText
     }
     
+    alert(date.toLocaleTimeString())
     if (date.toLocaleTimeString() !== '12:00:00 AM') {
         dateText += `, ${padTime(date.getHours())}:${padTime(date.getMinutes())}`
     }
