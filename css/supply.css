@@ -276,4 +276,10 @@
             }
         }
     }
+
+    .supply-table table {
+        & td:first-child {
+            padding: .3rem .15rem;
+        }
+    }
 }
