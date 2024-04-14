@@ -4,7 +4,6 @@ const getStoreExpenses = month => {
     showLoadAnimation()
 
     get(`StoreExpense/${loginInfo.companyId}/${month || new Date().getMonth() + 1}`).then(response => {
-        console.log(response)
         storeExpensesTable.innerHTML = storeExpensesTable.querySelector('tbody').innerHTML
         storeExpensesTable.style.display = 'block'
         replaceLoadIcons()
