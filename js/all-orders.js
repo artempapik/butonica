@@ -511,10 +511,10 @@ const createOrderRow = (order, table) => {
             orderInfoModal.style.display = 'flex'
             orderInfoModal.querySelector('.order-info-modal-content').scroll(0, 0)
             orderInfoModal.querySelector('table').scroll(0, 0)
-        }).catch(() => {
+        })/*.catch(() => {
             hidePageLoad()
             showMessage('error', getErrorMessage('замовлення'))
-        })
+        })*/
     }
 
     if (loginInfo.title < 2 || loginInfo.employeeId === order.employeeId) {
