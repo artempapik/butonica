@@ -457,7 +457,7 @@ const createOrderRow = (order, table) => {
                     const option = document.createElement('option')
                     option.text = product.name
                     option.dataset.id = product.id
-                    productSelect.append(option)
+                    productSelect.add(option)
                 }
 
                 for (const option of productSelect.options) {
@@ -469,6 +469,7 @@ const createOrderRow = (order, table) => {
 
                 const productSelectTd = document.createElement('td')
                 productSelectTd.append(productSelect)
+                $(productSelect).select2(select2NoResults)
 
                 const amount = document.createElement('input')
                 amount.type = 'number'
@@ -511,10 +512,10 @@ const createOrderRow = (order, table) => {
             orderInfoModal.style.display = 'flex'
             orderInfoModal.querySelector('.order-info-modal-content').scroll(0, 0)
             orderInfoModal.querySelector('table').scroll(0, 0)
-        })/*.catch(() => {
+        }).catch(() => {
             hidePageLoad()
             showMessage('error', getErrorMessage('замовлення'))
-        })*/
+        })
     }
 
     if (loginInfo.title < 2 || loginInfo.employeeId === order.employeeId) {
