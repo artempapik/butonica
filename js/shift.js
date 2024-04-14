@@ -247,7 +247,7 @@ const createShiftRow = shift => {
                 vt.classList.remove('not-active')
             })
             
-            const types = [0, 1, 3, 2, 4]
+            const types = [0, 1, 5, 3, 2, 4]
 
             for (const [index, viewType] of viewTypes.entries()) {
                 viewType.onpointerup = () => {
