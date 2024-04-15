@@ -469,7 +469,10 @@ const createOrderRow = (order, table) => {
 
                 const productSelectTd = document.createElement('td')
                 productSelectTd.append(productSelect)
-                $(productSelect).select2(select2NoResults)
+
+                const option = select2NoResults
+                option.width = '14rem'
+                $(productSelect).select2(option)
 
                 const amount = document.createElement('input')
                 amount.type = 'number'
@@ -511,7 +514,7 @@ const createOrderRow = (order, table) => {
 
             orderInfoModal.style.display = 'flex'
             orderInfoModal.querySelector('.order-info-modal-content').scroll(0, 0)
-            orderInfoModal.querySelector('table').scrollTo(0, 0)
+            orderInfoModal.querySelector('table').scroll(0, 0)
         }).catch(() => {
             hidePageLoad()
             showMessage('error', getErrorMessage('замовлення'))
