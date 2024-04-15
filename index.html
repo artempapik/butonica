@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="css/order-calendar.css">
     <link rel="stylesheet" href="css/flavor.css">
     <link rel="stylesheet" href="css/store-expense.css">
+    <link rel="stylesheet" href="css/store-expense-category.css">
     <link rel="stylesheet" href="css/label.css">
     <link rel="stylesheet" href="css/general-statistics.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
@@ -224,7 +225,7 @@
                         <span class="material-symbols-outlined">expand_more</span>
                     </div>
                     <ul class="sub-menu animate-item animate">
-                        <li class="main-padding" onpointerup="showStoreExpensesCategoriesInfo(event, 'storeexpensecategory')">
+                        <li class="main-padding" onpointerup="showStoreExpenseCategoryInfo(event, 'storeexpensecategory')">
                             <div>
                                 <span class="material-symbols-outlined">checklist_rtl</span>
                                 <span>Категорії</span>
@@ -2255,6 +2256,33 @@
             </button>
         </div>
     </div>
+    <div class="create-store-expense-category-modal">
+        <div class="animate create-store-expense-category-modal-content">
+            <div class="modal-content-name">
+                <span class="material-symbols-outlined">history</span>
+                <h1></h1>
+                <span class="close-modal material-symbols-outlined">close</span>
+            </div>
+            <div class="form">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Назва</span>
+                </h2>
+                <input maxlength="30">
+            </div>
+            <div class="form">
+                <h2>
+                    <span class="required">*</span>
+                    <span>Колір</span>
+                </h2>
+                <div class="store-expense-category-colors"></div>
+            </div>
+            <button type="button">
+                <div class="loader-button"></div>
+                <span>Зберегти</span>
+            </button>
+        </div>
+    </div>
     <div class="create-label-modal">
         <div class="animate create-label-modal-content">
             <div class="modal-content-name">
@@ -2487,6 +2515,7 @@
     <script src="js/order-calendar.js"></script>
     <script src="js/flavor.js"></script>
     <script src="js/store-expense.js"></script>
+    <script src="js/store-expense-category.js"></script>
     <script src="js/label.js"></script>
     <script src="js/general-statistics.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
