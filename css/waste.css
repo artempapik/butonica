@@ -146,8 +146,7 @@
     }
 
     .waste-info-modal-content {
-        gap: .8rem;
-        padding: .7rem;
+        padding: 1rem;
         padding-top: 0;
     }
 
