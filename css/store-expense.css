@@ -82,7 +82,7 @@
     
     .store-expense-table table {
         & td:first-child {
-            width: 8rem;
+            width: 7.5rem;
             padding: .3rem .1rem;
         }
 
