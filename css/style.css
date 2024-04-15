@@ -2810,6 +2810,18 @@ table {
         & .main-statistics {
             flex-direction: column;
             align-items: center;
+
+            & table {
+                width: 100%;
+
+                & td:first-child {
+                    white-space: nowrap;
+                }
+
+                & td:last-child {
+                    width: 100%;
+                }
+            }
         }
     }
 
