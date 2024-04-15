@@ -1037,6 +1037,24 @@ const menuItemsContents = {
             </table>
         </div>
     `,
+    storeexpensecategory: `
+        <div class="store-expense-category-header">
+            <div class="header-items">
+                <div id="loader"></div>
+                <span class="material-symbols-outlined">checklist_rtl</span>
+                <h1>Категорії витрат</h1>
+            </div>
+            <button onpointerup="createStoreExpenseCategoryModal()">Створити</button>
+        </div>
+        <div class="store-expense-category-table">
+            <table class="animate">
+                <tr>
+                    <td>Назва</td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    `,
     label: `
         <div class="label-header">
             <div class="header-items">
@@ -1406,6 +1424,7 @@ document.querySelectorAll('.close-modal').forEach(b => b.onpointerup = () => {
         internetOrderModal,
         flavorModal,
         storeExpenseModal,
+        storeExpenseCategoryModal,
         labelModal
     ]) {
         if (modal) {
@@ -1565,6 +1584,13 @@ const getDailyStatistics = () => get(`Statistics/daily/${loginInfo.companyId}`).
     fillMainVal(7, 'salesCount', false)
     fillMainVal(8, 'receipt')
     fillMainVal(9, 'internetOrdersReceipt')
+
+    if (loginInfo.title > 1) {
+        const statBlocks = main.querySelectorAll('.stat-block')
+        for (const i of [1, 2, 9]) {
+            statBlocks.item(i).style.display = 'none'
+        }
+    }
 
     const topSalesTable = main.querySelector('table')
 
