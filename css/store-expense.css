@@ -61,7 +61,7 @@
             font-family: 'Roboto Mono', monospace;
         }
     
-        &:nth-child(4) {
+        &:nth-child(5) {
             max-width: 17rem;
         }
     }
@@ -82,8 +82,16 @@
     
     .store-expense-table table {
         & td:first-child {
-            width: 7.8rem;
             padding: .3rem 0;
+            text-align: left !important;
+
+            & span {
+                display: unset !important;
+                
+                &:first-child {
+                    margin-right: .3rem;
+                }
+            }
         }
 
         & td:nth-child(2), & td:nth-child(5) {
