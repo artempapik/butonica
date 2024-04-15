@@ -1586,7 +1586,9 @@ const getDailyStatistics = () => get(`Statistics/daily/${loginInfo.companyId}`).
     fillMainVal(9, 'internetOrdersReceipt')
 
     if (loginInfo.title > 1) {
+        statValues.item(0).textContent = statValues.item(1).textContent
         const statBlocks = main.querySelectorAll('.stat-block')
+
         for (const i of [1, 2, 9]) {
             statBlocks.item(i).style.display = 'none'
         }
