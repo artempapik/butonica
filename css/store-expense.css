@@ -82,7 +82,6 @@
     
     .store-expense-table table {
         & td:first-child {
-            padding: .3rem 0;
             text-align: left !important;
 
             & span {
