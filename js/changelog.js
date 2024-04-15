@@ -11,6 +11,10 @@ const changelogs = [
         date: '18.04.24',
         changes: [
             {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'інформація щодо виручки онлайн-замовлень тепер приховується у статистиці'
+            },
+            {
                 type: CHANGELOG_TYPES.bug,
                 text: 'фікс багу видалення порожнього товару з букету'
             },
