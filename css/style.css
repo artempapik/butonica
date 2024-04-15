@@ -303,21 +303,6 @@ select {
     }
 }
 
-.ts-control {
-    border-radius: .5rem !important;
-
-    &:hover {
-        border-color: rgb(var(--table-hover-color));
-    }
-}
-
-.ts-dropdown {
-    & div.active {
-        background: rgba(var(--table-hover-color), .8);
-        color: rgb(245, 245, 245);
-    }
-}
-
 ul {
     list-style-type: none;
     margin: 0;
@@ -1472,15 +1457,8 @@ table {
         }
     }
 
-    & tr {
-        &:not(:first-child):hover {
-            background: rgba(var(--table-hover-color), .2);
-            outline: .1rem rgb(200, 200, 200) solid;
-        }
-
-        &:nth-child(even) {
-            background: rgb(242, 242, 242);
-        }
+    & tr:nth-child(even) {
+        background: rgb(242, 242, 242);
     }
 
     & td {
@@ -2350,6 +2328,10 @@ table {
 @media (hover: hover) {
     input[type="checkbox"]:hover {
         border-color: rgb(100, 100, 100);
+    }
+
+    table tr:not(:first-child):hover {
+        background: rgba(var(--table-hover-color), .2);
     }
 }
 
