@@ -1619,7 +1619,7 @@ const getDailyStatistics = () => get(`Statistics/daily/${loginInfo.companyId}`).
     dailyStatisticsTimeIntervalId = setInterval(() => factDate.textContent = new Date().toLocaleTimeString('ru').substring(0, 5), 60 * 1000)
 
     main.querySelector('.main-statistics').style.display = 'flex'
-})//.catch(() => showMessage('error', getErrorMessage('сьогоднішню статистику')))
+}).catch(() => showMessage('error', getErrorMessage('сьогоднішню статистику')))
 
 if (loginInfo) {
     get(`Company/start-subscription/${loginInfo.companyId}`).then(response => {
