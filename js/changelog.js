@@ -12,7 +12,7 @@ const changelogs = [
         changes: [
             {
                 type: CHANGELOG_TYPES.exclamation,
-                text: 'інформація щодо виручки онлайн-замовлень тепер приховується у статистиці'
+                text: 'інформація щодо виручки online-замовлень тепер приховується у статистиці'
             },
             {
                 type: CHANGELOG_TYPES.bug,
