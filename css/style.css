@@ -10,7 +10,7 @@
 :root {
     --modal-content-width: 20rem;
     --input-background-color: rgb(245, 245, 245);
-    --input-border-color: rgba(128, 128, 128, .7);
+    --input-border-color: rgba(128, 128, 128, .6);
     --table-hover-color: 79, 118, 181;
     --search-input-width: 12rem;
     --last-page-color: rgb(180, 180, 180);
