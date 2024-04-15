@@ -1569,10 +1569,10 @@ const getDailyStatistics = () => get(`Statistics/daily/${loginInfo.companyId}`).
     }
     
     const statValues = main.querySelectorAll('.stat-value')
-    const fillMainVal = (i, key, currency = true) => statValues.item(i).textContent = currency ? response[key] + ' грн' : response[key]
-
-    response.receipt = response.receipt.toFixed(2)
-    response.internetOrdersReceipt = response.internetOrdersReceipt.toFixed(2)
+    const fillMainVal = (i, key, currency = true) => {
+        const value = response[key] % 1 === 0 ? response[key] : response[key].toFixed(2)
+        statValues.item(i).textContent = currency ? value + ' грн' : value
+    }
 
     fillMainVal(0, 'revenue')
     fillMainVal(1, 'shiftRevenue')
@@ -1619,7 +1619,7 @@ const getDailyStatistics = () => get(`Statistics/daily/${loginInfo.companyId}`).
     dailyStatisticsTimeIntervalId = setInterval(() => factDate.textContent = new Date().toLocaleTimeString('ru').substring(0, 5), 60 * 1000)
 
     main.querySelector('.main-statistics').style.display = 'flex'
-}).catch(() => showMessage('error', getErrorMessage('сьогоднішню статистику')))
+})//.catch(() => showMessage('error', getErrorMessage('сьогоднішню статистику')))
 
 if (loginInfo) {
     get(`Company/start-subscription/${loginInfo.companyId}`).then(response => {
