@@ -171,10 +171,6 @@ input[type="checkbox"] {
     background: rgb(250, 250, 250);
     box-shadow: inset -20px 0 0 0 rgb(250, 250, 250);
 
-    &:hover {
-        border-color: rgb(100, 100, 100);
-    }
-
     &:after {
         content: "";
         position: absolute;
@@ -2351,6 +2347,12 @@ table {
                 }
             }
         }
+    }
+}
+
+@media (hover: hover) {
+    input[type="checkbox"]:hover {
+        border-color: rgb(100, 100, 100);
     }
 }
 
