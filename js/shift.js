@@ -1,4 +1,4 @@
-let shiftsTable, monthShifts, grouppedShifts, employeesNames
+let shiftsTable, monthShifts, grouppedShifts
 
 const shiftInfoModal = document.querySelector('.shift-info-modal')
 const shiftModalContent = shiftInfoModal.querySelector('.shift-info-modal-content')
@@ -36,7 +36,6 @@ const showShiftInfo = (e, menuContent) => {
     fillSelectedMenuItem(e)
     shiftsTable = document.querySelector('.shift-table table')
     getShifts(0)
-    get(`Employee/${loginInfo.companyId}/names`).then(response => employeesNames = response)
 }
 
 const cashRegisterOperationTypeToName = {
