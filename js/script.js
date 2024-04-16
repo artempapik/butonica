@@ -6,7 +6,7 @@ const Environment = {
 const BASE_URL = Environment.PROD
 const EMPTY_IMAGE_URL = 'img/empty-flower.png'
 
-let imageData, currentPage, dayValue, monthIndex, yearValue, dateString = 'виберіть день', dateQueryString
+let imageData, currentPage, dayValue, monthIndex, yearValue, dateString = 'виберіть день', dateQueryString, employeesNames
 
 const uploadImage = e => {
     const image = e.target.files[0]
@@ -1540,7 +1540,7 @@ const getSubscriptionExpiresText = date => {
     return daysLeft > 0 ? `${daysLeft} дн.` : 'НЕ СПЛАЧЕНО'
 }
 
-const hideStartPageLoad = () => setTimeout(() => {
+const hideStartPageLoad = (getDaily = false) => setTimeout(() => {
     const animationsDisabled = localStorage.getItem('animations-disabled') || false
 
     if (animationsDisabled) {
@@ -1559,7 +1559,13 @@ const hideStartPageLoad = () => setTimeout(() => {
             { opacity: '1' }
         ], 200)
     }
-}, 500)
+
+    get(`Employee/${loginInfo.companyId}/names`).then(response => employeesNames = response)
+
+    if (getDaily) {
+        getDailyStatistics()
+    }
+}, 300)
 
 let dailyStatisticsFactIntervalId, dailyStatisticsTimeIntervalId
 
@@ -1630,8 +1636,7 @@ if (loginInfo) {
         document.querySelector('.subscription-text span:last-child').textContent = getSubscriptionExpiresText(new Date(loginInfo.startSubscription))
         removeMenus(loginInfo.title)
 
-        hideStartPageLoad()
-        getDailyStatistics()
+        hideStartPageLoad(true)
     }).catch(() => showMessage('error', getErrorMessage('підписку')))
 } else {
     hideStartPageLoad()
