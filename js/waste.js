@@ -89,7 +89,7 @@ const createWasteRow = waste => {
     const tr = document.createElement('tr')
     tr.onpointerup = e => {
         if (e.target.tagName.toLowerCase() === 'span') {
-            //return
+            // return
         }
 
         showPageLoad()
@@ -97,7 +97,7 @@ const createWasteRow = waste => {
 
         wasteInfoModal.querySelector('.waste-date').textContent = formatWeekDate(waste.date, true)
         wasteInfoModal.querySelector('.waste-stock').textContent = waste.stock
-        wasteInfoModal.querySelector('.waste-employee').textContent = waste.employee
+        wasteInfoModal.querySelector('.waste-employee').textContent = employeesNames[waste.employee]
 
         get(`Waste/waste/${waste.id}`).then(response => {
             hidePageLoad()
