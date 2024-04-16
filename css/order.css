@@ -100,14 +100,12 @@
                 gap: .3rem;
                 padding: .4rem;
                 border-radius: .3rem;
+                color: #777;
 
-                &:hover {
+                &:hover, &.active-order-status {
                     background: rgb(230, 230, 230);
-                }
-
-                &.active-order-status {
-                    background: rgb(230, 230, 230);
-                    font-weight: bold;
+                    outline: .1rem #999 solid;
+                    color: #000;
                 }
 
                 &:first-child span:first-child {
