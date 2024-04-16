@@ -501,7 +501,7 @@
             }
 
             & .order-time {
-                margin-left: 4.5rem !important;
+                align-items: center;
             }
         }
 
