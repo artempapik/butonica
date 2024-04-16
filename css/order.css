@@ -104,7 +104,7 @@
 
                 &:hover, &.active-order-status {
                     background: rgb(230, 230, 230);
-                    outline: .1rem #999 solid;
+                    outline: .1rem #777 solid;
                     color: #000;
                 }
 
