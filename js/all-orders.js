@@ -1028,7 +1028,8 @@ const createInternetOrder = saleOrderType => {
         .then(response => {
             hideModalEnableButton(internetOrderModal, payButton)
             showMessage('success', createSuccessMessage('online-замовлення'))
-            order.id = response
+            order.id = response.id
+            order.labels = response.labels
             order.status = 0
             order.date = dateElement.value + 'T00:00:00'
             order.timeFrom = order.timeFromString
