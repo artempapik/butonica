@@ -411,7 +411,7 @@
         font-weight: bold;
     }
 
-    & td:nth-child(5) img {
+    & td:nth-child(2) img, td:nth-child(5) img {
         width: 1.6rem;
     }
 
