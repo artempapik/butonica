@@ -1034,7 +1034,7 @@ const createInternetOrder = saleOrderType => {
             order.timeFrom = order.timeFromString
             order.customer = order.customerName
 
-            switch (menuContent) {
+            switch (activeMenuItem) {
                 case 'allorder':
                     allOrdersTable.append(createOrderRow(order, allOrdersTable))
                     break
