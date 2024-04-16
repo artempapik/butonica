@@ -995,7 +995,7 @@
 
 .create-internet-order-modal-content {
     & .internet-client-info {
-        padding: 0 .5rem;
+        padding: 0 .2rem;
         justify-content: space-between;
         align-items: center;
         margin-bottom: -1.3rem;
