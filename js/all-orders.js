@@ -418,8 +418,7 @@ const createOrderRow = (order, table) => {
                                 showMessage('info', `Замовлення ${order.id} доплачено`)
                             }).catch(() => showMessage('error', `${ERROR_TEXT} доплатити`))
                         )
-                    })
-                    .catch(() => getErrorMessage('зміну'))
+                    }).catch(() => getErrorMessage('зміну'))
 
                 surchargeBlock.querySelector('.surcharge-button').onpointerup = () => performSurcharge(true, 'готівкою')
                 surchargeBlock.querySelector('.surcharge-button:last-child').onpointerup = () => performSurcharge(false, 'терміналом')
@@ -586,7 +585,7 @@ const createOrderRow = (order, table) => {
 
     const timeLeftTd = createTd(timeLeft.text)
     
-    if (timeLeft.text !== '–' && !timeLeft.text.endsWith('д')) {
+    if (timeLeft.text !== '–' && !(timeLeft.text instanceof HTMLElement) && !timeLeft.text.endsWith('д')) {
         timeLeftTd.dataset.timeFrom = order.timeFrom
         timeLeftTd.dataset.date = order.date
     }
@@ -1024,13 +1023,29 @@ const createInternetOrder = saleOrderType => {
         paidBonusSum,
         paidSum: +internetOrderModal.querySelector('.cash input').value || 0
     }
-
+    
     post('Order/internet', order)
-        .then(() => {
+        .then(response => {
             hideModalEnableButton(internetOrderModal, payButton)
             showMessage('success', createSuccessMessage('online-замовлення'))
-        })
-        .catch(() => {
+            order.id = response
+            order.status = 0
+            order.date = dateElement.value + 'T00:00:00'
+            order.timeFrom = order.timeFromString
+            order.customer = order.customerName
+
+            switch (menuContent) {
+                case 'allorder':
+                    allOrdersTable.append(createOrderRow(order, allOrdersTable))
+                    break
+                case 'pendingorder':
+                    pendingOrdersTable.append(createOrderRow(order, pendingOrdersTable))
+                    break
+                case 'completedorder':
+                    completedOrdersTable.append(createOrderRow(order, completedOrdersTable))
+                    break
+            }
+        }).catch(() => {
             hideModalEnableButton(internetOrderModal, payButton)
             showMessage('error', createErrorMessage('online-замовлення'))
         })
