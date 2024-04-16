@@ -30,10 +30,6 @@
                             vertical-align: text-top;
                             cursor: pointer;
                             color: rgb(96, 130, 182);
-
-                            &:hover {
-                                color: rgb(0, 71, 171);
-                            }
                         }
                     }
                 }
@@ -102,7 +98,7 @@
                 border-radius: .3rem;
                 color: #777;
 
-                &:hover, &.active-order-status {
+                &.active-order-status {
                     background: rgb(230, 230, 230);
                     outline: .1rem #aaa solid;
                     color: #000;
@@ -151,6 +147,7 @@
                     align-items: center;
                     font-size: .9rem;
                     transition: .1s;
+                    color: #444;
 
                     &:first-child {
                         border-right: .1rem rgb(150, 150, 150) solid;
@@ -160,11 +157,6 @@
                     &:last-child {
                         border-bottom-right-radius: .2rem;
                         gap: .2rem;
-                    }
-
-                    &:hover {
-                        background: rgba(204, 85, 0, .5);
-                        font-weight: bold;   
                     }
 
                     & span:first-child {
@@ -181,10 +173,6 @@
             outline: .1rem rgb(180, 180, 180) solid;
             border-radius: .7rem;
             padding: .4rem .6rem;
-
-            &:hover {
-                outline-color: rgb(130, 130, 130);
-            }
 
             & img {
                 width: 2rem;
@@ -587,5 +575,30 @@
                 display: none;
             }
         }
+    }
+}
+
+@media (hover: hover) {
+    .order-info-modal-content {
+        & .order-main-info .order-title .order-number-date .order-number .number span:last-child:hover {
+            color: rgb(0, 71, 171);
+        }
+
+        & .order-status {
+            & .statuses .status:hover {
+                background: rgb(230, 230, 230);
+                outline: .1rem #aaa solid;
+                color: #000;
+            }
+            
+            & .surcharge-block .surcharge-buttons .surcharge-button:hover {
+                background: rgba(204, 85, 0, .45);
+                color: #000;
+            }
+
+            & .payed-block:hover {
+                outline-color: rgb(130, 130, 130);
+            }
+        } 
     }
 }
