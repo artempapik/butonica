@@ -649,11 +649,6 @@ aside {
             align-items: center;
             border-radius: .5rem;
 
-            &:hover {
-                box-shadow: rgba(0, 0, 0, .16) 0 1px 4px;
-                background: rgba(var(--table-hover-color), .15);
-            }
-
             & span.material-symbols-outlined {
                 font-size: 1.1rem;
                 align-self: end;
@@ -2325,7 +2320,7 @@ table {
         background: rgb(210, 210, 210);
     }
 
-    .main-menu li .menu-item:hover {
+    .main-menu li .menu-item:hover, .sub-menu li div:hover {
         box-shadow: rgba(0, 0, 0, .16) 0 1px 4px;
         background: rgba(var(--table-hover-color), .15);
     }
