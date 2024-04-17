@@ -454,8 +454,18 @@
 }
 
 @media only screen and (max-width: 1500px) {
-    .shift-info-modal-content .shift-title-time .shift-view-by .view-group {
-        gap: .6rem;
+    .shift-info-modal-content .shift-title-time .shift-view-by {
+        flex-direction: column;
+        gap: .5rem;
+
+        & .view-group {
+            justify-content: center;
+            gap: 2.5rem;
+        }
+
+        & .view-group {
+            gap: .6rem;
+        }
     }
 }
 
@@ -464,16 +474,6 @@
         width: calc(var(--modal-content-width) + 12rem);
         padding: 1rem;
         padding-top: 0;
-
-        & .shift-title-time .shift-view-by {
-            flex-direction: column;
-            gap: .5rem;
-
-            & .view-group {
-                justify-content: center;
-                gap: 2.5rem;
-            }
-        }
 
         & .operations .form .content div .money-paid {
             width: 8rem;
