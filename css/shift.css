@@ -465,6 +465,16 @@
         padding: 1rem;
         padding-top: 0;
 
+        & .shift-title-time .shift-view-by {
+            flex-direction: column;
+            gap: .5rem;
+
+            & .view-group {
+                justify-content: center;
+                gap: 2.5rem;
+            }
+        }
+
         & .operations .form .content div .money-paid {
             width: 8rem;
         }
@@ -486,23 +496,11 @@
             margin-top: .7rem;
         }
 
-        & .shift-title-time {
-            & .shift-title {
-                gap: .5rem;
-                flex-direction: column;
-            }
-
-            & .shift-view-by {
-                flex-direction: column;
-                gap: .5rem;
-
-                & .view-group {
-                    justify-content: center;
-                    gap: 2.5rem;
-                }
-            }
+        & .shift-title-time .shift-title {
+            gap: .5rem;
+            flex-direction: column;
         }
-
+        
         & .operations .form {
             & .content {
                 padding: .8rem .1rem;    
