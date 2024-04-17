@@ -281,10 +281,6 @@ button {
 
 select {
     width: 11rem;
-    background: var(--input-background-color);
-    border: .1rem var(--input-border-color) solid;
-    border-radius: 1rem;
-    padding: .6rem;
 }
 
 ul {
@@ -717,8 +713,8 @@ aside {
 
 #calendar {
     --calendar-border-color: rgb(150, 150, 150);
-    --calendar-padding: 1.7rem;
-    --day-size: 2.5rem;
+    --calendar-padding: 1.4rem;
+    --day-size: 2.3rem;
     
     border: .1rem var(--calendar-border-color) solid;
     background: #fff;
@@ -738,11 +734,7 @@ aside {
         padding: 0 2.7rem;
 
         & select {
-            width: 8.5rem;
-
-            &:not(:hover, :focus) {
-                border-color: #f3f4f6;
-            }
+            width: 8rem;
         }
     }
 
@@ -1636,10 +1628,9 @@ table {
         background: rgb(242, 242, 242);
         color: rgb(50, 50, 50);
         padding: .3rem .9rem;
-        outline: rgba(var(--table-hover-color), .4) .1rem solid;
-        border-radius: 1rem;
+        border-radius: .7rem;
         transition: .05s;
-        box-shadow: rgba(0, 0, 0, .16) 0 1px 4px;
+        box-shadow: inset 0 0.8px 0 -0.25px rgba(255, 255, 255, .17), 0 0.5px 1.5px rgba(54, 122, 246, .25), 0 0 0 1px rgba(58, 108, 217, .45);
 
         &:first-of-type {
             background: rgba(var(--table-hover-color), .8);
@@ -1647,7 +1638,7 @@ table {
         }
 
         &:hover {
-            outline-color: rgb(var(--table-hover-color));
+            box-shadow: inset 0 0.8px 0 -0.25px rgba(255, 255, 255, .17), 0 0.5px 1.5px rgba(54, 122, 246, .25), 0 0 0 2px rgba(58, 108, 217, .45);
         }
     }
 }
@@ -2342,12 +2333,6 @@ table {
     input {
         transform: none !important;
     }
-
-    select {
-        appearance: none;
-        padding: .45rem !important;
-        font-size: 1rem;
-    }
 }
 
 @media only screen and (max-width: 1600px) {
@@ -2427,6 +2412,18 @@ table {
         & .main-statistics {
             width: unset;
             justify-content: center;
+
+            & .main-top-sales table {
+                width: 100%;
+
+                & td:first-child {
+                    white-space: nowrap;
+                }
+
+                & td:last-child {
+                    width: 100%;
+                }
+            }
         }
     }
 
@@ -2790,18 +2787,6 @@ table {
 
             & .main-top-sales {
                 margin-top: 0;
-
-                & table {
-                    width: 100%;
-    
-                    & td:first-child {
-                        white-space: nowrap;
-                    }
-
-                    & td:last-child {
-                        width: 100%;
-                    }
-                }
             }
         }
     }
