@@ -22,7 +22,7 @@ const getShifts = month => {
         }
 
         response.forEach(s => fillShiftsTable(s))
-    }).catch(() => showMessage('error', getErrorMessage('робочі зміни')))
+    }).catch(e => alert(e.message))
 }
 
 const showShiftInfo = (e, menuContent) => {
