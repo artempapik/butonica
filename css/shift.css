@@ -462,10 +462,6 @@
             justify-content: center;
             gap: 2.5rem;
         }
-
-        & .view-group {
-            gap: .6rem;
-        }
     }
 }
 
