@@ -2331,6 +2331,10 @@ const createCalculatorValueSpan = (span, e) => {
     calculator.style.top = (e.clientY - calculatorRect.height * 1.6) + 'px'
     calculator.style.left = (e.clientX - calculatorRect.width * .7) + 'px'
 
+    if (e.clientX - calculatorRect.width < 0) {
+        calculator.style.left = e.clientX / 2 + 'px'
+    }
+
     if (e.clientX + calculatorRect.width > window.innerWidth) {
         calculator.style.left = (window.innerWidth - calculatorRect.width * 1.5) + 'px'
     }
