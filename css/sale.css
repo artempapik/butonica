@@ -1152,6 +1152,7 @@
 
 .create-shift-modal {
     backdrop-filter: blur(.5rem);
+    -webkit-backdrop-filter: blur(.5rem);
 
     & .create-shift-modal-content {
         padding: 1.6rem 1.4rem .8rem 1.4rem;
