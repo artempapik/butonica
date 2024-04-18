@@ -138,10 +138,10 @@ const showSaleInfo = (e, menuContent) => {
         }
 
         hidePageLoad()
-        hideBodyOverflow()
         shiftModal.style.display = 'flex'
 
         get(`CashRegister/ids-names/${loginInfo.companyId}`).then(response => {
+            hideBodyOverflow()
             const cashRegistersSelect = shiftModal.querySelector('select')
 
             for (const cashRegister of response) {
@@ -152,6 +152,7 @@ const showSaleInfo = (e, menuContent) => {
             }
             
             cashRegistersSelect.value = ''
+            $(cashRegistersSelect).select2({ minimumResultsForSearch: -1 })
         })
     }).catch(e => {
         hidePageLoad()
