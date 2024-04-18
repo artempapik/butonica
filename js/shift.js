@@ -9,7 +9,31 @@ const getShifts = month => {
     
     get(`Shift/${loginInfo.employeeId}/${month || new Date().getMonth() + 1}`).then(response => {
         monthShifts = response
-        grouppedShifts = Map.groupBy(monthShifts.toSorted((a, b) => a.employee.localeCompare(b.employee)), s => s.employee)
+        const sortedShifts = monthShifts.toSorted((a, b) => a.employee.localeCompare(b.employee))
+
+        if (Map.groupBy) {
+            grouppedShifts = Map.groupBy(sortedShifts, s => s.employee)
+        } else {
+            const groupBy = (list, keyGetter) => {
+                const map = new Map()
+
+                list.forEach(item => {
+                    const key = keyGetter(item)
+                    const collection = map.get(key)
+
+                    if (!collection) {
+                        map.set(key, [item])
+                    } else {
+                        collection.push(item)
+                    }
+                })
+
+                return map
+            }
+
+            grouppedShifts = groupBy(sortedShifts, s => s.employee)
+        }
+
         shiftsTable.innerHTML = shiftsTable.querySelector('tbody').innerHTML
         shiftsTable.style.display = 'block'
         replaceLoadIcons()
@@ -22,7 +46,7 @@ const getShifts = month => {
         }
 
         response.forEach(s => fillShiftsTable(s))
-    }).catch(e => alert(e.message))
+    }).catch(() => showMessage('error', getErrorMessage('робочі зміни')))
 }
 
 const showShiftInfo = (e, menuContent) => {
