@@ -301,6 +301,8 @@ const createSaleOrderModal = () => {
         return
     }
 
+    hideBodyOverflow()
+
     saleOrderModal.querySelector('.free-payment input').checked = false
     saleOrderModal.querySelector('.payment-content').classList.remove('free-payment')
     saleOrderModal.style.display = 'flex'
