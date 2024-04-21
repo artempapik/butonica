@@ -1650,6 +1650,25 @@ if (loginInfo) {
 }
 
 const login = () => {
+    if (loginModal.querySelector('input').value === 'Karma' && loginModal.querySelector('input[type=password]').value === 'Sova') {
+        const compliments = [
+            'Посміхніться сьогодні, бо вас чекатиме тяжкий день',
+            'Нехай невзгоди не роблять вам в житті погоди',
+            'В тебе така класна посмішка',
+            'Заходь сюди частіше дивитися компліментики',
+            "Чудове ім'я!",
+            'ВИТОНЧЕНІШИЙ (ти)',
+            'За тобою соромиться підглядати моя камера',
+            'Ти смачніша, ніж філіжанка кави',
+            'ТАКЕ приємне волосся аааа..',
+            'Ти тупо топовий топ',
+            'Менеджер - ка з гарним голосом',
+            'Така врівноважена шо я єбу як ти впоруєшся',
+            'А в тебе кльові стікєри'
+        ]
+        showMessage('success', compliments[getRandom(0, compliments.length - 1)])
+        return
+    }
     const payButton = loginModal.querySelector('button')
     payButton.disabled = true
 
