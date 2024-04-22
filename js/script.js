@@ -2162,8 +2162,6 @@ const select2NoResults = {
     }
 }
 
-document.body.addEventListener('touchstart', e => e.preventDefault(), false)
-
 // Notification.requestPermission().then(permission => console.log(permission))
 
 // navigator.serviceWorker.ready.then(registration => registration.pushManager.subscribe({
