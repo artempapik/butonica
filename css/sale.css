@@ -433,7 +433,13 @@
                     align-items: center;
                     gap: 1rem;
 
-                    
+                    & .enter-value {
+                        font-family: unset;
+                        font-weight: bold;
+                        font-size: 1.15rem;
+                        color: rgb(50, 50, 50);
+                        letter-spacing: .04rem;
+                    }
                 }
             }
 
