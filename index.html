@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="css/label.css">
     <link rel="stylesheet" href="css/general-statistics.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro@2.9.6/build/vanilla-calendar.min.css">
 </head>
 <body>
     <header>
@@ -95,7 +96,7 @@
     <div class="container">
         <aside>
             <ul class="main-menu main-padding">
-                <li onpointerup="showSaleInfo(event, 'sale')">
+                <li onpointerup="showSaleInfo(event)">
                     <div class="menu-item">
                         <div class="menu-item-content">
                             <span class="material-symbols-outlined">terminal</span>
@@ -112,25 +113,25 @@
                         <span class="material-symbols-outlined">expand_more</span>
                     </div>
                     <ul class="sub-menu animate-item animate">
-                        <li class="main-padding" onpointerup="showAllOrderInfo(event, 'allorder')">
+                        <li class="main-padding" onpointerup="showAllOrderInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">list_alt</span>
                                 <span>Всі</span>
                             </div>
                         </li>
-                        <li class="main-padding" onpointerup="showPendingOrderInfo(event, 'pendingorder')">
+                        <li class="main-padding" onpointerup="showPendingOrderInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">hourglass_empty</span>
                                 <span>В очікуванні</span>
                             </div>
                         </li>
-                        <li class="main-padding" onpointerup="showCompletedOrderInfo(event, 'completedorder')">
+                        <li class="main-padding" onpointerup="showCompletedOrderInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">done</span>
                                 <span>Виконані</span>
                             </div>
                         </li>
-                        <li class="main-padding" onpointerup="showOrderCalendarInfo(event, 'ordercalendar')">
+                        <li class="main-padding" onpointerup="showOrderCalendarInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">calendar_month</span>
                                 <span>Календар</span>
@@ -138,7 +139,7 @@
                         </li>
                     </ul>
                 </li>
-                <li onpointerup="showShiftInfo(event, 'shift')">
+                <li onpointerup="showShiftInfo(event)">
                     <div class="menu-item">
                         <div class="menu-item-content">
                             <span class="material-symbols-outlined">fact_check</span>
@@ -155,31 +156,31 @@
                         <span class="material-symbols-outlined">expand_more</span>
                     </div>
                     <ul class="sub-menu animate-item animate">
-                        <li class="main-padding" onpointerup="showContractorInfo(event, 'contractor')">
+                        <li class="main-padding" onpointerup="showContractorInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">group_add</span>
                                 <span>Постачальники</span>
                             </div>
                         </li>
-                        <li class="main-padding" onpointerup="showSupplyInfo(event, 'supply')">
+                        <li class="main-padding" onpointerup="showSupplyInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">local_shipping</span>
                                 <span>Поставки</span>
                             </div>
                         </li>
-                        <li class="main-padding" onpointerup="showWasteInfo(event, 'waste')">
+                        <li class="main-padding" onpointerup="showWasteInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">delete</span>
                                 <span>Списання</span>
                             </div>
                         </li>
-                        <li class="main-padding" onpointerup="showLeftoverInfo(event, 'leftover')">
+                        <li class="main-padding" onpointerup="showLeftoverInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">directory_sync</span>
                                 <span>Залишки</span>
                             </div>
                         </li>
-                        <li class="main-padding" onpointerup="showInventoryInfo(event, 'inventory')">
+                        <li class="main-padding" onpointerup="showInventoryInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">edit_calendar</span>
                                 <span>Інвентаризація</span>
@@ -196,19 +197,19 @@
                         <span class="material-symbols-outlined">expand_more</span>
                     </div>
                     <ul class="sub-menu animate-item animate">
-                        <li class="main-padding" onpointerup="showCategoryInfo(event, 'category')">
+                        <li class="main-padding" onpointerup="showCategoryInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">format_list_bulleted</span>
                                 <span>Категорії</span>
                             </div>
                         </li>
-                        <li class="main-padding" onpointerup="showProductInfo(event, 'product')">
+                        <li class="main-padding" onpointerup="showProductInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">filter_vintage</span>
                                 <span>Товари</span>
                             </div>
                         </li>
-                        <li class="main-padding" onpointerup="showFlavorInfo(event, 'flavor')">
+                        <li class="main-padding" onpointerup="showFlavorInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">local_florist</span>
                                 <span>Букети та композиції</span>
@@ -225,13 +226,13 @@
                         <span class="material-symbols-outlined">expand_more</span>
                     </div>
                     <ul class="sub-menu animate-item animate">
-                        <li class="main-padding" onpointerup="showStoreExpenseCategoryInfo(event, 'storeexpensecategory')">
+                        <li class="main-padding" onpointerup="showStoreExpenseCategoryInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">checklist_rtl</span>
                                 <span>Категорії</span>
                             </div>
                         </li>
-                        <li class="main-padding" onpointerup="showStoreExpenseInfo(event, 'storeexpense')">
+                        <li class="main-padding" onpointerup="showStoreExpenseInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">monetization_on</span>
                                 <span>Витрати</span>
@@ -248,13 +249,13 @@
                         <span class="material-symbols-outlined">expand_more</span>
                     </div>
                     <ul class="sub-menu animate-item animate">
-                        <li class="main-padding" onpointerup="showClientInfo(event, 'client')">
+                        <li class="main-padding" onpointerup="showClientInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">person_add</span>
                                 <span>Клієнти</span>
                             </div>
                         </li>
-                        <li class="main-padding" onpointerup="showLabelInfo(event, 'label')">
+                        <li class="main-padding" onpointerup="showLabelInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">label</span>
                                 <span>Мітки</span>
@@ -271,7 +272,7 @@
                         <span class="material-symbols-outlined">expand_more</span>
                     </div>
                     <ul class="sub-menu animate-item animate">
-                        <li class="main-padding" onpointerup="showGeneralStatisticsInfo(event, 'generalstatistics')">
+                        <li class="main-padding" onpointerup="showGeneralStatisticsInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">show_chart</span>
                                 <span>Загальна</span>
@@ -294,25 +295,25 @@
                         <span class="material-symbols-outlined">expand_more</span>
                     </div>
                     <ul class="sub-menu animate-item animate">
-                        <li class="main-padding" onpointerup="showCompanyInfo(event, 'company')">
+                        <li class="main-padding" onpointerup="showCompanyInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">info</span>
                                 <span>Компанія</span>
                             </div>
                         </li>
-                        <li class="main-padding" onpointerup="showStockInfo(event, 'stock')">
+                        <li class="main-padding" onpointerup="showStockInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">storefront</span>
                                 <span>Торгові точки</span>
                             </div>
                         </li>
-                        <li class="main-padding" onpointerup="showCashRegisterInfo(event, 'cashregister')">
+                        <li class="main-padding" onpointerup="showCashRegisterInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">account_tree</span>
                                 <span>Каси</span>
                             </div>
                         </li>
-                        <li class="main-padding" onpointerup="showEmployeeInfo(event, 'employee')">
+                        <li class="main-padding" onpointerup="showEmployeeInfo(event)">
                             <div>
                                 <span class="material-symbols-outlined">person_apron</span>
                                 <span>Працівники</span>
@@ -455,7 +456,7 @@
                 </h2>
                 <input type="password" maxlength="20">
             </div>
-            <button type="button" onpointerup="login()">
+            <button onpointerup="login()">
                 <div class="loader-button"></div>
                 <span>Вхід</span>
             </button>
@@ -482,7 +483,7 @@
                 </h2>
                 <input class="stock-address" maxlength="35">
             </div>
-            <button type="button">
+            <button>
                 <div class="loader-button"></div>
                 <span>Зберегти</span>
             </button>
@@ -509,7 +510,7 @@
                 </h2>
                 <select class="cash-register-stock"></select>
             </div>
-            <button type="button">
+            <button>
                 <div class="loader-button"></div>
                 <span>Зберегти</span>
             </button>
@@ -577,7 +578,7 @@
                 <h2>День народження</h2>
                 <input class="employee-birth-date" type="date">
             </div>
-            <button type="button">
+            <button>
                 <div class="loader-button"></div>
                 <span>Зберегти</span>
             </button>
@@ -630,7 +631,7 @@
                 </h2>
                 <input class="category-name" maxlength="25">
             </div>
-            <button type="button">
+            <button>
                 <div class="loader-button"></div>
                 <span>Зберегти</span>
             </button>
@@ -709,7 +710,7 @@
                     <span>Ціни продажу для складів</span>
                 </h2>
             </div>
-            <button type="button">
+            <button>
                 <div class="loader-button"></div>
                 <span>Зберегти</span>
             </button>
@@ -780,7 +781,7 @@
                 <h2>Коментар</h2>
                 <textarea class="contractor-comment" maxlength="100" rows="4"></textarea>
             </div>
-            <button type="button">
+            <button>
                 <div class="loader-button"></div>
                 <span>Зберегти</span>
             </button>
@@ -900,12 +901,12 @@
                     <span>грн</span>
                 </h2>
                 <h2 class="total-sum-associated-costs">
-                    <span>Разом із супутніми витратами: </span>
+                    <span>Із супутніми витратами: </span>
                     <span></span>
                     <span>грн</span>
                 </h2>
             </div>
-            <button type="button">
+            <button>
                 <div class="loader-button"></div>
                 <span>Зберегти</span>
             </button>
@@ -963,7 +964,7 @@
                 </table>
             </div>
             <div class="total-sum-associated-costs">
-                <span>Разом із супутніми витратами:</span>
+                <span>Із супутніми витратами:</span>
                 <span></span>
             </div>
         </div>
@@ -1008,7 +1009,7 @@
                 <span>0.00</span>
                 <span>грн</span>
             </div>
-            <button type="button">
+            <button>
                 <div class="loader-button"></div>
                 <span>Провести інвентаризацію</span>
             </button>
@@ -1055,7 +1056,7 @@
                 <input class="client-full-name" maxlength="50">
             </div>
             <div class="form">
-                <h2>Телефон</h2>
+                <h2>Телефон(и)</h2>
                 <textarea class="client-phone" maxlength="30" rows="3"></textarea>
             </div>
             <div class="form">
@@ -1087,7 +1088,7 @@
                 <h2>Коментар</h2>
                 <textarea class="client-comment" maxlength="150" rows="6"></textarea>
             </div>
-            <button type="button">
+            <button>
                 <div class="loader-button"></div>
                 <span>Зберегти</span>
             </button>
@@ -1199,7 +1200,7 @@
                 </div>
             </div>
             <button class="one-more-product" onpointerup="addWasteProduct()">Додати товар</button>
-            <button type="button">
+            <button>
                 <div class="loader-button"></div>
                 <span>Зберегти</span>
             </button>
@@ -1217,7 +1218,7 @@
                 <h3 class="waste-stock"></h3>
             </div>
             <div class="form">
-                <h2>Хто списав</h2>
+                <h2>Списав</h2>
                 <h3 class="waste-employee"></h3>
             </div>
             <div class="form">
@@ -1246,7 +1247,7 @@
                     </div>
                 </div>
                 <div class="sale-change">
-                    <span>Решта</span>
+                    <span>Решта:</span>
                     <div>
                         <span class="change"></span>
                         <span>грн</span>
@@ -1268,7 +1269,7 @@
                         <span>Безкоштовно</span>
                     </label>
                 </form>
-                <button type="button" onpointerup="createSale()">
+                <button onpointerup="createSale()">
                     <div class="loader-button"></div>
                     <span>Оплата</span>
                 </button>
@@ -1514,7 +1515,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="button">
+                <button>
                     <div class="loader-button"></div>
                     <span>Оплата</span>
                 </button>
@@ -1792,7 +1793,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="button">
+                <button>
                     <div class="loader-button"></div>
                     <span>Оплата</span>
                 </button>
@@ -1809,13 +1810,13 @@
             <div class="form">
                 <h2>Внесіть готівку:</h2>
                 <div>
-                    <span class="enter-value" onpointerup="createCalculatorValueSpan(this, event)"></span>
+                    <span class="enter-value" onpointerup="createCalculatorValueSpan(this)"></span>
                     <span>грн</span>
                 </div>
             </div>
             <div class="shift-choices">
                 <button onpointerup="location.reload()">На головну</button>
-                <button type="button" onpointerup="createEmployeeShift()">
+                <button onpointerup="createEmployeeShift()">
                     <div class="loader-button"></div>
                     <span>Почати зміну</span>
                 </button>
@@ -1940,7 +1941,7 @@
                 <div>
                     <span class="required">*</span>
                     <span>Сума</span>
-                    <span class="enter-value" onpointerup="createCalculatorValueSpan(this, event)"></span>
+                    <span class="enter-value" onpointerup="createCalculatorValueSpan(this)"></span>
                     <span>грн</span>
                 </div>
             </div>
@@ -1957,7 +1958,7 @@
                 </div>
                 <textarea maxlength="50"></textarea>
             </div>
-            <button type="button" onpointerup="performCashRegisterOperation()">
+            <button onpointerup="performCashRegisterOperation()">
                 <div class="loader-button"></div>
                 <span>Провести операцію</span>
             </button>
@@ -2160,7 +2161,7 @@
                     <span class="material-symbols-outlined">auto_awesome_motion</span>
                     <span>Зберегти шаблон</span>
                 </button>
-                <button type="button">
+                <button>
                     <div class="loader-button"></div>
                     <span>Зберегти</span>
                 </button>
@@ -2239,7 +2240,7 @@
                     <span>Сума</span>
                 </h2>
                 <div>
-                    <span class="store-expense-sum enter-value" onpointerup="createCalculatorValueSpan(this, event)"></span>
+                    <span class="store-expense-sum enter-value" onpointerup="createCalculatorValueSpan(this)"></span>
                     <span>грн</span>
                 </div>
             </div>
@@ -2250,7 +2251,7 @@
                 </h2>
                 <textarea class="store-expense-comment" maxlength="150" rows="5"></textarea>
             </div>
-            <button type="button">
+            <button>
                 <div class="loader-button"></div>
                 <span>Зберегти</span>
             </button>
@@ -2277,7 +2278,7 @@
                 </h2>
                 <div class="store-expense-category-colors"></div>
             </div>
-            <button type="button">
+            <button>
                 <div class="loader-button"></div>
                 <span>Зберегти</span>
             </button>
@@ -2304,7 +2305,7 @@
                 </h2>
                 <div class="label-colors"></div>
             </div>
-            <button type="button">
+            <button>
                 <div class="loader-button"></div>
                 <span>Зберегти</span>
             </button>
@@ -2335,106 +2336,6 @@
     </div>
     <div id="loader-page">
         <div id="loader"></div>
-    </div>
-    <div class="calendar-modal">
-        <div id="calendar" class="animate-item animate">
-            <div class="month-year-select">
-                <select>
-                    <option>січень</option>
-                    <option>лютий</option>
-                    <option>березень</option>
-                    <option>квітень</option>
-                    <option>травень</option>
-                    <option>червень</option>
-                    <option>липень</option>
-                    <option>серпень</option>
-                    <option>вересень</option>
-                    <option>жовтень</option>
-                    <option>листопад</option>
-                    <option>грудень</option>
-                    <option>всі місяці</option>
-                </select>
-                <select>
-                    <option>2024</option>
-                    <option>2023</option>
-                </select>
-            </div>
-            <div class="week-names">
-                <span>пн</span>
-                <span>вт</span>
-                <span>ср</span>
-                <span>чт</span>
-                <span>пт</span>
-                <span>сб</span>
-                <span>нд</span>
-            </div>
-            <div class="week-days">
-                <div class="week">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-                <div class="week">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-                <div class="week">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-                <div class="week">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-                <div class="week">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-                <div class="week">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-            <div class="buttons">
-                <button onpointerup="setToday()">
-                    <span class="material-symbols-outlined">today</span>
-                    <span>Сьогодні</span>
-                </button>
-                <button onpointerup="setTomorrow()">
-                    <span class="material-symbols-outlined">event</span>
-                    <span>Завтра</span>
-                </button>
-            </div>
-        </div>
     </div>
     <div class="calculator-modal">
         <div id="calculator">
@@ -2521,6 +2422,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <script>Chart.register(ChartDataLabels)</script>
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro@2.9.6/build/vanilla-calendar.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </body>
