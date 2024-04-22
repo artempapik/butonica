@@ -1,3 +1,9 @@
+.store-expense-info-modal-content .store-expense-sum {
+    font-weight: bold !important;
+    color: rgb(220, 20, 60);
+    font-family: 'Roboto Mono', monospace;
+}
+
 .store-expense-type div {
     width: 10rem;
 
@@ -40,6 +46,8 @@
 }
 
 .store-expense-table table tr:not(:first-child) {
+    cursor: pointer;
+
     &.main-expense {
         background: rgb(235, 235, 235);
         border-top: .1rem rgb(170, 170, 170) solid;
