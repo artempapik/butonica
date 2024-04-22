@@ -53,6 +53,7 @@ const showStoreExpenseInfo = e => {
 }
 
 const storeExpenseModal = document.querySelector('.create-store-expense-modal')
+const storeExpenseInfoModal = document.querySelector('.store-expense-info-modal')
 
 const createStoreExpenseModal = () => {
     storeExpenseModal.querySelector('h1').textContent = 'Створити витрату'
@@ -73,6 +74,23 @@ const createStoreExpenseRow = storeExpense => {
     actionsColumn.append(editAction, deleteAction)
 
     const tr = document.createElement('tr')
+    tr.onpointerup = e => {
+        const tagName = e.target.tagName.toLowerCase()
+        if (tagName === 'span' &&
+            e.target.className &&
+            e.target.className !== 'material-symbols-outlined') {
+            return
+        }
+
+        hideBodyOverflow()
+        storeExpenseInfoModal.querySelector('.store-expense-date').textContent = formatWeekDate(storeExpense.date, true)
+        storeExpenseInfoModal.querySelector('.store-expense-stock').textContent = storeExpense.stock
+        storeExpenseInfoModal.querySelector('.store-expense-category').textContent = storeExpense.category || 'Інше'
+        storeExpenseInfoModal.querySelector('.store-expense-sum').textContent = '-' + storeExpense.sum.toFixed(2) + ' грн'
+        storeExpenseInfoModal.querySelector('.store-expense-comment').textContent = storeExpense.comment
+        storeExpenseInfoModal.style.display = 'flex'
+        storeExpenseInfoModal.querySelector('.store-expense-info-modal-content').scroll(0, 0)
+    }
 
     editAction.onpointerup = () => {
         storeExpenseModal.querySelector('h1').textContent = 'Редагувати витрату'
