@@ -402,7 +402,7 @@ const showShiftByEmployeeFilter = () => {
                 employeesList.querySelectorAll('li').forEach(e => e.classList.remove('active'))
                 li.classList.add('active')
                 shiftEmployeesInfoModal.querySelector('button').style.display = 'flex'
-                shiftsTable.innerHTML = shiftsTable.querySelector('tbody').innerHTML
+                shiftsTable.querySelectorAll('tr:not(tbody tr)').forEach(tr => tr.remove())
                 grouppedShifts.get(li.querySelector('.employee-info span').textContent).forEach(s => fillShiftsTable(s))
                 hideModal(shiftEmployeesInfoModal)
                 animateChange(shiftsTable)
@@ -424,7 +424,7 @@ const cancelShiftEmployee = () => {
     }
 
     shiftEmployeesInfoModal.querySelector('button').style.display = ''
-    shiftsTable.innerHTML = shiftsTable.querySelector('tbody').innerHTML
+    shiftsTable.querySelectorAll('tr:not(tbody tr)').forEach(tr => tr.remove())
     monthShifts.forEach(s => fillShiftsTable(s))
     hideModal(shiftEmployeesInfoModal)
     animateChange(shiftsTable)
