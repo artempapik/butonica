@@ -40,10 +40,6 @@
 
         & tr {
             background: #fff;
-            
-            &:hover {
-                background: #fff;
-            }
 
             &:not(:first-child) {
                 & td {
