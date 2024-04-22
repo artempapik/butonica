@@ -268,7 +268,7 @@ const createContractorRow = contractor => {
 
                 if (associatedCosts.length) {
                     const associatedTogetherWord = document.createElement('span')
-                    associatedTogetherWord.textContent = 'Разом із супутніми витратами: '
+                    associatedTogetherWord.textContent = 'Із супутніми витратами: '
 
                     const associatedTotalSum = document.createElement('span')
                     associatedTotalSum.textContent = supply.totalSumAssociatedCosts.toFixed(2) + ' грн'
