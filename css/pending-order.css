@@ -32,7 +32,7 @@
             border-top-left-radius: var(--button-radius);
             border-bottom-left-radius: var(--button-radius);
 
-            &:hover, &.active {
+            &.active {
                 color: rgb(235, 235, 235);
                 background: rgb(0, 119, 204);
             }
@@ -43,7 +43,7 @@
             border-bottom-right-radius: var(--button-radius);
             border-left: .01rem solid rgb(130, 130, 130);
 
-            &:hover, &.active {
+            &.active {
                 color: rgb(235, 235, 235);
                 background: rgb(48, 133, 108);
             }
@@ -56,15 +56,6 @@
 
     &.animate {
         transition: .1s;
-    }
-
-    &:hover {
-        background: rgb(248, 248, 248);
-        color: rgb(15, 15, 15);
-
-        & span {
-            color: rgb(15, 15, 15);
-        }
     }
 }
 
@@ -101,6 +92,31 @@
 
         &:nth-child(4) {
             max-width: 5.9rem !important;
+        }
+    }
+}
+
+@media (hover: hover) {
+    .pending-type, .store-expense-type {
+        & div {
+            &:first-child:hover {
+                color: rgb(235, 235, 235);
+                background: rgb(0, 119, 204);
+            }
+
+            &:last-child:hover {
+                color: rgb(235, 235, 235);
+                background: rgb(48, 133, 108);
+            }
+        }
+    }
+
+    .pending-order-table tr:first-child td:first-child:hover {
+        background: rgb(248, 248, 248);
+        color: rgb(15, 15, 15);
+
+        & span {
+            color: rgb(15, 15, 15);
         }
     }
 }
