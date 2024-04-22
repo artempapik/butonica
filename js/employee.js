@@ -61,6 +61,11 @@ const createEmployeeRow = employee => {
 
     if (loginInfo.title === 0) {
         actionsColumn.classList = 'employee-actions'
+
+        if (employee.title === 0) {
+            deleteAction.classList.add('hidden')
+        }
+
         actionsColumn.append(editAction, deleteAction)
     }
 
