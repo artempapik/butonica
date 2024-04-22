@@ -119,11 +119,6 @@
         & tr {
             background: #fff;
 
-            &:hover {
-                background: #fff;
-                outline: none;
-            }
-
             & .remove-supply-product {
                 transition: .1s;
 
