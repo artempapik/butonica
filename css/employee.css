@@ -39,10 +39,6 @@
 }
 
 .employee-table table {
-    & tr:nth-child(2) td:last-child span:last-child {
-        display: none;
-    }
-
     & tr:not(:first-child) {
         cursor: pointer;
 
@@ -65,6 +61,10 @@
                 &.scaled {
                     width: 1.7rem;
                 }
+            }
+
+            &:last-child .hidden {
+                display: none;
             }
         }
     }
