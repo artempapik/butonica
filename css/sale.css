@@ -1320,7 +1320,7 @@
 
         & div {
             display: flex;
-            align-items: center;
+            align-items: end;
             gap: .5rem;
 
             & .enter-value {
