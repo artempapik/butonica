@@ -370,15 +370,8 @@
         }
 
         & .flavor-products {
-            & table tr {
-                &:hover {
-                    background: #fff;
-                    outline: none;
-                }
-    
-                & .remove-flavor-product span:hover {
-                    color: rgba(255, 0, 0, .9);
-                }
+            & table tr .remove-flavor-product span:hover {
+                color: rgba(255, 0, 0, .9);
             }
 
             & .one-more-product:hover {
