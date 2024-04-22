@@ -8,7 +8,6 @@ const getShifts = month => {
     showLoadAnimation()
     
     get(`Shift/${loginInfo.employeeId}/${month || new Date().getMonth() + 1}`).then(response => {
-        animateChange(shiftsTable)
         shiftsTable.querySelector('.table-no-data')?.remove()
         monthShifts = response
         const sortedShifts = monthShifts.toSorted((a, b) => a.employee.localeCompare(b.employee))
@@ -66,6 +65,7 @@ const showShiftInfo = e => {
         actions: {
             clickMonth(_, self) {
                 shiftsCalendar.hide()
+                animateChange(shiftsTable)
                 getShifts(self.selectedMonth + 1)
             }
         }
