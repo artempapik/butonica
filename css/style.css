@@ -1331,6 +1331,12 @@ table {
     }
 }
 
+.vanilla-calendar[data-calendar-theme=dark] {
+    & .vanilla-calendar-day__btn_today {
+        color: rgb(235, 235, 235);
+    }
+}
+
 [class$="modal"] {
     display: none;
     position: fixed;
