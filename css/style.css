@@ -2091,13 +2091,20 @@ table {
                 }
             }
 
+            &:not(:last-child) {
+                border-bottom: .01rem rgb(100, 100, 100) solid;
+            }
+
             & span {
                 text-align: center;
                 width: 2rem;
                 padding: .7rem;
-                border: .01rem rgb(100, 100, 100) solid;
                 cursor: pointer;
-                
+
+                &:not(:last-child) {
+                    border-right: .01rem rgb(100, 100, 100) solid;
+                }
+
                 &:hover, &.active {
                     background: rgb(220, 220, 220);
                 }
