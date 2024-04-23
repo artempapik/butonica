@@ -33,8 +33,6 @@
 
 html, body {
     height: 100%;
-    user-select: none;
-    -webkit-user-select: none;
 }
 
 body, h1, h2, h3, h4 {
@@ -44,7 +42,8 @@ body, h1, h2, h3, h4 {
 body {
     min-height: 100%;
     height: auto;
-    
+    user-select: none;
+    -webkit-user-select: none;
     display: flex;
     flex-direction: column;
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
