@@ -168,7 +168,7 @@ const createFlavorRow = flavor => {
 
             flavorInfoModal.querySelector('img').src = response.imageData ? response.imageData : EMPTY_IMAGE_URL
             flavorInfoModal.querySelector('h1').textContent = getFlavorName(flavor)
-            flavorInfoModal.querySelector('.flavor-employee').textContent = employeesNames ? employeesNames[response.employee] : response.employee
+            flavorInfoModal.querySelector('.flavor-employee').textContent = employeesNames ? `${response.employee} (${employeesNames[response.employee]})` : response.employee
             flavorInfoModal.querySelector('.flavor-date').textContent = formatWeekDate(response.date, true)
             flavorInfoModal.querySelector('.flavor-stock').textContent = flavor.stock
             
