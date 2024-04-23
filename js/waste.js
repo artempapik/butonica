@@ -91,7 +91,7 @@ const createWasteRow = waste => {
 
         wasteInfoModal.querySelector('.waste-date').textContent = formatWeekDate(waste.date, true)
         wasteInfoModal.querySelector('.waste-stock').textContent = waste.stock
-        wasteInfoModal.querySelector('.waste-employee').textContent = employeesNames ? employeesNames[waste.employee] : waste.employee
+        wasteInfoModal.querySelector('.waste-employee').textContent = employeesNames ? `${waste.employee} (${employeesNames[waste.employee]})` : waste.employee
 
         get(`Waste/waste/${waste.id}`).then(response => {
             hidePageLoad()
