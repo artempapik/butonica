@@ -15,7 +15,7 @@ const showPendingOrderInfo = e => {
     get(`Order/pending/${loginInfo.companyId}`).then(response => {
         pendingOrders = response
 
-        if (pendingOrders.length && e) {
+        if (pendingOrders.length) {
             pendingOrdersTable.style.display = 'block'
         }
 
