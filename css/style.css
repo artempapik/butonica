@@ -1319,6 +1319,18 @@ table {
     margin-bottom: .75rem !important;
 }
 
+.vanilla-calendar[data-calendar-theme=light] {
+    outline: .1rem solid rgb(70, 70, 70);
+
+    & .vanilla-calendar-day__btn_today {
+        color: rgb(var(--table-hover-color));
+    }
+
+    & .vanilla-calendar-day__btn_selected, .vanilla-calendar-months__month_selected, .vanilla-calendar-years__year_selected {
+        background: linear-gradient(rgb(75, 145, 247) 0%, rgb(54, 122, 246) 100%);
+    }
+}
+
 [class$="modal"] {
     display: none;
     position: fixed;
