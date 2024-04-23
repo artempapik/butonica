@@ -1045,10 +1045,6 @@ const createInternetOrder = saleOrderType => {
             } else if (activeMenuItem === 'pendingorder') {
                 showPendingOrderInfo()
             }
-
-            if (pendingOrders) {
-                pendingOrders.push(order)
-            }
         }).catch(() => {
             hideModalEnableButton(internetOrderModal, payButton)
             showMessage('error', createErrorMessage('online-замовлення'))
