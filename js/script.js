@@ -1707,14 +1707,8 @@ document.onpointerup = e => {
 const confirmModal = document.querySelector('.confirm-modal')
 const confirmModalText = confirmModal.querySelector('.text')
 
-const showConfirm = (text, f, isDelete = false) => {
+const showConfirm = (text, f) => {
     const yesButton = confirmModal.querySelector('button')
-    
-    if (isDelete) {
-        yesButton.classList.add('delete-confirm')
-    } else {
-        yesButton.classList.remove('delete-confirm')
-    }
 
     hideBodyOverflow()
     confirmModalText.querySelectorAll('span').forEach(m => m.textContent = '')
