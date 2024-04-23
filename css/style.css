@@ -2095,9 +2095,9 @@ table {
                 text-align: center;
                 width: 2rem;
                 padding: .7rem;
-                border: .1rem rgb(140, 140, 140) solid;
+                border: .01rem rgb(100, 100, 100) solid;
                 cursor: pointer;
-    
+                
                 &:hover, &.active {
                     background: rgb(220, 220, 220);
                 }
