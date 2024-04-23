@@ -1,0 +1,248 @@
+:root {
+    --pie-chart-size: 19.5rem;
+}
+
+.general-statistics-header {
+    margin-bottom: 1.2rem;
+}
+
+.general-statistics-info {
+    display: flex;
+    justify-content: space-between;
+    background: rgba(79, 118, 181, .1);
+    gap: 1rem;
+    padding: 1.5rem;
+    border-radius: 1.1rem;
+    box-shadow: rgba(0, 0, 0, .12) 0 1px 3px, rgba(0, 0, 0, .24) 0 1px 2px;
+
+    & li {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        &:nth-child(3), &:last-child {
+            & .stat-value {
+                font-weight: bold;
+                color: rgb(220, 20, 60);
+            }
+        }
+
+        & .stat-title {
+            font-size: 1.2rem;
+            color: rgb(80, 80, 80);
+            font-weight: bold;
+
+            &.gain {
+                text-decoration: underline;
+                font-size: 1.3rem;
+                color: #000;
+            }
+        }
+
+        & .stat-value {
+            font-family: 'Roboto Mono', monospace;
+
+            &.gain {
+                font-size: 1.1rem;
+            }
+        }
+
+        &.sub-value {
+            display: none;
+        }
+    }
+}
+
+.statistics-date-filter {
+    & select {
+        width: unset;
+    }
+    
+    & .year-filter {
+        margin-left: .5rem;
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+    
+        & div {
+            font-size: 1rem;
+        }
+    }
+}
+
+.pie-charts {
+    justify-content: space-between;
+    margin: 1.5rem 0 1rem 0;
+    display: flex;
+    flex-wrap: wrap;
+
+    & canvas {
+        height: var(--pie-chart-size) !important;
+        width: var(--pie-chart-size) !important;
+    }
+}
+
+.bar-charts {
+    margin: .5rem 0;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    flex-direction: column;
+
+    &:last-child {
+        display: none;
+    }
+
+    & div {
+        padding: .5rem;
+        border: .2rem solid rgb(100, 100, 100);
+        border-radius: 1.5rem;
+        box-shadow: rgba(99, 99, 99, .2) 0 2px 8px 0;
+        transition: .1s;
+        background: #fff;
+
+        &.month-line-chart {
+            width: fit-content;
+            margin: 0 auto;
+        }
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    .bar-charts canvas, #income-by-shift-line-chart {
+        width: 66rem !important;
+        height: 33rem !important;
+    }
+}
+
+@media (hover: hover) {
+    .bar-charts div:hover {
+        border-color: rgba(68, 33, 175, .6);
+        box-shadow: rgba(0, 0, 0, .19) 0 10px 20px, rgba(0, 0, 0, .23) 0 6px 6px;
+    }
+}
+
+@media (hover: none) {
+    .bar-charts {
+        align-items: unset;
+    }
+}
+
+@media only screen and (max-width: 1700px) {
+    :root {
+        --pie-chart-size: 18rem;
+    }
+
+    .general-statistics-info li {
+        gap: .7rem;
+
+        & .stat-title {
+            font-size: 1.1rem;
+
+            &.gain {
+                font-size: 1.2rem;
+            }
+        }
+
+        & .stat-value {
+            font-size: 1rem;
+
+            &.gain {
+                font-size: 1.1rem;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1500px) {
+    :root {
+        --pie-chart-size: 24rem;
+    }
+
+    .general-statistics-info {
+        padding: 1.5rem 1rem;
+        border-radius: .9rem;
+    
+        & li {
+            gap: .5rem;
+    
+            & .stat-title {
+                font-size: 1rem;
+    
+                &.gain {
+                    font-size: 1.1rem;
+                }
+            }
+    
+            & .stat-value {
+                font-size: 1rem;
+    
+                &.gain {
+                    font-size: 1.1rem;
+                }
+
+                & span:last-child {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .pie-charts {
+        justify-content: center;
+        gap: 2rem;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    :root {
+        --pie-chart-size: 18rem;
+    }
+
+    .general-statistics-info {
+        align-self: center;
+        flex-direction: column;
+        padding: 1.1rem;
+        gap: 1.5rem;
+
+        & li {            
+            & .stat-title {
+                width: 12rem;
+                font-size: 1.1rem;
+            }
+    
+            & .stat-value {
+                font-size: 1rem;
+
+                & span:last-child {
+                    display: inline;
+                }
+            }
+        }
+    }
+
+    .pie-charts {
+        gap: 1.5rem;
+    }
+
+    .bar-charts {
+        gap: 1.5rem;
+        margin: 0;
+
+        & div {
+            padding: .2rem;
+            border-width: .1rem;
+            border-radius: 0;
+
+            &.month-line-chart {
+                width: unset;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    :root {
+        --pie-chart-size: 22rem;
+    }
+}
