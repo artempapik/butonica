@@ -2170,7 +2170,3 @@ const select2NoResults = {
 // })
 //     .then(subscription => console.log(subscription))
 //     .catch(e => console.log(e)))
-
-document.body.addEventListener('touchstart', function( event ) { 
-    event.preventDefault();
-}, false);
