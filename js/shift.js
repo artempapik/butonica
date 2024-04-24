@@ -220,6 +220,10 @@ const createShiftRow = shift => {
                     } else {
                         info.append(moneyPaidSpan, deleteIcon)
                     }
+
+                    if (operation.type === 3) {
+                        info.removeChild(deleteIcon)
+                    }
                     
                     const content = document.createElement('div')
                     content.classList = 'content'
