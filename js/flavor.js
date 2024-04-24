@@ -230,7 +230,7 @@ const createFlavorRow = flavor => {
     deleteAction.onpointerup = () => {
         const flavorType = flavor.isFlavor ? 'букет' : 'композицію'
 
-        showConfirm(`Видалити ${flavorType} ${flavor.name || '#' + flavor.id}?`, () => {
+        showConfirm(`Видалити ${flavorType} ${flavor.name || flavor.id}?`, () => {
             delete flavor.stock
             delete flavor.products
 
