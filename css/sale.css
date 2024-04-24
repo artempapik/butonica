@@ -10,6 +10,10 @@
     box-shadow: rgba(50, 50, 93, .35) 0 2px 5px -1px, rgba(0, 0, 0, .35) 0 1px 3px -1px;
     z-index: 1;
 
+    & span {
+        display: none;
+    }
+
     & div {
         gap: .7rem;
         width: fit-content;
@@ -1396,6 +1400,20 @@
 }
 
 @media only screen and (max-width: 700px) {
+    .sale-header {
+        & span {
+            display: block;
+            color: rgb(240, 240, 240);
+            background: rgb(30, 30, 30);
+            padding: .1rem;
+            border-radius: 50%;
+        }
+
+        & h1 {
+            font-size: 1.4rem;
+        }
+    }
+    
     .create-shift-modal .create-shift-modal-content {
         padding: .8rem 1.4rem .4rem 1.4rem;
         gap: 1.7rem;
@@ -1570,14 +1588,14 @@
 
     .sale-header {
         justify-content: space-between;
-        padding: .3rem .6rem !important;
+        padding: .3rem .2rem !important;
         border-radius: 0;
 
         & input[type=search] {
-            width: 15.5rem;
-            padding: .3rem;
+            width: 14.5rem;
+            padding: .3rem .1rem;
             padding-left: 2.6rem;
-            border-radius: .7rem;
+            border-radius: .5rem;
             font-size: .9rem;
 
             &::-webkit-search-cancel-button {
