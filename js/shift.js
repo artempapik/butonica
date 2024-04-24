@@ -287,7 +287,7 @@ const createShiftRow = shift => {
 
                         const cashRegisterContent = cashRegisterOperation.querySelector('.inner-content')
 
-                        if (cashRegisterContent.style.display === '') {
+                        if (!cashRegisterContent.style.display) {
                             content.classList.add('active')
                             cashRegisterContent.style.display = 'block'
                             return
