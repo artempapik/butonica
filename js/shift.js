@@ -129,7 +129,8 @@ const createShiftRow = shift => {
                     const time = document.createElement('span')
                     time.textContent = operation.time
 
-                    const type = createSpan(cashRegisterOperationTypeToName[operation.type])
+                    const operationName = cashRegisterOperationTypeToName[operation.type]
+                    const type = createSpan(operationName)
                     let shortenedId = ''
 
                     if (operation.orderId) {
@@ -188,14 +189,36 @@ const createShiftRow = shift => {
                     moneyPaidSpan.classList = 'money-paid'
                     moneyPaidSpan.append(moneyPaidIcon, moneyPaid)
 
-                    const expandIcon = document.createElement('span')
-                    expandIcon.classList = 'expand-shift material-symbols-outlined'
-                    expandIcon.innerHTML = 'expand_more'
+                    const deleteIcon = document.createElement('span')
+                    deleteIcon.classList = 'remove-shift-operation material-symbols-outlined'
+                    deleteIcon.innerHTML = operation.type === 2 ? 'cancel' : 'delete'
+
+                    deleteIcon.onpointerup = () => {
+                        const confirmText = operation.type === 2 ? `Скасувати замовлення ${operation.orderId}?` : `Видалити ${operationName.toLowerCase()} на ${operation.sum} грн?`
+
+                        showConfirm(confirmText, () => remove(`Shift/operation/${operation.id}`).then(response => {
+                            setTimeout(() => hideModal(confirmModal), 1)
+                            cashRegisterOperation.remove()
+
+                            if (operation.type === 2) {
+                                for (const surchargeSpan of shiftInfoModal.querySelectorAll('.surcharge .order-number')) {
+                                    if (surchargeSpan.textContent.includes(shortenedId)) {
+                                        surchargeSpan.closest('.form').remove()
+                                    }
+                                }
+                            }
+
+                            shiftEndSums.querySelector('.cash .end-sum').textContent = response.shiftEndCash.toFixed(2) + ' грн'
+                            shiftEndSums.querySelector('.terminal-cash .end-sum').textContent = response.shiftEndTerminalCash.toFixed(2) + ' грн'
+                            shiftEndSums.querySelector('.bonus-cash .end-sum').textContent = response.shiftEndBonusCash.toFixed(2) + ' грн'
+                            showMessage('info', operation.type === 2 ? 'Замовлення скасовано' : operationName + ' видалено')
+                        }).catch(() => showMessage('error', deleteErrorMessage(operationName))))
+                    }
 
                     if (operation.payType === 2) {
-                        info.append(expandIcon)
+                        info.append(deleteIcon)
                     } else {
-                        info.append(moneyPaidSpan, expandIcon)
+                        info.append(moneyPaidSpan, deleteIcon)
                     }
                     
                     const content = document.createElement('div')
@@ -257,18 +280,20 @@ const createShiftRow = shift => {
 
                     cashRegisterOperation.append(content, innerContent)
 
-                    content.onpointerup = () => {
+                    content.onpointerup = e => {
+                        if (e.target.classList.contains('remove-shift-operation')) {
+                            return
+                        }
+
                         const cashRegisterContent = cashRegisterOperation.querySelector('.inner-content')
 
-                        if (expandIcon.innerHTML === 'expand_more') {
+                        if (cashRegisterContent.style.display === '') {
                             content.classList.add('active')
-                            expandIcon.innerHTML = 'expand_less'
                             cashRegisterContent.style.display = 'block'
                             return
                         }
 
                         content.classList.remove('active')
-                        expandIcon.innerHTML = 'expand_more'
                         cashRegisterContent.style.display = ''
                     }
 
