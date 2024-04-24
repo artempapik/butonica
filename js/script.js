@@ -580,6 +580,7 @@ const menuItemsContents = {
     `,
     sale: `
         <div class="sale-header">
+            <span class="material-symbols-outlined" onpointerup="location.reload()">navigate_before</span>
             <h1>Продаж</h1>
             <input type="search" class="search-sale-product" oninput="searchSaleProductFlavor(event)" placeholder="Пошук товару або букету">
             <div>
