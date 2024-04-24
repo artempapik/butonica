@@ -206,6 +206,22 @@
                         width: 8rem;
                     }
 
+                    & .remove-shift-operation {
+                        cursor: pointer;
+                        font-size: 1.2rem;
+                        padding: .15rem .35rem;
+                        border-radius: .6rem;
+                        box-shadow: rgba(0, 0, 0, .12) 0 1px 2px, rgba(0, 0, 0, .12) 0 1px 2px;
+                        background: rgb(252, 252, 252);
+                        transition: .1s;
+                        color: rgb(var(--delete-action-color));
+
+                        &:hover {
+                            background: rgb(var(--delete-action-color));
+                            color: rgb(240, 240, 240);
+                        }
+                    }
+
                     & .bonus-paid, & .money-paid {
                         display: flex;
                         align-items: center;
@@ -455,7 +471,7 @@
         }
 
         & .operations .form .content:hover {
-            background: rgb(230, 230, 230);
+            background: rgb(225, 225, 225);
         }
     }
 
