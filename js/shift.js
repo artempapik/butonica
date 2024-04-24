@@ -212,7 +212,7 @@ const createShiftRow = shift => {
                             shiftEndSums.querySelector('.terminal-cash .end-sum').textContent = response.shiftEndTerminalCash.toFixed(2) + ' грн'
                             shiftEndSums.querySelector('.bonus-cash .end-sum').textContent = response.shiftEndBonusCash.toFixed(2) + ' грн'
                             showMessage('info', operation.type === 2 ? 'Замовлення скасовано' : operationName + ' видалено')
-                        }).catch(() => showMessage('error', deleteErrorMessage(operationName))))
+                        }).catch(() => showMessage('error', deleteErrorMessage(operationName.toLowerCase()))))
                     }
 
                     if (operation.payType === 2) {
