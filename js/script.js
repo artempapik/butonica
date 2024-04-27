@@ -1498,8 +1498,8 @@ const removeMenus = title => {
 const getSubscriptionExpiresText = date => {
     const daysLeft = 30 - Math.floor((new Date() - date) / (1000 * 60 * 60 * 24))
     const subText = document.querySelector('.subscription-text span:last-child')
-    subText.style.fontSize = daysLeft > 0 ? '' : '.85rem'
-    subText.style.color = daysLeft > 0 ? 'rgb(30, 30, 30)' : 'rgba(220, 0, 0, .9)'
+    subText.style.fontSize = daysLeft > 0 ? '' : '.8rem'
+    subText.style.color = daysLeft > 0 ? 'rgb(30, 30, 30)' : 'rgb(220, 0, 0)'
     return daysLeft > 0 ? `${daysLeft} дн.` : 'НЕ СПЛАЧЕНО'
 }
 
