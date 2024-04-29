@@ -1,15 +1,16 @@
 let expensesPieChart, incomePieChart, incomeByLabelPieChart, expensesIncomePieChart, incomeByShiftLineChart, yearGainBarChart, yearIncomeExpenseBarChart, yearProfitabilityLineChart
+let statMonth, statYear
+const statDate = new Date()
 
 const getStatisticsValues = () => {
     const animate = (localStorage.getItem('animations-disabled') || false) ? 'none' : ''
     showLoadAnimation()
 
-    let month = document.querySelector('.statistics-date-filter .month-filter select').selectedIndex
-    const year = document.querySelector('.statistics-date-filter .year-filter select').value
-
+    let month = statMonth === 0 ? 0 : statMonth ? statMonth + 2 : null
+    const year = statYear
     const pieCharts = document.querySelector('.pie-charts')
 
-    if (month === 1) {
+    if (month === null) {
         get(`Statistics/general/${loginInfo.companyId}/${year}`).then(response => {
             pieCharts.style.display = ''
             document.querySelector('.bar-charts').style.display = 'none'
@@ -404,6 +405,31 @@ const showGeneralStatisticsInfo = e => {
     main.innerHTML = menuItemsContents['generalstatistics']
     fillSelectedMenuItem(e)
 
+    statMonth = statDate.getMonth()
+    statYear = statDate.getFullYear()
+    const statTitles = document.querySelectorAll('.stat-switcher-title div')
+    statTitles.item(0).textContent = statDate.toLocaleString('uk', { month: 'long' })
+    statTitles.item(1).textContent = statYear
+
+    const statSwitcher = document.querySelectorAll('.stat-switcher div')
+    statSwitcher.forEach((ss, i) => ss.onpointerup = () => {
+        if (ss.classList.contains('active')) {
+            return
+        }
+
+        statSwitcher.forEach(ss => ss.classList.remove('active'))
+        ss.classList.add('active')
+
+        const statTitles = document.querySelectorAll('.stat-switcher-title div')
+        statTitles.item(0).style.display = i ? 'none' : ''
+
+        statYear = statDate.getFullYear()
+        statMonth = i ? null : statDate.getMonth()
+        statTitles.item(0).textContent = statDate.toLocaleString('uk', { month: 'long' })
+        statTitles.item(1).textContent = statYear
+        getStatisticsValues()
+    })
+
     expensesPieChart = getPieChart('expenses', 'Розподіл витрат', 2)
     incomePieChart = getPieChart('income', 'Розподіл доходів по Продажам', 2)
     expensesIncomePieChart = getPieChart('expenses-income', 'Відношення доходів до витрат', 2)
@@ -495,4 +521,44 @@ const updateChartsFontSize = () => {
 
     pieCharts.forEach(c => c.update('none'))
     barCharts.forEach(c => c.update('none'))
+}
+
+const previousStatPeriod = () => {
+    if (statMonth === null) {
+        document.querySelector('.stat-switcher-title div:last-of-type').textContent = --statYear
+        getStatisticsValues()
+        return
+    }
+
+    if (statMonth === 0) {
+        statMonth = 11
+        statYear--
+    } else {
+        statMonth--
+    }
+
+    const statTitles = document.querySelectorAll('.stat-switcher-title div')
+    statTitles.item(0).textContent = new Date(null, statMonth).toLocaleString('uk', { month: 'long' })
+    statTitles.item(1).textContent = statYear
+    getStatisticsValues()
+}
+
+const nextStatPeriod = () => {
+    if (statMonth === null) {
+        document.querySelector('.stat-switcher-title div:last-of-type').textContent = ++statYear
+        getStatisticsValues()
+        return
+    }
+
+    if (statMonth === 11) {
+        statMonth = 0
+        statYear++
+    } else {
+        statMonth++
+    }
+
+    const statTitles = document.querySelectorAll('.stat-switcher-title div')
+    statTitles.item(0).textContent = new Date(null, statMonth).toLocaleString('uk', { month: 'long' })
+    statTitles.item(1).textContent = statYear
+    getStatisticsValues()
 }
