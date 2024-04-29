@@ -253,6 +253,11 @@
         --pie-chart-size: 18rem;
     }
 
+    .general-statistics-header .month-filter {
+        flex-direction: column;
+        gap: 0;
+    }
+
     .general-statistics-info {
         align-self: center;
         flex-direction: column;
