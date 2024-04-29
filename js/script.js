@@ -1065,29 +1065,15 @@ const menuItemsContents = {
                 <div class="statistics-date-filter">
                     <h1>Загальна статистика</h1>
                     <div class="month-filter">
-                        <div>за:</div>
-                        <select onchange="getStatisticsValues()">
-                            <option>поточний місяць</option>
-                            <option>всі місяці</option>
-                            <option>січень</option>
-                            <option>лютий</option>
-                            <option>березень</option>
-                            <option>квітень</option>
-                            <option>травень</option>
-                            <option>червень</option>
-                            <option>липень</option>
-                            <option>серпень</option>
-                            <option>вересень</option>
-                            <option>жовтень</option>
-                            <option>листопад</option>
-                            <option>грудень</option>
-                        </select>
-                        <div class="year-filter">
-                            <select onchange="getStatisticsValues()">
-                                <option>2024</option>
-                                <option>2023</option>
-                            </select>
-                            <div>року</div>
+                        <div class="stat-switcher-title">
+                            <span class="material-symbols-outlined" onpointerup="previousStatPeriod()">chevron_left</span>
+                            <div></div>
+                            <div></div>
+                            <span class="material-symbols-outlined" onpointerup="nextStatPeriod()">chevron_right</span>
+                        </div>
+                        <div class="stat-switcher">
+                            <div class="active">місяць</div>
+                            <div>рік</div>
                         </div>
                     </div>
                 </div>
