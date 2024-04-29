@@ -255,7 +255,7 @@
 
     .general-statistics-header .month-filter {
         flex-direction: column;
-        gap: 0;
+        gap: .5rem !important;
     }
 
     .general-statistics-info {
