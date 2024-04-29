@@ -4,6 +4,60 @@
 
 .general-statistics-header {
     margin-bottom: 1.2rem;
+
+    & .statistics-date-filter {
+        align-items: center;
+
+        & .month-filter {
+            gap: 2rem;
+
+            & .stat-switcher-title {
+                display: flex;
+                align-items: center;
+                gap: .6rem;
+
+                & span {
+                    display: block !important;
+                    border-radius: 50%;
+                    width: fit-content;
+                    cursor: pointer;
+
+                    &:hover {
+                        background: rgb(30, 30, 30);
+                        color: rgb(240, 240, 240);
+                    }
+                }
+                
+                & div {
+                    font-size: 1.2rem;
+
+                    &:first-of-type {
+                        width: 5.5rem;
+                        text-align: center;
+                    }
+                }
+            }
+
+            & .stat-switcher {
+                display: flex;
+                border: .1rem rgb(30, 30, 30) solid;
+                border-radius: .2rem;
+
+                & div {
+                    width: 5.3rem;
+                    font-size: .9rem;
+                    padding: .15rem 0;
+                    cursor: pointer;
+                    text-align: center;
+    
+                    &:hover, &.active {
+                        background: rgb(30, 30, 30);
+                        color: rgb(230, 230, 230);
+                    }
+                }
+            }
+        }
+    }
 }
 
 .general-statistics-info {
