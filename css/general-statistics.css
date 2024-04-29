@@ -21,11 +21,6 @@
                     border-radius: 50%;
                     width: fit-content;
                     cursor: pointer;
-
-                    &:hover {
-                        background: rgb(30, 30, 30);
-                        color: rgb(240, 240, 240);
-                    }
                 }
                 
                 & div {
@@ -50,7 +45,7 @@
                     cursor: pointer;
                     text-align: center;
     
-                    &:hover, &.active {
+                    &.active {
                         background: rgb(30, 30, 30);
                         color: rgb(230, 230, 230);
                     }
@@ -174,6 +169,18 @@
         border-color: rgba(68, 33, 175, .6);
         box-shadow: rgba(0, 0, 0, .19) 0 10px 20px, rgba(0, 0, 0, .23) 0 6px 6px;
     }
+
+    .general-statistics-header .statistics-date-filter .month-filter {
+        & .stat-switcher-title span:hover {
+            background: rgb(30, 30, 30);
+            color: rgb(240, 240, 240);
+        }
+
+        & .stat-switcher div:hover {
+            background: rgb(30, 30, 30);
+            color: rgb(230, 230, 230);
+        }
+    }
 }
 
 @media (hover: none) {
@@ -256,6 +263,10 @@
     .general-statistics-header .month-filter {
         flex-direction: column;
         gap: .5rem !important;
+
+        & .stat-switcher {
+            align-self: start;
+        }
     }
 
     .general-statistics-info {
