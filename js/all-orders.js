@@ -377,26 +377,18 @@ const createOrderRow = (order, table) => {
             }
 
             const printSheets = orderNumberDate.querySelector('.order-number .number .print-sheets')
-            printSheets.style.display = ''
-
-            const printIcon = orderNumberDate.querySelector('.order-number .number .print')
 
             if (order.status < 2) {
-                printIcon.style.display = ''
-                
-                printIcon.onpointerup = () => {
-                    printIcon.style.display = 'none'
-                    printSheets.style.display = 'inline'
+                printSheets.style.display = ''
 
-                    const printRequest = sheet => get(`Order/pdf/${sheet}/${order.id}`)
-                        .then(f => window.open(f))
-                        .catch(() => showMessage('error', 'Не вдалося роздрукувати замовлення'))
+                const printRequest = sheet => get(`Order/pdf/${sheet}/${order.id}`)
+                    .then(f => window.open(f))
+                    .catch(() => showMessage('error', 'Не вдалося роздрукувати замовлення'))
 
-                    printSheets.querySelector('span').onpointerup = () => printRequest('a4')
-                    printSheets.querySelector('span:last-child').onpointerup = () => printRequest('a5')
-                }
+                printSheets.querySelector('span').onpointerup = () => printRequest('a4')
+                printSheets.querySelector('span:last-child').onpointerup = () => printRequest('a5')
             } else {
-                printIcon.style.display = 'none'
+                printSheets.style.display = 'none'
             }
 
             orderNumberDate.querySelector('.order-date input').value = getDate(response.date)
