@@ -347,8 +347,20 @@ const createSupplyRow = supply => {
         supplyModal.scroll(0, 0)
     }
 
-    deleteAction.onpointerup = () => {
-    }
+    deleteAction.onpointerup = () => showConfirm(`Видалити поставку?`, () => {
+        delete supply.stock
+        delete supply.contractor
+
+        remove('Supply', supply).then(() => {
+            setTimeout(() => hideModal(confirmModal), 1)
+            showMessage('info', deleteSuccessMessage('поставку'))
+            suppliesTable.removeChild(tr)
+
+            if (suppliesTable.children.length === 1) {
+                suppliesTable.style.display = ''
+            }
+        }).catch(() => showMessage('error', deleteErrorMessage('поставку')))
+    })
 
     tr.append(
         formatWeekDate(supply.date),
