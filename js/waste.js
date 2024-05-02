@@ -126,8 +126,11 @@ const createWasteRow = waste => {
         wasteModal.style.display = 'flex'
     }
 
-    deleteAction.onpointerup = () => showConfirm('Видалити списання?', () => remove('Waste', waste)
-        .then(() => {
+    deleteAction.onpointerup = () => {
+        delete waste.stock
+        delete waste.employee
+
+        showConfirm('Видалити списання?', () => remove('Waste', waste).then(() => {
             setTimeout(() => hideModal(confirmModal), 1)
             showMessage('info', deleteSuccessMessage('списання'))
             wastesTable.removeChild(tr)
@@ -136,6 +139,7 @@ const createWasteRow = waste => {
                 wastesTable.style.display = ''
             }
         }).catch(() => showMessage('error', deleteErrorMessage('списання'))))
+    }
 
     tr.append(
         formatWeekDate(waste.date),
