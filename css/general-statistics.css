@@ -175,7 +175,7 @@
             color: rgb(240, 240, 240);
         }
 
-        & .stat-switcher div:hover {
+        & .stat-switcher div:not(.active):hover {
             background: rgba(var(--table-hover-color), .9);
             color: rgb(230, 230, 230);
         }
