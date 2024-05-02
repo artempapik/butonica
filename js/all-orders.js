@@ -380,10 +380,10 @@ const createOrderRow = (order, table) => {
 
             if (order.status < 2) {
                 printIcon.style.display = ''
-        
+                
                 printIcon.onpointerup = () => {
                     get(`Order/pdf/${order.id}`)
-                        .then(r => window.open(r))
+                        .then(f => window.open(f))
                         .catch(() => showMessage('error', 'Не вдалося роздрукувати замовлення'))
                 }
             } else {
