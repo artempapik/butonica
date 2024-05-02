@@ -1,0 +1,42 @@
+.create-store-expense-category-modal-content {
+    width: calc(var(--modal-content-width) - 3rem);
+    gap: 2rem;
+
+    & .form {
+        gap: 1rem;
+
+        & .store-expense-category-colors {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            row-gap: .7rem;
+            justify-content: space-between;
+    
+            & .store-expense-category-color {
+                --store-expense-category-size: 2rem;
+                width: var(--store-expense-category-size);
+                height: var(--store-expense-category-size);
+                border-radius: 50%;
+                cursor: pointer;
+                outline: .1rem rgb(150, 150, 150) solid;
+            }
+        }
+    }
+}
+
+.store-expense-category-table table tr:not(:first-child) td:first-child {
+    text-align: center;
+
+    & span {
+        display: block;
+        padding: .3rem .9rem;
+        border-radius: .5rem;
+        box-shadow: rgba(0, 0, 0, .12) 0 1px 2px, rgba(0, 0, 0, .12) 0 1px 2px;
+    }
+}
+
+@media (hover: hover) {
+    .create-store-expense-category-modal-content .form .store-expense-category-colors .store-expense-category-color:hover {
+        transform: scale(1.1);
+    }
+}
