@@ -367,7 +367,7 @@ const createOrderRow = (order, table) => {
             const orderNumber = orderNumberDate.querySelector('.order-number .number span')
             orderNumber.textContent = orderId.length > 4 ? orderId.substring(orderId.length - 4) : orderId
 
-            const expandIdIcon = orderNumberDate.querySelector('.order-number .number span:nth-child(2)')
+            const expandIdIcon = orderNumberDate.querySelector('.order-number .number .expand')
             expandIdIcon.textContent = 'expand_content'
             expandIdIcon.style.display = orderId.length > 4 ? '' : 'none'
 
@@ -376,15 +376,24 @@ const createOrderRow = (order, table) => {
                 expandIdIcon.textContent = orderNumber.textContent.length === 4 ? 'expand_content' : 'collapse_content'
             }
 
-            const printIcon = orderNumberDate.querySelector('.order-number .number span:last-child')
+            const printSheets = orderNumberDate.querySelector('.order-number .number .print-sheets')
+            printSheets.style.display = ''
+
+            const printIcon = orderNumberDate.querySelector('.order-number .number .print')
 
             if (order.status < 2) {
                 printIcon.style.display = ''
                 
                 printIcon.onpointerup = () => {
-                    get(`Order/pdf/${order.id}`)
+                    printIcon.style.display = 'none'
+                    printSheets.style.display = 'inline'
+
+                    const printRequest = sheet => get(`Order/pdf/${sheet}/${order.id}`)
                         .then(f => window.open(f))
                         .catch(() => showMessage('error', 'Не вдалося роздрукувати замовлення'))
+
+                    printSheets.querySelector('span').onpointerup = () => printRequest('a4')
+                    printSheets.querySelector('span:last-child').onpointerup = () => printRequest('a5')
                 }
             } else {
                 printIcon.style.display = 'none'
