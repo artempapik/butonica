@@ -26,28 +26,19 @@
                             font-size: 1.2rem;
                         }
 
-                        & .expand, & .print {
+                        & .expand {
                             vertical-align: text-top;
                             cursor: pointer;
                             color: rgb(96, 130, 182);
                         }
 
-                        & .print {
-                            color: rgb(30, 30, 30);
-                            filter: drop-shadow(1px 1px 1px rgb(130, 130, 130));
-                        }
-
-                        & .print-sheets {
-                            display: none;
-
-                            & span {
-                                font-size: .8rem;
-                                padding: .1rem;
-                                border-radius: .3rem;
-                                background: rgba(var(--table-hover-color), .8);
-                                color: rgb(235, 235, 235);
-                                cursor: pointer;
-                            }
+                        & .print-sheets span {
+                            font-size: .7rem;
+                            padding: .15rem;
+                            border-radius: .3rem;
+                            background: rgb(0, 0, 0);
+                            color: rgb(240, 240, 240);
+                            cursor: pointer;
                         }
                     }
                 }
@@ -591,7 +582,6 @@
 
             & .print-sheets span:hover {
                 background: rgb(var(--table-hover-color));
-                color: rgb(250, 250, 250);
             }
         }
 
