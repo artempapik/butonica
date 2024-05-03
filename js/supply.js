@@ -490,7 +490,8 @@ const createSupply = () => {
         totalSum,
         totalSumAssociatedCosts,
         products,
-        associatedCosts
+        associatedCosts,
+        updateBuyingCost: supplyModal.querySelector('.update-buying-cost input').checked
     }
 
     post('Supply', supply).then(response => {
