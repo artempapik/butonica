@@ -154,24 +154,29 @@ const createProductModal = () => {
     productModal.querySelector('input[name=product-unit]').checked = true
     productModal.querySelector('button').onpointerup = () => createProduct()
 
-    const stockPricesBlock = productModal.querySelector('.stock-prices')
-    const stockPricesBlockHeader = stockPricesBlock.querySelector('h2')
-    stockPricesBlock.innerHTML = ''
-    stockPricesBlock.append(stockPricesBlockHeader)
-
-    for (const stock of stocksNames) {
-        const stockHeader = document.createElement('h4')
-        stockHeader.textContent = stock.name
-
-        const stockPriceInput = document.createElement('span')
-        stockPriceInput.classList = 'enter-value'
-        stockPriceInput.dataset.id = stock.id
-        stockPriceInput.onpointerup = () => createCalculatorValueSpan(stockPriceInput)
-
-        const stockPriceBlock = document.createElement('div')
-        stockPriceBlock.append(stockHeader, stockPriceInput)
-        stockPricesBlock.append(stockPriceBlock)
+    const fillStockPrices = selector => {
+        const stockPricesBlock = productModal.querySelector('.' + selector)
+        const stockPricesBlockHeader = stockPricesBlock.querySelector('h2')
+        stockPricesBlock.innerHTML = ''
+        stockPricesBlock.append(stockPricesBlockHeader)
+        
+        for (const stock of stocksNames) {
+            const stockHeader = document.createElement('h4')
+            stockHeader.textContent = stock.name
+    
+            const stockPriceInput = document.createElement('span')
+            stockPriceInput.classList = 'enter-value'
+            stockPriceInput.dataset.id = stock.id
+            stockPriceInput.onpointerup = () => createCalculatorValueSpan(stockPriceInput)
+    
+            const stockPriceBlock = document.createElement('div')
+            stockPriceBlock.append(stockHeader, stockPriceInput)
+            stockPricesBlock.append(stockPriceBlock)
+        }
     }
+
+    fillStockPrices('buying-stock-prices')
+    fillStockPrices('stock-prices')
 
     hideBodyOverflow()
     productModal.style.display = 'flex'
@@ -272,26 +277,31 @@ const createProductRow = product => {
             productModal.querySelectorAll('input[name=product-unit]').item(product.unit).checked = true
             
             get(`Product/stock-prices/${product.id}`).then(response => {
-                const stockPricesBlock = productModal.querySelector('.stock-prices')
-                const stockPricesBlockHeader = stockPricesBlock.querySelector('h2')
-                stockPricesBlock.innerHTML = ''
-                stockPricesBlock.append(stockPricesBlockHeader)
-    
-                for (const productStockPrice of response) {
-                    const stockHeader = document.createElement('h4')
-                    stockHeader.textContent = productStockPrice.stockName
-            
-                    const stockPriceInput = document.createElement('span')
-                    stockPriceInput.classList = 'enter-value'
-                    stockPriceInput.dataset.id = productStockPrice.id
-                    stockPriceInput.dataset.stockId = productStockPrice.stockId
-                    stockPriceInput.textContent = productStockPrice.sellingCost
-                    stockPriceInput.onpointerup = () => createCalculatorValueSpan(stockPriceInput)
-
-                    const stockPriceBlock = document.createElement('div')
-                    stockPriceBlock.append(stockHeader, stockPriceInput)
-                    stockPricesBlock.append(stockPriceBlock)
+                const fillStockPrices = selector => {
+                    const stockPricesBlock = productModal.querySelector('.' + selector)
+                    const stockPricesBlockHeader = stockPricesBlock.querySelector('h2')
+                    stockPricesBlock.innerHTML = ''
+                    stockPricesBlock.append(stockPricesBlockHeader)
+        
+                    for (const productStockPrice of response) {
+                        const stockHeader = document.createElement('h4')
+                        stockHeader.textContent = productStockPrice.stockName
+                
+                        const stockPriceInput = document.createElement('span')
+                        stockPriceInput.classList = 'enter-value'
+                        stockPriceInput.dataset.id = productStockPrice.id
+                        stockPriceInput.dataset.stockId = productStockPrice.stockId
+                        stockPriceInput.textContent = selector === 'stock-prices' ? productStockPrice.sellingCost : productStockPrice.buyingCost
+                        stockPriceInput.onpointerup = () => createCalculatorValueSpan(stockPriceInput)
+                        
+                        const stockPriceBlock = document.createElement('div')
+                        stockPriceBlock.append(stockHeader, stockPriceInput)
+                        stockPricesBlock.append(stockPriceBlock)
+                    }
                 }
+
+                fillStockPrices('buying-stock-prices')
+                fillStockPrices('stock-prices')
             }).catch(() => showMessage('error', getErrorMessage('ціни для товару')))
     
             productModal.querySelector('button').onpointerup = () => editProduct(product.id, tr)
@@ -377,6 +387,7 @@ const createProduct = () => {
     const type = productTypeToIndex[productModal.querySelector('input[name=product-type]:checked').value]
     const unit = productUnitToIndex[productModal.querySelector('input[name=product-unit]:checked').value]
 
+    const buyingStockPricesBlock = productModal.querySelectorAll('.buying-stock-prices div')
     const stockPricesBlock = productModal.querySelectorAll('.stock-prices div')
 
     if (productModal.querySelector('.stock-prices').children.length === 1) {
@@ -394,6 +405,12 @@ const createProduct = () => {
     const payButton = productModal.querySelector('button')
     payButton.disabled = true
 
+    const buyingStockPrices = []
+
+    for (const stockPriceBlock of buyingStockPricesBlock) {
+        buyingStockPrices.push(+stockPriceBlock.querySelector('span').textContent)
+    }
+
     const stockPrices = []
 
     for (const stockPriceBlock of stockPricesBlock) {
@@ -404,6 +421,10 @@ const createProduct = () => {
             stockId: input.dataset.id,
             sellingCost
         })
+    }
+
+    for (let i = 0; i < stockPrices.length; i++) {
+        stockPrices[i].buyingCost = buyingStockPrices[i]
     }
 
     const product = {
@@ -450,6 +471,7 @@ const editProduct = (id, oldRow) => {
     const type = productTypeToIndex[productModal.querySelector('input[name=product-type]:checked').value]
     const unit = productUnitToIndex[productModal.querySelector('input[name=product-unit]:checked').value]
 
+    const buyingStockPricesBlock = productModal.querySelectorAll('.buying-stock-prices div')
     const stockPricesBlock = productModal.querySelectorAll('.stock-prices div')
 
     for (const stockPriceBlock of stockPricesBlock) {
@@ -462,6 +484,12 @@ const editProduct = (id, oldRow) => {
     const payButton = productModal.querySelector('button')
     payButton.disabled = true
 
+    const buyingStockPrices = []
+
+    for (const stockPriceBlock of buyingStockPricesBlock) {
+        buyingStockPrices.push(+stockPriceBlock.querySelector('span').textContent)
+    }
+
     const stockPrices = []
 
     for (const stockPriceBlock of stockPricesBlock) {
@@ -473,6 +501,10 @@ const editProduct = (id, oldRow) => {
             stockId: input.dataset.stockId,
             sellingCost
         })
+    }
+
+    for (let i = 0; i < stockPrices.length; i++) {
+        stockPrices[i].buyingCost = buyingStockPrices[i]
     }
 
     const product = {
