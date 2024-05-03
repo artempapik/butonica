@@ -751,10 +751,10 @@ const menuItemsContents = {
                     <div class="arrows">
                         <span class="arrow-group">
                             <span class="material-symbols-outlined first-last-page" onpointerup="firstAllOrderPage(event)">first_page</span>
-                            <span class="material-symbols-outlined last-page" onpointerup="previousAllOrderPage(event)">arrow_circle_left</span>
+                            <span class="material-symbols-outlined last-page" onpointerup="previousAllOrderPage(event)">chevron_left</span>
                         </span>
                         <span class="arrow-group">
-                            <span class="material-symbols-outlined" onpointerup="nextAllOrderPage(event)">arrow_circle_right</span>
+                            <span class="material-symbols-outlined" onpointerup="nextAllOrderPage(event)">chevron_right</span>
                             <span class="material-symbols-outlined first-last-page" onpointerup="lastAllOrderPage(event)">last_page</span>
                         </span>
                     </div>
@@ -838,10 +838,10 @@ const menuItemsContents = {
                     <div class="arrows">
                         <span class="arrow-group">
                             <span class="material-symbols-outlined first-last-page" onpointerup="firstCompletedOrderPage(event)">first_page</span>
-                            <span class="material-symbols-outlined last-page" onpointerup="previousCompletedOrderPage(event)">arrow_circle_left</span>
+                            <span class="material-symbols-outlined last-page" onpointerup="previousCompletedOrderPage(event)">chevron_left</span>
                         </span>
                         <span class="arrow-group">
-                            <span class="material-symbols-outlined" onpointerup="nextCompletedOrderPage(event)">arrow_circle_right</span>
+                            <span class="material-symbols-outlined" onpointerup="nextCompletedOrderPage(event)">chevron_right</span>
                             <span class="material-symbols-outlined first-last-page" onpointerup="lastCompletedOrderPage(event)">last_page</span>
                         </span>
                     </div>
