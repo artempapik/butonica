@@ -468,40 +468,16 @@
                 align-items: center;
 
                 & .add-client {
-                    display: flex;
-                    align-items: center;
-                    gap: .4rem;
+                    cursor: pointer;
+                    color: rgba(42, 82, 190, .8);
 
-                    & span:first-child {
-                        cursor: pointer;
-                        color: rgba(42, 82, 190, .8);
-
-                        &:hover {
-                            color: rgb(42, 82, 190);
-                        }
+                    &:hover {
+                        color: rgb(42, 82, 190);
                     }
                 }
 
-                & .select-client {
-                    display: flex;
-                    gap: .5rem;
-
-                    & select, & input {
-                        border-radius: .6rem;
-                    }
-
-                    & select {
-                        width: 10rem;
-                    }
-
-                    & input {
-                        background-position: .3rem;
-                        background-size: 1.1rem;
-                        font-size: .9rem;
-                        padding: 0 .3rem;
-                        padding-left: 1.6rem;
-                        width: 6.7rem;
-                    }
+                & select {
+                    width: 12.5rem;
                 }
 
                 & .clear-client {
