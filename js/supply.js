@@ -165,6 +165,7 @@ const createSupplyModal = () => {
 
     const suppliesProductsTable = supplyModal.querySelector('table')
     suppliesProductsTable.innerHTML = suppliesProductsTable.querySelector('tbody').innerHTML
+    supplyModal.querySelector('.update-buying-cost input').checked = false
 
     totalSumElement.textContent = '0.00'
     totalSumAssociatedCostsElement.textContent = '0.00'
