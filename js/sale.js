@@ -1,4 +1,4 @@
-let shiftId, checkoutClients, checkoutClientsSelect, checkoutClientInput, clientsWithPhones
+let shiftId, checkoutClients, checkoutClientsSelect, clientsWithPhones
 let shifts, shiftsBlock, activeShiftIndex = 0
 let saleProducts, saleFlavors, totalSum, labels
 
@@ -11,8 +11,7 @@ const initializeSaleScreen = () => {
     checkoutClients = document.querySelector('.checkout-clients')
 
     checkoutClients.querySelector('.clear-client').onpointerup = () => {
-        checkoutClients.querySelector('select').value = ''
-        checkoutClients.querySelector('input').value = ''
+        $(checkoutClientsSelect).val('').select2(select2NoResults)
     }
 
     clientModal.querySelector('button').onpointerup = () => {
@@ -91,12 +90,14 @@ const initializeSaleScreen = () => {
     })
 
     checkoutClientsSelect = checkoutClients.querySelector('select')
-    checkoutClientInput = document.querySelector('.search-checkout-client')
     
     get(`Client/phones/${loginInfo.companyId}`).then(response => {
         clientsWithPhones = response
         fillClientsSelect(clientsWithPhones)
         checkoutClientsSelect.value = ''
+        const noResults = select2NoResults
+        noResults.placeholder = 'Оберіть клієнта'
+        $(checkoutClientsSelect).select2(noResults)
     })
 }
 
@@ -245,9 +246,6 @@ const payTypeToIndex = {
 }
 
 const createSale = () => {
-    const payButton = saleModal.querySelector('button')
-    payButton.disabled = true
-
     const checkoutClient = checkoutClients.querySelector('select').selectedOptions[0]
     const clientId = checkoutClient ? +checkoutClient.dataset.id : null
 
@@ -267,6 +265,9 @@ const createSale = () => {
         showMessage('error', 'Недостатньо готівки для оплати')
         return
     }
+
+    const payButton = saleModal.querySelector('button')
+    payButton.disabled = true
 
     const sale = {
         companyId: loginInfo.companyId,
@@ -1223,15 +1224,4 @@ const fillClientsSelect = clients => {
         option.dataset.bonusCash = client.bonusCash
         checkoutClientsSelect.add(option)
     }
-}
-
-const searchClientByPhone = () => {
-    const searchQuery = checkoutClientInput.value.trim()
-
-    if (!searchQuery) {
-        fillClientsSelect(clientsWithPhones)
-        return
-    }
-
-    fillClientsSelect(clientsWithPhones.filter(c => c.phone.split('\n').some(p => p.includes(searchQuery))))
 }
