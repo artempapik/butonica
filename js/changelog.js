@@ -12,7 +12,7 @@ const changelogs = [
         changes: [
             {
                 type: CHANGELOG_TYPES.fire,
-                text: 'тепер при створенні та редагуванні товарів можна призначати їм закупівельну ціну'
+                text: 'тепер при створенні та редагуванні товарів можна вписувати їм закупівельну ціну'
             },
             {
                 type: CHANGELOG_TYPES.exclamation,
