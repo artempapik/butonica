@@ -631,9 +631,15 @@ const menuItemsContents = {
                     </div>
                     <div class="checkout" onpointerup="createSaleOrderModal()">Оформити замовлення</div>
                     <div class="checkout-clients">
-                        <span class="material-symbols-outlined add-client" onpointerup="createClientModal(false)">add_circle</span>
+                        <div class="add-client" onpointerup="createClientModal(false)">
+                            <span class="material-symbols-outlined">add_circle</span>
+                            <span>Новий</span>
+                        </div>
                         <select class="select-client"></select>
-                        <span class="material-symbols-outlined clear-client">cancel</span>
+                        <div class="clear-client">
+                            <span>Очистити</span>
+                            <span class="material-symbols-outlined">cancel</span>
+                        </div>
                     </div>
                     <div class="sale-payment" onpointerup="createSaleModal()">Оплата</div>
                 </div>
