@@ -1,1227 +1,1229 @@
-let shiftId, checkoutClients, checkoutClientsSelect, clientsWithPhones
-let shifts, shiftsBlock, activeShiftIndex = 0
-let saleProducts, saleFlavors, totalSum, labels
-
-const shiftModal = document.querySelector('.create-shift-modal')
-const saleModal = document.querySelector('.create-sale-modal')
-const saleOrderModal = document.querySelector('.create-sale-order-modal')
-const cashRegisterOperationsModal = document.querySelector('.cash-register-operations-modal')
-
-const initializeSaleScreen = () => {
-    checkoutClients = document.querySelector('.checkout-clients')
-
-    checkoutClients.querySelector('.clear-client').onpointerup = () => {
-        $(checkoutClientsSelect).val('').select2(select2NoResults)
-    }
-
-    clientModal.querySelector('button').onpointerup = () => {
-        const fullNameElement = clientModal.querySelector('.client-full-name')
-        const fullName = fullNameElement.value.trim()
-
-        if (!fullName) {
-            showMessage('error', 'Введіть ПІБ клієнта')
-            return
-        }
-
-        const payButton = clientModal.querySelector('button')
-        payButton.disabled = true
-
-        const birthDateElement = clientModal.querySelector('.client-birth-date')
-
-        const client = {
-            companyId: loginInfo.companyId,
-            fullName,
-            phone: clientModal.querySelector('.client-phone').value,
-            email: clientModal.querySelector('.client-email').value,
-            birthDate: birthDateElement.value ? new Date(birthDateElement.value) : null,
-            isMale: clientModal.querySelector('input[type=radio]').checked,
-            instagram: clientModal.querySelector('.client-instagram').value,
-            comment: clientModal.querySelector('.client-comment').value
-        }
-
-        post('Client', client).then(response => {
-            hideModalEnableButton(clientModal, payButton)
-            showMessage('success', createSuccessMessage('клієнта'))
-            const option = document.createElement('option')
-            option.text = client.fullName + ' ' + client.phone.split('\n')[0]
-            option.dataset.id = response
-            option.dataset.name = client.fullName
-            option.dataset.phone = client.phone
-            option.dataset.bonusCash = 0
-            checkoutClientsSelect.add(option)
-        }).catch(() => {
-            hideModalEnableButton(clientModal, payButton)
-            showMessage('error', createErrorMessage('клієнта'))
-        })
-    }
-
-    totalSum = document.querySelector('.to-pay .enter-value')
-    shiftsBlock = document.querySelector('.shifts')
-    shifts = JSON.parse(localStorage.getItem('shifts')) || []
-
-    if (shifts.length) {
-        document.querySelector('.empty-cart').style.display = 'none'
-        document.querySelector('.add-shift').style.display = 'flex'
-
-        document.querySelector('.cash-register-products .products').style.display = 'block'
-        const saleProducts = document.querySelector('.cash-register-products .sale-products')
-        shifts[shifts.length - 1].products.forEach(p => saleProducts.append(p.isFlavor ? createSaleFlavor(p) : createSaleProduct(p)))
-        document.querySelector('.shopping-cart-total').textContent = shifts[shifts.length - 1].products.length
-        activeShiftIndex = shifts.length - 1
-        document.querySelector('.cash-register-products .products').style.display = shifts[activeShiftIndex].products.length ? 'block' : ''
-    }
-
-    updateTotalSum()
-    shifts.forEach(s => createShift(s))
-
-    get(`Order/products-flavors/${shiftId}`).then(response => {
-        hidePageLoad()
-
-        saleFlavors = response.flavors ? response.flavors.map(f => ({
-            id: f.id,
-            name: getFlavorName(f),
-            imageData: f.imageData,
-            totalProductCost: f.totalSum
-        })) : []
-
-        fillSaleFlavors(saleFlavors)
-        saleProducts = response.products || []
-        fillSaleProducts(saleProducts)
-    })
-
-    checkoutClientsSelect = checkoutClients.querySelector('select')
-    
-    get(`Client/phones/${loginInfo.companyId}`).then(response => {
-        clientsWithPhones = response
-        fillClientsSelect(clientsWithPhones)
-        checkoutClientsSelect.value = ''
-        const noResults = select2NoResults
-        noResults.placeholder = 'Оберіть клієнта'
-        $(checkoutClientsSelect).select2(noResults)
-    })
+const CHANGELOG_TYPES = {
+    success: 'success',
+    fire: 'fire',
+    exclamation: 'exclamation',
+    bug: 'bug'
 }
 
-const showSaleInfo = e => {
-    showPageLoad()
-
-    get(`Shift/last/${loginInfo.employeeId}`).then(response => {
-        get(`Label/${loginInfo.companyId}`)
-            .then(response => labels = response)
-            .catch(() => showMessage('error', getErrorMessage('мітки')))
-        
-        shiftId = response
-        fillSelectedMenuItem(e)
-
-        header.style.display = 'none'
-        document.querySelector('main').classList.add('sale-padding')
-
-        document.querySelectorAll('.main-menu span:last-child').forEach(i => i.style.display = 'none')
-        document.querySelectorAll('.menu-item').forEach(i => i.style.width = 'fit-content')
-        document.querySelector('.main-menu').classList.add('sale-padding')
-        document.querySelectorAll('.sub-menu li').forEach(i => {
-            i.classList.add('sale-padding')
-            i.style.color = 'rgb(204, 85, 0)'
-            i.querySelector('div').style.justifyContent = 'center'
-            i.querySelector('div span').style.fontWeight = 'bold'
-        })
-
-        main.innerHTML = menuItemsContents['sale']
-
-        if (response) {
-            initializeSaleScreen()
-            return
-        }
-
-        hidePageLoad()
-        shiftModal.style.display = 'flex'
-
-        get(`CashRegister/ids-names/${loginInfo.companyId}`).then(response => {
-            hideBodyOverflow()
-            const cashRegistersSelect = shiftModal.querySelector('select')
-
-            for (const cashRegister of response) {
-                const option = document.createElement('option')
-                option.text = cashRegister.name
-                option.dataset.id = cashRegister.id
-                cashRegistersSelect.append(option)
+const changelogs = [
+    {
+        v: '2.7.1',
+        date: '14.05.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'тепер при створенні та редагуванні товарів ви можете змінити закупівельну ціну'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: "в поставках з'явився прапорець, який дозволяє відмітити, чи хочете ви оновити закупівельні ціни для товарів"
             }
-            
-            cashRegistersSelect.value = ''
-            $(cashRegistersSelect).select2({
-                minimumResultsForSearch: -1,
-                'language': {
-                    'noResults': () => 'Каси відсутні'
-                }
-            })
-        })
-    }).catch(e => {
-        hidePageLoad()
-        
-        if (e.message.startsWith('403')) {
-            const employee = JSON.parse(e.message.substring(3))
-            showMessage('error', `Зміна відкрита співробітником\n${employee.email} (${employee.fullName})`)
-            return
-        }
-
-        showMessage('error', getErrorMessage('зміну'))
-    })
-}
-
-const createEmployeeShift = () => {
-    const cashRegister = shiftModal.querySelector('select')
-
-    if (!cashRegister.value) {
-        showMessage('error', 'Оберіть касу')
-        return
-    }
-
-    const cash = shiftModal.querySelector('.enter-value')
-
-    if (!cash.textContent) {
-        showMessage('error', 'Внесіть готівку')
-        return
-    }
-
-    const payButton = shiftModal.querySelector('button:last-child')
-    payButton.disabled = true
-
-    const shift = {
-        cashRegisterId: cashRegister.selectedOptions[0].dataset.id,
-        cash: +cash.textContent,
-        employeeId: loginInfo.employeeId,
-        start: new Date()
-    }
-
-    post('Shift', shift).then(response => {
-        showPageLoad()
-        hideModalEnableButton(shiftModal, payButton)
-        shiftId = response
-        initializeSaleScreen()
-        showMessage('success', 'Ви почали зміну')
-    }).catch(() => {
-        hideModalEnableButton(shiftModal, payButton)
-        showMessage('Сталася помилка при спробі відкрити зміну')
-    })
-}
-
-const createSaleModal = () => {
-    if (!shifts || !shifts.length || !shifts[activeShiftIndex].products.length) {
-        showMessage('error', 'Ви не додали жодного товару')
-        return
-    }
-
-    saleModal.querySelector('input[name=pay-type]').checked = true
-    saleModal.querySelector('.sale-checkout').style.display = 'flex'
-    saleModal.querySelector('.sale-checkout').classList.remove('free-terminal')
-    saleModal.querySelector('.sale-checkout .sale-change').style.display = ''
-    hideBodyOverflow()
-    saleModal.style.display = 'flex'
-
-    const paidSumInput = saleModal.querySelector('.sale-checkout input')
-    paidSumInput.value = ''
-    paidSumInput.oninput = () => {
-        const paidSum = +paidSumInput.value
-        const changeBlock = saleModal.querySelector('.sale-checkout .sale-change')
-
-        changeBlock.style.display = paidSum > +totalSum.textContent ? 'flex' : 'none'
-        changeBlock.querySelector('.change').textContent = (paidSum - +totalSum.textContent).toFixed(2)
-    }
-
-    saleModal.querySelectorAll('.payment label').forEach(l => l.onpointerup = () => {
-        const isCash = l.querySelector('input').value === 'Готівка'
-        const saleCheckout = saleModal.querySelector('.sale-checkout')
-        
-        if (isCash) {
-            saleCheckout.classList.remove('free-terminal')
-        } else {
-            saleCheckout.classList.add('free-terminal')
-        }
-    })
-}
-
-const payTypeToIndex = {
-    'Готівка': 0,
-    'Термінал': 1,
-    'Безкоштовно': 2
-}
-
-const createSale = () => {
-    const checkoutClient = checkoutClients.querySelector('select').selectedOptions[0]
-    const clientId = checkoutClient ? +checkoutClient.dataset.id : null
-
-    let customerName = ''
-    let customerPhone = ''
-
-    if (checkoutClient) {
-        customerName = checkoutClient.dataset.name
-        customerPhone = checkoutClient.dataset.phone
-    }
-
-    const totalSumValue = +totalSum.textContent
-    const payType = payTypeToIndex[saleModal.querySelector('input[name=pay-type]:checked').value]
-    const paidSum = +saleModal.querySelector('.sale-checkout input').value || 0
-
-    if (paidSum < totalSumValue && payType === 0) {
-        showMessage('error', 'Недостатньо готівки для оплати')
-        return
-    }
-
-    const payButton = saleModal.querySelector('button')
-    payButton.disabled = true
-
-    const sale = {
-        companyId: loginInfo.companyId,
-        shiftId,
-        clientId,
-        customerName,
-        customerPhone,
-        flavors: shifts[activeShiftIndex].products.filter(p => p.isFlavor).map(f => ({ flavorId: f.id })),
-        products: shifts[activeShiftIndex].products.filter(p => !p.isFlavor).map(p => ({
-            productId: p.id,
-            amount: p.shiftAmount,
-            sum: p.totalProductCost
-        })),
-        totalSum: totalSumValue,
-        payType,
-        paidSum
-    }
-
-    post('Order', sale).then(() => {
-        closeShift()
-        hideModalEnableButton(saleModal, payButton)
-        showMessage('success', createSuccessMessage('продаж'))
-    }).catch(() => {
-        hideModalEnableButton(saleModal, payButton)
-        showMessage('error', createErrorMessage('продаж'))
-    })
-}
-
-const createSaleOrderModal = () => {
-    if (!shifts || !shifts.length || !shifts[activeShiftIndex].products.length) {
-        showMessage('error', 'Ви не додали жодного товару')
-        return
-    }
-
-    hideBodyOverflow()
-
-    saleOrderModal.querySelector('.free-payment input').checked = false
-    saleOrderModal.querySelector('.payment-content').classList.remove('free-payment')
-    saleOrderModal.style.display = 'flex'
-    const buttons = saleOrderModal.querySelectorAll('.sale-order-type span')
-
-    buttons.forEach(b => {
-        b.style.background = '#fff'
-        b.style.color = '#000'
-    })
-
-    const labelsBlock = saleOrderModal.querySelector('.sale-order-labels')
-    const deliveryBlocks = saleOrderModal.querySelectorAll('[id^=delivery]')
-    const pickupBlocks = saleOrderModal.querySelectorAll('[id^=pickup]')
-
-    labelsBlock.style.display = 'none'
-    deliveryBlocks.forEach(b => b.style.display = 'none')
-    pickupBlocks.forEach(b => b.style.display = 'none')
-
-    const saleOrderProducts = saleOrderModal.querySelector('.sale-order-products')
-    const checkout = saleOrderModal.querySelector('.sale-order-checkout')
-    const payment = saleOrderModal.querySelector('.payment')
-
-    saleOrderProducts.style.display = 'none'
-    checkout.style.display = 'none'
-    payment.style.display = 'none'
-    
-    buttons.forEach(b => b.onpointerup = () => {
-        imageData = ''
-        saleOrderModal.querySelectorAll('img').forEach(i => i.src = EMPTY_IMAGE_URL)
-
-        buttons.forEach(b => {
-            b.style.background = '#fff'
-            b.style.color = '#000'
-        })
-
-        b.style.background = 'rgb(40, 40, 40)'
-        b.style.color = 'rgb(245, 245, 245)'
-
-        labelsBlock.innerHTML = ''
-        labelsBlock.style.display = 'flex'
-        
-        for (const label of labels) {
-            const div = document.createElement('div')
-            div.classList = 'sale-order-label'
-            div.textContent = label.name
-            div.dataset.id = label.id
-
-            const backgroundColor = `rgb(${labelIndexToBackground[label.color]})`
-            div.style.outline = `.15rem ${backgroundColor} solid`
-
-            div.onpointerup = () => {
-                if (div.style.background === backgroundColor) {
-                    div.style.background = ''
-                    div.style.color = ''
-                    div.style.boxShadow = ''
-                    return
-                }
-
-                div.style.background = backgroundColor
-                div.style.color = `rgb(${labelIndexToColor[label.color]})`
-                div.style.boxShadow = 'rgba(0, 0, 0, .16) 0 3px 6px, rgba(0, 0, 0, .23) 0 3px 6px'
+        ]
+    },
+    {
+        v: '2.7',
+        date: '11.05.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.success,
+                text: "всі ваші замовлення в очікуванні можна відправити у друк! Для таких замовлень тепер наявні 2 кнопки біля номеру, які дозволяють обрати формат друку"
+            },
+            {
+                text: 'редизайн вибору клієнта в меню «Продаж»'
             }
-
-            labelsBlock.append(div)
-        }
-
-        const paymentIcons = saleOrderModal.querySelectorAll('.payment-content li span:first-child')
-        paymentIcons.forEach(paymentIcon => paymentIcon.onpointerup = () => {
-            paymentIcons.forEach(pi => pi.parentNode.classList.remove('active-payment-type'))
-            paymentIcon.parentNode.classList.add('active-payment-type')
-        })
-
-        saleOrderModal.querySelectorAll('input:not(input[type=radio])').forEach(i => i.value = '')
-        saleOrderModal.querySelectorAll('textarea').forEach(t => t.value = '')
-
-        saleOrderProducts.style.display = 'flex'
-        checkout.style.display = 'flex'
-        payment.style.display = 'flex'
-
-        const fillClientInfo = saleOrderType => {
-            const checkoutClient = checkoutClients.querySelector('select').selectedOptions[0]
-            const cashBackBlock = payment.querySelector('.cashback')
-            const cashBlock = payment.querySelector('.cash')
-
-            if (checkoutClient) {
-                cashBackBlock.style.display = ''
-                cashBlock.querySelector('ul').style.margin = ''
-            } else {
-                cashBackBlock.style.display = 'none'
-                cashBlock.querySelector('ul').style.margin = 'auto'
-                return
+        ]
+    },
+    {
+        v: '2.6.1',
+        date: '06.05.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'Видалення поставок, списань та інвентаризацій – реалізовано! Можна більше не перейматися, що дані було заповнено невірно'
+            },
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: '«Загальна статистика» отримала редизайн – тепер переглядати всю найважливішу інформацію стало ще зручніше і простіше'
             }
-
-            if (!checkoutClient) {
-                return
+        ]
+    },
+    {
+        v: '2.6',
+        date: '03.05.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'тепер ви можете видаляти внесення, винесення, продажі та замовлення з робочих змін! Дуже в нагоді, коли флорист помилився операцією або продаж/замовлення було скасовано'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: "в меню «Продаж» у мобільному режимі з'явилася кнопка, яка дозволяє повернутися на головну сторінку"
             }
-
-            let customerName = checkoutClient.dataset.name
-
-            const customerInfo = saleOrderModal.querySelector(`#${saleOrderType}-customer-recipient-info`)
-            customerInfo.querySelector('.sale-order-customer-name').value = customerName
-            customerInfo.querySelector('.sale-order-customer-phone').value = checkoutClient.dataset.phone
-
-            const clientInfo = saleOrderModal.querySelector('.cashback')
-            clientInfo.querySelector('.client span:last-child').textContent = checkoutClient.dataset.name
-            clientInfo.querySelector('.balance span:last-child').textContent = (+checkoutClient.dataset.bonusCash).toFixed(2) + ' грн'
-        }
-
-        if (b.textContent === 'Доставка') {
-            deliveryBlocks.forEach(b => b.style.display = 'flex')
-            pickupBlocks.forEach(b => b.style.display = 'none')
-            fillClientInfo('delivery')
-            return
-        }
-
-        deliveryBlocks.forEach(b => b.style.display = 'none')
-        pickupBlocks.forEach(b => b.style.display = 'flex')
-        fillClientInfo('pickup')
-    })
-
-    const orderProducts = saleOrderModal.querySelector('table')
-    orderProducts.innerHTML = orderProducts.querySelector('tbody').innerHTML
-
-    for (const product of shifts[activeShiftIndex].products) {
-        const tr = document.createElement('tr')
-        tr.append(
-            createTd(product.name),
-            createTd(product.shiftAmount),
-            createTd(product.totalProductCost.toFixed(2) + ' грн'),
-        )
-        orderProducts.append(tr)
-    }
-
-    saleOrderModal.querySelector('.sale-order-total-sum span:last-child').textContent = (+totalSum.textContent).toFixed(2) + ' грн'
-
-    const paymentContent = saleOrderModal.querySelector('.payment-content')
-    const freePaymentCheckbox = saleOrderModal.querySelector('.free-payment input')
-    freePaymentCheckbox.onclick = () => freePaymentCheckbox.checked ? paymentContent.classList.add('free-payment') : paymentContent.classList.remove('free-payment')
-
-    saleOrderModal.querySelector('button').onpointerup = () => {
-        const saleOrderType = buttons.item(0).style.background === 'rgb(40, 40, 40)' ? 'delivery' : 'pickup'
-        createSaleOrder(saleOrderType)
-    }
-}
-
-const createSaleOrder = saleOrderType => {
-    const dateInfo = saleOrderModal.querySelector(`#${saleOrderType}-date`)
-    const dateElement = dateInfo.querySelector('.sale-order-date-date')
-
-    if (!dateElement.value) {
-        showMessage('error', 'Вкажіть дату замовлення')
-        return
-    }
-
-    const clientOption = checkoutClients.querySelector('select').selectedOptions[0]
-    let clientId = null
-
-    if (clientOption) {
-        clientId = +clientOption.dataset.id
-    }
-
-    const date = new Date(dateElement.value)
-
-    const timeFromElement = dateInfo.querySelector('.sale-order-date-time-from')
-    const timeTillElement = dateInfo.querySelector('.sale-order-date-time-till')
-
-    if (saleOrderType === 'pickup' && (!timeFromElement.value || !timeTillElement.value)) {
-        showMessage('error', 'Оберіть час для самовивозу')
-        return
-    }
-
-    const customerInfo = saleOrderModal.querySelector(`#${saleOrderType}-customer-recipient-info`)
-    const customerNameElement = customerInfo.querySelector('.sale-order-customer-name')
-
-    if (!customerNameElement.value) {
-        showMessage('error', "Введіть ім'я замовника")
-        return
-    }
-
-    const customerName = customerNameElement.value.trim()
-    const customerPhone = customerInfo.querySelector('.sale-order-customer-phone').value.trim()
-
-    let recipientName, recipientPhone
-    if (saleOrderType === 'delivery') {
-        recipientName = customerInfo.querySelector('.sale-order-recipient-name').value.trim()
-        recipientPhone = customerInfo.querySelector('.sale-order-recipient-phone').value.trim()
-    }
-
-    const addressElement = saleOrderModal.querySelector('.sale-order-address')
-
-    if (saleOrderType === 'delivery' && !addressElement.value) {
-        showMessage('error', 'Введіть адресу доставки')
-        return
-    }
-
-    const paidBonusSum = +saleOrderModal.querySelector('.cashback input').value || 0
-    const checkoutClient = checkoutClients.querySelector('select').selectedOptions[0]
-
-    if (checkoutClient && paidBonusSum > +checkoutClient.dataset.bonusCash) {
-        showMessage('error', 'Клієнт не має стільки бонусів на рахунку')
-        return
-    }
-    
-    if (paidBonusSum > +totalSum.textContent / 2) {
-        showMessage('error', 'Сума бонусів не може перевищувати половину суми замовлення')
-        return
-    }
-
-    const payButton = saleOrderModal.querySelector('button')
-    payButton.disabled = true
-
-    const order = {
-        companyId: loginInfo.companyId,
-        imageData,
-        labels: [...saleOrderModal.querySelectorAll('.sale-order-label')]
-            .filter(l => l.style.outlineColor === l.style.background)
-            .map(l => ({ labelId: +l.dataset.id })),
-        shiftId,
-        clientId,
-        date,
-        timeFromString: timeFromElement.value,
-        timeTillString: timeTillElement.value,
-        customerName,
-        customerPhone,
-        recipientName,
-        recipientPhone,
-        address: addressElement.value.trim(),
-        comment: saleOrderModal.querySelector(`#${saleOrderType}-comment textarea`).value.trim(),
-        flavors: shifts[activeShiftIndex].products.filter(p => p.isFlavor).map(f => ({ flavorId: f.id })),
-        products: shifts[activeShiftIndex].products.filter(p => !p.isFlavor).map(p => ({
-            productId: p.id,
-            amount: p.shiftAmount,
-            sum: p.totalProductCost
-        })),
-        totalSum: totalSum.textContent,
-        payType: saleOrderModal.querySelector('.free-payment input').checked ?
-            2 :
-            saleOrderModal.querySelector('.payment-content li').classList.contains('active-payment-type') ? 0 : 1,
-        paidBonusSum,
-        paidSum: +saleOrderModal.querySelector('.cash input').value || 0
-    }
-
-    post('Order', order).then(() => {
-        hideModalEnableButton(saleOrderModal, payButton)
-        closeShift()
-        showMessage('success', createSuccessMessage('замовлення'))
-    }).catch(() => {
-        hideModalEnableButton(saleOrderModal, payButton)
-        showMessage('error', createErrorMessage('замовлення'))
-    })
-}
-
-const calculateSaleTotalSum = () => shifts[activeShiftIndex].products.reduce((total, current) => total + current.totalProductCost, 0)
-const updateTotalSum = () => totalSum.textContent = shifts.length ? calculateSaleTotalSum().toFixed(2) : '0.00'
-
-const setActiveButton = button => {
-    for (const button of document.querySelectorAll('.shifts button')) {
-        button.style.background = 'rgb(250, 250, 250)'
-        button.style.color = 'rgb(20, 20, 20)'
-        button.querySelector('span:last-child').style.display = 'none'
-        button.style.width = '4.6rem'
-    }
-
-    if (!button) {
-        return
-    }
-
-    button.style.background = 'rgb(20, 20, 20)'
-    button.style.color = 'rgb(240, 240, 240)'
-    button.style.width = '5.7rem'
-
-    if (button.children.length) {
-        button.querySelector('span:last-child').style.display = ''
-    }
-}
-
-const closeShift = (updateSaleWindow = true) => {
-    if (updateSaleWindow) {
-        document.querySelector('.search-sale-product').value = ''
-        document.querySelector('.sale-products').innerHTML = ''
-
-        fillSaleFlavors(saleFlavors, true)
-        fillSaleProducts(saleProducts, true)
-        
-        const saleFlavorsNodes = document.querySelectorAll('.sale-content .sale-flavor')
-        const saleProductsNodes = document.querySelectorAll('.sale-content .sale-product')
-
-        for (const product of shifts[activeShiftIndex].products) {
-            if (product.isFlavor) {
-                for (const saleFlavor of saleFlavorsNodes) {
-                    if (saleFlavor.querySelector('.sale-flavor-name span:last-child').textContent === product.name) {
-                        saleFlavor.remove()
-                        break
-                    }
-                }
-            } else {
-                for (const saleProduct of saleProductsNodes) {
-                    if (saleProduct.querySelector('.sale-product-name').textContent === product.name) {
-                        let amount = saleProduct.querySelector('.sale-product-amount-price span').textContent
-                        const spaceIndex = amount.indexOf(' ')
-                        amount = Math.round((+amount.substring(0, spaceIndex) - product.shiftAmount) * 100) / 100 + amount.substring(spaceIndex)
-                        saleProduct.querySelector('.sale-product-amount-price span').textContent = amount
-                        break
-                    }
-                }
+        ]
+    },
+    {
+        v: '2.5.1',
+        date: '28.04.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.bug,
+                text: 'фікс багу з декількома номерами телефонів у замовленні'
+            },
+            {
+                type: CHANGELOG_TYPES.bug,
+                text: 'фікс багу з позиціонуванням калькулятора'
+            },
+            {
+                text: 'на калькулятор тепер також впливають анімації'
+            },
+            {
+                text: 'калькулятор додано до компоненту зміни ціни продажу/замовлення'
             }
-        }
-    }
-
-    let activeShiftButton
-
-    for (const button of document.querySelectorAll('.shifts button')) {
-        if (button.style.background === 'rgb(20, 20, 20)') {
-            activeShiftButton = button
-            break
-        }
-    }
-
-    activeShiftButton.remove()
-    activeShiftButton.onpointerup = () => {}
-    shifts.splice(activeShiftIndex, 1)
-    localStorage.setItem('shifts', JSON.stringify(shifts))
-
-    if (activeShiftIndex > 0) {
-        activeShiftIndex--
-    }
-
-    const saleProductsScreen = document.querySelector('.cash-register-products .sale-products')
-    saleProductsScreen.innerHTML = ''
-
-    if (shifts.length) {
-        setActiveButton(document.querySelectorAll('.shifts button').item(activeShiftIndex))
-        shifts[activeShiftIndex].products.forEach(p => saleProductsScreen.append(p.isFlavor ? createSaleFlavor(p) : createSaleProduct(p)))
-        document.querySelector('.shopping-cart-total').textContent = shifts[activeShiftIndex].products.length
-        document.querySelector('.cash-register-products .products').style.display = shifts[activeShiftIndex].products.length ? 'block' : ''
-        updateTotalSum()
-        return
-    }
-
-    document.querySelector('.empty-cart').style.display = 'flex'
-    document.querySelector('.add-shift').style.display = 'none'
-    document.querySelector('.products').style.display = 'none'
-    updateTotalSum()
-}
-
-const createShift = (shift = null, product = null) => {
-    const timeSpan = document.createElement('span')
-    const date = new Date()
-
-    const time = `${padTime(date.getHours())}:${padTime(date.getMinutes())}`
-
-    if (shift) {
-        timeSpan.textContent = shift.time
-    } else {
-        timeSpan.textContent = time
-        shifts.push({ time, products: [] })
-
-        if (product) {
-            shifts[shifts.length - 1].products.push(product)
-        }
-
-        localStorage.setItem('shifts', JSON.stringify(shifts))
-    }
-
-    const close = document.createElement('span')
-    close.classList = 'material-symbols-outlined'
-    close.textContent = 'close'
-
-    close.onpointerup = () => {
-        if (!shifts[activeShiftIndex].products.length) {
-            closeShift(false)
-            return
-        }
-
-        if (shifts[activeShiftIndex].products.length) {
-            showConfirm('Видалити продаж?', () => {
-                closeShift(false)
-                setTimeout(() => hideModal(confirmModal), 1)
-            })
-        }
-    }
-
-    const button = document.createElement('button')
-    button.classList = 'shift'
-    setActiveButton(button)
-
-    button.onpointerup = () => {
-        setActiveButton(button)
-        let index = 0
-
-        for (const button of document.querySelectorAll('.shifts button')) {
-            if (button.style.background === 'rgb(20, 20, 20)') {
-                activeShiftIndex = index
-                break
+        ]
+    },
+    {
+        v: '2.5',
+        date: '25.04.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.success,
+                text: 'Редагування ваших замовлень – реалізовано! Більше не потрібно створювати нове замовлення, якщо вміст було змінено'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'фільтрації даних за датами було перенесено у заголовки таблиць – разом із новим календарем'
+            },
+            {
+                text: 'всі події наведення перенесено у спеціальні секції – більше не буде випадкових натискань на телефоні/планшеті'
             }
-
-            index++
-        }
-
-        const saleProducts = document.querySelector('.cash-register-products .sale-products')
-        saleProducts.innerHTML = ''
-        shifts[activeShiftIndex].products.forEach(p => saleProducts.append(p.isFlavor ? createSaleFlavor(p) : createSaleProduct(p)))
-        document.querySelector('.shopping-cart-total').textContent = shifts[activeShiftIndex].products.length
-        document.querySelector('.cash-register-products .products').style.display = shifts[activeShiftIndex].products.length ? 'block' : ''
-        
-        updateTotalSum()
-    }
-
-    button.append(timeSpan, close)
-    shiftsBlock.insertBefore(button, document.querySelector('.add-shift'))
-}
-
-const createSaleFlavor = flavor => {
-    const saleFlavorName = document.createElement('span')
-    saleFlavorName.textContent = flavor.name
-
-    const saleFlavorNameBlock = document.createElement('div')
-    saleFlavorNameBlock.classList = 'sale-flavor-name'
-
-    saleFlavorNameBlock.append(createFlavorIcon(), saleFlavorName)
-
-    const saleFlavorCost = document.createElement('div')
-    saleFlavorCost.classList = 'sale-flavor-cost'
-    saleFlavorCost.append(createSpan(flavor.totalProductCost.toFixed(2)))
-
-    const saleFlavorHeader = document.createElement('div')
-    saleFlavorHeader.classList = 'sale-flavor-header'
-    saleFlavorHeader.append(saleFlavorNameBlock, saleFlavorCost)
-
-    const saleFlavor = document.createElement('div')
-    saleFlavor.classList = 'sale-flavor'
-    saleFlavor.append(saleFlavorHeader)
-
-    const removeFlavor = document.createElement('span')
-    removeFlavor.classList = 'material-symbols-outlined'
-    removeFlavor.textContent = 'remove_circle_outline'
-
-    removeFlavor.onpointerup = e => {
-        e.target.parentNode.remove()
-        shifts[activeShiftIndex].products.splice(shifts[activeShiftIndex].products.findIndex(f => f.isFlavor && f.id === flavor.id), 1)
-        localStorage.setItem('shifts', JSON.stringify(shifts))
-        document.querySelector('.shopping-cart-total').textContent = shifts[activeShiftIndex].products.length
-        updateTotalSum()
-    }
-
-    const saleFlavorContent = document.createElement('div')
-    saleFlavorContent.classList = 'sale-product-content'
-    saleFlavorContent.append(saleFlavor, removeFlavor)
-
-    return saleFlavorContent
-}
-
-const createSaleProduct = product => {
-    const saleProductName = document.createElement('div')
-    saleProductName.classList = 'sale-product-name'
-    saleProductName.textContent = product.name
-
-    const saleProductCost = document.createElement('div')
-    saleProductCost.classList = 'sale-product-cost'
-    saleProductCost.append(
-        createSpan(product.sellingCost.toFixed(2) + ' x '),
-        createSpan(),
-        createSpan(' = '),
-        createSpan()
-    )
-
-    const saleProductHeader = document.createElement('div')
-    saleProductHeader.classList = 'sale-product-header'
-    saleProductHeader.append(saleProductName, saleProductCost)
-
-    const spans = saleProductCost.querySelectorAll('span')
-    spans.item(1).textContent = product.shiftAmount || product.shiftAmount === 0 ? product.shiftAmount : 1
-    spans.item(3).textContent = product.totalProductCost || product.totalProductCost === 0 ? product.totalProductCost.toFixed(2) : product.sellingCost.toFixed(2)
-
-    const input = document.createElement('input')
-    input.oninput = e => {
-        handlePriceInput(e)
-        spans.item(1).textContent = input.value
-
-        const totalCost = +input.value * product.sellingCost
-        spans.item(3).textContent = totalCost.toFixed(2)
-
-        updateShiftProduct(product.id, +input.value, totalCost)
-    }
-    input.value = product.shiftAmount || product.shiftAmount === 0 ? product.shiftAmount : '1'
-    input.type = 'number'
-    input.min = '0'
-    input.max = '9999'
-
-    const updateShiftProduct = (id, amount, totalCost) => {
-        const currentShift = shifts[activeShiftIndex]
-
-        for (const product of currentShift.products) {
-            if (product.id === id) {
-                product.shiftAmount = amount
-                product.totalProductCost = totalCost
-                break
+        ]
+    },
+    {
+        v: '2.4.3',
+        date: '20.04.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.bug,
+                text: 'додане online-замовлення тепер одразу відображається у списку замовлень'
+            },
+            {
+                text: 'компонент «Калькулятор» запроваджено у меню початку зміни, меню каси та в розділі витрат'
             }
-        }
-
-        shifts[activeShiftIndex] = currentShift
-        updateTotalSum()
-        localStorage.setItem('shifts', JSON.stringify(shifts))
-    }
-
-    const decreaseButton = document.createElement('button')
-    decreaseButton.onpointerup = () => {
-        const value = +input.value
-
-        if (value === 0) {
-            return
-        }
-
-        input.value = value > 0 && value < 1 ? '0' : +input.value - 1
-        spans.item(1).textContent = input.value
-
-        const totalCost = input.value === '0' ? 0 : (+spans.item(3).textContent - product.sellingCost).toFixed(2)
-        spans.item(3).textContent = totalCost
-
-        updateShiftProduct(product.id, +input.value, +totalCost)
-    }
-    decreaseButton.textContent = '-'
-    
-    const increaseButton = document.createElement('button')
-    increaseButton.onpointerup = () => {
-        const value = +input.value
-
-        if (value === 9999) {
-            return
-        }
-
-        input.value = value > 9998 && value < 9999 ? '9999' : +input.value + 1
-        spans.item(1).textContent = input.value
-
-        const totalCost = input.value === '9999' ? (product.sellingCost * 9999).toFixed(2) : (+spans.item(3).textContent + product.sellingCost).toFixed(2)
-        spans.item(3).textContent = totalCost
-
-        updateShiftProduct(product.id, +input.value, +totalCost)
-    }
-    increaseButton.textContent = '+'
-
-    const saleProductButtons = document.createElement('div')
-    saleProductButtons.classList = 'sale-product-buttons'
-    saleProductButtons.append(decreaseButton, input, increaseButton)
-
-    const saleProduct = document.createElement('div')
-    saleProduct.classList = 'sale-product'
-    saleProduct.append(saleProductHeader, saleProductButtons)
-
-    const removeProduct = document.createElement('span')
-    removeProduct.classList = 'material-symbols-outlined'
-    removeProduct.textContent = 'remove_circle_outline'
-
-    removeProduct.onpointerup = e => {
-        e.target.parentNode.remove()
-        shifts[activeShiftIndex].products.splice(shifts[activeShiftIndex].products.findIndex(p => p.id === product.id), 1)
-        localStorage.setItem('shifts', JSON.stringify(shifts))
-        document.querySelector('.shopping-cart-total').textContent = shifts[activeShiftIndex].products.length
-        updateTotalSum()
-    }
-
-    const saleProductContent = document.createElement('div')
-    saleProductContent.classList = 'sale-product-content'
-    saleProductContent.append(saleProduct, removeProduct)
-
-    return saleProductContent
-}
-
-const productIndexToShortUnit = {
-    0: 'шт',
-    1: 'кг',
-    2: 'м'
-}
-
-const createFlavorIcon = () => {
-    const flavorIcon = document.createElement('span')
-    flavorIcon.classList = 'material-symbols-outlined'
-    flavorIcon.textContent = 'local_florist'
-    return flavorIcon
-}
-
-const fillSaleFlavors = (saleFlavors, reshow = false) => {
-    document.querySelector('.sale-products').innerHTML = ''
-
-    for (const flavor of saleFlavors) {
-        const flavorName = document.createElement('span')
-        flavorName.textContent = flavor.name
-
-        const flavorNameBlock = document.createElement('div')
-        flavorNameBlock.classList = 'sale-flavor-name'
-        flavorNameBlock.append(createFlavorIcon(), flavorName)
-
-        const flavorPrice = document.createElement('span')
-        flavorPrice.textContent = flavor.totalProductCost.toFixed(2) + ' грн'
-
-        const flavorPriceBlock = document.createElement('div')
-        flavorPriceBlock.classList = 'sale-flavor-price'
-        flavorPriceBlock.append(flavorPrice)
-
-        const div = document.createElement('div')
-        div.append(flavorNameBlock, flavorPriceBlock)
-
-        const saleFlavor = document.createElement('div')
-        saleFlavor.classList = 'sale-flavor'
-        saleFlavor.append(div)
-        saleFlavor.dataset.imageData = flavor.imageData || ''
-
-        const saleProducts = document.querySelector('.cash-register-products .sale-products')
-        saleFlavor.onpointerup = () => {
-            saleFlavor.style.background = 'rgb(215, 215, 215)'
-            let isNewShift = false
-
-            if (!shifts.length) {
-                isNewShift = true
-
-                createShift(null, {
-                    id: flavor.id,
-                    name: flavor.name,
-                    totalProductCost: flavor.totalProductCost,
-                    isFlavor: true
-                })
+        ]
+    },
+    {
+        v: '2.4.2',
+        date: '18.04.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'інформація щодо виручки online-замовлень тепер приховується у статистиці (для флориста і менеджера)'
+            },
+            {
+                type: CHANGELOG_TYPES.bug,
+                text: 'фікс багу видалення порожнього товару з букета'
             }
-
-            document.querySelector('.empty-cart').style.display = 'none'
-            document.querySelector('.add-shift').style.display = 'flex'
-            document.querySelector('.cash-register-products .products').style.display = 'block'
-
-            for (const saleFlavor of saleProducts.querySelectorAll('.sale-flavor')) {
-                if (saleFlavor.querySelector('.sale-flavor-name span:last-child').textContent === flavor.name) {
-                    return
-                }
+        ]
+    },
+    {
+        v: '2.4.1',
+        date: '15.04.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'реалізовано перегляд ваших інвентаризацій – можна побачити, яку кількість товару було проставлено; мінорне оновлення дизайну'
+            },
+            {
+                type: CHANGELOG_TYPES.bug,
+                text: 'фікс випадаючих списків («дякуємо» Apple)'
             }
-
-            saleProducts.append(createSaleFlavor(flavor))
-            const shoppingCartTotal = document.querySelector('.shopping-cart-total')
-            shoppingCartTotal.textContent = document.querySelectorAll('.products .sale-product, .products .sale-flavor').length
-
-            if (!isNewShift) {
-                shifts[activeShiftIndex].products.push({
-                    id: flavor.id,
-                    name: flavor.name,
-                    totalProductCost: flavor.totalProductCost,
-                    isFlavor: true
-                })
+        ]
+    },
+    {
+        v: '2.4',
+        date: '10.04.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: "у «Робочих змінах» з'явилася можливість фільтрації змін за працівником і перегляду його виручки по всім змінам за місяць"
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'для замовлень номери тепер відображаються у форматі останніх 4-х цифр – при натисненні є можливість переглянути повний номер'
+            },
+            {
+                type: CHANGELOG_TYPES.bug,
+                text: 'склад замовлення в мобільному режимі тепер скролиться до початку'
             }
-
-            localStorage.setItem('shifts', JSON.stringify(shifts))
-            updateTotalSum()
-        }
-
-        document.querySelector('.sale-products').append(saleFlavor)
-    }
-
-    if (reshow) {
-        showFlowerImages()
-    }
-}
-
-const fillSaleProducts = (saleProducts, reshow = false) => {
-    for (const product of saleProducts) {
-        const productName = document.createElement('div')
-        productName.classList = 'sale-product-name'
-        productName.textContent = product.name
-
-        const productAmount = document.createElement('span')
-        productAmount.textContent = product.amount + ' ' + productIndexToShortUnit[product.unit]
-
-        const productPrice = document.createElement('span')
-        productPrice.textContent = product.sellingCost.toFixed(2) + ' грн'
-
-        const productAmountPrice = document.createElement('div')
-        productAmountPrice.classList = 'sale-product-amount-price'
-        productAmountPrice.append(productAmount, productPrice)
-
-        const div = document.createElement('div')
-        div.append(productName, productAmountPrice)
-
-        const saleProduct = document.createElement('div')
-        saleProduct.classList = 'sale-product'
-        saleProduct.append(div)
-        saleProduct.dataset.imageData = product.imageData || ''
-
-        const saleProducts = document.querySelector('.cash-register-products .sale-products')
-        saleProduct.onpointerup = () => {
-            let isNewShift = false
-
-            if (!shifts.length) {
-                isNewShift = true
-
-                createShift(null, {
-                    id: product.id,
-                    name: product.name,
-                    sellingCost: product.sellingCost,
-                    shiftAmount: 1,
-                    totalProductCost: product.sellingCost
-                })
+        ]
+    },
+    {
+        v: '2.3.1',
+        date: '03.04.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'тепер час, який залишився до доставки/самовивозу у розділах «Всі замовлення», «Замовлення в очікуванні» та «Календар замовлень», перераховується автоматично'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'тепер у розділі «Замовлення в очікуванні» при переведенні замовлення у статус «Доставлене» воно прибирається зі списку'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'тепер у замовленнях, якщо ви вказували інстаграм клієнта у форматі @nickname, він буде розпізнаватися Бутонікою як посилання'
+            },
+            {
+                text: 'мінорне оновлення дизайну замовлень'
+            },
+            {
+                text: 'вимкнення анімацій тепер впливає на анімацію таблиць'
             }
-
-            document.querySelector('.empty-cart').style.display = 'none'
-            document.querySelector('.add-shift').style.display = 'flex'
-            document.querySelector('.cash-register-products .products').style.display = 'block'
-
-            for (const saleProduct of saleProducts.querySelectorAll('.sale-product')) {
-                if (saleProduct.querySelector('.sale-product-name').textContent === product.name) {
-                    const input = saleProduct.querySelector('input')
-
-                    if (+input.value === 9999) {
-                        return
-                    }
-
-                    input.value = +input.value + 1
-                    const spans = saleProduct.querySelectorAll('.sale-product-cost span')
-                    spans.item(1).textContent = input.value
-
-                    const totalCost = +input.value * product.sellingCost
-                    spans.item(3).textContent = totalCost.toFixed(2)
-
-                    for (const shiftProduct of shifts[activeShiftIndex].products) {
-                        if (shiftProduct.id === product.id) {
-                            shiftProduct.shiftAmount = +input.value
-                            shiftProduct.totalProductCost = totalCost
-                            break
-                        }
-                    }
-    
-                    localStorage.setItem('shifts', JSON.stringify(shifts))
-                    updateTotalSum()
-                    return
-                }
+        ]
+    },
+    {
+        v: '2.3',
+        date: '27.03.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.success,
+                text: "тепер ви можете створювати витрату для магазину, працюючи з касою! Витрати з категоріями та можливістю фільтрації також відображаються в робочих змінах; у підрозділі «Витрати» з'явилася можливість фільтрації за типом витрати та категорією; розподіл витрат також показано у вигляді діаграми"
+            },
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'головна сторінка тепер відображає коротку статистику поточної зміни (тільки для директора, адміна та працівника, який відкрив зміну)'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'зменшено вікно інвентаризації – наразі воно повністю вміщується на екрані вашого мобільного'
             }
-
-            saleProducts.append(createSaleProduct(product))
-            const shoppingCartTotal = document.querySelector('.shopping-cart-total')
-            shoppingCartTotal.textContent = document.querySelectorAll('.products .sale-product').length
-
-            if (!isNewShift) {
-                shifts[activeShiftIndex].products.push({
-                    id: product.id,
-                    name: product.name,
-                    sellingCost: product.sellingCost,
-                    shiftAmount: 1,
-                    totalProductCost: product.sellingCost
-                })
+        ]
+    },
+    {
+        v: '2.2.1',
+        date: '22.03.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.bug,
+                text: 'фікс багу, коли працівники могли бачити недоступні розділи сайту'
+            },
+            {
+                type: CHANGELOG_TYPES.bug,
+                text: 'усунення візуальної помилки скролу порожньої таблиці'
+            },
+            {
+                text: 'невеликий редизайн кнопок фільтрації замовлень у очікуванні'
+            },
+            {
+                text: 'на вікні входу в систему тепер можна натискати Enter для входу'
             }
-
-            localStorage.setItem('shifts', JSON.stringify(shifts))
-            updateTotalSum()
-        }
-
-        document.querySelector('.sale-products').append(saleProduct)
-    }
-
-    if (reshow) {
-        showFlowerImages()
-    }
-}
-
-const addShift = () => {
-    createShift()
-    activeShiftIndex = document.querySelectorAll('.shifts button').length - 1
-    document.querySelector('.cash-register-products .sale-products').innerHTML = ''
-    document.querySelector('.cash-register-products .products').style.display = ''
-    updateTotalSum()
-}
-
-const showFlowerImages = () => {
-    const checkbox = document.querySelector('input[type=checkbox]')
-
-    for (const saleProduct of document.querySelectorAll('.sale-products:first-child .sale-product, .sale-products:first-child .sale-flavor')) {
-        if (checkbox.checked) {
-            const img = document.createElement('img')
-            img.src = saleProduct.dataset.imageData || EMPTY_IMAGE_URL
-            saleProduct.insertBefore(img, saleProduct.firstChild)
-            continue
-        }
-
-        const img = saleProduct.querySelector('img')
-
-        if (img) {
-            img.remove()
-        }
-    }
-}
-
-const searchSaleProductFlavor = e => {
-    if (!saleFlavors && !saleProducts) {
-        return
-    }
-
-    document.querySelector('.sale-products').innerHTML = ''
-    const searchQuery = e.target.value.trim().toLowerCase()
-
-    const filteredSaleFlavors = saleFlavors.filter(f => f.name.toLowerCase().includes(searchQuery))
-    const filteredSaleProducts = saleProducts.filter(p => p.name.toLowerCase().includes(searchQuery))
-
-    fillSaleFlavors(filteredSaleFlavors, true)
-    fillSaleProducts(filteredSaleProducts, true)
-}
-
-const removeSaleCart = () => {
-    document.querySelector('.cash-register-products .sale-products').innerHTML = ''
-    document.querySelector('.shopping-cart-total').textContent = '0'
-    totalSum.textContent = '0.00'
-
-    shifts[activeShiftIndex].products = []
-    localStorage.setItem('shifts', JSON.stringify(shifts))
-}
-
-const operationNameToType = {
-    'Внесення': 0,
-    'Винесення': 1
-}
-
-const showCashRegisterOperations = () => {
-    showPageLoad()
-
-    const cashRegisterOperationTypes = document.querySelectorAll('.cash-register-operation-type div')
-
-    cashRegisterOperationTypes.forEach(crot => crot.onpointerup = () => {
-        if (crot.classList.contains('active')) {
-            return
-        }
-
-        cashRegisterOperationTypes.forEach(crot => crot.classList.remove('active'))
-        crot.classList.add('active')
-    })
-
-    get(`CashRegister/${shiftId}/revenue`).then(response => {
-        hidePageLoad()
-
-        const cashBlock = cashRegisterOperationsModal.querySelector('.cash-register-cash')
-        cashBlock.querySelector('.form:first-child span:last-child').textContent = response.cash.toFixed(2) + ' грн'
-        cashBlock.querySelector('.form:nth-child(2) span:not(.cash-register-sum span):last-child').textContent = response.cashRevenue.toFixed(2) + ' грн'
-        cashBlock.querySelector('.form:nth-child(3) span:not(.cash-register-sum span):last-child').textContent = response.terminalRevenue.toFixed(2) + ' грн'
-        cashBlock.querySelector('.form:last-child span:not(.cash-register-sum span):last-child').textContent = response.revenue.toFixed(2) + ' грн'
-
-        cashRegisterOperationTypes.forEach(crot => crot.classList.remove('active'))
-        cashRegisterOperationTypes.item(0).classList.add('active')
-        cashRegisterOperationsModal.querySelector('.enter-value').textContent = ''
-
-        const textarea = cashRegisterOperationsModal.querySelector('textarea')
-        textarea.value = ''
-        
-        const iconTexts = ["Кур'єр", 'Сміття', 'Вода', 'Оренда приміщення', 'Розмін']
-        document.querySelectorAll('.cash-register-comment-icons li').forEach((icon, i) => icon.onpointerup = () => textarea.value = iconTexts[i])
-
-        hideBodyOverflow()
-        cashRegisterOperationsModal.style.display = 'flex'
-    }).catch(() => showMessage('error', getErrorMessage('касу')))
-}
-
-const performCashRegisterOperation = () => {
-    let type = 0
-
-    for (const operationType of cashRegisterOperationsModal.querySelectorAll('.cash-register-operation-type div')) {
-        if (operationType.classList.contains('active')) {
-            break
-        }
-
-        type++
-    }
-    
-    if (type === 2) {
-        showMessage('error', 'Операція недоступна')
-        return
-    }
-
-    const sumInput = cashRegisterOperationsModal.querySelector('.enter-value')
-
-    if (!sumInput.textContent) {
-        showMessage('error', 'Введіть суму операції')
-        return
-    }
-
-    const payButton = cashRegisterOperationsModal.querySelector('button')
-    payButton.disabled = true
-
-    const cashRegisterOperation = {
-        shiftId,
-        type,
-        sum: +sumInput.textContent,
-        comment: cashRegisterOperationsModal.querySelector('textarea').value.trim()
-    }
-
-    post('Shift/operation', cashRegisterOperation)
-        .then(() => {
-            hideModalEnableButton(cashRegisterOperationsModal, payButton)
-            showMessage('success', 'Операція проведена')
-        })
-        .catch(e => {
-            hideModalEnableButton(cashRegisterOperationsModal, payButton)
-
-            if (e.message === '403') {
-                showMessage('error', 'Недостатньо коштів у касі')
-                return
+        ]
+    },
+    {
+        v: '2.2',
+        date: '19.03.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'у розділ «Загальна статистика» до місячної статистики додано графік, який відображає виручку змін за кожен день'
+            },
+            {
+                text: 'покращення візуальної частини розділів «Витрати магазину» та «Загальна статистика»'
             }
-
-            showMessage('error', 'Помилка при проведенні операції')
-        })
-}
-
-const endEmployeeShift = () => showConfirm('Закрити зміну?', () => put('Shift', { id: shiftId })
-    .then(() => {
-        setTimeout(() => hideModal(confirmModal), 1)
-        showMessage('info', 'Зміну закрито')
-        setTimeout(() => location.reload(), 1200)
-    }).catch(() => showMessage('error', 'Сталася помилка при закритті зміни')))
-
-const fillClientsSelect = clients => {
-    checkoutClientsSelect.innerHTML = ''
-            
-    for (const client of clients) {
-        const option = document.createElement('option')
-        option.text = client.fullName + ' ' + client.phone.split('\n')[0]
-        option.dataset.id = client.id
-        option.dataset.name = client.fullName
-        option.dataset.phone = client.phone
-        option.dataset.bonusCash = client.bonusCash
-        checkoutClientsSelect.add(option)
+        ]
+    },
+    {
+        v: '2.1.1',
+        date: '16.03.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'залишки тепер відображають інформацію про кількість використаних квітів у прийнятих замовленнях'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'формат дати всіх розділів сайту став зручнішим і легшим для сприйняття'
+            },
+            {
+                type: CHANGELOG_TYPES.bug,
+                text: 'фікс багів із додаванням у порожню таблицю; тепер порожні таблиці не приховуються, а відображаються з написом «Даних немає»'
+            }
+        ]
+    },
+    {
+        v: '2.1.0',
+        date: '13.03.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'перегляд інформації про товар тепер відображає історію зміни його закупівельної ціни (тільки для директора й адміна)'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'у розділ «Компанія» додано кнопку для швидкого копіювання ваших контактних даних'
+            },
+            {
+                text: 'оптимізація бази: при перегляді товарів тепер не завантажуються всі картинки'
+            }
+        ]
+    },
+    {
+        v: '2.0.2',
+        date: '11.03.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.bug,
+                text: 'невеликий фікс у перегляді замовлень за тиждень у календарі замовлень'
+            },
+            {
+                text: 'тепер кожне замовлення відображає інформацію, чи є воно online-замовленням'
+            }
+        ]
+    },
+    {
+        v: '2.0.1',
+        date: '09.03.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'перехід до інстаграму та номеру клієнта, а також до телефону постачальника доступні прямо з відповідних таблиць'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'тепер замовлення в робочих змінах відображаються разом із номером'
+            },
+            {
+                text: '«всі замовлення» тепер сортуються не тільки за статусом, а й за часом у залежності від статусу'
+            }
+        ]
+    },
+    {
+        v: '2.0',
+        date: '07.03.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.success,
+                text: 'функціонал «Календар замовлень» – реалізовано! Переглядайте ваші замовлення у зручному вигляді за день або тиждень у вигляді карток'
+            }
+        ]
+    },
+    {
+        v: '1.9.1',
+        date: '04.03.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'у розділах «Працівники», «Клієнти», «Постачальники» та «Замовлення» номери телефонів доступні для набору прямо з Butonica'
+            },
+            {
+                type: CHANGELOG_TYPES.bug,
+                text: 'фікс багу із нескинутими фільтрами у «замовленнях в очікуванні», «залишках» і «товарах»'
+            },
+            {
+                text: 'покращено відображення «виконаних замовлень» у мобільному режимі'
+            }
+        ]
+    },
+    {
+        v: '1.9',
+        date: '02.03.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'тепер ви можете переглядати замовлення в очікуванні за обраним типом – «прийняті» або «зібрані»'
+            },
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'тепер ви можете шукати замовлення в очікуванні за номером – для цього просто натисніть 🔍 у першому стовчику таблиці та введіть початок номера'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'перегляд замовлень у очікуванні за датою тепер не робить запитів до серверу – фільтрація проходить швидше'
+            }
+        ]
+    },
+    {
+        v: '1.8.4',
+        date: '29.02.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.bug,
+                text: 'декілька фіксів розмірів картинок для товарів і букетів на пристроях Apple, додано тіні'
+            },
+            {
+                text: 'тепер вимкнення анімацій впливає на початковий екран і плавність прокрутки'
+            },
+            {
+                text: 'після натиснення клавіші Escape спливаючий калькулятор тепер приховується'
+            }
+        ]
+    },
+    {
+        v: '1.8.3',
+        date: '25.02.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.success,
+                text: 'меню «Продаж» повністю адаптовано до телефонного режиму'
+            },
+            {
+                text: 'дрібні правки верстки у списаннях та меню завантаження зображень у телефонному режимі'
+            }
+        ]
+    },
+    {
+        v: '1.8.2',
+        date: '22.02.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'розмір та якість зображень були збільшені'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'тепер для кожної таблиці при завантаженні, пошуку, фільтрації та сортуванні відтворюється анімація'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'Butonica тепер дає змогу вимикати анімації'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'тепер не можна створити інтернет-замовлення без товарів'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'при натисканні на замовлення тепер видно, чи оплачено воно'  
+            },
+            {
+                type: CHANGELOG_TYPES.bug,
+                text: 'фікс невеликих багів із режимом очікування та вибору типу операції в касі в меню «Продаж»'
+            },
+            {
+                text: 'меню завантаження зображення осучаснено'
+            },
+            {
+                text: 'замітки перенесені у панель користувача'
+            }
+        ]
+    },
+    {
+        v: '1.8.1',
+        date: '15.02.24',
+        changes: [
+            {
+                text: 'тепер, якщо в замовленні час «від» та «до» співпадають, він не дублюється'
+            },
+            {
+                text: 'деяки іконки були замінені на монохромні з метою оптимізації та покращення зовнішнього вигляду'
+            },
+            {
+                text: 'дрібні правки верстки в розділах «Товари», «Букети та композиції», «Залишки», «Витрати магазину», «Клієнти» та «Працівники»'
+            },
+            {
+                text: "тепер у таблиці клієнтів замість email'у відображається instagram"
+            }
+        ]
+    },
+    {
+        v: '1.8',
+        date: '11.02.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.success,
+                text: 'Butonica тепер доступна у вигляді PWA (Progressive Web Application)! Тепер ви можете встановити сервіс на домашній екран і користуватися ним як мобільним додатком'
+            },
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'новий тестовий компонент «калькулятор», який дозволяє швидше та зручніше вводити числові дані. Наявний на сторінці створення та редагування товару'
+            },
+            {
+                text: 'тепер всі працівники сортуються спочатку за посадою, а потім – за властивістю «активний»'
+            },
+            {
+                text: 'нові анімації кнопок виходу з системи та перегляду розділу «Changelog»'
+            },
+            {
+                text: 'невеликі правки верстки в замовленнях'
+            }
+        ]
+    },
+    {
+        v: '1.7',
+        date: '08.02.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'новий розділ – «Changelog», у якому зібрана вся інформація про останні оновлення сервісу'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'тепер завантаження сервісу супроводжується анімацією'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'Butonica наразі визначає, чи є доступ до інтернету, і виводить спеціальне вікно, якщо доступ зник'
+            },
+            {
+                text: 'тепер поставка у постачальника має незалежний скрол – решта інформації залишається статичною'
+            },
+            {
+                text: 'робити інвентаризацію стало зручніше з усіх пристроїв'
+            },
+            {
+                text: 'іконка часу у «виконаних замовленнях» тепер не відображається'
+            }
+        ]
+    },
+    {
+        v: '1.6.5',
+        date: '02.02.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: "у «робочих змінах» з'явилася фільтрація за типом операції та іконка годинника біля часу відкриття зміни"
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'тепер продажі можна проводити в мінус товару'
+            }
+        ]
+    },
+    {
+        v: '1.6.4',
+        date: '28.01.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.bug,
+                text: 'фікс багу у меню продаж, який виникав при відкритті зміни'
+            },
+            {
+                type: CHANGELOG_TYPES.bug,
+                text: 'фікс помилки із некоректним розміром годинника в режимі очікування'
+            }
+        ]
+    },
+    {
+        v: '1.6.3',
+        date: '26.01.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: "«режим очікування» отримав оновлення: з'явився годинник із можливістю розгортання на весь екран; при активації режиму вся сторінка стає сірою та неактивною – запобігання випадкових натискань"
+            },
+            {
+                text: "якщо в замовлені ім'я отримувача не було введено, тепер під його іменем буде напис «Не вказано»"
+            },
+            {
+                text: 'логотип сайту отримав нову анімацію при наведенні'
+            }
+        ]
+    },
+    {
+        v: '1.6.2',
+        date: '20.01.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'нове уніфіковане меню при видаленні елементів сайту, виході з системи та доплаті замовлень'
+            },
+            {
+                type: CHANGELOG_TYPES.bug,
+                text: 'фікс невеликих помилок із витратами магазину та статистики в мобільному режимі'
+            }
+        ]
+    },
+    {
+        v: '1.6.1',
+        date: '14.01.24',
+        changes: [
+            {
+                text: 'тепер система забороняє створювати 2 однакові категорії або товара'
+            },
+            {
+                text: 'мінорний редизайн іконок'
+            }
+        ]
+    },
+    {
+        v: '1.6',
+        date: '10.01.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'тепер залишки відображають кількість квітів, яку використано в букетах'
+            },
+            {
+                type: CHANGELOG_TYPES.bug,
+                text: 'фікс багу із входом у систему з довільним регістром'
+            }
+        ]
+    },
+    {
+        v: '1.5.2',
+        date: '04.01.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.bug,
+                text: 'фікс багу, коли інколи при створенні товару виникало дублювання складів'
+            },
+            {
+                type: CHANGELOG_TYPES.bug,
+                text: 'фікс багу, коли анімація очікування після кліку на кнопку «Зберегти» не зникала'
+            },
+            {
+                text: 'тепер, якщо період підписки закінчився, система дає ще 3 дні на оплату, після чого вхід блокується'
+            }
+        ]
+    },
+    {
+        v: '1.5.1',
+        date: '29.12.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'зміна кольорової гамми графіків для відповідання стилістиці бутоніки; зміна шрифтів, додавання тіней та підписи під необхідні типи графіків'
+            }
+        ]
+    },
+    {
+        v: '1.5',
+        date: '25.12.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'редизайн «загальної статистики»; поява річної статистики та графіків доходів, витрат і прибутків'
+            }
+        ]
+    },
+    {
+        v: '1.4',
+        date: '19.12.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.success,
+                text: 'новий розділ сайту – «Загальна статистика»'
+            },
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: "у шапці сайту з'явилися замітки із можливістю швидко зберігати, переглядати та видаляти ваші замітки"
+            }
+        ]
+    },
+    {
+        v: '1.3.4',
+        date: '11.12.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'можливість перегляду поставок за періодом'
+            },
+            {
+                text: 'зміна шрифту для деяких числових значень на більш підходящий'
+            }
+        ]
+    },
+    {
+        v: '1.3.3',
+        date: '07.12.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'у телефонному режимі тепер відображається кнопка, яка відкриває повноцінне меню, замість маленьких кнопок раніше'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'натиснення на будь-який елемент, що відкривається у спливаючому вікні, тепер показує анімацію свого завантаження'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'день народження клієнтів тепер відображається у зручнішому форматі («10 вересня» замість «10.09.1998»)'
+            }
+        ]
+    },
+    {
+        v: '1.3.2',
+        date: '03.12.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'собівартість букету тепер приховується для флористів'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'тепер шапка сайту стала фіксованю при скролі та клікабельною – при кліку сторінка прогортується нагору'
+            },
+            {
+                text: 'галочки «активних» та «неактивних» працівників отримали редизайн'
+            }
+        ]
+    },
+    {
+        v: '1.3.1',
+        date: '30.11.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'тепер кожне натиснення на кнопку «Зберегти» блокує її та показує анімацію збереження – це виключає помилки із повторним натисненням та подвійним збереженням'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'можливість посторінкового гортання «всіх» та «виконаних» замовлень – відображається 50 останніх замовлень на сторінці'
+            },
+            {
+                text: 'впроваджено декілька анімацій (натиснення на профіль, відкритті підпунктів меню, на спливаючих вікнах та робочих змінах)'
+            },
+            {
+                text: 'тепер інстаграм клієнта відображається у вигляді іконки соціальної мережі'
+            }
+        ]
+    },
+    {
+        v: '1.3',
+        date: '23.11.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.success,
+                text: 'Butonica повністю адаптовано для планшетів і смартфонів – тепер ви можете повноцінно слідкувати за вашим бізнесом у мобільному режимі'
+            },
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: "на сайті з'явився «режим очікування» – можливість увімкнути приємну анімацію в періоди, коли сайт не використовується"
+            },
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'тип замовлення тепер показано у вигляді іконки замість слів «доставка» й «самовивіз»'
+            }
+        ]
+    },
+    {
+        v: '1.2.1',
+        date: '16.11.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: "з'явилася можливість редагувати редагувати час та коментар до замовлення"
+            },
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: "на кожному розділі сайту тепер присутня анімація завантаження – особливо корисно для повільного інтернету або значної кількості елементів у таблиці"
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: "тепер у меню «Продаж» у розділі «Каса» для внесень і винесень можна додавати швидкі коментарі, використовуючи стікери («Кур'єр», «Сміття», «Вода», «Аренда приміщення» та «Розмін»)"
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'також вибір типу операції додатково супроводжується кольором – зелений для «внесень» і червоний для «винесень»'
+            },
+            {
+                text: 'при початковому перегляді Butonica тепер замість пустої білої сторінки з меню відображається бекграунд-анімація у стилістиці сервісу'
+            }
+        ]
+    },
+    {
+        v: '1.2',
+        date: '10.11.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'можливість перегляду розділів «Робочі зміни», «Поставки», «Списання», «Інвентаризації», «Витрати магазину» за місяцем'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'також для наведених вище розділів введене сортування у зворотньому порядку – починаючи з останнього доданого'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'замовлення «в очікуванні» виводяться, починаючи з найближчого замовлення; «всі замовлення» – починаючи з останнього виконаного'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'при відкритті робочої зміни тепер видно, хто й коли її починав і закінчував'
+            }
+        ]
+    },
+    {
+        v: '1.1',
+        date: '04.11.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'можливість створювати клієнта з меню «Продаж»'
+            },
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'можливість перегляду замовлень за датою'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: "у таблиці замовлень з'явився стовпець, що показує час, який залишився до замовлення"
+            }
+        ]
+    },
+    {
+        v: '1.0.1',
+        date: '28.10.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'на всі поля вводу додано хрестики для швидкого видалення'
+            },
+            {
+                text: 'редизайн компоненту «прапорець» у стилі iOS'
+            },
+            {
+                text: 'змінено порядок замовлень: «всі», «в очікуванні», «виконані»'
+            }
+        ]
+    },
+    {
+        v: '1.0',
+        date: '24.10.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.success,
+                text: 'реліз першої стабільної версії Butonica'
+            },
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'можливість створювати інтернет-замовлення, які не будуть враховуватися в касі'
+            }
+        ]
+    },
+    {
+        v: '0.9.9',
+        date: '22.10.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.bug,
+                text: 'фікс усіх знайдених багів із замовленнями'
+            }
+        ]
+    },
+    {
+        v: '0.9.8',
+        date: '18.10.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'додано можливість пошуку клієнта у продажах за номером телефона'
+            },
+            {
+                type: CHANGELOG_TYPES.bug,
+                text: "пофікшено кілька багів, пов'язаних зі скасуванням та доплатою замовлень"
+            }
+        ]
+    },
+    {
+        v: '0.9.7',
+        date: '16.10.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'реалізація функціоналу доплати замовлень – доплата також відображається у статистиці робочої зміни'
+            },
+            {
+                text: 'тепер флористи й менеджери не можуть змінювати відсоток бонусів'
+            }
+        ]
+    },
+    {
+        v: '0.9.6',
+        date: '15.10.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'можливість оплачувати замовлення бонусами – вони списуються з рахунку клієнта'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: '«всі замовлення» тепер відображаються в зворотньому порядку – починаючи від останнього доданого'
+            },
+            {
+                text: 'тепер у статистиці робочих змін підписується тип оплати кожного продажу та замовлення'
+            },
+            {
+                text: 'в робочих змінах тепер спочатку відображається відкрита зміна'
+            }
+        ]
+    },
+    {
+        v: '0.9.5',
+        date: '14.10.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'тепер скасувати замовлення може тільки директор, адміністратор або той, хто його створював'
+            },
+            {
+                text: 'реалізація роботи з робочими змінами для різних працівників'
+            }
+        ]
+    },
+    {
+        v: '0.9.4',
+        date: '11.10.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'тепер працівники можуть бачити лише власні зміни'
+            },
+            {
+                text: 'тепер не можна створити працівника з тим логіном, який вже існує в системі'
+            },
+            {
+                text: 'якщо тип замовлення «самовивіз», то дані отримувача й адреса тепер не відображаються'
+            }
+        ]
+    },
+    {
+        v: '0.9.3',
+        date: '10.10.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: "для букетів з'явилася можливість зберігати шаблони"
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'букети тепер відображають собівартість'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'додана можливість помічати працівника як активного або неактивного – це потрібно для збереження робочих змін працівника, який більше не працює'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'тепер працівник не може зайти в «Продаж», якщо зміна відкрита іншим працівником'
+            },
+            {
+                text: 'на працівника можна натискати і переглядати дані про нього'
+            }
+        ]
+    },
+    {
+        v: '0.9.2',
+        date: '06.10.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'завершено розділ меню «Букети та композиції»; букети тепер відображаться в продажах та при продажі розкладаються на квіти та коректно списуються'
+            },
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'завершено розділ меню «Мітки»; для флористів і менеджерів пункт не відображається'
+            }
+        ]
+    },
+    {
+        v: '0.9.1',
+        date: '27.09.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'для замовлень тепер можна обирати відсоток бонусів'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'тепер на сайті присутні ролі користувачів – обмеження для флористів та менеджерів у перегляді, видаленні та редагуванні розділів сайту'
+            },
+            {
+                text: "для важливих спливаючих вікон з'явився хрестик, щоб випадково їх не закривати"
+            }
+        ]
+    },
+    {
+        v: '0.9',
+        date: '24.09.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'завершено розділ меню «Витрати магазину», його можуть переглядати лише директор і адміністратор'
+            },
+            {
+                text: 'іконка профіля користувача тепер відображає кількість днів до закінчення підписки'
+            },
+            {
+                text: 'завершено базовий функціонал розділу меню «Букети та композиції»'
+            }
+        ]
+    },
+    {
+        v: '0.8.1',
+        date: '21.09.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'при перегляді замовлень клієнта тепер також відображається загальна сума всіх його замовлень'
+            },
+            {
+                text: "під назвою сайту з'явився невеличкий припис"
+            },
+            {
+                text: 'оптимізація бази даних для збереження великої кількості картинок'
+            }
+        ]
+    },
+    {
+        v: '0.8',
+        date: '17.09.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'при виборі постачальника та товара у меню тепер можна здійснювати пошук за назвою'
+            },
+            {
+                text: 'товари в поставках, списаннях, замовленнях і меню «Продаж» тепер відображаються в алфавітному порядку'
+            },
+            {
+                text: 'всі картинки стали заокруглені та стали відбивати невеликі тіні'
+            },
+            {
+                text: 'редизайн іконок головного меню'
+            },
+            {
+                text: 'списання тепер відображає інформацію про те, хто зробив його'
+            }
+        ]
+    },
+    {
+        v: '0.7.2',
+        date: '15.09.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'до замовлення тепер можна додавати картинку'
+            },
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'натискання на клієнта тепер відображає усі замовлення цього клієнта'
+            },
+            {
+                text: 'кількість квітів в меню «Продаж» тепер перераховується одразу після продажу'
+            },
+            {
+                text: 'пункт меню «Статистика» переміщено в низ сайту'
+            }
+        ]
+    },
+    {
+        v: '0.7.1',
+        date: '12.09.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'шапка таблиці відображається при скролі сайту'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'при переході в меню продаж меню сайта згортається в компактний режим, а шапка сайту приховується'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'баланс каси у зміні тепер перераховується після кожної операції з касою'
+            },
+            {
+                text: 'мінімалістична смуга прокрутки'
+            },
+            {
+                text: 'колір наведення в меню змінено із помаранчевого на блідо-блакитний'
+            },
+            {
+                text: 'біля всіх полів із пошуком тепер відображається іконка лупи'
+            }
+        ]
+    },
+    {
+        v: '0.7',
+        date: '09.09.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'функціонал профілів користувачів, кожний із власним логіном і паролем'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'при відкритті зміни сума каси заноситься в робочі зміну в якості першого внесення'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'при закритті зміни в касі зберігається стан готівки та терміналу'
+            }
+        ]
+    },
+    {
+        v: '0.6.1',
+        date: '04.09.23',
+        changes: [
+            {
+                text: 'тепер при створенні поставки перший постачальник не обирається автоматично'
+            },
+            {
+                text: 'тепер при створенні поставки, якщо у вас 1 склад, він обирається автоматично'
+            }
+        ]
+    },
+    {
+        v: '0.6',
+        date: '03.09.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'можливість натиснути на робочі зміну та переглянути повну інформацію про всі операції протягом цієї зміни'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'товари в меню «Продаж» тепер відображають свою кількість на складі'
+            },
+            {
+                text: 'в операціях поставок, списань та інвентаризацій тепер показано точний час проведення'
+            },
+            {
+                text: 'підтримка декількох номерів телефона для клієнтів'
+            }
+        ]
+    },
+    {
+        v: '0.5.1',
+        date: '31.08.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'можливість натискати на пункт «Каса» у продажах і проводити операції з касою'
+            },
+            {
+                text: 'завершено дизайн вікна оформлення замовлення'
+            },
+            {
+                text: 'завершено базовий функціонал розділу меню «Робочі зміни»'
+            }
+        ]
+    },
+    {
+        v: '0.5',
+        date: '29.08.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'можливість додавати клієнта до продажу'
+            },
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'можливість змінювати ціну продажу'
+            }
+        ]
+    },
+    {
+        v: '0.4.1',
+        date: '26.08.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'можливість перегляду інформації про поставку'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'завершено розділ меню «Списання»'
+            }
+        ]
+    },
+    {
+        v: '0.4',
+        date: '23.08.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'завершено базовий функціонал розділу меню «Продаж»'
+            },
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'можливість натискати на постачальника та переглядати інформацію про нього і всі його останні поставки за датою'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: "всі повідомлення сайту тепер з'являються у вигляді спливаючих вікон та мають 3 категорії: «Успіх», «Інформація» та «Помилка»"
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'поява кнопки «Зараз» на поставках, списаннях та інвентаризаціях'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'можливість вказувати супутні витрати для поставки'
+            },
+            {
+                text: "«сума оплати» та «дата оплати» у поставці стали взаємопов'язаними"
+            }
+        ]
+    },
+    {
+        v: '0.3',
+        date: '18.08.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'товари тепер можуть мати картинки'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'завершено розділи меню «Інвентаризація» та «Клієнти»'
+            }
+        ]
+    },
+    {
+        v: '0.2',
+        date: '10.08.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'тепер, якщо у вас кілька складів, можна задавати різні ціни продажу для одного товару для кожного складу'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'завершено розділ меню «Залишки»'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'додано валідацію вхідних даних по всьому сайту'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text:  'вимкнення можливості виділення контенту на сайті'
+            }
+        ]
+    },
+    {
+        v: '0.1',
+        date: '07.08.23',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.success,
+                text: 'перший реліз'
+            },
+            {
+                type: CHANGELOG_TYPES.success,
+                text: 'зміна назви з «Kvitka» на «Butonica»'
+            },
+            {
+                type: CHANGELOG_TYPES.success,
+                text: 'поява логотипу'
+            },
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'завершено розділи меню «Компанія», «Торгові точки», «Каси», «Працівники», «Категорії», «Товари», «Постачальники» та «Поставки»'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'завершений вигляд хедеру та бокового меню'
+            },
+            {
+                text: 'колір наведення в таблиці змінено із помаранчевого на блідо-блакитний'
+            }
+        ]
     }
-}
+]
+
+const randomFacts = [
+    'Буде скоро'
+]
