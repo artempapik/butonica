@@ -139,7 +139,7 @@ const fillLeftoversTable = leftoverProducts => {
 
         const createTdWithText = field => {
             const td = createTd()
-            const value = product['amount' + field]
+            const value = product['in' + field]
 
             if (value) {
                 td.append(createSpan(`${value} шт`))
