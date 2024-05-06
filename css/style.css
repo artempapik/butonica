@@ -1045,8 +1045,8 @@ main {
                     & tbody {
                         position: unset;
                         box-shadow: none;
-                        border-top: .15rem rgba(204, 85, 0, .55) solid;
-                        border-bottom: .15rem rgba(204, 85, 0, .4) solid;
+                        border-top: .15rem rgba(204, 85, 0, .5) solid;
+                        border-bottom: .15rem rgba(204, 85, 0, .5) solid;
 
                         & tr {
                             background: #fff;
