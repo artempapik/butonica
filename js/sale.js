@@ -1,4 +1,4 @@
-let shiftId, checkoutClients, checkoutClientsSelect, clientsWithPhones
+let shiftId, checkoutClients, checkoutClientsSelect, clientsWithPhones, recalculateAction
 let shifts, shiftsBlock, activeShiftIndex = 0
 let saleProducts, saleFlavors, totalSum, labels
 
@@ -95,9 +95,7 @@ const initializeSaleScreen = () => {
         clientsWithPhones = response
         fillClientsSelect(clientsWithPhones)
         checkoutClientsSelect.value = ''
-        const noResults = select2NoResults
-        noResults.placeholder = 'Оберіть клієнта'
-        $(checkoutClientsSelect).select2(noResults)
+        $(checkoutClientsSelect).select2(select2PlaceholderClient)
     })
 }
 
@@ -756,6 +754,8 @@ const createSaleFlavor = flavor => {
     return saleFlavorContent
 }
 
+let previousSaleSpan, previousSalePrice
+
 const createSaleProduct = product => {
     const saleProductName = document.createElement('div')
     saleProductName.classList = 'sale-product-name'
@@ -763,8 +763,53 @@ const createSaleProduct = product => {
 
     const saleProductCost = document.createElement('div')
     saleProductCost.classList = 'sale-product-cost'
+
+    const editSellingPrice = createSpan('edit')
+    editSellingPrice.classList = 'material-symbols-outlined'
+
+    if (product.changedCost) {
+        editSellingPrice.classList.add('changed-price')
+    }
+
+    editSellingPrice.onpointerup = () => {
+        if (editSellingPrice.classList.contains('changed-price')) {
+            editSellingPrice.classList.remove('changed-price')
+            productSellingCost.textContent = product.sellingCost
+            const totalCost = +input.value * product.sellingCost
+            spans.item(5).textContent = totalCost.toFixed(2)
+            product.changedCost = null
+            updateShiftProduct(product.id, +input.value, +input.value * product.sellingCost)
+            return
+        }
+
+        editSellingPrice.classList.add('changed-price')
+        previousSaleSpan = productSellingCost
+        previousSalePrice = productSellingCost.textContent
+        productSellingCost.textContent = ''
+
+        createCalculatorValueSpan(productSellingCost)
+
+        recalculateAction = () => {
+            const totalCost = +input.value * +spans.item(1).textContent
+            spans.item(5).textContent = totalCost.toFixed(2)
+            const changedCost = +spans.item(1).textContent === product.sellingCost ? null : +spans.item(1).textContent
+            product.changedCost = changedCost
+            updateShiftProduct(product.id, +input.value, totalCost, changedCost)
+
+            if (+spans.item(1).textContent === product.sellingCost) {
+                editSellingPrice.classList.remove('changed-price')
+            } else {
+                editSellingPrice.classList.add('changed-price')
+            }
+        }
+    }
+    
+    const productSellingCost = createSpan(product.changedCost ? product.changedCost.toFixed(2) : product.sellingCost.toFixed(2))
+
     saleProductCost.append(
-        createSpan(product.sellingCost.toFixed(2) + ' x '),
+        editSellingPrice,
+        productSellingCost,
+        createSpan(' x '),
         createSpan(),
         createSpan(' = '),
         createSpan()
@@ -775,31 +820,32 @@ const createSaleProduct = product => {
     saleProductHeader.append(saleProductName, saleProductCost)
 
     const spans = saleProductCost.querySelectorAll('span')
-    spans.item(1).textContent = product.shiftAmount || product.shiftAmount === 0 ? product.shiftAmount : 1
-    spans.item(3).textContent = product.totalProductCost || product.totalProductCost === 0 ? product.totalProductCost.toFixed(2) : product.sellingCost.toFixed(2)
+    spans.item(3).textContent = product.shiftAmount || product.shiftAmount === 0 ? product.shiftAmount : 1
+    spans.item(5).textContent = product.totalProductCost || product.totalProductCost === 0 ? product.totalProductCost.toFixed(2) : product.sellingCost.toFixed(2)
 
     const input = document.createElement('input')
     input.oninput = e => {
         handlePriceInput(e)
-        spans.item(1).textContent = input.value
+        spans.item(3).textContent = input.value
 
-        const totalCost = +input.value * product.sellingCost
-        spans.item(3).textContent = totalCost.toFixed(2)
+        const totalCost = +input.value * (product.changedCost || product.sellingCost)
+        spans.item(5).textContent = totalCost.toFixed(2)
 
-        updateShiftProduct(product.id, +input.value, totalCost)
+        updateShiftProduct(product.id, +input.value, totalCost, product.changedCost === product.sellingCost ? null : product.changedCost)
     }
     input.value = product.shiftAmount || product.shiftAmount === 0 ? product.shiftAmount : '1'
     input.type = 'number'
     input.min = '0'
     input.max = '9999'
 
-    const updateShiftProduct = (id, amount, totalCost) => {
+    const updateShiftProduct = (id, amount, totalCost, changedCost) => {
         const currentShift = shifts[activeShiftIndex]
 
         for (const product of currentShift.products) {
             if (product.id === id) {
                 product.shiftAmount = amount
                 product.totalProductCost = totalCost
+                product.changedCost = changedCost
                 break
             }
         }
@@ -818,12 +864,12 @@ const createSaleProduct = product => {
         }
 
         input.value = value > 0 && value < 1 ? '0' : +input.value - 1
-        spans.item(1).textContent = input.value
+        spans.item(3).textContent = input.value
 
-        const totalCost = input.value === '0' ? 0 : (+spans.item(3).textContent - product.sellingCost).toFixed(2)
-        spans.item(3).textContent = totalCost
+        const totalCost = input.value === '0' ? 0 : (+spans.item(5).textContent - (product.changedCost || product.sellingCost)).toFixed(2)
+        spans.item(5).textContent = totalCost
 
-        updateShiftProduct(product.id, +input.value, +totalCost)
+        updateShiftProduct(product.id, +input.value, +totalCost, product.changedCost === product.sellingCost ? null : product.changedCost)
     }
     decreaseButton.textContent = '-'
     
@@ -836,12 +882,12 @@ const createSaleProduct = product => {
         }
 
         input.value = value > 9998 && value < 9999 ? '9999' : +input.value + 1
-        spans.item(1).textContent = input.value
+        spans.item(3).textContent = input.value
 
-        const totalCost = input.value === '9999' ? (product.sellingCost * 9999).toFixed(2) : (+spans.item(3).textContent + product.sellingCost).toFixed(2)
-        spans.item(3).textContent = totalCost
+        const totalCost = input.value === '9999' ? (product.sellingCost * 9999).toFixed(2) : (+spans.item(5).textContent + (product.changedCost || product.sellingCost)).toFixed(2)
+        spans.item(5).textContent = totalCost
 
-        updateShiftProduct(product.id, +input.value, +totalCost)
+        updateShiftProduct(product.id, +input.value, +totalCost, product.changedCost === product.sellingCost ? null : product.changedCost)
     }
     increaseButton.textContent = '+'
 
@@ -913,7 +959,7 @@ const fillSaleFlavors = (saleFlavors, reshow = false) => {
 
         const saleProducts = document.querySelector('.cash-register-products .sale-products')
         saleFlavor.onpointerup = () => {
-            saleFlavor.style.background = 'rgb(215, 215, 215)'
+            saleFlavor.classList.add('selected')
             let isNewShift = false
 
             if (!shifts.length) {
@@ -1016,10 +1062,10 @@ const fillSaleProducts = (saleProducts, reshow = false) => {
 
                     input.value = +input.value + 1
                     const spans = saleProduct.querySelectorAll('.sale-product-cost span')
-                    spans.item(1).textContent = input.value
+                    spans.item(3).textContent = input.value
 
                     const totalCost = +input.value * product.sellingCost
-                    spans.item(3).textContent = totalCost.toFixed(2)
+                    spans.item(5).textContent = totalCost.toFixed(2)
 
                     for (const shiftProduct of shifts[activeShiftIndex].products) {
                         if (shiftProduct.id === product.id) {
@@ -1035,6 +1081,7 @@ const fillSaleProducts = (saleProducts, reshow = false) => {
                 }
             }
 
+            product.changedCost = null
             saleProducts.append(createSaleProduct(product))
             const shoppingCartTotal = document.querySelector('.shopping-cart-total')
             shoppingCartTotal.textContent = document.querySelectorAll('.products .sale-product').length
