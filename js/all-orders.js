@@ -378,10 +378,10 @@ const createOrderRow = (order, table) => {
 
             const printSheets = orderNumberDate.querySelector('.order-number .number .print-sheets')
 
-            if (order.status < 2) {
+            if (order.status !== 2) {
                 printSheets.style.display = ''
 
-                const printRequest = sheet => get(`Order/pdf/${sheet}/${order.id}`)
+                const printRequest = sheet => get(`Order/${loginInfo.companyId}/pdf/${sheet}/${order.id}`)
                     .then(f => window.open(f))
                     .catch(() => showMessage('error', 'Не вдалося роздрукувати замовлення'))
 
@@ -488,10 +488,12 @@ const createOrderRow = (order, table) => {
 
                 const productSelectTd = document.createElement('td')
                 productSelectTd.append(productSelect)
-
-                const option = select2NoResults
-                option.width = '14rem'
-                $(productSelect).select2(option)
+                $(productSelect).select2({
+                    'language': {
+                        'noResults': () => 'Не знайдено'
+                    },
+                    'width': '14rem'
+                })
 
                 const amount = document.createElement('input')
                 amount.type = 'number'
@@ -729,7 +731,7 @@ const createInternetOrderModal = () => {
     const internetOrderClientsBlock = internetOrderModal.querySelector('.internet-client-info')
 
     const internetOrderClients = internetOrderClientsBlock.querySelector('select')
-    $(internetOrderClients).select2(select2NoResults)
+    $(internetOrderClients).select2(select2PlaceholderClient)
     const clientNames = internetOrderModal.querySelectorAll('.sale-order-customer-name')
     const cashbackBlock = internetOrderModal.querySelector('.cashback')
 
@@ -768,7 +770,7 @@ const createInternetOrderModal = () => {
     const saveClient = internetOrderClientsBlock.querySelector('input')
     saveClient.onclick = () => {
         if (saveClient.checked) {
-            $(internetOrderClients).val('').select2(select2NoResults)
+            $(internetOrderClients).val('').select2(select2PlaceholderClient)
             clientNames.forEach(cn => cn.value = '')
             clientPhones.forEach(ch => ch.value = '')
             cashbackBlock.style.cssText = 'display:none !important'
