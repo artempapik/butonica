@@ -259,14 +259,23 @@ const createShiftRow = shift => {
                         for (const product of operation.products) {
                             const tr = document.createElement('tr')
 
-                            // const productNameTd = createTd(product.name)
-                            // const inDecSpan = document.createElement('div')
-                            // inDecSpan.classList = i ? 'increase' : 'decrease'
-                            // inDecSpan.textContent = i ? 'націнка +3% (+4 грн)' : 'уцінка –5% (–6 грн)'
-                            // productNameTd.append(inDecSpan)
+                            console.log(product)
+
+                            const productNameTd = createTd(product.name)
+
+                            if (product.change) {
+                                const inDecSpan = document.createElement('div')
+                                inDecSpan.classList = product.change < 0 ? 'increase' : 'decrease'
+    
+                                const inDecVal = Math.abs(product.change)
+                                const inDecPercent = (inDecVal / (product.sum + product.change) * 100)
+                                const inDecPercentStr = (inDecPercent % 1 === 0 ? inDecPercent : inDecPercent.toFixed(2)) + '%'
+                                inDecSpan.textContent = product.change < 0 ? `націнка ${inDecPercentStr} (+${inDecVal} грн)` : `уцінка ${inDecPercentStr} (–${inDecVal} грн)`
+                                productNameTd.append(inDecSpan)
+                            }
 
                             tr.append(
-                                createTd(product.name),
+                                productNameTd,
                                 createTd(product.amount),
                                 createTd(product.sum.toFixed(2))
                             )
