@@ -258,9 +258,6 @@ const createShiftRow = shift => {
 
                         for (const product of operation.products) {
                             const tr = document.createElement('tr')
-
-                            console.log(product)
-
                             const productNameTd = createTd(product.name)
 
                             if (product.change) {
