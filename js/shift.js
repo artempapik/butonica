@@ -263,10 +263,10 @@ const createShiftRow = shift => {
                             if (product.change) {
                                 const inDecSpan = document.createElement('div')
                                 inDecSpan.classList = product.change < 0 ? 'increase' : 'decrease'
-    
+                                
                                 const inDecVal = Math.abs(product.change)
                                 const inDecPercent = (inDecVal / (product.sum + product.change) * 100)
-                                const inDecPercentStr = (inDecPercent % 1 === 0 ? inDecPercent : inDecPercent.toFixed(2)) + '%'
+                                const inDecPercentStr = (inDecPercent % 1 === 0 ? inDecPercent : inDecPercent.toFixed(1)) + '%'
                                 inDecSpan.textContent = product.change < 0 ? `націнка ${inDecPercentStr} (+${inDecVal} грн)` : `уцінка ${inDecPercentStr} (–${inDecVal} грн)`
                                 productNameTd.append(inDecSpan)
                             }
