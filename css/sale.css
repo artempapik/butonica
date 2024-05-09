@@ -138,6 +138,11 @@
 
         & .sale-flavor {
             outline: .1rem solid rgb(100, 100, 100);
+
+            &.selected {
+                filter: grayscale();
+                opacity: .5;
+            }
         }
     }
 
@@ -203,16 +208,16 @@
                     }
                 }
             }
-    
+            
             & .cash-register-products {
                 margin-top: .5rem;
-    
+
                 & .empty-cart {
                     margin: auto;
-                    margin-top: 6rem;
+                    margin-top: 11rem;
                     display: flex;
                     flex-direction: column;
-                    gap: 1rem;
+                    gap: .7rem;
     
                     & span:first-child {
                         font-size: 4rem;
@@ -364,6 +369,16 @@
                                         height: fit-content;
                                         display: block;
                                     }
+
+                                    & .sale-product-cost {
+                                        width: unset;
+
+                                        & span:nth-child(2) {
+                                            display: inline-block;
+                                            min-width: 1.7rem;
+                                            height: 1rem;
+                                        }
+                                    }
                                 }
         
                                 & .sale-product-buttons {
@@ -405,11 +420,33 @@
                             }
 
                             & .material-symbols-outlined {
-                                color: rgba(255, 0, 0, .6);
                                 cursor: pointer;
 
-                                &:hover {
-                                    color: rgba(255, 0, 0, .9);
+                                &:first-child {
+                                    vertical-align: bottom;
+                                    font-size: 1.4rem;
+                                    margin-right: .5rem;
+                                    color: rgba(65, 105, 225);
+
+                                    &.changed-price {
+                                        color: rgba(215, 0, 64, .8);
+
+                                        &:hover {
+                                            color: rgb(215, 0, 64);
+                                        }
+                                    }
+
+                                    &:hover {
+                                        color: rgba(65, 105, 225, .8);
+                                    }
+                                }
+
+                                &:last-child {
+                                    color: rgba(255, 0, 0, .6);
+    
+                                    &:hover {
+                                        color: rgba(255, 0, 0, .9);
+                                    }
                                 }
                             }
                         }
@@ -988,7 +1025,6 @@
 
 .create-internet-order-modal-content {
     & .internet-client-info {
-        padding: 0 .2rem;
         justify-content: space-between;
         align-items: center;
         margin-bottom: -1.3rem;
@@ -997,14 +1033,6 @@
             display: flex;
             align-items: center;
             gap: .5rem;
-
-            & h2 {
-                font-size: 1.1rem;
-            }
-
-            & select {
-                width: 13rem;
-            }
         }
     }
 
@@ -1442,10 +1470,12 @@
             padding: .9rem .6rem;
         }
 
-        & .internet-client-info {
-            flex-direction: column;
-            align-items: start;
-            gap: .7rem;
+        & .internet-client-info div {
+            gap: .2rem;
+
+            & span {
+                font-size: .9rem;
+            }
         }
 
         & .customer-recipient-info {
