@@ -1437,6 +1437,10 @@ window.onpointerup = e => {
                 previousSaleSpan = null
                 previousSalePrice = null
             }
+
+            if (e.target === calculatorModal && recalculateAction) {
+                recalculateAction = null
+            }
         }
     }
 }
@@ -2202,6 +2206,10 @@ const select2PlaceholderClient = {
         'noResults': () => 'Не знайдено'
     },
     'placeholder': 'Обрати клієнта'
+}
+
+const select2NoSearch = {
+    minimumResultsForSearch: -1
 }
 
 // Notification.requestPermission().then(permission => console.log(permission))
