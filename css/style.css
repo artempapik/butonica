@@ -1036,7 +1036,7 @@ main {
                         }
                     }
                 }
-    
+
                 & table {
                     display: block;
                     margin-bottom: 0;
@@ -1045,8 +1045,8 @@ main {
                     & tbody {
                         position: unset;
                         box-shadow: none;
-                        border-top: .15rem rgba(204, 85, 0, .5) solid;
-                        border-bottom: .15rem rgba(204, 85, 0, .5) solid;
+                        border-top: .15rem rgba(204, 85, 0, .55) solid;
+                        border-bottom: .15rem rgba(204, 85, 0, .4) solid;
 
                         & tr {
                             background: #fff;
@@ -1775,6 +1775,7 @@ table {
     top: 3%;
     left: 50%;
     transform: translate(-50%, 0);
+    text-align: center;
 
     &.animate {
         animation: animate-top .4s;
@@ -2771,7 +2772,6 @@ table {
 
     #message {
         width: 70%;
-        text-align: center;
     }
 
     #loader {
