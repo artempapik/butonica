@@ -1429,6 +1429,14 @@ window.onpointerup = e => {
                     screensaver.style.zIndex = 2
                 }
             }
+
+            if (recalculateAction && !previousSaleSpan.textContent) {
+                previousSaleSpan.textContent = previousSalePrice
+                recalculateAction()
+                recalculateAction = null
+                previousSaleSpan = null
+                previousSalePrice = null
+            }
         }
     }
 }
@@ -1607,27 +1615,6 @@ if (loginInfo) {
 }
 
 const login = () => {
-    if (loginModal.querySelector('input').value === 'Karma' && loginModal.querySelector('input[type=password]').value === 'Sova') {
-        const compliments = [
-            'Посміхніться сьогодні, бо вас чекатиме тяжкий день',
-            'Нехай невзгоди не роблять вам в житті погоди',
-            'В тебе така класна посмішка',
-            'Заходь сюди частіше дивитися компліментики',
-            "Чудове ім'я!",
-            'ВИТОНЧЕНІШИЙ (ти)',
-            'За тобою соромиться підглядати моя камера',
-            'Ти смачніша, ніж філіжанка кави',
-            'ТАКЕ приємне волосся аааа..',
-            'Ти тупо топовий топ',
-            'Менеджер - ка з гарним голосом',
-            'Така врівноважена шо я єбу як ти впоруєшся',
-            'А в тебе кльові стікєри',
-            'Будь-які твої паролі завжди вірні'
-        ]
-        showMessage('success', compliments[getRandom(0, compliments.length - 1)])
-        return
-    }
-
     const payButton = loginModal.querySelector('button')
     payButton.disabled = true
 
@@ -2078,8 +2065,17 @@ window.onkeyup = e => {
     }
 
     if (e.key === 'Backspace') {
+        if (!enterInput.textContent) {
+            return
+        }
+
         calculatorNumbers[calculatorNumbers.length - 1].classList.add('active')
         enterInput.textContent = enterInput.textContent.slice(0, -1)
+
+        if (recalculateAction) {
+            recalculateAction()
+        }
+
         return
     }
 
@@ -2088,6 +2084,10 @@ window.onkeyup = e => {
     }
 
     if (calculator.classList.contains('mode-search') && enterInput.textContent.length > 3) {
+        return
+    }
+
+    if (recalculateAction && enterInput.textContent.length > 6) {
         return
     }
 
@@ -2106,13 +2106,26 @@ window.onkeyup = e => {
 
     calculatorNumbers[keyToCalculatorNumber[e.key]].classList.add('active')
     enterInput.textContent += e.key
+
+    if (recalculateAction) {
+        recalculateAction()
+    }
 }
 
 calculatorNumbers.forEach(e => e.onpointerup = () => {
     calculatorNumbers.forEach(n => n.classList.remove('active'))
 
     if (e.textContent === 'backspace') {
+        if (!enterInput.textContent) {
+            return
+        }
+
         enterInput.textContent = enterInput.textContent.slice(0, -1)
+
+        if (recalculateAction) {
+            recalculateAction()
+        }
+
         return
     }
 
@@ -2124,11 +2137,19 @@ calculatorNumbers.forEach(e => e.onpointerup = () => {
         return
     }
 
+    if (recalculateAction && enterInput.textContent.length > 6) {
+        return
+    }
+
     if (enterInput.textContent.length > 8) {
         return
     }
 
     enterInput.textContent += e.textContent
+
+    if (recalculateAction) {
+        recalculateAction()
+    }
 })
 
 if ('serviceWorker' in navigator) {
@@ -2174,6 +2195,13 @@ const select2NoResults = {
     'language': {
         'noResults': () => 'Не знайдено'
     }
+}
+
+const select2PlaceholderClient = {
+    'language': {
+        'noResults': () => 'Не знайдено'
+    },
+    'placeholder': 'Обрати клієнта'
 }
 
 // Notification.requestPermission().then(permission => console.log(permission))
