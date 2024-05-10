@@ -952,7 +952,6 @@
                 <h1></h1>
                 <span class="close-modal material-symbols-outlined">close</span>
             </div>
-            <datalist id="supply-product"></datalist>
             <div class="form">
                 <h2>
                     <span class="required">*</span>
@@ -968,8 +967,7 @@
                     <span class="required">*</span>
                     <span>Постачальник</span>
                 </h2>
-                <input list="supply-contractor">
-                <datalist id="supply-contractor"></datalist>
+                <select class="supply-contractor"></select>
             </div>
             <div class="form">
                 <h2>
@@ -981,7 +979,7 @@
             <div class="form">
                 <h2>Сума оплати</h2>
                 <div class="supply-paid-sum-block">
-                    <input class="supply-paid-sum" type="number" min="0" max="100000" oninput="handlePriceInput(event)">
+                    <span class="enter-value supply-paid-sum" onpointerup="createCalculatorValueSpan(this)"></span>
                     <span>грн</span>
                 </div>
             </div>
@@ -1294,7 +1292,6 @@
                 <h1></h1>
                 <span class="close-modal material-symbols-outlined">close</span>
             </div>
-            <datalist id="waste-product"></datalist>
             <div class="waste-header">
                 <div class="form">
                     <h2>
@@ -1428,17 +1425,11 @@
                     </div>
                     <div class="sale-order-time">
                         <div>
-                            <span>
-                                <span>час</span>
-                                <span class="exact-time">від:</span>
-                            </span>
+                            <span class="exact-time">з</span>
                             <input type="time" class="sale-order-date-time-from">
                         </div>
                         <div>
-                            <span>
-                                <span>час</span>
-                                <span class="exact-time">до:</span>
-                            </span>
+                            <span class="exact-time">до</span>
                             <input type="time" class="sale-order-date-time-till">
                         </div>
                     </div>
@@ -1471,21 +1462,15 @@
                     <div class="sale-order-time">
                         <div>
                             <span>
-                                <span>
-                                    <span class="required">*</span>
-                                    <span>час</span>
-                                </span>
-                                <span class="exact-time">від:</span>
+                                <span class="required">*</span>
+                                <span class="exact-time">з</span>
                             </span>
                             <input type="time" class="sale-order-date-time-from">
                         </div>
                         <div>
                             <span>
-                                <span>
-                                    <span class="required">*</span>
-                                    <span>час</span>
-                                </span>
-                                <span class="exact-time">до:</span>
+                                <span class="required">*</span>
+                                <span class="exact-time">до</span>
                             </span>
                             <input type="time" class="sale-order-date-time-till">
                         </div>
@@ -1676,17 +1661,11 @@
                     </div>
                     <div class="sale-order-time">
                         <div>
-                            <span>
-                                <span>час</span>
-                                <span class="exact-time">від:</span>
-                            </span>
+                            <span class="exact-time">з</span>
                             <input type="time" class="sale-order-date-time-from">
                         </div>
                         <div>
-                            <span>
-                                <span>час</span>
-                                <span class="exact-time">до:</span>
-                            </span>
+                            <span class="exact-time">до</span>
                             <input type="time" class="sale-order-date-time-till">
                         </div>
                     </div>
@@ -1719,21 +1698,15 @@
                     <div class="sale-order-time">
                         <div>
                             <span>
-                                <span>
-                                    <span class="required">*</span>
-                                    <span>час</span>
-                                </span>
-                                <span class="exact-time">від:</span>
+                                <span class="required">*</span>
+                                <span class="exact-time">з</span>
                             </span>
                             <input type="time" class="sale-order-date-time-from">
                         </div>
                         <div>
                             <span>
-                                <span>
-                                    <span class="required">*</span>
-                                    <span>час</span>
-                                </span>
-                                <span class="exact-time">до:</span>
+                                <span class="required">*</span>
+                                <span class="exact-time">до</span>
                             </span>
                             <input type="time" class="sale-order-date-time-till">
                         </div>
@@ -2109,7 +2082,7 @@
                     </div>
                     <div class="order-time">
                         <div>
-                            <span>від</span>
+                            <span>з</span>
                             <input type="time">
                         </div>
                         <div>
