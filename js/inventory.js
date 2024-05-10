@@ -130,6 +130,7 @@ const createInventoryModal = () => {
         inventoryStocksSelect.add(option)
     }
 
+    $(inventoryStocksSelect).val('').select2(select2NoSearch)
     const inventoryProductsTable = inventoryModal.querySelector('table')
 
     const fillInventoriesModalTable = stockId => {
