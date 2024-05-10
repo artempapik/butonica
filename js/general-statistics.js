@@ -435,7 +435,7 @@ const showGeneralStatisticsInfo = e => {
     expensesIncomePieChart = getPieChart('expenses-income', 'Відношення доходів до витрат', 2)
 
     incomeByShiftLineChart = getLineChart('income-by-shift', 'Виручка змін за місяць')
-    incomeByShiftLineChart.options.layout.padding = { top: 10 }
+    incomeByShiftLineChart.options.layout.padding = { top: 10, right: 20 }
     incomeByShiftLineChart.options.plugins.datalabels.formatter = value => value || null
     incomeByShiftLineChart.update()
 
