@@ -2065,6 +2065,7 @@ window.onkeyup = e => {
     calculatorNumbers.forEach(n => n.classList.remove('active'))
 
     if (e.key === 'Escape') {
+        recalculateAction = null
         hideModal(calculatorModal)
     }
 
