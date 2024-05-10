@@ -1,0 +1,132 @@
+.search-product {
+    display: none;
+    width: var(--search-input-width);
+    margin-bottom: 1.1rem;
+}
+
+.create-product-modal-content,
+.product-info-modal-content {
+    gap: 1.3rem;
+}
+
+.product-info-modal-content {
+    padding: 1rem;
+    padding-top: 0;
+    width: calc(var(--modal-content-width) + 6rem);
+
+    & .product-content {
+        flex-direction: row;
+        justify-content: space-between;
+
+        & .product-info {
+            flex: 2;
+            gap: 1.5rem;
+        }
+
+        & img {
+            filter: drop-shadow(1px 1px 2px rgb(130, 130, 130));
+            margin-top: .8rem;
+            width: 8rem;
+            height: fit-content;
+            height: intrinsic;
+        }   
+    }
+
+    & table {
+        display: block;
+        width: 100%;
+        margin-bottom: 0;
+
+        & tbody {
+            font-size: 1rem;
+        }
+
+        & tr td {
+            &:nth-child(2),
+            &:nth-child(3) {
+                text-align: center;
+            }
+        }
+
+        & td:not(:last-child) {
+            white-space: nowrap;
+        }
+
+        & td:last-child {
+            width: 100%;
+        }
+    }
+
+    & .form {
+        & h2 {
+            font-weight: bold;
+        }
+
+        & h3 {
+            font-weight: normal;
+        }
+    }
+
+    & .product-prices-history div {
+        font-weight: bold;
+        text-align: center;
+        font-size: 1.2rem;
+        margin: .5rem 0 .2rem 0;
+    }
+}
+
+.create-product-modal-content {
+    padding: .9rem 1.1rem;
+    gap: 1.2rem;
+
+    & .form input[type=number] {
+        width: 5rem;
+    }
+
+    & .form-check {
+        display: flex;
+        flex-direction: column;
+        gap: .7rem;
+
+        & form {
+            display: flex;
+            gap: .4rem;
+
+            & label {
+                display: flex;
+                align-items: center;
+                gap: .4rem;
+            }
+
+            &.product-type label {
+                align-items: baseline;
+            }
+        }
+    }
+
+    & .buying-stock-prices, & .stock-prices {
+        & h2 {
+            margin-bottom: .6rem;
+        }
+
+        & div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            & .enter-value {
+                width: 4.5rem;
+            }
+        }
+    }
+}
+
+.product-table table tr:not(:first-child) {
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 700px) and (orientation: portrait) {
+    .product-table table td:first-child {
+        max-width: 9.7rem;
+    }
+}

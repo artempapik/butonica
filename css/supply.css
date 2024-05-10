@@ -1,0 +1,298 @@
+.create-supply-modal-content {
+    width: calc(var(--modal-content-width) + 8rem);
+    gap: 1.5rem;
+
+    & select {
+        width: 14rem;
+    }
+
+    & .supply-paid-sum-block {
+        display: flex;
+        gap: .6rem;
+        align-items: center;
+
+        & .supply-paid-sum {
+            padding: .4rem;
+            width: 3.5rem;
+        }
+    }
+
+    & .total-sum, & .total-sum-associated-costs {
+        align-self: end;
+        margin-bottom: 1rem;
+
+        & span:first-child {
+            font-weight: bold;
+        }
+    }
+
+    & .total-sum-associated-costs {
+        display: none;
+    }
+}
+
+.associated-costs, .supply-products {
+    & h2 {
+        margin-top: 1.5rem;
+        font-size: 1.2rem !important;
+        font-weight: bold !important;
+    }
+
+    & .one-more-product {
+        background: none;
+        width: 100%;
+        color: #000;
+        font-size: 1rem;
+        padding: .5rem 0;
+        transition: .1s;
+    }
+}
+
+.supply-products h2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & .update-buying-cost {
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+
+        & span {
+            font-weight: normal;
+            font-size: 1rem;
+        }
+    }
+}
+
+.associated-costs {
+    & .associated-costs-data {
+        display: flex;
+        flex-direction: column;
+        gap: .7rem;
+
+        & div {
+            display: flex;
+            gap: 2rem;
+            justify-content: space-between;
+    
+            & input:first-child {
+                flex: 3;
+            }
+    
+            & input:last-child {
+                flex: 1;
+            }
+    
+            & span {
+                color: rgba(255, 0, 0, .6);
+                cursor: pointer;
+                align-self: center;
+            }
+        }
+    }
+}
+
+.supply-products:not(.supply-info-modal .supply-products) {
+    & table {
+        display: block;
+        box-shadow: none;
+        margin-bottom: 0;
+
+        & tbody {
+            display: none;
+
+            & td {
+                color: #000;
+            }
+        }
+
+        & td:nth-child(4) {
+            width: 4rem;
+            text-align: center;
+        }
+
+        & input {
+            font-size: .85rem;
+            width: 4rem;
+        }
+
+        & input[list=supply-product] {
+            width: 9.1rem;
+        }
+
+        & tr {
+            background: #fff;
+
+            & .remove-supply-product {
+                transition: .1s;
+
+                & span {
+                    color: rgba(255, 0, 0, .6);
+                    cursor: pointer;
+
+                    &:hover {
+                        color: rgba(255, 0, 0, .9);
+                    }
+                }
+            }
+        }
+
+        & td {
+            border-right: none !important;
+            font-size: .9rem;
+            padding: .5rem .2rem;
+        }
+    }
+}
+
+.supply-table table tr:not(:first-child) td:first-child {
+    text-align: center;
+}
+
+.supply-info-modal-content {
+    gap: 1.5rem;
+    padding: 1rem;
+    padding-top: 0;
+    width: calc(var(--modal-content-width) + 12rem);
+
+    & .form {
+        & h2 {
+            font-weight: bold;
+        }
+
+        & h3 {
+            font-weight: normal;
+            font-size: 1.1rem;
+        }
+    }
+
+    & table {
+        display: block;
+        margin-bottom: 0;
+        
+        & td {
+            font-size: 1rem;
+            padding: .6rem .5rem;
+
+            &:nth-child(2) {
+                text-align: center;
+            }
+        }
+    }
+
+    & .supply-products table {
+        width: 100%;
+
+        & td:not(:last-child) {
+            white-space: nowrap;
+        }
+
+        & td:last-child {
+            width: 100%;
+        }
+    }
+
+    & .supply-products h2, & .supply-associated-costs h2 {
+        font-size: 1.2rem;
+        margin: 0;
+        margin-bottom: 1rem;
+    }
+
+    & .total-sum, & .total-sum-associated-costs {
+        display: flex;
+        justify-content: end;
+        font-size: 1.2rem;
+        font-weight: bold;
+        gap: .5rem;
+
+        & span:last-child {
+            font-weight: normal;
+        }
+    }
+}
+
+.supply-table table tr:not(:first-child) {
+    cursor: pointer;
+}
+
+.supply-header .supplies-date-filter {
+    align-items: center;
+}
+
+@media (hover: hover) {
+    .associated-costs, .supply-products .one-more-product:hover {
+        border-color: rgb(30, 30, 30);
+    }
+
+    .associated-costs .associated-costs-data div,
+    .supply-products:not(.supply-info-modal .supply-products) table tr .remove-supply-product {
+        & span:hover {
+            color: rgba(255, 0, 0, .9);
+        }
+    }
+}
+
+@media only screen and (max-width: 1400px) {
+    .supply-info-modal-content {
+        gap: 1.3rem;
+    }
+}
+
+@media only screen and (max-width: 700px) and (orientation: portrait) {
+    .create-supply-modal-content {
+        padding: .7rem .5rem;
+
+        & .supply-products table {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        & .total-sum, & .total-sum-associated-costs {
+            font-size: 1.1rem !important;
+        }
+    }
+
+    .supply-info-modal-content {
+        padding: 0 .2rem .8rem .2rem;
+
+        & .supply-products table td {
+            font-size: .9rem;
+            padding: .5rem .4rem;
+
+            &:first-child {
+                min-width: 8.5rem;
+            }
+
+            &:not(:last-child) {
+                white-space: unset;
+            }
+        }
+
+        & .total-sum, & .total-sum-associated-costs {
+            font-size: 1rem;
+            gap: .2rem;
+        }
+    }
+
+    .supply-header {
+        & button:not(& .header-items button) {
+            align-self: start;
+        }
+        
+        & .supplies-date-filter {
+            flex-direction: column;
+            align-items: start;
+
+            & .supply-view-type .type.active span:last-child {
+                font-weight: unset;
+            }
+        }
+    }
+
+    .supply-table table {
+        & td:first-child {
+            padding: .3rem .15rem;
+        }
+    }
+}
