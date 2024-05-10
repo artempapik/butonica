@@ -2177,7 +2177,8 @@ const createCalculatorValueSpan = span => {
 
     calculatorModal.style.display = 'flex'
     const calculatorRect = calculator.getBoundingClientRect()
-    calculator.style.left = spanRect.left - (calculatorRect.width - spanRect.width) / 2 + 'px'
+    const leftCoord = spanRect.left - (calculatorRect.width - spanRect.width) / 2
+    calculator.style.left = (leftCoord > 0 ? leftCoord : 0.5) + 'px'
 
     const top = spanRect.top - calculatorRect.height * 1.05
     if (top < 0) {
