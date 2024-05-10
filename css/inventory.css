@@ -169,15 +169,15 @@
     }
     
     .create-inventory-modal-content {
-        padding: .1rem .1rem;
-        gap: .1rem;
+        padding: .8rem .6rem;
+        gap: .8rem;
 
-        & .inventory-header {
-            margin: 0;
+        & .inventory-header .form {
+            gap: .4rem;
         }
 
         & .inventory-stock {
-            width: unset;
+            width: 5.5rem;
         }
 
         & table {
