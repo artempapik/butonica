@@ -112,9 +112,7 @@ const getStatisticsValues = () => {
         return
     }
 
-    if (month) {
-        month--
-    }
+    month = month ? month - 1 : 1
 
     get(`Statistics/general/${loginInfo.companyId}/${year}/${month || new Date().getMonth() + 1}`).then(response => {
         const statValues = document.querySelectorAll('.general-statistics-info .stat-value span:first-child')
