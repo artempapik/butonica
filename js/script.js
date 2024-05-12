@@ -1340,7 +1340,7 @@ const handlePriceInput = e => {
 
 const hideBodyOverflow = () => {
     if (isMobile) {
-        document.body.style.position = 'fixed'
+        // document.body.style.position = 'fixed'
     }
 
     document.body.style.overflow = 'hidden'
