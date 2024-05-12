@@ -1340,8 +1340,10 @@ const handlePriceInput = e => {
 
 const hideBodyOverflow = () => {
     if (isMobile) {
-        localStorage.setItem('scroll-y', window.scrollY)
+        const scrollY = window.scrollY
+        localStorage.setItem('scroll-y', scrollY)
         document.body.classList.add('fixed')
+        document.body.style.top = -scrollY + 'px'
     }
 
     document.body.style.overflow = 'hidden'
