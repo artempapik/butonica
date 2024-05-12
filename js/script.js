@@ -14,7 +14,7 @@ const uploadImage = e => {
         e.target.parentNode.querySelector('input').value = ''
         e.target.parentNode.querySelector('img').src = response
         imageData = response
-    }).catch(() => console.error('error converting company image'))
+    }).catch(() => console.error('error converting image'))
 }
 
 const removeImage = e => {
@@ -1340,7 +1340,7 @@ const handlePriceInput = e => {
 
 const hideBodyOverflow = () => {
     if (isMobile) {
-        // document.body.style.position = 'fixed'
+        document.body.style.position = 'fixed'
     }
 
     document.body.style.overflow = 'hidden'
