@@ -1687,11 +1687,6 @@ document.onpointerdown = e => {
 }
 
 const isMobile = 'ontouchstart' in window
-
-if ('virtualKeyboard' in navigator) {
-    navigator.virtualKeyboard.overlaysContent = true
-}
-
 const notificationsInfo = document.querySelector('.notifications-info')
 
 document.onpointerup = e => {
