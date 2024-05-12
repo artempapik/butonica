@@ -1340,14 +1340,14 @@ const handlePriceInput = e => {
 
 const hideBodyOverflow = () => {
     if (isMobile) {
-        document.body.style.position = 'fixed'
+        document.body.classList.add('fixed')
     }
 
     document.body.style.overflow = 'hidden'
 }
 
 const hideModal = modal => {
-    document.body.style.position = ''
+    document.body.classList.remove('fixed')
     modal.style.display = ''
 
     if (!intervalId && modal !== calculatorModal && modal !== flavorTemplatesModal && !shiftInfoModal.style.display) {
