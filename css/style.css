@@ -2759,7 +2759,8 @@ table {
     }
 
     [class$="modal-content"] {
-        max-height: calc(100vh - 9.5rem);
+        border-radius: 0;
+        max-height: calc(100vh - 8.5rem);
     }
 
     [class$="view-type"] {
