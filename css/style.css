@@ -48,6 +48,11 @@ body {
     flex-direction: column;
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     background: rgb(250, 250, 250);
+
+    &.fixed {
+        position: fixed;
+        width: 100%;
+    }
 }
 
 a {
