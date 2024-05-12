@@ -1340,6 +1340,7 @@ const handlePriceInput = e => {
 
 const hideBodyOverflow = () => {
     if (isMobile) {
+        localStorage.setItem('scroll-y', window.scrollY)
         document.body.classList.add('fixed')
     }
 
@@ -1347,7 +1348,11 @@ const hideBodyOverflow = () => {
 }
 
 const hideModal = modal => {
-    document.body.classList.remove('fixed')
+    if (isMobile) {
+        document.body.classList.remove('fixed')
+        window.scrollTo(0, localStorage.getItem('scroll-y'))
+    }
+
     modal.style.display = ''
 
     if (!intervalId && modal !== calculatorModal && modal !== flavorTemplatesModal && !shiftInfoModal.style.display) {
