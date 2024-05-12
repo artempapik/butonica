@@ -1347,7 +1347,7 @@ const hideBodyOverflow = () => {
 }
 
 const hideModal = modal => {
-    document.body.style.position = ''
+    // document.body.style.position = ''
     modal.style.display = ''
 
     if (!intervalId && modal !== calculatorModal && modal !== flavorTemplatesModal && !shiftInfoModal.style.display) {
