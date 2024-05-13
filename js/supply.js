@@ -93,6 +93,7 @@ const showSupplyInfo = e => {
         }
 
         $(supplyContractorsList).val('').select2(select2NoResults)
+        $(".select2-container").click(function(){ $('.select2-search__field').trigger('focus'); });
     })
 
     get(`Stock/ids-names/${loginInfo.companyId}`).then(response => {
