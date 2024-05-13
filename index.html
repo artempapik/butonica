@@ -2549,6 +2549,8 @@
     <script src="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro@2.9.6/build/vanilla-calendar.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script> $(".select2-container").click(function(){ $('.select2-search__field').trigger('focus'); }); </script>
+    <script> $('.select2-container').click(function (e) {
+        $(e.currentTarget).prev('select').data('select2').$dropdown.find('.select2-search__field').focus();
+      }); </script>
 </body>
 </html>
