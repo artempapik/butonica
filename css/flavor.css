@@ -85,11 +85,7 @@
                 font-size: .85rem;
                 width: 3rem;
             }
-        
-            & input[list=flavor-product] {
-                width: 9.1rem;
-            }
-        
+            
             & tr {
                 background: #fff;
                 
