@@ -537,7 +537,7 @@ const menuItemsContents = {
         <div class="inventory-header">
             <div class="header-items">
                 <div id="loader"></div>
-                <span class="material-symbols-outlined">edit_calendar</span>
+                <span class="material-symbols-outlined">inventory</span>
                 <div class="inventory-date-filter">
                     <h1>Інвентаризація</h1>
                     <div class="month-filter">
