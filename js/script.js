@@ -1406,7 +1406,7 @@ document.querySelectorAll('.close-modal').forEach(b => b.onpointerup = () => {
         storeExpenseCategoryModal,
         labelModal
     ]) {
-        if (modal) {
+        if (modal.style.display) {
             setTimeout(() => hideModal(modal), 1)
         }
     }
