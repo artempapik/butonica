@@ -135,7 +135,25 @@ const fillLeftoversTable = leftoverProducts => {
         productAmountColumn.textContent = product.amount
 
         const productBuyingCostColumn = document.createElement('td')
-        productBuyingCostColumn.textContent = product.buyingCost ? product.buyingCost.toFixed(2) : '–'
+
+        if (product.buyingCost) {
+            const isUp = product.change === null || product.change === 0 ? null : product.change > 0
+            const buyingIcon = createSpan(isUp === null ? 'remove' : isUp ? 'arrow_drop_up' : 'arrow_drop_down')
+            buyingIcon.classList = 'material-symbols-outlined'
+            buyingIcon.style.color = isUp === null ? 'rgb(150, 150, 150)' : isUp ? 'green' : 'red'
+            productBuyingCostColumn.append(buyingIcon, createSpan(product.buyingCost.toFixed(2)))
+
+            if (isUp !== null) {
+                tippy(productBuyingCostColumn, {
+                    content: `${isUp ? 'зросла' : 'впала'} на ${Math.abs(product.change)} грн`,
+                    placement: 'right'
+                })
+            }
+        } else {
+            const noneSpan = createSpan('–')
+            noneSpan.style.textAlign = 'center'
+            productBuyingCostColumn.append(noneSpan)
+        }
 
         const createTdWithText = field => {
             const td = createTd()
