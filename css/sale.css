@@ -1076,10 +1076,6 @@
                 font-size: .9rem;
                 width: 5rem;
             }
-        
-            & input[list=internet-product], & input[list=internet-flavor] {
-                width: 12rem;
-            }
             
             & tr {
                 background: #fff;
