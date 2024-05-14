@@ -117,10 +117,6 @@
             width: 4rem;
         }
 
-        & input[list=supply-product] {
-            width: 9.1rem;
-        }
-
         & tr {
             background: #fff;
 
