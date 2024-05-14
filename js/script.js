@@ -1738,39 +1738,6 @@ const logout = () => showConfirm('Вийти з Butonica?', () => {
     location.reload()
 })
 
-const keepDatalistOptions = selector => {
-    const options = [...document.querySelectorAll(`#${selector} option`)].map(o => ({
-        id: +o.dataset.id,
-        value: o.value
-    }))
-
-    for (const input of document.querySelectorAll(`input[list=${selector}]`)) {
-        input.onfocus = e => {
-            e.target.placeholder = e.target.value
-            e.target.value = ''
-        }
-
-        input.onblur = e => {
-            if (!options.some(o => o.value === e.target.value)) {
-                e.target.value = e.target.placeholder
-                return
-            }
-            
-            e.target.placeholder = e.target.value
-        }
-    
-        input.onchange = e => {
-            const option = options.find(o => o.value === e.target.value)
-    
-            if (option) {
-                e.target.dataset.id = option.id
-            }
-    
-            e.target.blur()
-        }
-    }
-}
-
 const getRandom = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
 
 const screensaverMarkup = `
