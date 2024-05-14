@@ -2759,7 +2759,7 @@ table {
     }
 
     [class$="modal-content"] {
-        border-radius: .3rem;
+        border-radius: .5rem;
         max-height: calc(100vh - 8.5rem);
     }
 
