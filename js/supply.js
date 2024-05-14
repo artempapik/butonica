@@ -91,10 +91,8 @@ const showSupplyInfo = e => {
             option.dataset.id = contractor.id
             supplyContractorsList.append(option)
         }
-
-        // new SlimSelect({select:supplyContractorsList})
-
-        // $(supplyContractorsList).val('').select2(select2NoResults)
+        
+        $(supplyContractorsList).val('').select2(select2NoResults)
     })
 
     get(`Stock/ids-names/${loginInfo.companyId}`).then(response => {
@@ -141,8 +139,7 @@ const createSupplyModal = () => {
     supplyModal.querySelector('h1').textContent = 'Створити поставку'
     supplyModal.querySelectorAll('input').forEach(i => i.value = '')
 
-    // $(supplyModal.querySelector('.supply-contractor')).val('').select2(select2NoResults)
-    new SlimSelect({select:supplyModal.querySelector('.supply-contractor')})
+    $(supplyModal.querySelector('.supply-contractor')).val('').select2(select2NoResults)
     const supplyStock = supplyModal.querySelector('.supply-stock')
 
     if (supplyStock.children.length > 1) {
