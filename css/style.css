@@ -2243,7 +2243,7 @@ table {
 
         &.bottom::after {
             border-color: transparent transparent rgb(50, 50, 50) transparent !important;
-            top: -11% !important;
+            top: -12.5% !important;
         }
 
         & .calculator-row {
