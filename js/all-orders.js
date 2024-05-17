@@ -366,15 +366,7 @@ const createOrderRow = (order, table) => {
             const orderId = order.id.toString()
             const orderNumber = orderNumberDate.querySelector('.order-number .number span')
             orderNumber.textContent = orderId.length > 4 ? orderId.substring(orderId.length - 4) : orderId
-
-            const expandIdIcon = orderNumberDate.querySelector('.order-number .number .expand')
-            expandIdIcon.textContent = 'expand_content'
-            expandIdIcon.style.display = orderId.length > 4 ? '' : 'none'
-
-            expandIdIcon.onpointerup = () => {
-                orderNumber.textContent = orderNumber.textContent.length === 4 ? orderId : orderId.substring(orderId.length - 4)
-                expandIdIcon.textContent = orderNumber.textContent.length === 4 ? 'expand_content' : 'collapse_content'
-            }
+            orderNumber.onpointerup = () => orderNumber.textContent = orderNumber.textContent.length <= 4 ? orderId : orderId.substring(orderId.length - 4)
 
             const printSheets = orderNumberDate.querySelector('.order-number .number .print-sheets')
 
