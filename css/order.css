@@ -24,12 +24,12 @@
                         & span:first-child:not(.print-sheets span) {
                             font-family: 'Roboto Mono', monospace;
                             font-size: 1.2rem;
-                        }
-
-                        & .expand {
-                            vertical-align: text-top;
+                            margin-right: .3rem;
                             cursor: pointer;
-                            color: rgb(96, 130, 182);
+
+                            &:hover {
+                                text-decoration: underline;
+                            }
                         }
 
                         & .print-sheets span {
