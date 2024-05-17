@@ -1470,6 +1470,7 @@ table {
 
     & .vanilla-calendar-day__btn_selected, .vanilla-calendar-months__month_selected, .vanilla-calendar-years__year_selected {
         background: linear-gradient(rgb(75, 145, 247) 0%, rgb(54, 122, 246) 100%);
+        color: rgb(240, 240, 240);
     }
 }
 
