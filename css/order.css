@@ -384,6 +384,10 @@
 [class$="order-table"] table tr:not(:first-child) {
     cursor: pointer;
 
+    & td:nth-child(2) img {
+        filter: drop-shadow(1px 1px 2px rgb(130, 130, 130));
+    }
+
     & td:nth-child(3) {
         max-width: 16rem;
     }
