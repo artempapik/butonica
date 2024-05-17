@@ -52,7 +52,7 @@ const flavorInfoModal = document.querySelector('.flavor-info-modal')
 const flavorTemplatesModal = document.querySelector('.flavor-templates-modal')
 
 const flavorTotalBuyingSumElement = flavorModal.querySelector('.total-buying-sum span:last-child')
-const flavorTotalSumElement = flavorModal.querySelector('.total-sum input')
+const flavorTotalSumElement = flavorModal.querySelector('.total-sum .enter-value')
 
 const calculateFlavorTotalSum = () => {
     let totalBuyingSum = 0
@@ -73,7 +73,7 @@ const calculateFlavorTotalSum = () => {
     }
 
     flavorTotalBuyingSumElement.textContent = totalBuyingSum.toFixed(2)
-    flavorTotalSumElement.value = totalSum.toFixed(2)
+    flavorTotalSumElement.textContent = totalSum.toFixed(2)
 }
 
 const saveTemplate = () => {
@@ -134,7 +134,7 @@ const createFlavorModal = () => {
         flavorModal.querySelector('.total-buying-sum').style.visibility = 'hidden'
     }
 
-    flavorModal.querySelector('.total-sum input').value = '0.00'
+    flavorModal.querySelector('.total-sum .enter-value').textContent = '0.00'
 
     const flavorsProductsTable = flavorModal.querySelector('table')
     flavorsProductsTable.innerHTML = flavorsProductsTable.querySelector('tbody').innerHTML
@@ -340,7 +340,7 @@ const createFlavor = () => {
         employeeId: loginInfo.employeeId,
         products,
         totalBuyingSum: +flavorTotalBuyingSumElement.textContent,
-        totalSum: +flavorTotalSumElement.value
+        totalSum: +flavorTotalSumElement.textContent
     }
 
     post('Flavor', flavor).then(response => {
@@ -420,7 +420,7 @@ const editFlavor = (id, oldRow, date) => {
         employeeId: loginInfo.employeeId,
         products,
         totalBuyingSum: +flavorTotalBuyingSumElement.textContent,
-        totalSum: +flavorTotalSumElement.value
+        totalSum: +flavorTotalSumElement.textContent
     }
 
     put('Flavor', flavor).then(response => {
@@ -526,7 +526,7 @@ const addFlavorProduct = (product = null) => {
             }
         }
         
-        flavorTotalSumElement.value = (+flavorTotalSumElement.value - +productSum.textContent).toFixed(2)
+        flavorTotalSumElement.textContent = (+flavorTotalSumElement.textContent - +productSum.textContent).toFixed(2)
         e.target.parentNode.parentNode.remove()
 
         const table = flavorModal.querySelector('table')
