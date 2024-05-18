@@ -4,8 +4,9 @@ const getWastes = month => {
     showLoadAnimation()
 
     get(`Waste/${loginInfo.companyId}/${month || new Date().getMonth() + 1}`).then(response => {
-        wastesTable.innerHTML = wastesTable.querySelector('tbody').innerHTML
+        wastesTable.querySelector('.table-no-data')?.remove()
         wastesTable.style.display = 'block'
+        wastesTable.querySelectorAll('tr:not(tbody tr)').forEach(tr => tr.remove())
         replaceLoadIcons()
 
         if (!response.length) {
@@ -24,6 +25,23 @@ const showWasteInfo = e => {
     getWastes(0)
     get(`Stock/ids-names/${loginInfo.companyId}`).then(response => wasteStocks = response)
     get(`Product/ids-names/${loginInfo.companyId}`).then(response => wasteProducts = response)
+
+    const wastesCalendar = new VanillaCalendar('.waste-table td:first-child', {
+        type: 'month',
+        input: true,
+        settings: {
+            lang: 'uk'
+        },
+        actions: {
+            clickMonth(_, self) {
+                wastesCalendar.hide()
+                animateChange(wastesTable)
+                getWastes(self.selectedMonth + 1)
+            }
+        }
+    })
+
+    wastesCalendar.init()
 }
 
 const wasteModal = document.querySelector('.create-waste-modal')
