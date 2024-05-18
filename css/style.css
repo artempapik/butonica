@@ -1429,7 +1429,10 @@ table {
 .all-order-table table tbody tr td:nth-child(3),
 .pending-order-table table tbody tr td:nth-child(3),
 .shift-table table tbody tr td:nth-child(2),
-.shift-table table tbody tr td:nth-child(3) {
+.shift-table table tbody tr td:nth-child(3),
+.waste-table table tbody tr td:first-child,
+.inventory-table table tbody tr td:nth-child(2),
+.store-expense-table table tbody tr td:first-child {
     cursor: pointer;
     transition: .1s;
 
