@@ -5,8 +5,9 @@ const getInventories = month => {
 
     get(`Inventory/${loginInfo.companyId}/${month || new Date().getMonth() + 1}`).then(response => {
         inventories = response
-        inventoriesTable.innerHTML = inventoriesTable.querySelector('tbody').innerHTML
+        inventoriesTable.querySelector('.table-no-data')?.remove()
         inventoriesTable.style.display = 'block'
+        inventoriesTable.querySelectorAll('tr:not(tbody tr)').forEach(tr => tr.remove())
         replaceLoadIcons()
 
         if (!inventories.length) {
@@ -36,6 +37,23 @@ const showInventoryInfo = e => {
         inventoryFilters.style.display = 'flex'
         fillInventoryFilters(inventoryFilters, inventoryStocks, 'name')
     })
+
+    const inventoryCalendar = new VanillaCalendar('.inventory-table td:nth-child(2)', {
+        type: 'month',
+        input: true,
+        settings: {
+            lang: 'uk'
+        },
+        actions: {
+            clickMonth(_, self) {
+                inventoryCalendar.hide()
+                animateChange(inventoriesTable)
+                getInventories(self.selectedMonth + 1)
+            }
+        }
+    })
+
+    inventoryCalendar.init()
 }
 
 const fillInventoryFilters = (filtersBlock, items, key) => {
