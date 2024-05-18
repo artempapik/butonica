@@ -540,24 +540,6 @@ const menuItemsContents = {
                 <span class="material-symbols-outlined">inventory</span>
                 <div class="inventory-date-filter">
                     <h1>Інвентаризація</h1>
-                    <div class="month-filter">
-                        <div>за:</div>
-                        <select onchange="getInventories(event.target.selectedIndex)">
-                            <option>поточний місяць</option>
-                            <option>січень</option>
-                            <option>лютий</option>
-                            <option>березень</option>
-                            <option>квітень</option>
-                            <option>травень</option>
-                            <option>червень</option>
-                            <option>липень</option>
-                            <option>серпень</option>
-                            <option>вересень</option>
-                            <option>жовтень</option>
-                            <option>листопад</option>
-                            <option>грудень</option>
-                        </select>
-                    </div>
                 </div>
             </div>
             <button onpointerup="createInventoryModal()">Створити</button>
@@ -570,7 +552,10 @@ const menuItemsContents = {
             <table class="animate">
                 <tr>
                     <td>Склад</td>
-                    <td>Дата</td>
+                    <td>
+                        <span>Дата</span>
+                        <span class="material-symbols-outlined">calendar_month</span>
+                    </td>
                     <td>Результат</td>
                     <td></td>
                 </tr>
@@ -685,34 +670,17 @@ const menuItemsContents = {
             <div class="header-items">
                 <div id="loader"></div>
                 <span class="material-symbols-outlined">delete</span>
-                <div class="wastes-date-filter">
-                    <h1>Списання</h1>
-                    <div class="month-filter">
-                        <div>за:</div>
-                        <select onchange="getWastes(event.target.selectedIndex)">
-                            <option>поточний місяць</option>
-                            <option>січень</option>
-                            <option>лютий</option>
-                            <option>березень</option>
-                            <option>квітень</option>
-                            <option>травень</option>
-                            <option>червень</option>
-                            <option>липень</option>
-                            <option>серпень</option>
-                            <option>вересень</option>
-                            <option>жовтень</option>
-                            <option>листопад</option>
-                            <option>грудень</option>
-                        </select>
-                    </div>
-                </div>
+                <h1>Списання</h1>
             </div>
             <button onpointerup="createWasteModal()">Створити</button>
         </div>
         <div class="waste-table">
             <table class="animate">
                 <tr>
-                    <td>Дата</td>
+                    <td>
+                        <span>Дата</span>
+                        <span class="material-symbols-outlined">calendar_month</span>
+                    </td>
                     <td>Склад</td>
                     <td>Списав</td>
                     <td></td>
@@ -985,24 +953,6 @@ const menuItemsContents = {
                             <span>Магазину</span>
                         </div>
                     </div>
-                    <div class="month-filter">
-                        <div>за:</div>
-                        <select onchange="getStoreExpenses(event.target.selectedIndex)">
-                            <option>поточний місяць</option>
-                            <option>січень</option>
-                            <option>лютий</option>
-                            <option>березень</option>
-                            <option>квітень</option>
-                            <option>травень</option>
-                            <option>червень</option>
-                            <option>липень</option>
-                            <option>серпень</option>
-                            <option>вересень</option>
-                            <option>жовтень</option>
-                            <option>листопад</option>
-                            <option>грудень</option>
-                        </select>
-                    </div>
                 </div>
             </div>
             <button onpointerup="createStoreExpenseModal()">Створити</button>
@@ -1010,7 +960,10 @@ const menuItemsContents = {
         <div class="store-expense-table">
             <table class="animate">
                 <tr>
-                    <td>Дата</td>
+                    <td>
+                        <span>Дата</span>
+                        <span class="material-symbols-outlined">calendar_month</span>
+                    </td>
                     <td>Склад</td>
                     <td>Категорія</td>
                     <td>Сума</td>
