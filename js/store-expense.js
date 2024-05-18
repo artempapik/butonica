@@ -4,8 +4,9 @@ const getStoreExpenses = month => {
     showLoadAnimation()
 
     get(`StoreExpense/${loginInfo.companyId}/${month || new Date().getMonth() + 1}`).then(response => {
-        storeExpensesTable.innerHTML = storeExpensesTable.querySelector('tbody').innerHTML
+        storeExpensesTable.querySelector('.table-no-data')?.remove()
         storeExpensesTable.style.display = 'block'
+        storeExpensesTable.querySelectorAll('tr:not(tbody tr)').forEach(tr => tr.remove())
         replaceLoadIcons()
 
         if (!response.length) {
@@ -50,6 +51,23 @@ const showStoreExpenseInfo = e => {
         // pendingOrderFilters.status = index
         // filterPendingOrders()
     })
+
+    const storeExpenseCalendar = new VanillaCalendar('.store-expense-table td:first-child', {
+        type: 'month',
+        input: true,
+        settings: {
+            lang: 'uk'
+        },
+        actions: {
+            clickMonth(_, self) {
+                storeExpenseCalendar.hide()
+                animateChange(storeExpensesTable)
+                getStoreExpenses(self.selectedMonth + 1)
+            }
+        }
+    })
+
+    storeExpenseCalendar.init()
 }
 
 const storeExpenseModal = document.querySelector('.create-store-expense-modal')
