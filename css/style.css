@@ -1075,8 +1075,9 @@ main {
                             background: rgb(50, 50, 50);
                             color: rgb(245, 245, 245);
                         }
-    
+                        
                         & td:last-child {
+                            width: 2.6rem;
                             text-align: center;
                         }
                     }
