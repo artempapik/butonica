@@ -1,4 +1,4 @@
-let clientsTable
+let clientsTable, clients
 
 const showClientInfo = e => {
     main.innerHTML = menuItemsContents['client']
@@ -11,6 +11,7 @@ const showClientInfo = e => {
     }
 
     get(`Client/${loginInfo.companyId}`).then(response => {
+        clients = response.clients
         document.querySelector('.client-bonus .enter-value').textContent = response.discount
 
         if (response.clients.length) {
@@ -250,7 +251,15 @@ const createClientRow = client => {
     return tr
 }
 
-const fillClientsTable = client => clientsTable.append(createClientRow(client))
+const fillClientsTable = client => {
+    if (!client) {
+        clientsTable.innerHTML = clientsTable.querySelector('tbody').innerHTML
+        clientsTable.append(createEmptyDataDiv())
+        return
+    }
+
+    clientsTable.append(createClientRow(client))
+}
 
 const createClient = () => {
     const fullNameElement = clientModal.querySelector('.client-full-name')
@@ -326,4 +335,23 @@ const editClient = (oldClient, oldRow) => {
         hideModalEnableButton(clientModal, payButton)
         showMessage('error', updateErrorMessage('клієнта'))
     })
+}
+
+const searchClient = () => {
+    animateChange(clientsTable)
+    const searchQuery = document.querySelector('.search-client').value.trim().toLowerCase()
+
+    const filteredClients = clients.filter(c =>
+        c.fullName.toLowerCase().startsWith(searchQuery) ||
+        c.instagram?.includes(searchQuery) ||
+        c.phone.includes(searchQuery)
+    )
+
+    if (!filteredClients.length) {
+        fillClientsTable(null)
+        return
+    }
+
+    clientsTable.innerHTML = clientsTable.querySelector('tbody').innerHTML
+    filteredClients.forEach(c => fillClientsTable(c))
 }
