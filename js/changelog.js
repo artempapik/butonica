@@ -16,7 +16,11 @@ const changelogs = [
             },
             {
                 type: CHANGELOG_TYPES.fire,
-                text: 'вказувати час для замовлення стало значно простіше'
+                text: 'вказувати час для замовлень стало значно простіше'
+            },
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: "у розділі «Клієнти» тепер можна шукати клієнтів за ім'ям, інстаграмом і номером телефону"
             },
             {
                 type: CHANGELOG_TYPES.exclamation,
