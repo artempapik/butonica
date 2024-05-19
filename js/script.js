@@ -640,6 +640,7 @@ const menuItemsContents = {
             </div>
             <button onpointerup="createClientModal()">Створити</button>
         </div>
+        <input type="search" oninput="searchClient()" class="search-client" placeholder="ПІБ, instagram або номер">
         <div class="client-bonus">
             <span>Відсоток бонусів:</span>
             <div>
