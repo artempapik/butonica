@@ -225,6 +225,7 @@ const createClientRow = client => {
         remove('Client', client).then(() => {
             setTimeout(() => hideModal(confirmModal), 1)
             showMessage('info', deleteSuccessMessage('клієнта'))
+            clients.splice(clients.findIndex(c => c.id === client.id), 1)
             clientsTable.removeChild(tr)
 
             if (clientsTable.children.length === 1) {
@@ -291,6 +292,7 @@ const createClient = () => {
         showMessage('success', createSuccessMessage('клієнта'))
         client.id = response
         client.bonusCash = 0
+        clients.push(client)
         fillClientsTable(client)
         clientsTable.style.display = 'block'
     }).catch(() => {
@@ -342,7 +344,7 @@ const searchClient = () => {
     const searchQuery = document.querySelector('.search-client').value.trim().toLowerCase()
 
     const filteredClients = clients.filter(c =>
-        c.fullName.toLowerCase().startsWith(searchQuery) ||
+        c.fullName.toLowerCase().includes(searchQuery) ||
         c.instagram?.includes(searchQuery) ||
         c.phone.includes(searchQuery)
     )
