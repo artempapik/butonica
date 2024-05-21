@@ -1317,6 +1317,8 @@ const hideModal = modal => {
 
     if (modal === calculatorModal) {
         calculator.classList.remove('bottom')
+        calculator.classList.remove('time')
+        calculator.classList.remove('without-dot')
 
         if (calculator.classList.contains('mode-search')) {
             calculator.classList.remove('mode-search')
@@ -2004,8 +2006,30 @@ window.onkeyup = e => {
         hideModal(calculatorModal)
     }
 
+    const isTime = calculator.classList.contains('time')
+
     if (e.key === 'Backspace') {
         if (!enterInput.textContent) {
+            return
+        }
+
+        if (isTime) {
+            let lastDigitIndex = -1
+            const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            const time = enterInput.textContent
+
+            for (let i = time.length - 1; i > -1; i--) {
+                if (digits.some(s => time[i] == s)) {
+                    lastDigitIndex = i
+                    break
+                }
+            }
+
+            if (lastDigitIndex === -1) {
+                return
+            }
+
+            enterInput.textContent = time.substring(0, lastDigitIndex) + '-' + time.substring(lastDigitIndex + 1)
             return
         }
 
@@ -2019,7 +2043,7 @@ window.onkeyup = e => {
         return
     }
 
-    if (calculator.classList.contains('bottom') && enterInput.textContent.length > 1) {
+    if (calculator.classList.contains('bottom') && !isTime && enterInput.textContent.length > 1) {
         return
     }
 
@@ -2045,6 +2069,12 @@ window.onkeyup = e => {
     }
 
     calculatorNumbers[keyToCalculatorNumber[e.key]].classList.add('active')
+
+    if (isTime) {
+        enterInput.textContent = enterInput.textContent.replace('-', e.key)
+        return
+    }
+
     enterInput.textContent += e.key
 
     if (recalculateAction) {
@@ -2054,9 +2084,30 @@ window.onkeyup = e => {
 
 calculatorNumbers.forEach(e => e.onpointerup = () => {
     calculatorNumbers.forEach(n => n.classList.remove('active'))
+    const isTime = calculator.classList.contains('time')
 
     if (e.textContent === 'backspace') {
         if (!enterInput.textContent) {
+            return
+        }
+
+        if (isTime) {
+            let lastDigitIndex = -1
+            const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            const time = enterInput.textContent
+
+            for (let i = time.length - 1; i > -1; i--) {
+                if (digits.some(s => time[i] == s)) {
+                    lastDigitIndex = i
+                    break
+                }
+            }
+
+            if (lastDigitIndex === -1) {
+                return
+            }
+
+            enterInput.textContent = time.substring(0, lastDigitIndex) + '-' + time.substring(lastDigitIndex + 1)
             return
         }
 
@@ -2069,7 +2120,7 @@ calculatorNumbers.forEach(e => e.onpointerup = () => {
         return
     }
 
-    if (calculator.classList.contains('bottom') && enterInput.textContent.length > 1) {
+    if (calculator.classList.contains('bottom') && !calculator.classList.contains('time') && enterInput.textContent.length > 1) {
         return
     }
 
@@ -2082,6 +2133,11 @@ calculatorNumbers.forEach(e => e.onpointerup = () => {
     }
 
     if (enterInput.textContent.length > 8) {
+        return
+    }
+
+    if (isTime) {
+        enterInput.textContent = enterInput.textContent.replace('-', e.textContent)
         return
     }
 
@@ -2105,11 +2161,15 @@ const animateChange = item => (localStorage.getItem('animations-disabled') || fa
     { opacity: '1' }
 ], 200)
 
-const createCalculatorValueSpan = span => {
+const createCalculatorValueSpan = (span, isTime = false) => {
     const spanRect = span.getBoundingClientRect()
 
     calculatorNumbers.forEach(n => n.classList.remove('active'))
-    enterInput = span
+    enterInput = isTime ? span.querySelector('span') : span
+
+    if (isTime) {
+        calculator.classList.add('time', 'without-dot')
+    }
 
     calculatorModal.style.display = 'flex'
     const calculatorRect = calculator.getBoundingClientRect()
