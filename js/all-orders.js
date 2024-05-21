@@ -385,9 +385,9 @@ const createOrderRow = (order, table) => {
 
             orderNumberDate.querySelector('.order-date input').value = getDate(response.date)
 
-            const orderTime = orderInfoModal.querySelectorAll('.order-time input')
-            orderTime.item(0).value = order.timeFrom
-            orderTime.item(1).value = order.timeTill
+            const orderTime = orderInfoModal.querySelectorAll('.order-time .enter-time-value span:first-child')
+            orderTime.item(0).textContent = order.timeFrom || '--:--'
+            orderTime.item(1).textContent = order.timeTill || '--:--'
 
             imageData = ''
             orderInfoModal.querySelector('img').src = response.imageData ? response.imageData : EMPTY_IMAGE_URL
@@ -912,7 +912,7 @@ const createInternetOrder = saleOrderType => {
     const timeFromElement = dateInfo.querySelector('.sale-order-date-time-from')
     const timeTillElement = dateInfo.querySelector('.sale-order-date-time-till')
 
-    if (saleOrderType === 'pickup' && (!timeFromElement.value || !timeTillElement.value)) {
+    if (saleOrderType === 'pickup' && (timeFromElement.textContent.includes('-') || timeTillElement.textContent.includes('-'))) {
         showMessage('error', 'Оберіть час для самовивозу')
         return
     }
@@ -1017,8 +1017,8 @@ const createInternetOrder = saleOrderType => {
         clientId,
         saveClient: internetOrderModal.querySelector('.internet-client-info input').checked,
         date,
-        timeFromString: timeFromElement.value,
-        timeTillString: timeTillElement.value,
+        timeFromString: timeFromElement.textContent.replaceAll('-', '0'),
+        timeTillString: timeTillElement.textContent.replaceAll('-', '0'),
         customerName,
         customerPhone,
         recipientName,
@@ -1034,7 +1034,7 @@ const createInternetOrder = saleOrderType => {
         paidBonusSum,
         paidSum: +internetOrderModal.querySelector('.cash input').value || 0
     }
-    
+
     post('Order/internet', order)
         .then(response => {
             hideModalEnableButton(internetOrderModal, payButton)
