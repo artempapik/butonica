@@ -463,7 +463,7 @@ const createSaleOrder = saleOrderType => {
     const timeFromElement = dateInfo.querySelector('.sale-order-date-time-from')
     const timeTillElement = dateInfo.querySelector('.sale-order-date-time-till')
 
-    if (saleOrderType === 'pickup' && (!timeFromElement.value || !timeTillElement.value)) {
+    if (saleOrderType === 'pickup' && (timeFromElement.textContent[0] === '-' || timeTillElement.textContent[0] === '-')) {
         showMessage('error', 'Оберіть час для самовивозу')
         return
     }
@@ -517,8 +517,8 @@ const createSaleOrder = saleOrderType => {
         shiftId,
         clientId,
         date,
-        timeFromString: timeFromElement.value,
-        timeTillString: timeTillElement.value,
+        timeFromString: timeFromElement.textContent.replaceAll('-', '0'),
+        timeTillString: timeTillElement.textContent.replaceAll('-', '0'),
         customerName,
         customerPhone,
         recipientName,
