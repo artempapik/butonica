@@ -862,6 +862,7 @@ const createInternetOrderModal = () => {
         })
 
         internetOrderModal.querySelectorAll('input:not(input[type=radio])').forEach(i => i.value = '')
+        internetOrderModal.querySelectorAll('.enter-time-value span:first-child').forEach(t => t.textContent = '--:--')
         internetOrderModal.querySelectorAll('textarea').forEach(t => t.value = '')
 
         saleOrderProducts.style.display = 'flex'
