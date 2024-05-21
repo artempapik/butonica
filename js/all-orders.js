@@ -660,7 +660,7 @@ const editOrderStatus = (order, shouldSurcharge, oldRow, table) => {
 
     const date = new Date(dateElement.value)
 
-    const times = orderInfoModal.querySelectorAll('.order-time input')
+    const times = orderInfoModal.querySelectorAll('.enter-time-value span:first-child')
     const timeFromElement = times.item(0)
     const timeTillElement = times.item(1)
 
@@ -683,18 +683,21 @@ const editOrderStatus = (order, shouldSurcharge, oldRow, table) => {
     const address = orderInfoModal.querySelector('.address textarea').value.trim()
     const comment = orderInfoModal.querySelector('.comment textarea').value.trim()
 
+    timeFromElement.textContent = timeFromElement.textContent.replaceAll('-', '0')
+    timeTillElement.textContent = timeTillElement.textContent.replaceAll('-', '0')
+
     put('Order', {
         id: order.id,
         date,
-        timeFromString: timeFromElement.value,
-        timeTillString: timeTillElement.value,
+        timeFromString: timeFromElement.textContent,
+        timeTillString: timeTillElement.textContent,
         status: activeOrderStatus,
         address,
         comment
     }).then(() => {
         order.date = dateElement.value + 'T00:00:00'
-        order.timeFrom = timeFromElement.value
-        order.timeTill = timeTillElement.value
+        order.timeFrom = timeFromElement.textContent
+        order.timeTill = timeTillElement.textContent
         order.status = activeOrderStatus
         order.address = address
         order.comment = comment
