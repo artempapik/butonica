@@ -912,7 +912,7 @@ const createInternetOrder = saleOrderType => {
     const timeFromElement = dateInfo.querySelector('.sale-order-date-time-from')
     const timeTillElement = dateInfo.querySelector('.sale-order-date-time-till')
 
-    if (saleOrderType === 'pickup' && (timeFromElement.textContent.includes('-') || timeTillElement.textContent.includes('-'))) {
+    if (saleOrderType === 'pickup' && (timeFromElement.textContent[0] === '-' || timeTillElement.textContent[0] === '-')) {
         showMessage('error', 'Оберіть час для самовивозу')
         return
     }
