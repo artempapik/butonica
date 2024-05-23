@@ -370,6 +370,7 @@ const createSaleOrderModal = () => {
         })
 
         saleOrderModal.querySelectorAll('input:not(input[type=radio])').forEach(i => i.value = '')
+        saleOrderModal.querySelectorAll('.enter-time-value span:first-child').forEach(t => t.textContent = '--:--')
         saleOrderModal.querySelectorAll('textarea').forEach(t => t.value = '')
 
         saleOrderProducts.style.display = 'flex'
