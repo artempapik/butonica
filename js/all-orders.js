@@ -683,8 +683,8 @@ const editOrderStatus = (order, shouldSurcharge, oldRow, table) => {
     const address = orderInfoModal.querySelector('.address textarea').value.trim()
     const comment = orderInfoModal.querySelector('.comment textarea').value.trim()
 
-    const timeFrom = timeFromElement.textContent.replaceAll('-', '0')
-    const timeTill = timeTillElement.textContent.replaceAll('-', '0')
+    const timeFrom = timeFromElement.textContent[0] === '-' ? null : timeFromElement.textContent.replaceAll('-', '0')
+    const timeTill = timeTillElement.textContent[0] === '-' ? null : timeTillElement.textContent.replaceAll('-', '0')
 
     put('Order', {
         id: order.id,
