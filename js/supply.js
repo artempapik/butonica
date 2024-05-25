@@ -143,7 +143,7 @@ const createSupplyModal = () => {
     const supplyStock = supplyModal.querySelector('.supply-stock')
 
     if (supplyStock.children.length > 1) {
-        supplyStock.value = ''
+        $(supplyStock).val('').select2(select2NoSearch('Обрати склад'))
     }
 
     supplyModal.querySelector('.supply-paid-sum').textContent = ''
@@ -154,7 +154,7 @@ const createSupplyModal = () => {
 
     const suppliesProductsTable = supplyModal.querySelector('table')
     suppliesProductsTable.innerHTML = suppliesProductsTable.querySelector('tbody').innerHTML
-    supplyModal.querySelector('.update-buying-cost input').checked = false
+    supplyModal.querySelector('.update-buying-cost input').checked = true
 
     totalSumElement.textContent = '0.00'
     totalSumAssociatedCostsElement.textContent = '0.00'
