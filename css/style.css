@@ -62,6 +62,7 @@ a {
 
 .login-modal {
     backdrop-filter: blur(.5rem);
+    -webkit-backdrop-filter: blur(.5rem);
 
     & .login-modal-content {
         padding: 1.3rem 1.7rem;
