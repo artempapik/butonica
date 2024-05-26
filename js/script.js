@@ -1579,25 +1579,73 @@ if (loginInfo) {
     }).catch(() => showMessage('error', getErrorMessage('підписку')))
 } else {
     hideStartPageLoad()
-    loginModal.style.display = 'flex'
+    ;[header, menu].forEach(i => i.style.display = 'none')
 
-    loginModal.onkeyup = e => {
-        if (e.key === 'Enter') {
-            login()
+    let password = ''
+    const passwordButtons = loginModal.querySelectorAll('.login-row span')
+    const passwordChars = document.querySelectorAll('.login-field span')
+
+    passwordButtons.forEach(b => b.onpointerup = () => {
+        passwordButtons.forEach(b => b.classList.remove('active'))
+
+        if (b.textContent === 'visibility') {
+            b.textContent = 'visibility_off'
+            passwordChars.forEach((s, index) => s.textContent = password[index] || '•')
+            return
         }
-    }
+
+        if (b.textContent === 'visibility_off') {
+            b.textContent = 'visibility'
+            passwordChars.forEach(s => s.textContent = '•')
+            return
+        }
+
+        if (b.textContent === 'backspace') {
+            password = password.slice(0, -1)
+            passwordChars.item(password.length).classList.remove('entered')
+            passwordChars.item(password.length).textContent = '•'
+            return
+        }
+
+        if (password.length === 6) {
+            return
+        }
+
+        b.classList.add('active')
+        password += b.textContent
+        passwordChars.item(password.length - 1).classList.add('entered')
+
+        if (passwordButtons.item(9).textContent === 'visibility_off') {
+            passwordChars.item(password.length - 1).textContent = b.textContent
+        }
+
+        if (password.length === 6) {
+            if (!login(password)) {
+                password = ''
+            }
+        }
+    })
+
+    loginModal.style.display = 'flex'
 }
 
-const login = () => {
-    const payButton = loginModal.querySelector('button')
-    payButton.disabled = true
+const login = pass => {
+    showPageLoad()
+    
+    const passToCred = {
+        '000000': ['test', '1111'],
+        '274891': ['irzhov2013@gmail.com', '0673995128']
+    }
 
-    const email = loginModal.querySelector('input').value
-    const password = loginModal.querySelector('input[type=password]').value
+    const cred = passToCred[pass] || ''
+    const email = cred ? cred[0] : ''
+    const password = cred ? cred[1] : ''
     const companyUser = { email, password }
 
     post('Company/login', companyUser).then(response => {
-        hideModalEnableButton(loginModal, payButton)
+        hidePageLoad()
+        hideModal(loginModal)
+        ;[header, menu].forEach(i => i.style.display = '')
 
         const loggedUser = {
             companyId: response.companyId,
@@ -1618,7 +1666,10 @@ const login = () => {
         document.querySelector('.subscription-text span:last-child').textContent = getSubscriptionExpiresText(loggedUser.startSubscription)
         getDailyStatistics()
     }).catch(e => {
-        payButton.disabled = false
+        const passwordChars = document.querySelectorAll('.login-field span')
+        passwordChars.forEach(s => s.classList.remove('entered'))
+        passwordChars.forEach(s => s.textContent = '•')
+        hidePageLoad()
 
         if (e.message === '403') {
             showMessage('error', 'Період підписки вичерпано.\nОплатіть підписку')
@@ -1626,6 +1677,7 @@ const login = () => {
         }
 
         showMessage('error', 'Невірний логін або пароль')
+        return false
     })
 }
 
