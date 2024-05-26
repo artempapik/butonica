@@ -73,6 +73,43 @@ a {
         box-shadow: rgba(0, 0, 0, .12) 0 1px 3px, rgba(0, 0, 0, .24) 0 1px 2px;
         gap: 1.1rem;
 
+        & h1 {
+            display: flex;
+            gap: .8rem;
+            justify-content: center;
+            align-items: center;
+
+            & img {
+                width: 2.3rem;
+            }
+
+            & span {
+                font-family: 'Quicksand', -apple-system;
+                font-size: 1.8rem;
+            }
+        }
+
+        & .login-field {
+            display: flex;
+            align-self: normal;
+            justify-content: space-between;
+            padding: 0 1rem;
+            font-size: 1.5rem;
+            letter-spacing: .6rem;
+            color: rgb(180, 180, 180);
+            font-family: 'Quicksand';
+            font-weight: bold;
+
+            & span {
+                width: 1.5rem;
+                text-align: center;
+
+                &.entered {
+                    color: rgb(0, 71, 171);
+                }
+            }
+        }
+
         & .login-row {
             display: flex;
             gap: 1rem;
@@ -81,8 +118,8 @@ a {
             & span {
                 box-shadow: rgba(0, 0, 0, .16) 0 1px 4px;
                 background: linear-gradient(90deg, rgba(240, 240, 240, 1) 50%, rgba(253, 253, 253, 1) 100%);
-                width: 4rem;
-                height: 4rem;
+                width: 4.2rem;
+                height: 4.2rem;
                 border-radius: 50%;
                 align-content: center;
                 text-align: center;
@@ -116,68 +153,6 @@ a {
                     }
                 }
             }
-        }
-
-        & h1 {
-            display: flex;
-            gap: .8rem;
-            justify-content: center;
-            align-items: center;
-
-            & img {
-                width: 2.3rem;
-            }
-
-            & .logo-text {
-                font-family: 'Quicksand', -apple-system;
-                font-size: 1.8rem;
-            }
-        }
-
-        & .login-field {
-            display: flex;
-            align-self: normal;
-            justify-content: space-between;
-            padding: 0 1rem;
-            font-size: 1.5rem;
-            letter-spacing: .6rem;
-            color: rgb(180, 180, 180);
-            font-family: 'Quicksand';
-
-            & span {
-                width: 1.5rem;
-                text-align: center;
-
-                &.entered {
-                    color: rgb(0, 71, 171);
-                }
-            }
-        }
-
-        & .form {
-            flex-direction: row;
-            align-items: center;
-
-            & h2 {
-                width: 6.5rem;
-                display: flex;
-                gap: .7rem;
-                align-items: center;
-
-                & span:first-child {
-                    color: rgb(50, 50, 50);
-                    font-size: 1.3rem;
-                }
-            }
-
-            & input {
-                flex: 1;
-                font-size: .9rem;
-            }
-        }
-
-        & button {
-            align-self: auto;
         }
     }
 }
