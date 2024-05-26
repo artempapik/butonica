@@ -1578,6 +1578,7 @@ if (loginInfo) {
         hideStartPageLoad(true)
     }).catch(() => showMessage('error', getErrorMessage('підписку')))
 } else {
+    document.body.style.overflow = 'hidden'
     hideStartPageLoad()
     ;[header, menu].forEach(i => i.style.display = 'none')
 
