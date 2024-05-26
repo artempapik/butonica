@@ -76,7 +76,7 @@
 
         & span:last-child {
             letter-spacing: .03rem;
-            font-family: 'Segoe UI', -apple-system;
+            font-family: 'Segoe UI', -apple-system, sans-serif;
         }
     }
 }
@@ -142,7 +142,7 @@
 
             & span:last-child {
                 letter-spacing: .03rem;
-                font-family: 'Segoe UI', -apple-system;
+                font-family: 'Segoe UI', -apple-system, sans-serif;
                 font-weight: bold;
             }
         }
