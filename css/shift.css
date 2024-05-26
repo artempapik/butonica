@@ -412,7 +412,7 @@
 
     & tr:not(:first-child) {
         cursor: pointer;
-    
+        
         & td:nth-child(5) {
             font-weight: bold;
             color: rgb(40, 40, 40);
