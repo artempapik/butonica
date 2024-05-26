@@ -1621,6 +1621,7 @@ if (loginInfo) {
 
         if (password.length === 6) {
             if (!login(password)) {
+                passwordButtons.forEach(b => b.classList.remove('active'))
                 password = ''
             }
         }
@@ -1662,6 +1663,7 @@ const login = pass => {
         localStorage.setItem('login-info', JSON.stringify(loggedUser))
         loginInfo = loggedUser
 
+        get(`Employee/${loginInfo.companyId}/names`).then(response => employeesNames = response)
         showMessage('success', '🌸 Вітаємо в Butonica,\n' + loggedUser.fullName)
 
         removeMenus(loggedUser.title)
