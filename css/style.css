@@ -44,6 +44,7 @@ body {
     height: auto;
     user-select: none;
     -webkit-user-select: none;
+    -webkit-font-smoothing: antialiased;
     display: flex;
     flex-direction: column;
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
