@@ -83,7 +83,7 @@ a {
             }
 
             & span {
-                font-family: 'Quicksand', -apple-system;
+                font-family: 'Quicksand', -apple-system, sans-serif;
                 font-size: 1.8rem;
             }
         }
@@ -411,7 +411,7 @@ header {
                 flex-direction: column;
         
                 & span:first-child {
-                    font-family: 'Quicksand', -apple-system;
+                    font-family: 'Quicksand', -apple-system, sans-serif;
                     letter-spacing: .05rem;
                     font-size: 1.7rem;
                 }
@@ -732,7 +732,7 @@ aside {
 .main-menu {
     position: sticky;
     top: 0;
-    font-family: 'Segoe UI', -apple-system;
+    font-family: 'Segoe UI', -apple-system, sans-serif;
     font-size: .9rem;
     display: flex;
     flex-direction: column;
@@ -1906,7 +1906,7 @@ table {
         align-self: center;
 
         & span:first-child {
-            font-family: 'Quicksand', -apple-system;
+            font-family: 'Quicksand', -apple-system, sans-serif;
             font-size: 1.7rem;
         }
 
@@ -1963,7 +1963,7 @@ table {
         font-weight: bold;
         font-size: 2rem;
         letter-spacing: .1rem;
-        font-family: 'Quicksand', -apple-system;
+        font-family: 'Quicksand', -apple-system, sans-serif;
         --r1: 154%;
         --r2: 68.5%;
         --fill: rgba(100, 180, 250);
