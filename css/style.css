@@ -61,8 +61,6 @@ a {
 }
 
 .login-modal {
-    backdrop-filter: blur(.5rem);
-    -webkit-backdrop-filter: blur(.5rem);
     background: rgba(255, 255, 255, .1) !important;
 
     & .login-modal-content {
