@@ -1634,7 +1634,11 @@ const login = pass => {
     
     const passToCred = {
         '000000': ['test', '1111'],
-        '274891': ['irzhov2013@gmail.com', '0673995128']
+        '995128': ['irzhov2013@gmail.com', '0673995128'],
+        '173371': ['KR173371', '0684108854'],
+        '797447': ['Alesia', '0982797447'],
+        '145666': ['Katerina', 'Antichrist666'],
+        '584781': ['daria', 'saVa58478']
     }
 
     const cred = passToCred[pass] || ''
