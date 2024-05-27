@@ -506,6 +506,14 @@ const createSaleOrder = saleOrderType => {
         return
     }
 
+    const timeFrom = timeFromElement.textContent[0] === '-' ? null : timeFromElement.textContent.replaceAll('-', '0')
+    const timeTill = timeTillElement.textContent[0] === '-' ? null : timeTillElement.textContent.replaceAll('-', '0')
+
+    if (!isValidTime(timeFrom) || !isValidTime(timeTill)) {
+        showMessage('error', 'Вкажіть коректний час замовлення')
+        return
+    }
+
     const payButton = saleOrderModal.querySelector('button')
     payButton.disabled = true
 
@@ -518,8 +526,8 @@ const createSaleOrder = saleOrderType => {
         shiftId,
         clientId,
         date,
-        timeFromString: timeFromElement.textContent[0] === '-' ? null : timeFromElement.textContent.replaceAll('-', '0'),
-        timeTillString: timeTillElement.textContent[0] === '-' ? null : timeTillElement.textContent.replaceAll('-', '0'),
+        timeFromString: timeFrom,
+        timeTillString: timeTill,
         customerName,
         customerPhone,
         recipientName,
