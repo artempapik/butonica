@@ -1469,6 +1469,11 @@ const getSubscriptionExpiresText = date => {
     const subText = document.querySelector('.subscription-text span:last-child')
     subText.style.fontSize = daysLeft > 0 ? '' : '.8rem'
     subText.style.color = daysLeft > 0 ? 'rgb(30, 30, 30)' : 'rgb(220, 0, 0)'
+
+    if (daysLeft < -3) {
+        return false
+    }
+
     return daysLeft > 0 ? `${daysLeft} дн.` : 'НЕ СПЛАЧЕНО'
 }
 
@@ -1572,9 +1577,16 @@ if (loginInfo) {
 
         document.querySelector('.profile').textContent = getInitials(loginInfo.fullName)
         document.querySelector('.profile-info div span:last-child').textContent = loginInfo.fullName + ' — ' + employeeTitleToName[loginInfo.title]
-        document.querySelector('.subscription-text span:last-child').textContent = getSubscriptionExpiresText(new Date(loginInfo.startSubscription))
-        removeMenus(loginInfo.title)
+        const subscription = getSubscriptionExpiresText(new Date(loginInfo.startSubscription))
 
+        if (!subscription) {
+            showMessage('error', 'Термін підписки вийшов')
+            localStorage.setItem('login-info', null)
+            setTimeout(() => location.reload(), 2500)
+        }
+
+        document.querySelector('.subscription-text span:last-child').textContent = subscription
+        removeMenus(loginInfo.title)
         hideStartPageLoad(true)
     }).catch(() => showMessage('error', getErrorMessage('підписку')))
 } else {
