@@ -1929,9 +1929,9 @@ table {
 }
 
 #loader {
-    width: 1.8rem !important;
-    height: 1.8rem !important;
-    border: .3rem solid rgb(var(--table-hover-color));
+    width: 1.77rem !important;
+    height: 1.77rem !important;
+    border: .25rem solid rgb(var(--table-hover-color));
     border-bottom-color: transparent;
     border-radius: 50%;
     animation: rotation 1.5s linear infinite;
