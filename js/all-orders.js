@@ -686,6 +686,11 @@ const editOrderStatus = (order, shouldSurcharge, oldRow, table) => {
     const timeFrom = timeFromElement.textContent[0] === '-' ? null : timeFromElement.textContent.replaceAll('-', '0')
     const timeTill = timeTillElement.textContent[0] === '-' ? null : timeTillElement.textContent.replaceAll('-', '0')
 
+    if (!isValidTime(timeFrom) || !isValidTime(timeTill)) {
+        showMessage('error', 'Вкажіть коректний час замовлення')
+        return
+    }
+
     put('Order', {
         id: order.id,
         date,
@@ -1007,6 +1012,14 @@ const createInternetOrder = saleOrderType => {
         return
     }
 
+    const timeFrom = timeFromElement.textContent[0] === '-' ? null : timeFromElement.textContent.replaceAll('-', '0')
+    const timeTill = timeTillElement.textContent[0] === '-' ? null : timeTillElement.textContent.replaceAll('-', '0')
+
+    if (!isValidTime(timeFrom) || !isValidTime(timeTill)) {
+        showMessage('error', 'Вкажіть коректний час замовлення')
+        return
+    }
+
     const payButton = internetOrderModal.querySelector('button:not(.one-more-product)')
     payButton.disabled = true
 
@@ -1021,8 +1034,8 @@ const createInternetOrder = saleOrderType => {
         clientId,
         saveClient: internetOrderModal.querySelector('.internet-client-info input').checked,
         date,
-        timeFromString: timeFromElement.textContent.replaceAll('-', '0'),
-        timeTillString: timeTillElement.textContent.replaceAll('-', '0'),
+        timeFromString: timeFrom,
+        timeTillString: timeTill,
         customerName,
         customerPhone,
         recipientName,
