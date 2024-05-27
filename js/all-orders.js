@@ -691,6 +691,9 @@ const editOrderStatus = (order, shouldSurcharge, oldRow, table) => {
         return
     }
 
+    const payButton = orderInfoModal.querySelector('button:not(.one-more-product)')
+    payButton.disabled = true
+
     put('Order', {
         id: order.id,
         date,
@@ -716,8 +719,11 @@ const editOrderStatus = (order, shouldSurcharge, oldRow, table) => {
             table.replaceChild(newRow, oldRow)
         }
 
-        hideModal(orderInfoModal)
-    }).catch(() => showMessage('error', 'Не вдалося відредагувати замовлення'))
+        hideModalEnableButton(orderInfoModal, payButton)
+    }).catch(() => {
+        hideModalEnableButton(orderInfoModal, payButton)
+        showMessage('error', 'Не вдалося відредагувати замовлення')
+    })
 }
 
 const createInternetOrderModal = () => {
