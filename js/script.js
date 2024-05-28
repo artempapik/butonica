@@ -1652,7 +1652,8 @@ const login = pass => {
         '173371': ['KR173371', '0684108854'],
         '797447': ['Alesia', '0982797447'],
         '145666': ['Katerina', 'Antichrist666'],
-        '584781': ['daria', 'saVa58478']
+        '584781': ['daria', 'saVa58478'],
+        '837432': ['florist_ir', '837432']
     }
 
     const cred = passToCred[pass] || ''
