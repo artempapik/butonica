@@ -764,7 +764,7 @@ const menuItemsContents = {
     `,
     pendingorder: `
         <div class="order-header">
-            <div class="header-items">
+            <div class="header-items pending">
                 <div id="loader"></div>
                 <span class="material-symbols-outlined">hourglass_empty</span>
                 <h1>Замовлення в очікуванні</h1>
