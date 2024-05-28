@@ -84,6 +84,10 @@
 }
 
 @media only screen and (max-width: 700px) and (orientation: portrait) {
+    .store-expense-header .header-icon {
+        display: none !important;
+    }
+
     .store-expense-type {
         margin-left: 0;
 
