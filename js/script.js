@@ -941,7 +941,7 @@ const menuItemsContents = {
         <div class="store-expense-header">
             <div class="header-items">
                 <div id="loader"></div>
-                <span class="material-symbols-outlined">monetization_on</span>
+                <span class="material-symbols-outlined header-icon">monetization_on</span>
                 <div class="store-expenses-date-filter">
                     <h1>Витрати</h1>
                     <div class="store-expense-type">
