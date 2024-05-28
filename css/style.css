@@ -2775,7 +2775,8 @@ table {
 
         & .header-items {
             & span:not(.change-page span, [class$="view-type"] span, .period-filter span, .calendar-component span, .order-calendar-months span, .pending-type span, .store-expense-type span) {
-                display: none !important;
+                font-size: 1.37rem !important;
+                width: unset !important;
             }
             
             & h1 {
