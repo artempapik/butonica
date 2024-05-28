@@ -254,6 +254,12 @@
     }
 }
 
+@media only screen and (max-width: 1200px) {
+    :root {
+        --pie-chart-size: 23rem;
+    }
+}
+
 @media only screen and (max-width: 900px) {
     :root {
         --pie-chart-size: 18rem;
