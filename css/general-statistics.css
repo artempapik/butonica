@@ -310,6 +310,22 @@
     }
 }
 
+@media only screen and (max-width: 700px) and (orientation: portrait) {
+    .general-statistics-header .header-items {
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 1rem;
+
+        & .statistics-date-filter {
+            flex-wrap: nowrap;
+
+            & .stat-switcher {
+                align-self: unset;
+            }
+        }
+    }
+}
+
 @media only screen and (max-width: 500px) {
     :root {
         --pie-chart-size: 22rem;
