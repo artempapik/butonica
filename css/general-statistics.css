@@ -156,7 +156,7 @@
     }
 }
 
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 950px) {
     .bar-charts canvas, #income-by-shift-line-chart {
         width: 66rem !important;
         height: 33rem !important;
