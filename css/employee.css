@@ -27,6 +27,31 @@
     gap: 1.5rem;
 
     & .form {
+        &.employee-pass {
+            & h2 {
+                display: flex;
+                gap: .7rem;
+                align-items: center;
+
+                & .material-symbols-outlined {
+                    cursor: pointer;
+                    color: rgba(var(--table-hover-color), .8);
+
+                    &:hover {
+                        color: rgb(var(--table-hover-color));
+                    }
+                }
+            }
+
+            & h3 {
+                font-family: 'Quicksand';
+                letter-spacing: .2rem;
+                font-size: 1.2rem;
+                font-weight: bold;
+                color: rgb(var(--table-hover-color));
+            }
+        }
+
         & h2 {
             font-weight: bold;
         }
