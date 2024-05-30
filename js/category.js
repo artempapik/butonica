@@ -20,7 +20,7 @@ const showCategoryInfo = e => {
         }
 
         categories.forEach(c => fillCategoriesTable(c))
-        setFixedTable(categoriesTable)
+        setFixedTable(categoriesTable.querySelectorAll('tbody td'))
         replaceLoadIcons()
     }).catch(() => showMessage('error', getErrorMessage('категорії')))
 }
