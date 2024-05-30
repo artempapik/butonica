@@ -35,10 +35,12 @@ const employeeModal = document.querySelector('.create-employee-modal')
 const employeeInfoModal = document.querySelector('.employee-info-modal')
 
 const createEmployeeModal = () => {
+    disableDirectorProps(false)
     employeeModal.querySelector('h1').textContent = 'Створити працівника'
     employeeModal.querySelectorAll('input').forEach(i => i.value = '')
     employeeModal.querySelector('.employee-title').value = ''
-    employeeModal.querySelector('.stock-employee').style.display = 'flex'
+    $(employeeModal.querySelector('.employee-title')).select2(select2NoSearch('Обрати посаду'))
+    $(employeeModal.querySelector('.employee-stock')).select2(select2NoSearch('Обрати магазин'))
     employeeModal.querySelector('.active-employee').style.display = 'flex'
     employeeModal.querySelector('.active-employee input').checked = false
     employeeModal.querySelector('button').onpointerup = () => createEmployee()
@@ -52,7 +54,13 @@ const employeeTitleToBackground = {
     3: '232, 132, 35'
 }
 
-const hideEmployeeTitle = e => employeeModal.querySelector('.stock-employee').style.display = e.target.selectedIndex < 2 ? 'none' : ''
+const disableEmployeeStock = e => $(employeeModal.querySelector('.employee-stock')).prop('disabled', e.target.selectedIndex < 2)
+
+const disableDirectorProps = disable => {
+    $(employeeModal.querySelector('.employee-title')).prop('disabled', disable)
+    $(employeeModal.querySelector('.employee-stock')).prop('disabled', disable)
+    employeeModal.querySelector('.active-employee input').disabled = disable
+}
 
 const createEmployeeRow = employee => {
     const editAction = createEditSpan('employee')
@@ -110,24 +118,17 @@ const createEmployeeRow = employee => {
 
     if (loginInfo.title === 0) {
         editAction.onpointerup = () => {
-            employeeModal.querySelector('.stock-employee').style.display = 'flex'
-            employeeModal.querySelector('.active-employee').style.display = 'flex'
-
             employeeModal.querySelector('h1').textContent = 'Редагувати працівника'
             employeeModal.querySelector('.employee-login').value = employee.email
             employeeModal.querySelector('.employee-password').value = employee.password
             employeeModal.querySelector('.employee-title').selectedIndex = employee.title
+            $(employeeModal.querySelector('.employee-title')).select2(select2NoSearch())
+            $(employeeModal.querySelector('.employee-stock')).select2(select2NoSearch())
             employeeModal.querySelector('.active-employee input').checked = employee.isActive
             employeeModal.querySelector('.employee-full-name').value = employee.fullName
             employeeModal.querySelector('.employee-phone').value = employee.phone
             employeeModal.querySelector('.employee-birth-date').value = employee.birthDate ? getDate(employee.birthDate) : ''
-
-            if (getComputedStyle(actionsColumn.querySelector('.delete-employee')).display === 'none') {
-                employeeModal.querySelector('.employee-title').parentNode.style.display = 'none'
-                employeeModal.querySelector('.stock-employee').style.display = 'none'
-                employeeModal.querySelector('.active-employee').style.display = 'none'
-            }
-
+            disableDirectorProps(getComputedStyle(actionsColumn.querySelector('.delete-employee')).display === 'none')
             employeeModal.querySelector('button').onpointerup = () => editEmployee(employee, tr)
             employeeModal.style.display = 'flex'
         }
