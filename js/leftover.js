@@ -31,7 +31,7 @@ const showLeftoverInfo = e => {
 
         calculateTotalCost(leftoverProducts)
         fillLeftoversTable(leftoverProducts)
-        setFixedTable(leftoversTable, [2, 3, 4, 5])
+        setFixedTable(leftoversTable.querySelectorAll('tbody td:first-child, tbody td:nth-child(2)'))
         replaceLoadIcons()
     }).catch(() => showMessage('error', getErrorMessage('залишки')))
 
