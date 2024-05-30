@@ -2285,16 +2285,7 @@ const select2NoSearch = placeholder => ({
 })
 
 const isValidTime = time => time === null || /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9])?$/.test(time)
-
-const setFixedTable = (table, skip = []) => {
-    for (const [index, td] of table.querySelectorAll('tbody td').entries()) {
-        if (skip.includes(index) || td.style.minWidth) {
-            continue
-        }
-
-        td.style.minWidth = td.getBoundingClientRect().width + 'px'
-    }
-}
+const setFixedTable = tds => tds.forEach(td => td.style.minWidth = td.getBoundingClientRect().width + 'px')
 
 // Notification.requestPermission().then(permission => console.log(permission))
 
