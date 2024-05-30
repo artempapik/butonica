@@ -941,18 +941,16 @@ const menuItemsContents = {
         <div class="store-expense-header">
             <div class="header-items">
                 <div id="loader"></div>
-                <span class="material-symbols-outlined header-icon">monetization_on</span>
-                <div class="store-expenses-date-filter">
-                    <h1>Витрати</h1>
-                    <div class="store-expense-type">
-                        <div>
-                            <span class="material-symbols-outlined">fact_check</span>
-                            <span>Робочих змін</span>
-                        </div>
-                        <div>
-                            <span class="material-symbols-outlined">storefront</span>
-                            <span>Магазину</span>
-                        </div>
+                <span class="material-symbols-outlined">monetization_on</span>
+                <h1>Витрати</h1>
+                <div class="store-expense-type">
+                    <div>
+                        <span class="material-symbols-outlined">fact_check</span>
+                        <span>Робочих змін</span>
+                    </div>
+                    <div>
+                        <span class="material-symbols-outlined">storefront</span>
+                        <span>Магазину</span>
                     </div>
                 </div>
             </div>
