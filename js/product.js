@@ -32,7 +32,6 @@ const showProductInfo = e => {
         }
 
         products.forEach(p => fillProductsTable(p))
-        setFixedTable(productsTable, [1, 2])
         replaceLoadIcons()
     }).catch(() => showMessage('error', getErrorMessage('товари')))
 
