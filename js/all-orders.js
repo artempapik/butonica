@@ -855,12 +855,11 @@ const createInternetOrderModal = () => {
 
             div.onpointerup = () => {
                 if (div.style.background === backgroundColor) {
-                    div.style.background = ''
-                    div.style.color = ''
-                    div.style.boxShadow = ''
+                    unselectLabelDiv(div)
                     return
                 }
 
+                labelsBlock.querySelectorAll('.sale-order-label').forEach(unselectLabelDiv)
                 div.style.background = backgroundColor
                 div.style.color = `rgb(${labelIndexToColor[label.color]})`
                 div.style.boxShadow = 'rgba(0, 0, 0, .16) 0 3px 6px, rgba(0, 0, 0, .23) 0 3px 6px'
