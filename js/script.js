@@ -1506,68 +1506,77 @@ const hideStartPageLoad = (getDaily = false) => setTimeout(() => {
 
 let dailyStatisticsFactIntervalId, dailyStatisticsTimeIntervalId
 
-const getDailyStatistics = () => get(`Statistics/daily/${loginInfo.companyId}`).then(response => {
-    if (!response || (loginInfo.title > 1 && response.employeeId !== loginInfo.employeeId)) {
-        return
-    }
-    
-    const statValues = main.querySelectorAll('.stat-value')
+const getDailyStatistics = () => {
+    showPageLoad()
 
-    if (!statValues.length) {
-        return
-    }
-
-    const fillMainVal = (i, key, currency = true) => {
-        const value = response[key] % 1 === 0 ? response[key] : response[key].toFixed(2)
-        statValues.item(i).textContent = currency ? value + ' грн' : value
-    }
-
-    fillMainVal(0, 'revenue')
-    fillMainVal(1, 'shiftRevenue')
-    fillMainVal(2, 'internetOrdersRevenue')
-    fillMainVal(3, 'cash')
-    fillMainVal(4, 'terminalCash')
-    fillMainVal(5, 'ordersCount', false)
-    fillMainVal(6, 'internetOrdersCount', false)
-    fillMainVal(7, 'salesCount', false)
-    fillMainVal(8, 'receipt')
-    fillMainVal(9, 'internetOrdersReceipt')
-
-    if (loginInfo.title > 1) {
-        statValues.item(0).textContent = statValues.item(1).textContent
-        const statBlocks = main.querySelectorAll('.stat-block')
-
-        for (const i of [1, 2, 9]) {
-            statBlocks.item(i).style.display = 'none'
+    get(`Statistics/daily/${loginInfo.companyId}`).then(response => {
+        hidePageLoad()
+        
+        if (!response || (loginInfo.title > 1 && response.employeeId !== loginInfo.employeeId)) {
+            return
         }
-    }
+        
+        const statValues = main.querySelectorAll('.stat-value')
 
-    const topSalesTable = main.querySelector('table')
-
-    if (response.topSales.length) {
-        for (const sale of response.topSales) {
-            const tr = document.createElement('tr')
-            tr.append(
-                createTd(sale.name),
-                createTd(sale.amount)
-            )
-
-            topSalesTable.append(tr)
+        if (!statValues.length) {
+            return
         }
-    } else {
-        topSalesTable.append(createEmptyDataDiv())
-    }
 
-    const fact = main.querySelector('.fact')
-    fact.textContent = randomFacts[getRandom(0, randomFacts.length - 1)]
-    dailyStatisticsFactIntervalId = setInterval(() => fact.textContent = randomFacts[getRandom(0, randomFacts.length - 1)], 60 * 1000 * 15)
+        const fillMainVal = (i, key, currency = true) => {
+            const value = response[key] % 1 === 0 ? response[key] : response[key].toFixed(2)
+            statValues.item(i).textContent = currency ? value + ' грн' : value
+        }
 
-    const factDate = main.querySelector('.fact-date')
-    factDate.textContent = new Date().toLocaleTimeString('ru').substring(0, 5)
-    dailyStatisticsTimeIntervalId = setInterval(() => factDate.textContent = new Date().toLocaleTimeString('ru').substring(0, 5), 60 * 1000)
+        fillMainVal(0, 'revenue')
+        fillMainVal(1, 'shiftRevenue')
+        fillMainVal(2, 'internetOrdersRevenue')
+        fillMainVal(3, 'cash')
+        fillMainVal(4, 'terminalCash')
+        fillMainVal(5, 'ordersCount', false)
+        fillMainVal(6, 'internetOrdersCount', false)
+        fillMainVal(7, 'salesCount', false)
+        fillMainVal(8, 'receipt')
+        fillMainVal(9, 'internetOrdersReceipt')
 
-    main.querySelector('.main-statistics').style.display = 'flex'
-}).catch(() => showMessage('error', getErrorMessage('сьогоднішню статистику')))
+        if (loginInfo.title > 1) {
+            statValues.item(0).textContent = statValues.item(1).textContent
+            const statBlocks = main.querySelectorAll('.stat-block')
+
+            for (const i of [1, 2, 9]) {
+                statBlocks.item(i).style.display = 'none'
+            }
+        }
+
+        const topSalesTable = main.querySelector('table')
+
+        if (response.topSales.length) {
+            for (const sale of response.topSales) {
+                const tr = document.createElement('tr')
+                tr.append(
+                    createTd(sale.name),
+                    createTd(sale.amount)
+                )
+
+                topSalesTable.append(tr)
+            }
+        } else {
+            topSalesTable.append(createEmptyDataDiv())
+        }
+
+        const fact = main.querySelector('.fact')
+        fact.textContent = randomFacts[getRandom(0, randomFacts.length - 1)]
+        dailyStatisticsFactIntervalId = setInterval(() => fact.textContent = randomFacts[getRandom(0, randomFacts.length - 1)], 60 * 1000 * 15)
+
+        const factDate = main.querySelector('.fact-date')
+        factDate.textContent = new Date().toLocaleTimeString('ru').substring(0, 5)
+        dailyStatisticsTimeIntervalId = setInterval(() => factDate.textContent = new Date().toLocaleTimeString('ru').substring(0, 5), 60 * 1000)
+
+        main.querySelector('.main-statistics').style.display = 'flex'
+    }).catch(() => {
+        hidePageLoad()
+        showMessage('error', getErrorMessage('сьогоднішню статистику'))
+    })
+}
 
 if (loginInfo) {
     get(`Company/start-subscription/${loginInfo.companyId}`).then(response => {
