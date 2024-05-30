@@ -513,6 +513,11 @@ const createSaleOrder = saleOrderType => {
         return
     }
 
+    if (timeTill && !timeFrom) {
+        showMessage('error', 'Вкажіть час «від»')
+        return
+    }
+
     const payButton = saleOrderModal.querySelector('button')
     payButton.disabled = true
 
