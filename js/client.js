@@ -19,7 +19,6 @@ const showClientInfo = e => {
         }
 
         response.clients.forEach(c => fillClientsTable(c))
-        setFixedTable(clientsTable, [2, 3])
         replaceLoadIcons()
     }).catch(() => showMessage('error', getErrorMessage('клієнтів')))
 }
