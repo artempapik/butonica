@@ -691,6 +691,11 @@ const editOrderStatus = (order, shouldSurcharge, oldRow, table) => {
         return
     }
 
+    if (timeTill && !timeFrom) {
+        showMessage('error', 'Вкажіть час «від»')
+        return
+    }
+
     const payButton = orderInfoModal.querySelector('button:not(.one-more-product)')
     payButton.disabled = true
 
@@ -1022,6 +1027,11 @@ const createInternetOrder = saleOrderType => {
 
     if (!isValidTime(timeFrom) || !isValidTime(timeTill)) {
         showMessage('error', 'Вкажіть коректний час замовлення')
+        return
+    }
+
+    if (timeTill && !timeFrom) {
+        showMessage('error', 'Вкажіть час «від»')
         return
     }
 
