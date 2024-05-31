@@ -1068,18 +1068,7 @@ const createInternetOrder = saleOrderType => {
         .then(response => {
             hideModalEnableButton(internetOrderModal, payButton)
             showMessage('success', createSuccessMessage('online-замовлення'))
-            
-            if (activeMenuItem === 'allorder') {
-                order.id = response.id
-                order.labels = response.labels
-                order.status = 0
-                order.date = dateElement.value + 'T00:00:00'
-                order.timeFrom = order.timeFromString
-                order.customer = order.customerName
-                allOrdersTable.append(createOrderRow(order, allOrdersTable))
-            } else if (activeMenuItem === 'pendingorder') {
-                showPendingOrderInfo()
-            }
+            showPendingOrderInfo()
         }).catch(() => {
             hideModalEnableButton(internetOrderModal, payButton)
             showMessage('error', createErrorMessage('online-замовлення'))
@@ -1237,5 +1226,18 @@ const addInternetOrderFlavor = () => {
                 break
             }
         }
+    }
+}
+
+const printEmptySheetModal = document.querySelector('.print-empty-sheet-modal')
+
+const printEmptyOrderSheet = () => {
+    hideBodyOverflow()
+    printEmptySheetModal.style.display = 'flex'
+
+    printEmptySheetModal.querySelector('button').onpointerup = () => {
+        const sheet = printEmptySheetModal.querySelector('input[name=sheet-type]:first-child').checked ? 'a4' : 'a5'
+        const orderId = printEmptySheetModal.querySelector('input[name=order-type]:first-child').checked ? '74630' : '74630'
+        window.open(`${Environment.PROD}/Order/5cc9f842-f3df-4855-adfd-5a113e3ebc04/pdf/${sheet}/${orderId}`)
     }
 }
