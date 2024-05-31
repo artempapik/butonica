@@ -740,7 +740,10 @@ const menuItemsContents = {
                     </div>
                 </div>
             </div>
-            <button onpointerup="createInternetOrderModal()">Створити</button>
+            <button class="print-empty" onpointerup="printEmptyOrderSheet()">
+                <span class="material-symbols-outlined">print</span>
+                <span>Бланк</span>
+            </button>
         </div>
         <div class="all-order-table">
             <table class="animate">
@@ -1384,6 +1387,7 @@ window.onpointerup = e => {
         flavorTemplatesModal,
         employeeInfoModal,
         storeExpenseInfoModal,
+        printEmptySheetModal,
         notesModal,
         changelogModal,
         calculatorModal
@@ -1506,11 +1510,15 @@ const hideStartPageLoad = (getDaily = false) => setTimeout(() => {
 
 let dailyStatisticsFactIntervalId, dailyStatisticsTimeIntervalId
 
-const getDailyStatistics = () => {
+const getDailyStatistics = (loginName = '') => {
     showPageLoad()
 
     get(`Statistics/daily/${loginInfo.companyId}`).then(response => {
         hidePageLoad()
+
+        if (loginName) {
+            showMessage('success', '🌸 Вітаємо в Butonica,\n' + loginName)
+        }
         
         if (!response || (loginInfo.title > 1 && response.employeeId !== loginInfo.employeeId)) {
             return
@@ -1685,13 +1693,12 @@ const login = pass => {
         loginInfo = loggedUser
 
         get(`Employee/${loginInfo.companyId}/names`).then(response => employeesNames = response)
-        showMessage('success', '🌸 Вітаємо в Butonica,\n' + loggedUser.fullName)
 
         removeMenus(loggedUser.title)
         document.querySelector('.profile').textContent = getInitials(loggedUser.fullName)
         document.querySelector('.profile-info div span:last-child').textContent = loggedUser.fullName + ' — ' + employeeTitleToName[loggedUser.title]
         document.querySelector('.subscription-text span:last-child').textContent = getSubscriptionExpiresText(loggedUser.startSubscription)
-        getDailyStatistics()
+        getDailyStatistics(loggedUser.fullName)
     }).catch(e => {
         const passwordChars = document.querySelectorAll('.login-field span')
         passwordChars.forEach(s => s.classList.remove('entered'))
