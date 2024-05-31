@@ -372,13 +372,9 @@ const createOrderRow = (order, table) => {
 
             if (order.status !== 2) {
                 printSheets.style.display = ''
-
-                const printRequest = sheet => get(`Order/${loginInfo.companyId}/pdf/${sheet}/${order.id}`)
-                    .then(f => window.open(f))
-                    .catch(() => showMessage('error', 'Не вдалося роздрукувати замовлення'))
-
-                printSheets.querySelector('span').onpointerup = () => window.open('https://google.com', null, 'width=600,height=400');
-
+                const printRequest = sheet => window.open(`${Environment.PROD}/Order/${loginInfo.companyId}/pdf/${sheet}/${orderId}`)
+                
+                printSheets.querySelector('span').onpointerup = () => printRequest('a4')
                 printSheets.querySelector('span:last-child').onpointerup = () => printRequest('a5')
             } else {
                 printSheets.style.display = 'none'
