@@ -99,7 +99,7 @@
                 font-size: 1rem;
 
                 &:not(:last-child) {
-                    white-space: nowrap;
+                    width: 100%;
                 }
 
                 &:last-child {
