@@ -12,7 +12,7 @@ const changelogs = [
         changes: [
             {
                 type: CHANGELOG_TYPES.fire,
-                text: 'можливість створення налаштовуваного порожнього бланку для замовлення'
+                text: 'можливість створення порожнього бланку в розділі «Всі замовлення»'
             },
             {
                 type: CHANGELOG_TYPES.exclamation,
