@@ -377,7 +377,8 @@ const createOrderRow = (order, table) => {
                     .then(f => window.open(f))
                     .catch(() => showMessage('error', 'Не вдалося роздрукувати замовлення'))
 
-                printSheets.querySelector('span').onpointerup = () => printRequest('a4')
+                printSheets.querySelector('span').onpointerup = () => window.open('https://google.com', null, 'width=600,height=400');
+
                 printSheets.querySelector('span:last-child').onpointerup = () => printRequest('a5')
             } else {
                 printSheets.style.display = 'none'
