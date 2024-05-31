@@ -429,6 +429,40 @@
     display: none;
 }
 
+.order-header .print-empty, .print-empty-sheet-info-modal-content button {
+    padding: .4rem .9rem;
+    background: rgb(70, 70, 70);
+
+    &:hover {
+        background: #000;
+        box-shadow: none;
+    }
+}
+
+.print-empty-sheet-info-modal-content {
+    gap: 2rem;
+
+    & h1 {
+        margin-top: 0;
+        text-align: center;
+    }
+
+    & .print-checks {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 .5rem;
+
+        & form {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    & button {
+        align-self: unset;
+    }
+}
+
 @media only screen and (max-width: 1500px) {
     .order-info-modal-content {
         & .customer, & .recipient {
