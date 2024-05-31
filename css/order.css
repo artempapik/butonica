@@ -430,7 +430,7 @@
 }
 
 .order-header .print-empty, .print-empty-sheet-info-modal-content button {
-    padding: .35rem .8rem;
+    padding: .4rem 1rem;
     background: rgb(70, 70, 70);
 
     &:hover {
@@ -509,6 +509,10 @@
         & h1 {
             font-size: 1.1rem;
         }
+    }
+
+    .order-header .print-empty span:first-child {
+        display: none;
     }
 
     .order-info-modal-content {
