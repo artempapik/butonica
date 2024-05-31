@@ -7,8 +7,25 @@ const CHANGELOG_TYPES = {
 
 const changelogs = [
     {
+        v: '3.1',
+        date: '25.06.24',
+        changes: [
+            {
+                type: CHANGELOG_TYPES.fire,
+                text: 'можливість створення налаштовуваного порожнього бланку для замовлення'
+            },
+            {
+                type: CHANGELOG_TYPES.exclamation,
+                text: 'оновлення дизайну розділів «Товари» і «Залишки»'
+            },
+            {
+                text: 'рефакторинг загальної статистики'
+            }
+        ]
+    },
+    {
         v: '3.0',
-        date: '13.06.24',
+        date: '17.06.24',
         changes: [
             {
                 type: CHANGELOG_TYPES.fire,
@@ -32,15 +49,11 @@ const changelogs = [
             },
             {
                 type: CHANGELOG_TYPES.exclamation,
-                text: 'оновлення дизайну розділів «Товари» і «Залишки»'
-            },
-            {
-                type: CHANGELOG_TYPES.exclamation,
                 text: 'оновлено вікну перегляду паролю у працівника'
             },
             {
                 type: CHANGELOG_TYPES.bug,
-                text: 'фікс багів із розрахуванням часу до замовлення, позиціонуванням калькулятора, версткою розділів'
+                text: 'фікс багів із вибором часу замовлення, позиціонуванням калькулятора, друком бланків, версткою розділів, рендерингом шрифтів на Mac'
             }
         ]
     },
