@@ -246,7 +246,11 @@ const statusTypeToBackground = {
 }
 
 const calculateDaysLeft = date => {
-    const daysLeft = new Date(date).getDate() - new Date().getDate()
+    const daysLeft = Math.ceil((new Date(date) - new Date()) / (1000 * 60 * 60 * 24))
+
+    if (daysLeft < 0) {
+        return '!'
+    }
 
     if (!daysLeft) {
         const img = document.createElement('img')
@@ -591,16 +595,20 @@ const createOrderRow = (order, table) => {
 
     const timeLeftTd = createTd(timeLeft.text)
     
-    if (timeLeft.text !== '–' && !(timeLeft.text instanceof HTMLElement) && !timeLeft.text.endsWith('д')) {
+    if (timeLeft.text !== '–' && order.timeFrom) {
         timeLeftTd.dataset.timeFrom = order.timeFrom
         timeLeftTd.dataset.date = order.date
     }
 
-    if ('background' in timeLeft) {
+    if ('background' in timeLeft || timeLeft.text === '!') {
         timeLeftTd.style.background = timeLeft.background
         timeLeftTd.style.color = 'rgb(240, 240, 240)'
         timeLeftTd.style.fontWeight = 'bold'
         timeLeftTd.style.fontSize = '.9rem'
+    }
+
+    if (timeLeft.text === '!') {
+        timeLeftTd.style.background = 'rgb(240, 0, 0)'
     }
 
     const orderTypeTd = createTd()
