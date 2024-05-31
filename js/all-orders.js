@@ -1237,7 +1237,7 @@ const printEmptyOrderSheet = () => {
 
     printEmptySheetModal.querySelector('button').onpointerup = () => {
         const sheet = printEmptySheetModal.querySelector('input[name=sheet-type]:first-child').checked ? 'a4' : 'a5'
-        const orderId = printEmptySheetModal.querySelector('input[name=order-type]:first-child').checked ? '74630' : '74630'
+        const orderId = printEmptySheetModal.querySelector('input[name=order-type]:first-child').checked ? '85125' : '85126'
         window.open(`${Environment.PROD}/Order/5cc9f842-f3df-4855-adfd-5a113e3ebc04/pdf/${sheet}/${orderId}`)
     }
 }
