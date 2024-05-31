@@ -374,7 +374,7 @@ const createOrderRow = (order, table) => {
                 printSheets.style.display = ''
 
                 const printRequest = sheet => get(`Order/${loginInfo.companyId}/pdf/${sheet}/${order.id}`)
-                    .then(f => window.open(f, '_blank'))
+                    .then(f => window.open(f))
                     .catch(() => showMessage('error', 'Не вдалося роздрукувати замовлення'))
 
                 printSheets.querySelector('span').onpointerup = () => printRequest('a4')
