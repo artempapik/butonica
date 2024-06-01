@@ -20,6 +20,15 @@
                 & .order-number {
                     font-size: 1.2rem;
 
+                    & .material-symbols-outlined {
+                        vertical-align: sub;
+                        margin-right: .2rem;
+
+                        &:hover {
+                            color: rgb(var(--table-hover-color));
+                        }
+                    }
+
                     & .number {
                         & span:first-child:not(.print-sheets span) {
                             font-family: 'Roboto Mono', monospace;
