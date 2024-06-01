@@ -1,4 +1,4 @@
-let allOrdersTable, orderProducts, internetProductsOptions, internetProductsOptionsArray, internetFlavorsOptions, internetFlavorsOptionsArray, allOrdersPages, allOrderIntervalId
+let allOrdersTable, orderProducts, internetProductsOptions, internetProductsOptionsArray, internetFlavorsOptions, internetFlavorsOptionsArray, allOrdersPages, allOrderIntervalId, orderTippy
 
 const orderInfoModal = document.querySelector('.order-info-modal')
 const internetOrderModal = document.querySelector('.create-internet-order-modal')
@@ -365,7 +365,17 @@ const createOrderRow = (order, table) => {
             }
 
             const orderNumberDate = orderInfoModal.querySelector('.order-number-date')
-            orderNumberDate.querySelector('.order-number span').textContent = (order.isInternet ? 'Online-замовлення' : 'Замовлення') + ' '
+            const orderTypeIcon = orderNumberDate.querySelector('.order-number span')
+            orderTypeIcon.textContent = order.isInternet ? 'credit_card' : 'shopping_bag'
+
+            if (orderTippy) {
+                orderTippy.destroy()
+            }
+
+            orderTippy = tippy(orderTypeIcon, {
+                content: order.isInternet ? 'online-замовлення створено' : 'замовлення створено на зміні',
+                placement: 'right'
+            })
 
             const orderId = order.id.toString()
             const orderNumber = orderNumberDate.querySelector('.order-number .number span')
