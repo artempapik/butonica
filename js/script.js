@@ -1428,7 +1428,7 @@ const loginModal = document.querySelector('.login-modal')
 
 const employeeTitleToName = {
     0: 'Директор',
-    1: 'Адміністратор',
+    1: 'Адмін',
     2: 'Флорист',
     3: 'Менеджер'
 }
