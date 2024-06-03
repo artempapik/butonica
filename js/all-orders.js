@@ -373,7 +373,7 @@ const createOrderRow = (order, table) => {
             }
 
             orderTippy = tippy(orderTypeIcon, {
-                content: order.isInternet ? 'online-замовлення створено' : 'замовлення створено на зміні',
+                content: order.isInternet ? 'online-замовлення створено' : 'замовлення на зміні',
                 placement: 'right'
             })
 
