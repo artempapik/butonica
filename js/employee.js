@@ -103,7 +103,7 @@ const createEmployeeRow = employee => {
             employeePass.textContent = employeePass.textContent === hiddenPass ? employee.password : hiddenPass
         }
 
-        employeeInfoModal.querySelector('.employee-stock').textContent = employee.title === 0 ? '–' : employee.stock
+        employeeInfoModal.querySelector('.employee-stock').textContent = employee.title < 2 ? '–' : employee.stock
         employeeInfoModal.querySelector('.employee-title').textContent = employeeTitleToName[employee.title]
         employeeInfoModal.querySelector('.employee-registration-date').textContent = formatDate(employee.registrationDate)
         showHideNodeInfo(employeeInfoModal, 'employee-birth-date', formatDate(employee.birthDate, false, false))
