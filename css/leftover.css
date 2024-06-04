@@ -11,6 +11,8 @@
 .leftover-table {
     & table {
         & tr:not(:first-child) {
+            cursor: pointer;
+
             & td:nth-child(3),
             & td:nth-child(4),
             & td:last-child {
@@ -72,6 +74,48 @@
 
         & span:last-child {
             font-family: 'Roboto Mono', monospace;
+        }
+    }
+}
+
+.leftover-info-modal {
+    & .leftover-info-modal-content {
+        width: calc(var(--modal-content-width) + 11rem);
+
+        & h1 {
+            margin-top: 0;
+        }
+
+        & .order-flavor-info {
+            display: flex;
+            justify-content: space-between;
+
+            & h2 {
+                font-size: 1.1rem;
+                display: flex;
+                align-items: center;
+                gap: .5rem;
+
+                & span.material-symbols-outlined {
+                    &.flavor {
+                        color: rgb(230, 80, 25);
+                    }
+
+                    &.order {
+                        color: #367AF6;
+                    }
+                }
+            }
+
+            & table {
+                display: block;
+                margin: 0;
+                margin-top: 1.2rem;
+
+                & td:last-child {
+                    text-align: center;
+                }
+            }
         }
     }
 }
