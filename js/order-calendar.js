@@ -168,7 +168,7 @@ const fillOrderCalendar = (day, month, year, isWeek = false) => {
                             convertMsToTime(new Date(order.date.replace('00', order.timeFrom.substring(0, 2)).replace('00', order.timeFrom.substring(3))) - new Date()) :
                             { text: calculateDaysLeft(order.date) }
 
-                    if (timeLeft.text !== '–' && !timeLeft.text.endsWith('д')) {
+                    if (timeLeft.text !== '–' && order.timeFrom) {
                         leftTime.dataset.timeFrom = order.timeFrom
                         leftTime.dataset.date = order.date
                     }
@@ -184,6 +184,11 @@ const fillOrderCalendar = (day, month, year, isWeek = false) => {
                             leftTime.style.fontWeight = 'bold'
                             leftTime.style.color = 'rgb(50, 50, 50)'
                         }
+                    }
+
+                    if (timeLeft.text === '!') {
+                        leftTime.style.color = 'rgb(240, 240, 240)'
+                        leftTime.style.background = 'rgb(240, 0, 0)'
                     }
 
                     const orderTimeBlock = document.createElement('div')
