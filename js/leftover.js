@@ -116,6 +116,8 @@ const showAllLeftovers = (filtersBlock, key) => {
 const showAllLeftoverCategories = () => showAllLeftovers(leftoverCategoryFilters, 'categories')
 const showAllLeftoverStocks = () => showAllLeftovers(leftoverStockFilters, 'stocks')
 
+const leftoverInfoModal = document.querySelector('.leftover-info-modal')
+
 const fillLeftoversTable = leftoverProducts => {
     leftoversTable.innerHTML = leftoversTable.querySelector('tbody').innerHTML
 
@@ -125,6 +127,75 @@ const fillLeftoversTable = leftoverProducts => {
     }
 
     for (const product of leftoverProducts) {
+        const tr = document.createElement('tr')
+        tr.onpointerup = () => {
+            leftoverInfoModal.querySelector('h1').textContent = product.name
+            // showPageLoad()
+            hideBodyOverflow()
+
+            const flavorInfo = [
+                {
+                    name: 'Букет 60001',
+                    amount: 5
+                },
+                {
+                    name: 'Букет 60002',
+                    amount: 2
+                },
+                {
+                    name: 'Букет 60003',
+                    amount: 10
+                }
+            ]
+
+            const orderInfo = [
+                {
+                    number: '5734',
+                    date: 'вт 15 чер',
+                    amount: 7
+                },
+                {
+                    number: '5735',
+                    date: 'ср 16 чер',
+                    amount: 5
+                },
+                {
+                    number: '5736',
+                    date: 'чт 17 чер',
+                    amount: 10
+                }
+            ]
+
+            const flavorInfoTable = leftoverInfoModal.querySelector('.flavor-info-table')
+            flavorInfoTable.innerHTML = flavorInfoTable.querySelector('tbody').innerHTML
+
+            const orderInfoTable = leftoverInfoModal.querySelector('.order-info-table')
+            orderInfoTable.innerHTML = orderInfoTable.querySelector('tbody').innerHTML
+
+            for (const flavor of flavorInfo) {
+                const tr = document.createElement('tr')
+                tr.append(
+                    createTd(flavor.name),
+                    createTd(flavor.amount)
+                )
+                flavorInfoTable.append(tr)
+            }
+
+            for (const order of orderInfo) {
+                const tr = document.createElement('tr')
+                tr.append(
+                    createTd(order.number),
+                    createTd(order.date),
+                    createTd(order.amount)
+                )
+                orderInfoTable.append(tr)
+            }
+
+            leftoverInfoModal.style.display = 'flex'
+            leftoverInfoModal.querySelector('div').scroll(0, 0)
+            // catch
+        }
+
         const productNameColumn = document.createElement('td')
         productNameColumn.textContent = product.name
 
@@ -169,7 +240,6 @@ const fillLeftoversTable = leftoverProducts => {
             return td
         }
         
-        const tr = document.createElement('tr')
         tr.append(
             productNameColumn,
             leftoverProductStockColumn,
