@@ -1389,6 +1389,7 @@ window.onpointerup = e => {
         orderInfoModal,
         flavorInfoModal,
         flavorTemplatesModal,
+        leftoverInfoModal,
         employeeInfoModal,
         storeExpenseInfoModal,
         printEmptySheetModal,
