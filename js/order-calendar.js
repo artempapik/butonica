@@ -251,7 +251,12 @@ const fillOrderCalendar = (day, month, year, isWeek = false) => {
                     }
     
                     const cancelButton = createSpan('close')
-                    cancelButton.classList = 'material-symbols-outlined'
+
+                    if (loginInfo.title < 2 || loginInfo.employeeId === order.employeeId) {
+                        cancelButton.classList = 'material-symbols-outlined'
+                    } else {
+                        cancelButton.style.visibility = 'hidden'
+                    }
 
                     const doneButton = createSpan(i ? 'local_shipping' : 'done')
                     doneButton.style.background = i ? 'rgb(255, 100, 30)' : 'rgb(48, 133, 108)'
