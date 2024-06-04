@@ -70,6 +70,9 @@
         & .sale-product, & .sale-flavor {
             height: fit-content;
             display: flex;
+            flex: 1;
+            max-width: 14rem;
+            min-width: 9rem;
             flex-direction: column;
             gap: 1.5rem;
             box-shadow: rgba(6, 24, 44, .1) 0 0 0 2px, rgba(6, 24, 44, .3) 0 4px 6px -1px, rgba(255, 255, 255, .1) 0 1px 0 inset;
@@ -85,7 +88,6 @@
             }
 
             & div {
-                width: 10rem;
                 height: 5rem;
                 display: flex;
                 flex-direction: column;
@@ -1513,8 +1515,8 @@
         gap: .5rem;
 
         & .sale-products {
-            justify-content: center;
             gap: 1rem;
+            padding: 0 .3rem;
         }
 
         & .sale-panel {
