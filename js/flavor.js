@@ -595,15 +595,14 @@ const viewFlavorTemplates = () => {
             const deleteIcon = createSpan('delete_forever')
             deleteIcon.classList = 'material-symbols-outlined'
 
-            deleteIcon.onpointerup = () => {
+            deleteIcon.onpointerup = () => showConfirm('Видалити шаблон?', () =>
                 remove('FlavorTemplate', { id: template.id }).then(() => {
                     templatesList.removeChild(deleteIcon.parentNode)
 
                     if (!templatesList.children.length) {
                         flavorTemplatesModal.style.display = ''
                     }
-                }).catch(() => showMessage('error', deleteErrorMessage('шаблон')))
-            }
+                }).catch(() => showMessage('error', deleteErrorMessage('шаблон'))))
 
             const templateContent = document.createElement('span')
             templateContent.classList = 'template-content'
