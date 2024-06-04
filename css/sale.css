@@ -1609,11 +1609,12 @@
         border-radius: 0;
 
         & input[type=search] {
-            width: 14.5rem;
-            padding: .3rem .1rem;
-            padding-left: 2.6rem;
+            width: 14.3rem;
+            padding: .3rem 0;
+            padding-left: 2.2rem;
             border-radius: .5rem;
             font-size: .9rem;
+            background-position: .3rem;
 
             &::-webkit-search-cancel-button {
                 transform: scale(1.2);
