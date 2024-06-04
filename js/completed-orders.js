@@ -94,7 +94,7 @@ const showCompletedOrderInfo = e => {
             return
         }
 
-        document.querySelector('.change-page').style.display = 'flex'
+        document.querySelector('.change-page').style.display = response === 1 ? 'none' : 'flex'
         completedOrdersPages = response
         document.querySelector('.change-page .page-number span:last-child').textContent = 'з ' + completedOrdersPages
     })
