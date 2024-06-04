@@ -67,6 +67,8 @@
             display: block;
             box-shadow: none;
             margin-bottom: 0;
+            width: 100%;
+            overflow-x: auto;
         
             & tbody {
                 display: none;
