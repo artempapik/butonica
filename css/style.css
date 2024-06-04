@@ -2735,11 +2735,19 @@ table {
 
 @media only screen and (max-width: 700px) {
     main .main-statistics {
+        margin-top: .9rem;
+        flex-direction: column;
         align-items: center;
         gap: 1rem;
-        flex-direction: row;
-        align-items: baseline;
         margin-bottom: 1rem;
+
+        & .main-stat-blocks {
+            gap: .5rem;
+        }
+
+        & .main-top-sales {
+            margin-top: 0;
+        }
     }
 }
 
@@ -2799,24 +2807,8 @@ table {
         }
     }
 
-    main {
-        & .order-header {
-            align-items: start;
-        }
-
-        & .main-statistics {
-            margin-top: .9rem;
-            flex-direction: column;
-            align-items: center;
-
-            & .main-stat-blocks {
-                gap: .5rem;
-            }
-
-            & .main-top-sales {
-                margin-top: 0;
-            }
-        }
+    main .order-header {
+        align-items: start;
     }
 
     [class$="modal-content"] {
