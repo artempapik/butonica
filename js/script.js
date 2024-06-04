@@ -1312,7 +1312,11 @@ const hideModal = modal => {
 
     modal.style.display = ''
 
-    if (!intervalId && modal !== calculatorModal && modal !== flavorTemplatesModal && !shiftInfoModal.style.display) {
+    if (!intervalId &&
+        modal !== calculatorModal &&
+        modal !== flavorTemplatesModal &&
+        !flavorTemplatesModal.style.display &&
+        !shiftInfoModal.style.display) {
         document.body.style.overflow = ''
     }
 
