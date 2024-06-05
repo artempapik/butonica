@@ -223,4 +223,13 @@
             }
         }
     }
+
+    .order-flavor-info {
+        flex-direction: column;
+        gap: 2.5rem;
+
+        & .flavor-info, & .order-info {
+            gap: .8rem !important;
+        }
+    }
 }
