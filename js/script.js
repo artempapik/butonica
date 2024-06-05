@@ -1751,6 +1751,10 @@ const isMobile = 'ontouchstart' in window
 const notificationsInfo = document.querySelector('.notifications-info')
 
 document.onpointerup = e => {
+    if (isMobile && document.querySelector('.subscription').contains(e.target)) {
+        return
+    }
+    
     if (isMobile) {
         document.activeElement.blur()
     }
