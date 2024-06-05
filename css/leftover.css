@@ -80,15 +80,23 @@
 
 .leftover-info-modal {
     & .leftover-info-modal-content {
-        width: calc(var(--modal-content-width) + 11rem);
+        width: calc(var(--modal-content-width) + 18rem);
 
         & h1 {
             margin-top: 0;
+            text-align: center;
         }
 
         & .order-flavor-info {
             display: flex;
             justify-content: space-between;
+
+            & .flavor-info, & .order-info {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1.2rem;
+            }
 
             & h2 {
                 font-size: 1.1rem;
@@ -110,10 +118,21 @@
             & table {
                 display: block;
                 margin: 0;
-                margin-top: 1.2rem;
 
-                & td:last-child {
-                    text-align: center;
+                &.flavor-info-table td {
+                    width: 6rem;
+                }
+
+                &.order-info-table td {
+                    width: 4.5rem;
+                }
+
+                & td {
+                    padding: initial 0;
+
+                    &:nth-child(2), &:last-child {
+                        text-align: center;
+                    }
                 }
             }
         }
