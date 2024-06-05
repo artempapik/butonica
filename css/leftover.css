@@ -224,12 +224,18 @@
         }
     }
 
-    .order-flavor-info {
-        flex-direction: column;
-        gap: 2.5rem;
+    .leftover-info-modal-content {
+        & h1 {
+            font-size: 1.3rem;
+        }
 
-        & .flavor-info, & .order-info {
-            gap: .8rem !important;
+        .order-flavor-info {
+            flex-direction: column;
+            gap: 2.5rem;
+    
+            & .flavor-info, & .order-info {
+                gap: .8rem !important;
+            }
         }
     }
 }
