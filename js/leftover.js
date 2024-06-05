@@ -128,7 +128,11 @@ const fillLeftoversTable = leftoverProducts => {
 
     for (const product of leftoverProducts) {
         const tr = document.createElement('tr')
-        tr.onpointerup = () => {
+        tr.onpointerup = e => {
+            if (e.target.tagName.toLowerCase() === 'span') {
+                return
+            }
+
             leftoverInfoModal.querySelector('h1').textContent = product.name
             // showPageLoad()
             hideBodyOverflow()
