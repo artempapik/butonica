@@ -2625,6 +2625,8 @@
     </div>
     <script src="js/sw.js"></script>
     <script src="js/changelog.js"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
     <script src="js/script.js"></script>
     <script src="js/company.js"></script>
     <script src="js/stock.js"></script>
@@ -2655,8 +2657,6 @@
     <script src="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro@2.9.6/build/vanilla-calendar.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="https://unpkg.com/@popperjs/core@2"></script>
-    <script src="https://unpkg.com/tippy.js@6"></script>
     <script>
         $(document).on('focus', '.select2-selection.select2-selection--single', () => $('.select2-search__field').trigger('focus'))
         $('select.select2').on('select2:closing', e => $(e.target).data('select2').$selection.one('focus focusin', e => e.stopPropagation()))
