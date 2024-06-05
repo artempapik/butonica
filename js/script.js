@@ -1472,6 +1472,11 @@ const removeMenus = title => {
 }
 
 const getSubscriptionExpiresText = date => {
+    tippy(document.querySelector('.subscription'), {
+        content: `Дата оплати: ${formatDate(date)}`,
+        placement: 'top'
+    })
+
     const daysLeft = 30 - Math.floor((new Date() - date) / (1000 * 60 * 60 * 24))
     const subText = document.querySelector('.subscription-text span:last-child')
     subText.style.fontSize = daysLeft > 0 ? '' : '.8rem'
