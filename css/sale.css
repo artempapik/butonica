@@ -1440,7 +1440,7 @@
     }
 
     .cash-register-operations-modal-content {
-        padding: .7rem .5rem;
+        padding: .7rem .6rem;
         gap: .8rem;
 
         & h1 {
@@ -1449,6 +1449,7 @@
 
         & .cash-register-cash {
             gap: .8rem;
+            padding: .7rem .3rem;
         }
     }
 }
