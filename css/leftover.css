@@ -225,6 +225,9 @@
     }
 
     .leftover-info-modal-content {
+        gap: 1.5rem;
+        width: fit-content !important;
+
         & h1 {
             font-size: 1.3rem;
         }
