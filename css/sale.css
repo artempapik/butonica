@@ -1553,6 +1553,16 @@
                     height: unset;
                     align-items: center;
 
+                    & .sale-flavor-name span {
+                        &:first-child {
+                            font-size: 1.5rem;
+                        }
+
+                        &:last-child {
+                            width: 7rem;
+                        }
+                    }
+
                     & .sale-product-name {
                         width: 9.5rem;
                         font-size: .9rem;
@@ -1594,7 +1604,7 @@
 
             & .sale-panel {
                 top: 0;
-                height: 87%;
+                height: 86%;
                 min-width: unset;
                 max-height: unset;
                 width: 100%;
