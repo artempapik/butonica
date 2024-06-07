@@ -71,7 +71,7 @@
             height: fit-content;
             display: flex;
             flex: 1;
-            min-width: 8.5rem;
+            min-width: 9rem;
             max-width: 13rem;
             flex-direction: column;
             gap: 1.5rem;
