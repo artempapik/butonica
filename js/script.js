@@ -571,7 +571,10 @@ const menuItemsContents = {
                 <input type="checkbox" onclick="showFlowerImages()">
                 <label>зображення</label>
             </div>
-            <span class="material-symbols-outlined">shopping_cart</span>
+            <div class="cart-mobile">
+                <span>0</span>
+                <span class="material-symbols-outlined">shopping_cart</span>
+            </div>
         </div>
         <div class="sale-content">
             <div class="sale-products"></div>
