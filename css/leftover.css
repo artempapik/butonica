@@ -80,7 +80,7 @@
 
 .leftover-info-modal {
     & .leftover-info-modal-content {
-        width: calc(var(--modal-content-width) + 18rem);
+        width: calc(var(--modal-content-width) + 12rem);
 
         & h1 {
             margin-top: 0;
@@ -120,19 +120,32 @@
                 margin: 0;
 
                 &.flavor-info-table td {
-                    width: 6rem;
+                    &:first-child {
+                        width: 6.5rem;
+                    }
+
+                    &:last-child {
+                        width: 3rem;
+                    }
                 }
 
                 &.order-info-table td {
-                    width: 4.5rem;
+                    &:first-child {
+                        width: 3rem;
+                    }
+
+                    &:nth-child(2) {
+                        width: 4.5rem;
+                    }
+
+                    &:last-child {
+                        width: 2.5rem;
+                    }
                 }
 
                 & td {
                     padding: initial 0;
-
-                    &:nth-child(2), &:last-child {
-                        text-align: center;
-                    }
+                    text-align: center;
                 }
             }
         }
