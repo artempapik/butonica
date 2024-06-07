@@ -1663,7 +1663,7 @@
         & input[type=search] {
             margin: auto;
             width: 15.8rem;
-            padding: .5rem 0;
+            padding: .5rem .3rem;
             padding-left: 2.5rem;
             border-radius: .5rem;
             font-size: 1rem;
