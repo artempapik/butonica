@@ -148,308 +148,311 @@
         }
     }
 
-    & .sale-panel {
+    & .sale-panel-wrapper {
         position: sticky;
         top: 5.3rem;
-        max-height: 90vh;
-        overflow-y: auto;
-        border-top-left-radius: .5rem;
-        border-top-right-radius: .5rem;
-        background: #fff;
-        display: flex;
-        flex-direction: column;
-        box-shadow: rgba(0, 0, 0, .16) 0 1px 4px, rgba(51, 51, 51, .7) 0 0 0 3px;
-        margin-bottom: .5rem;
-        min-width: 31rem;
-        width: 31rem;
-
-        & .sale-cash-register {
-            flex: 1;
-            padding: .3rem;
-            padding-bottom: 0;
+        
+        & .sale-panel {
+            max-height: 90vh;
+            overflow-y: auto;
+            border-top-left-radius: .5rem;
+            border-top-right-radius: .5rem;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            box-shadow: rgba(0, 0, 0, .16) 0 1px 4px, rgba(51, 51, 51, .7) 0 0 0 3px;
+            margin-bottom: .5rem;
+            min-width: 31rem;
+            width: 31rem;
     
-            & .cash-register {
-                display: flex;
-                gap: 1rem;
-    
-                & button {
-                    padding: .4rem 0;
-                    border-width: .15rem;
-                    border-radius: .7rem;
-                    transition: .1s;
+            & .sale-cash-register {
+                flex: 1;
+                padding: .3rem;
+                padding-bottom: 0;
+        
+                & .cash-register {
                     display: flex;
-                    gap: .2rem;
-                    justify-content: center;
-
-                    &:hover {
-                        box-shadow: none;
-                    }
-                }
-    
-                & button:first-child {
-                    background: rgba(255, 255, 255, .9);
-                    color: rgb(30, 30, 30);
-                    flex: 4;
-                    border: .15rem rgba(0, 119, 204, .6) solid;
-
-                    &:hover {
-                        color: rgb(250, 250, 250);
-                        background: rgba(0, 119, 204, .9);
-                    }
-                }
-    
-                & button:last-child {
-                    background: rgba(255, 255, 255, .9);
-                    color: rgb(30, 30, 30);
-                    flex: 3;
-                    border: .15rem rgba(239, 1, 7, .6) solid;
-    
-                    &:hover {
-                        color: rgb(250, 250, 250);
-                        background: rgba(239, 1, 7, .8);
-                    }
-                }
-            }
-            
-            & .cash-register-products {
-                margin-top: .5rem;
-
-                & .empty-cart {
-                    color: rgb(70, 70, 70);
-                    margin: auto;
-                    margin-top: 25%;
-                    display: flex;
-                    flex-direction: column;
-                    gap: .7rem;
-    
-                    & span:first-child {
-                        font-size: 4rem;
-                        align-self: center;
-                    }
-    
-                    & span:last-child {
-                        font-size: 1.5rem;
-                        font-weight: bold;
-                    }
-                }
-
-                & .shifts {
-                    display: flex;
-                    margin: 0 .3rem;
-                    gap: .8rem;
-                    row-gap: .4rem;
-                    flex-wrap: wrap;
-                    align-items: center;
-                    
-                    & .shift {
-                        padding: .2rem;
+                    gap: 1rem;
+        
+                    & button {
+                        padding: .4rem 0;
+                        border-width: .15rem;
+                        border-radius: .7rem;
+                        transition: .1s;
                         display: flex;
-                        justify-content: space-between;
-                        border: .1rem rgb(170, 170, 170) solid;
-                        border-radius: .4rem;
-                        font-family: 'Roboto Mono', monospace;
-                        background: rgb(250, 250, 250);
-                        color: rgb(20, 20, 20);
-
+                        gap: .2rem;
+                        justify-content: center;
+    
                         &:hover {
                             box-shadow: none;
                         }
-
+                    }
+        
+                    & button:first-child {
+                        background: rgba(255, 255, 255, .9);
+                        color: rgb(30, 30, 30);
+                        flex: 4;
+                        border: .15rem rgba(0, 119, 204, .6) solid;
+    
+                        &:hover {
+                            color: rgb(250, 250, 250);
+                            background: rgba(0, 119, 204, .9);
+                        }
+                    }
+        
+                    & button:last-child {
+                        background: rgba(255, 255, 255, .9);
+                        color: rgb(30, 30, 30);
+                        flex: 3;
+                        border: .15rem rgba(239, 1, 7, .6) solid;
+        
+                        &:hover {
+                            color: rgb(250, 250, 250);
+                            background: rgba(239, 1, 7, .8);
+                        }
+                    }
+                }
+                
+                & .cash-register-products {
+                    margin-top: .5rem;
+    
+                    & .empty-cart {
+                        color: rgb(70, 70, 70);
+                        margin: auto;
+                        margin-top: 25%;
+                        display: flex;
+                        flex-direction: column;
+                        gap: .7rem;
+        
                         & span:first-child {
-                            margin: auto;
+                            font-size: 4rem;
+                            align-self: center;
                         }
         
                         & span:last-child {
-                            font-size: 1.3rem;
-                            align-self: end;
+                            font-size: 1.5rem;
+                            font-weight: bold;
+                        }
+                    }
+    
+                    & .shifts {
+                        display: flex;
+                        margin: 0 .3rem;
+                        gap: .8rem;
+                        row-gap: .4rem;
+                        flex-wrap: wrap;
+                        align-items: center;
+                        
+                        & .shift {
+                            padding: .2rem;
+                            display: flex;
+                            justify-content: space-between;
+                            border: .1rem rgb(170, 170, 170) solid;
+                            border-radius: .4rem;
+                            font-family: 'Roboto Mono', monospace;
+                            background: rgb(250, 250, 250);
+                            color: rgb(20, 20, 20);
+    
+                            &:hover {
+                                box-shadow: none;
+                            }
+    
+                            & span:first-child {
+                                margin: auto;
+                            }
+            
+                            & span:last-child {
+                                font-size: 1.3rem;
+                                align-self: end;
+                                
+                                &:hover {
+                                    color: rgb(255, 0, 0);
+                                }
+                            }
+                        }
+        
+                        & .add-shift {
+                            display: none;
+                            align-items: center;
+                            cursor: pointer;
                             
                             &:hover {
-                                color: rgb(255, 0, 0);
+                                color: rgb(0, 119, 204);
                             }
                         }
                     }
-    
-                    & .add-shift {
+        
+                    & .products {
                         display: none;
-                        align-items: center;
-                        cursor: pointer;
                         
-                        &:hover {
-                            color: rgb(0, 119, 204);
-                        }
-                    }
-                }
-    
-                & .products {
-                    display: none;
-                    
-                    & .products-header {
-                        margin: .6rem 0;
-    
-                        & div:first-of-type {
-                            display: flex;
-                            gap: .5rem;
-    
-                            & .shopping-cart-total {
-                                font-size: 1.2rem;
-                                font-weight: bold;
-                                color: rgb(80, 80, 80);
-                            }
-                        }
-
-                        & span {
-                            font-size: 1.5rem;
-    
-                            &.remove-cart {
-                                cursor: pointer;
-                                color: rgba(239, 1, 7, .7);
-    
-                                &:hover {
-                                    color: rgb(239, 1, 7);
-                                }
-                            }
-                        }
-                    }
-
-                    & .sale-products {
-                        display: flex;
-                        flex-direction: column;
-                        gap: .5rem;
-                        max-height: 48vh;
-                        overflow-y: auto;
-                        flex-wrap: nowrap;
-                        padding: .2rem;
-
-                        & .sale-product-content {
-                            display: flex;
-                            gap: .7rem;
-                            align-items: center;
-
-                            & .sale-product, & .sale-flavor {
-                                flex: 1;
-                                max-width: unset;
-                                cursor: default;
-                                align-items: center;
+                        & .products-header {
+                            margin: .6rem 0;
+        
+                            & div:first-of-type {
                                 display: flex;
-                                flex-direction: row;
-                                background: rgb(240, 240, 240);
-                                padding: .3rem .6rem;
-                                box-shadow: rgba(0, 0, 0, .02) 0 1px 3px 0, rgba(27, 31, 35, .15) 0 0 0 1px;
-                                border-radius: .5rem;
+                                gap: .5rem;
         
-                                &:hover {
-                                    box-shadow: rgba(0, 0, 0, .3) 0 1px 3px 0, rgba(27, 31, 35, .25) 0 0 0 1px;
+                                & .shopping-cart-total {
+                                    font-size: 1.2rem;
+                                    font-weight: bold;
+                                    color: rgb(80, 80, 80);
                                 }
-
-                                & div {
-                                    height: auto;
-                                }
+                            }
+    
+                            & span {
+                                font-size: 1.5rem;
         
-                                & .sale-product-header, & .sale-flavor-header {
-                                    height: fit-content;
-                                    margin: 0;
-                                    display: flex;
-                                    gap: .3rem;
-                                    align-items: start;
-                                    flex: 2;
-                                    flex-direction: column;
+                                &.remove-cart {
+                                    cursor: pointer;
+                                    color: rgba(239, 1, 7, .7);
         
-                                    & .sale-product-name, & .sale-flavor-name {
-                                        width: 9rem;
-                                        height: fit-content;
-                                        font-weight: bold;
-                                    }
-
-                                    & .sale-flavor-name {
-                                        justify-content: start;
-                                        gap: .5rem;
-
-                                        & span:first-child {
-                                            color: rgb(204, 85, 0);
-                                        }
-                                    }
-        
-                                    & .sale-product-cost, & .sale-flavor-cost {
-                                        height: fit-content;
-                                        display: block;
-                                    }
-
-                                    & .sale-product-cost {
-                                        width: unset;
-
-                                        & span:nth-child(2) {
-                                            display: inline-block;
-                                            min-width: 1.7rem;
-                                            height: 1rem;
-                                        }
+                                    &:hover {
+                                        color: rgb(239, 1, 7);
                                     }
                                 }
-        
-                                & .sale-product-buttons {
+                            }
+                        }
+    
+                        & .sale-products {
+                            display: flex;
+                            flex-direction: column;
+                            gap: .5rem;
+                            max-height: 48vh;
+                            overflow-y: auto;
+                            flex-wrap: nowrap;
+                            padding: .2rem;
+    
+                            & .sale-product-content {
+                                display: flex;
+                                gap: .7rem;
+                                align-items: center;
+    
+                                & .sale-product, & .sale-flavor {
+                                    flex: 1;
+                                    max-width: unset;
+                                    cursor: default;
+                                    align-items: center;
                                     display: flex;
                                     flex-direction: row;
-                                    align-items: center;
-                                    gap: .5rem;
-        
-                                    & button {
-                                        border: 0;
-                                        border-radius: 50%;
-                                        background: rgba(42, 82, 190, .8);
-                                        font-size: 1.2rem;
-                                        padding: .2rem .6rem;
-                                        
-                                        &:hover {
-                                            box-shadow: none;
-                                            background: rgb(42, 82, 190);
-                                        }
-
-                                        &:first-child {
-                                            padding: .2rem .7rem;
-                                        }
-                                    }
-
-                                    & input {
-                                        text-align: center;
-                                        padding: .2rem .3rem;
-                                        height: 2rem;
-                                        width: 4rem;
-                                        box-shadow: none;
-                                        border-radius: .5rem;
-                                    }
-                                }
-                            }
-
-                            & .sale-flavor {
-                                outline: .1rem solid rgb(100, 100, 100);
-                            }
-
-                            & .material-symbols-outlined {
-                                cursor: pointer;
-
-                                &:first-child {
-                                    vertical-align: bottom;
-                                    font-size: 1.4rem;
-                                    margin-right: .5rem;
-                                    color: rgba(65, 105, 225);
-
-                                    &.changed-price {
-                                        color: rgba(215, 0, 64, .8);
-
-                                        &:hover {
-                                            color: rgb(215, 0, 64);
-                                        }
-                                    }
-
+                                    background: rgb(240, 240, 240);
+                                    padding: .3rem .6rem;
+                                    box-shadow: rgba(0, 0, 0, .02) 0 1px 3px 0, rgba(27, 31, 35, .15) 0 0 0 1px;
+                                    border-radius: .5rem;
+            
                                     &:hover {
-                                        color: rgba(65, 105, 225, .8);
+                                        box-shadow: rgba(0, 0, 0, .3) 0 1px 3px 0, rgba(27, 31, 35, .25) 0 0 0 1px;
                                     }
-                                }
-
-                                &:last-child {
-                                    color: rgba(255, 0, 0, .6);
     
-                                    &:hover {
-                                        color: rgba(255, 0, 0, .9);
+                                    & div {
+                                        height: auto;
+                                    }
+            
+                                    & .sale-product-header, & .sale-flavor-header {
+                                        height: fit-content;
+                                        margin: 0;
+                                        display: flex;
+                                        gap: .3rem;
+                                        align-items: start;
+                                        flex: 2;
+                                        flex-direction: column;
+            
+                                        & .sale-product-name, & .sale-flavor-name {
+                                            width: 9rem;
+                                            height: fit-content;
+                                            font-weight: bold;
+                                        }
+    
+                                        & .sale-flavor-name {
+                                            justify-content: start;
+                                            gap: .5rem;
+    
+                                            & span:first-child {
+                                                color: rgb(204, 85, 0);
+                                            }
+                                        }
+            
+                                        & .sale-product-cost, & .sale-flavor-cost {
+                                            height: fit-content;
+                                            display: block;
+                                        }
+    
+                                        & .sale-product-cost {
+                                            width: unset;
+    
+                                            & span:nth-child(2) {
+                                                display: inline-block;
+                                                min-width: 1.7rem;
+                                                height: 1rem;
+                                            }
+                                        }
+                                    }
+            
+                                    & .sale-product-buttons {
+                                        display: flex;
+                                        flex-direction: row;
+                                        align-items: center;
+                                        gap: .5rem;
+            
+                                        & button {
+                                            border: 0;
+                                            border-radius: 50%;
+                                            background: rgba(42, 82, 190, .8);
+                                            font-size: 1.2rem;
+                                            padding: .2rem .6rem;
+                                            
+                                            &:hover {
+                                                box-shadow: none;
+                                                background: rgb(42, 82, 190);
+                                            }
+    
+                                            &:first-child {
+                                                padding: .2rem .7rem;
+                                            }
+                                        }
+    
+                                        & input {
+                                            text-align: center;
+                                            padding: .2rem .3rem;
+                                            height: 2rem;
+                                            width: 4rem;
+                                            box-shadow: none;
+                                            border-radius: .5rem;
+                                        }
+                                    }
+                                }
+    
+                                & .sale-flavor {
+                                    outline: .1rem solid rgb(100, 100, 100);
+                                }
+    
+                                & .material-symbols-outlined {
+                                    cursor: pointer;
+    
+                                    &:first-child {
+                                        vertical-align: bottom;
+                                        font-size: 1.4rem;
+                                        margin-right: .5rem;
+                                        color: rgba(65, 105, 225);
+    
+                                        &.changed-price {
+                                            color: rgba(215, 0, 64, .8);
+    
+                                            &:hover {
+                                                color: rgb(215, 0, 64);
+                                            }
+                                        }
+    
+                                        &:hover {
+                                            color: rgba(65, 105, 225, .8);
+                                        }
+                                    }
+    
+                                    &:last-child {
+                                        color: rgba(255, 0, 0, .6);
+        
+                                        &:hover {
+                                            color: rgba(255, 0, 0, .9);
+                                        }
                                     }
                                 }
                             }
@@ -457,102 +460,102 @@
                     }
                 }
             }
-        }
-
-        & .sale-pay-buttons {
-            text-align: center;
-
-            & .to-pay {
-                align-items: center;
-                padding: 1rem;
-                display: flex;
-                justify-content: space-between;
-
-                & .to-pay-message {
-                    font-size: 1.3rem;
-                    font-weight: bold;
-                }
-
-                & div {
-                    display: flex;
+    
+            & .sale-pay-buttons {
+                text-align: center;
+    
+                & .to-pay {
                     align-items: center;
-                    gap: 1rem;
-
-                    & .enter-value {
-                        font-family: unset;
+                    padding: 1rem;
+                    display: flex;
+                    justify-content: space-between;
+    
+                    & .to-pay-message {
+                        font-size: 1.3rem;
                         font-weight: bold;
-                        font-size: 1.15rem;
-                        color: rgb(50, 50, 50);
-                        letter-spacing: .04rem;
+                    }
+    
+                    & div {
+                        display: flex;
+                        align-items: center;
+                        gap: 1rem;
+    
+                        & .enter-value {
+                            font-family: unset;
+                            font-weight: bold;
+                            font-size: 1.15rem;
+                            color: rgb(50, 50, 50);
+                            letter-spacing: .04rem;
+                        }
                     }
                 }
-            }
-
-            & .checkout {
-                padding: 1rem 0;
-                border-top: .1rem rgb(120, 120, 120) solid;
-                border-bottom: .1rem rgb(120, 120, 120) solid;
-                cursor: pointer;
-                font-size: 1.1rem;
-                background: rgb(225, 225, 225);
-
-                &:hover {
-                    background: rgb(215, 215, 215);
-                }
-            }
-
-            & .checkout-clients {
-                padding: .8rem .5rem;
-                display: flex;
-                justify-content: space-between;
-                gap: 1rem;
-                align-items: center;
-
-                & .add-client, & .clear-client {
+    
+                & .checkout {
+                    padding: 1rem 0;
+                    border-top: .1rem rgb(120, 120, 120) solid;
+                    border-bottom: .1rem rgb(120, 120, 120) solid;
                     cursor: pointer;
+                    font-size: 1.1rem;
+                    background: rgb(225, 225, 225);
+    
+                    &:hover {
+                        background: rgb(215, 215, 215);
+                    }
+                }
+    
+                & .checkout-clients {
+                    padding: .8rem .5rem;
                     display: flex;
+                    justify-content: space-between;
+                    gap: 1rem;
                     align-items: center;
-                    justify-content: center;
-                    gap: .5rem;
-                    color: rgb(240, 240, 240);
-                    padding: .2rem 0;
-                    border-radius: .3rem;
-                    width: 7.3rem;
-
-                    & .material-symbols-outlined {
-                        font-size: 1.25rem;
+    
+                    & .add-client, & .clear-client {
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: .5rem;
+                        color: rgb(240, 240, 240);
+                        padding: .2rem 0;
+                        border-radius: .3rem;
+                        width: 7.3rem;
+    
+                        & .material-symbols-outlined {
+                            font-size: 1.25rem;
+                        }
+                    }
+    
+                    & .add-client {
+                        background: rgba(42, 82, 190, .75);
+    
+                        &:hover {
+                            background: rgb(42, 82, 190);
+                        }
+                    }
+    
+                    & .clear-client {
+                        background: rgba(220, 90, 90, .9);
+    
+                        &:hover {
+                            background: rgba(190, 30, 30, .85);
+                        }
                     }
                 }
-
-                & .add-client {
-                    background: rgba(42, 82, 190, .75);
-
+    
+                & .sale-payment {
+                    padding: 1.2rem 0;
+                    cursor: pointer;
+                    font-size: 1.7rem;
+                    background: rgb(68, 153, 128);
+                    color: rgb(245, 245, 245);
+    
                     &:hover {
-                        background: rgb(42, 82, 190);
-                    }
-                }
-
-                & .clear-client {
-                    background: rgba(220, 90, 90, .9);
-
-                    &:hover {
-                        background: rgba(190, 30, 30, .85);
+                        background: rgb(58, 143, 118);
                     }
                 }
             }
-
-            & .sale-payment {
-                padding: 1.2rem 0;
-                cursor: pointer;
-                font-size: 1.7rem;
-                background: rgb(68, 153, 128);
-                color: rgb(245, 245, 245);
-
-                &:hover {
-                    background: rgb(58, 143, 118);
-                }
-            }
-        }
+        }   
     }
 }
 
