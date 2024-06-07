@@ -1525,7 +1525,7 @@
 
             & .sale-product, & .sale-flavor {
                 max-width: unset;
-                padding: .5rem .4rem;
+                padding: .5rem .3rem;
                 border-radius: .4rem;
 
                 & div {
@@ -1535,7 +1535,7 @@
                     align-items: center;
 
                     & .sale-product-name {
-                        width: 11.6rem;
+                        width: 11.5rem;
                     }
     
                     & .sale-product-amount-price, & .sale-flavor-price {
@@ -1545,6 +1545,10 @@
                             width: 6rem;
                             text-align: right;
                         }
+                    }
+
+                    & .sale-flavor-price span:last-child {
+                        width: unset;
                     }
                 }
             }
