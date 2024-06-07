@@ -67,6 +67,7 @@ const initializeSaleScreen = () => {
         const saleProducts = document.querySelector('.cash-register-products .sale-products')
         shifts[shifts.length - 1].products.forEach(p => saleProducts.append(p.isFlavor ? createSaleFlavor(p) : createSaleProduct(p)))
         document.querySelector('.shopping-cart-total').textContent = shifts[shifts.length - 1].products.length
+        document.querySelector('.cart-mobile span').textContent = shifts[shifts.length - 1].products.length
         activeShiftIndex = shifts.length - 1
         document.querySelector('.cash-register-products .products').style.display = shifts[activeShiftIndex].products.length ? 'block' : ''
     }
@@ -98,7 +99,7 @@ const initializeSaleScreen = () => {
         $(checkoutClientsSelect).select2(select2NoResults('Обрати клієнта'))
     })
 
-    const cartButton = document.querySelector('.sale-header span:last-child')
+    const cartButton = document.querySelector('.sale-header .cart-mobile')
     cart = document.querySelector('.sale-panel-wrapper')
 
     const pressCartButton = display => {
@@ -658,6 +659,7 @@ const closeShift = (updateSaleWindow = true) => {
         setActiveButton(document.querySelectorAll('.shifts button').item(activeShiftIndex))
         shifts[activeShiftIndex].products.forEach(p => saleProductsScreen.append(p.isFlavor ? createSaleFlavor(p) : createSaleProduct(p)))
         document.querySelector('.shopping-cart-total').textContent = shifts[activeShiftIndex].products.length
+        document.querySelector('.cart-mobile span').textContent = shifts[activeShiftIndex].products.length
         document.querySelector('.cash-register-products .products').style.display = shifts[activeShiftIndex].products.length ? 'block' : ''
         updateTotalSum()
         return
@@ -667,6 +669,7 @@ const closeShift = (updateSaleWindow = true) => {
     document.querySelector('.add-shift').style.display = 'none'
     document.querySelector('.products').style.display = 'none'
     updateTotalSum()
+    document.querySelector('.cart-mobile span').textContent = '0'
 }
 
 const createShift = (shift = null, product = null) => {
@@ -727,6 +730,7 @@ const createShift = (shift = null, product = null) => {
         saleProducts.innerHTML = ''
         shifts[activeShiftIndex].products.forEach(p => saleProducts.append(p.isFlavor ? createSaleFlavor(p) : createSaleProduct(p)))
         document.querySelector('.shopping-cart-total').textContent = shifts[activeShiftIndex].products.length
+        document.querySelector('.cart-mobile span').textContent = shifts[activeShiftIndex].products.length
         document.querySelector('.cash-register-products .products').style.display = shifts[activeShiftIndex].products.length ? 'block' : ''
         
         updateTotalSum()
@@ -766,6 +770,7 @@ const createSaleFlavor = flavor => {
         shifts[activeShiftIndex].products.splice(shifts[activeShiftIndex].products.findIndex(f => f.isFlavor && f.id === flavor.id), 1)
         localStorage.setItem('shifts', JSON.stringify(shifts))
         document.querySelector('.shopping-cart-total').textContent = shifts[activeShiftIndex].products.length
+        document.querySelector('.cart-mobile span').textContent = shifts[activeShiftIndex].products.length
         updateTotalSum()
     }
 
@@ -930,6 +935,7 @@ const createSaleProduct = product => {
         shifts[activeShiftIndex].products.splice(shifts[activeShiftIndex].products.findIndex(p => p.id === product.id), 1)
         localStorage.setItem('shifts', JSON.stringify(shifts))
         document.querySelector('.shopping-cart-total').textContent = shifts[activeShiftIndex].products.length
+        document.querySelector('.cart-mobile span').textContent = shifts[activeShiftIndex].products.length
         updateTotalSum()
     }
 
@@ -953,6 +959,52 @@ const createFlavorIcon = () => {
     return flavorIcon
 }
 
+const addSaleFlavor = (saleFlavor, flavor) => {
+    saleFlavor.classList.add('selected')
+    let isNewShift = false
+
+    if (!shifts.length) {
+        isNewShift = true
+
+        createShift(null, {
+            id: flavor.id,
+            name: flavor.name,
+            totalProductCost: flavor.totalProductCost,
+            isFlavor: true
+        })
+    }
+
+    document.querySelector('.empty-cart').style.display = 'none'
+    document.querySelector('.add-shift').style.display = 'flex'
+    document.querySelector('.cash-register-products .products').style.display = 'block'
+
+    const saleProducts = document.querySelector('.cash-register-products .sale-products')
+
+    for (const saleFlavor of saleProducts.querySelectorAll('.sale-flavor')) {
+        if (saleFlavor.querySelector('.sale-flavor-name span:last-child').textContent === flavor.name) {
+            return
+        }
+    }
+
+    saleProducts.append(createSaleFlavor(flavor))
+    const shoppingCartTotal = document.querySelector('.shopping-cart-total')
+    const productsNumber = document.querySelectorAll('.products .sale-product, .products .sale-flavor').length
+    shoppingCartTotal.textContent = productsNumber
+    document.querySelector('.cart-mobile span').textContent = productsNumber
+
+    if (!isNewShift) {
+        shifts[activeShiftIndex].products.push({
+            id: flavor.id,
+            name: flavor.name,
+            totalProductCost: flavor.totalProductCost,
+            isFlavor: true
+        })
+    }
+
+    localStorage.setItem('shifts', JSON.stringify(shifts))
+    updateTotalSum()
+}
+
 const fillSaleFlavors = (saleFlavors, reshow = false) => {
     document.querySelector('.sale-products').innerHTML = ''
 
@@ -971,55 +1023,24 @@ const fillSaleFlavors = (saleFlavors, reshow = false) => {
         flavorPriceBlock.classList = 'sale-flavor-price'
         flavorPriceBlock.append(flavorPrice)
 
+        const addProductIcon = createSpan('add')
+        addProductIcon.classList = 'material-symbols-outlined add-product-icon'
+        addProductIcon.onpointerup = () => addSaleFlavor(saleFlavor, flavor)
+
         const div = document.createElement('div')
-        div.append(flavorNameBlock, flavorPriceBlock)
+        div.append(flavorNameBlock, flavorPriceBlock, addProductIcon)
 
         const saleFlavor = document.createElement('div')
         saleFlavor.classList = 'sale-flavor'
         saleFlavor.append(div)
         saleFlavor.dataset.imageData = flavor.imageData || ''
 
-        const saleProducts = document.querySelector('.cash-register-products .sale-products')
         saleFlavor.onpointerup = () => {
-            saleFlavor.classList.add('selected')
-            let isNewShift = false
-
-            if (!shifts.length) {
-                isNewShift = true
-
-                createShift(null, {
-                    id: flavor.id,
-                    name: flavor.name,
-                    totalProductCost: flavor.totalProductCost,
-                    isFlavor: true
-                })
+            if (window.innerWidth < 700) {
+                return
             }
 
-            document.querySelector('.empty-cart').style.display = 'none'
-            document.querySelector('.add-shift').style.display = 'flex'
-            document.querySelector('.cash-register-products .products').style.display = 'block'
-
-            for (const saleFlavor of saleProducts.querySelectorAll('.sale-flavor')) {
-                if (saleFlavor.querySelector('.sale-flavor-name span:last-child').textContent === flavor.name) {
-                    return
-                }
-            }
-
-            saleProducts.append(createSaleFlavor(flavor))
-            const shoppingCartTotal = document.querySelector('.shopping-cart-total')
-            shoppingCartTotal.textContent = document.querySelectorAll('.products .sale-product, .products .sale-flavor').length
-
-            if (!isNewShift) {
-                shifts[activeShiftIndex].products.push({
-                    id: flavor.id,
-                    name: flavor.name,
-                    totalProductCost: flavor.totalProductCost,
-                    isFlavor: true
-                })
-            }
-
-            localStorage.setItem('shifts', JSON.stringify(shifts))
-            updateTotalSum()
+            addSaleFlavor(saleFlavor, flavor)
         }
 
         document.querySelector('.sale-products').append(saleFlavor)
@@ -1028,6 +1049,76 @@ const fillSaleFlavors = (saleFlavors, reshow = false) => {
     if (reshow) {
         showFlowerImages()
     }
+}
+
+const addSaleProduct = product => {
+    let isNewShift = false
+
+    if (!shifts.length) {
+        isNewShift = true
+
+        createShift(null, {
+            id: product.id,
+            name: product.name,
+            sellingCost: product.sellingCost,
+            shiftAmount: 1,
+            totalProductCost: product.sellingCost
+        })
+    }
+
+    document.querySelector('.empty-cart').style.display = 'none'
+    document.querySelector('.add-shift').style.display = 'flex'
+    document.querySelector('.cash-register-products .products').style.display = 'block'
+
+    const saleProducts = document.querySelector('.cash-register-products .sale-products')
+
+    for (const saleProduct of saleProducts.querySelectorAll('.sale-product')) {
+        if (saleProduct.querySelector('.sale-product-name').textContent === product.name) {
+            const input = saleProduct.querySelector('input')
+
+            if (+input.value === 9999) {
+                return
+            }
+
+            input.value = +input.value + 1
+            const spans = saleProduct.querySelectorAll('.sale-product-cost span')
+            spans.item(3).textContent = input.value
+
+            const totalCost = +input.value * product.sellingCost
+            spans.item(5).textContent = totalCost.toFixed(2)
+
+            for (const shiftProduct of shifts[activeShiftIndex].products) {
+                if (shiftProduct.id === product.id) {
+                    shiftProduct.shiftAmount = +input.value
+                    shiftProduct.totalProductCost = totalCost
+                    break
+                }
+            }
+
+            localStorage.setItem('shifts', JSON.stringify(shifts))
+            updateTotalSum()
+            return
+        }
+    }
+
+    product.changedCost = null
+    saleProducts.append(createSaleProduct(product))
+    const shoppingCartTotal = document.querySelector('.shopping-cart-total')
+    shoppingCartTotal.textContent = document.querySelectorAll('.products .sale-product').length
+    document.querySelector('.cart-mobile span').textContent = document.querySelectorAll('.products .sale-product').length
+
+    if (!isNewShift) {
+        shifts[activeShiftIndex].products.push({
+            id: product.id,
+            name: product.name,
+            sellingCost: product.sellingCost,
+            shiftAmount: 1,
+            totalProductCost: product.sellingCost
+        })
+    }
+
+    localStorage.setItem('shifts', JSON.stringify(shifts))
+    updateTotalSum()
 }
 
 const fillSaleProducts = (saleProducts, reshow = false) => {
@@ -1046,80 +1137,24 @@ const fillSaleProducts = (saleProducts, reshow = false) => {
         productAmountPrice.classList = 'sale-product-amount-price'
         productAmountPrice.append(productAmount, productPrice)
 
+        const addProductIcon = createSpan('add')
+        addProductIcon.classList = 'material-symbols-outlined add-product-icon'
+        addProductIcon.onpointerup = () => addSaleProduct(product)
+
         const div = document.createElement('div')
-        div.append(productName, productAmountPrice)
+        div.append(productName, productAmountPrice, addProductIcon)
 
         const saleProduct = document.createElement('div')
         saleProduct.classList = 'sale-product'
         saleProduct.append(div)
         saleProduct.dataset.imageData = product.imageData || ''
 
-        const saleProducts = document.querySelector('.cash-register-products .sale-products')
         saleProduct.onpointerup = () => {
-            let isNewShift = false
-
-            if (!shifts.length) {
-                isNewShift = true
-
-                createShift(null, {
-                    id: product.id,
-                    name: product.name,
-                    sellingCost: product.sellingCost,
-                    shiftAmount: 1,
-                    totalProductCost: product.sellingCost
-                })
+            if (window.innerWidth < 700) {
+                return
             }
 
-            document.querySelector('.empty-cart').style.display = 'none'
-            document.querySelector('.add-shift').style.display = 'flex'
-            document.querySelector('.cash-register-products .products').style.display = 'block'
-
-            for (const saleProduct of saleProducts.querySelectorAll('.sale-product')) {
-                if (saleProduct.querySelector('.sale-product-name').textContent === product.name) {
-                    const input = saleProduct.querySelector('input')
-
-                    if (+input.value === 9999) {
-                        return
-                    }
-
-                    input.value = +input.value + 1
-                    const spans = saleProduct.querySelectorAll('.sale-product-cost span')
-                    spans.item(3).textContent = input.value
-
-                    const totalCost = +input.value * product.sellingCost
-                    spans.item(5).textContent = totalCost.toFixed(2)
-
-                    for (const shiftProduct of shifts[activeShiftIndex].products) {
-                        if (shiftProduct.id === product.id) {
-                            shiftProduct.shiftAmount = +input.value
-                            shiftProduct.totalProductCost = totalCost
-                            break
-                        }
-                    }
-    
-                    localStorage.setItem('shifts', JSON.stringify(shifts))
-                    updateTotalSum()
-                    return
-                }
-            }
-
-            product.changedCost = null
-            saleProducts.append(createSaleProduct(product))
-            const shoppingCartTotal = document.querySelector('.shopping-cart-total')
-            shoppingCartTotal.textContent = document.querySelectorAll('.products .sale-product').length
-
-            if (!isNewShift) {
-                shifts[activeShiftIndex].products.push({
-                    id: product.id,
-                    name: product.name,
-                    sellingCost: product.sellingCost,
-                    shiftAmount: 1,
-                    totalProductCost: product.sellingCost
-                })
-            }
-
-            localStorage.setItem('shifts', JSON.stringify(shifts))
-            updateTotalSum()
+            addSaleProduct(product)
         }
 
         document.querySelector('.sale-products').append(saleProduct)
@@ -1136,6 +1171,7 @@ const addShift = () => {
     document.querySelector('.cash-register-products .sale-products').innerHTML = ''
     document.querySelector('.cash-register-products .products').style.display = ''
     updateTotalSum()
+    document.querySelector('.cart-mobile span').textContent = '0'
 }
 
 const showFlowerImages = () => {
@@ -1175,6 +1211,7 @@ const searchSaleProductFlavor = e => {
 const removeSaleCart = () => {
     document.querySelector('.cash-register-products .sale-products').innerHTML = ''
     document.querySelector('.shopping-cart-total').textContent = '0'
+    document.querySelector('.cart-mobile span').textContent = '0'
     totalSum.textContent = '0.00'
 
     shifts[activeShiftIndex].products = []
