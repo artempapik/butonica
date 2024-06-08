@@ -1,3 +1,16 @@
+.animate-cart-product {
+    box-shadow: rgba(6, 24, 44, .1) 0 0 0 2px, rgba(6, 24, 44, .3) 0 4px 6px -1px, rgba(255, 255, 255, .1) 0 1px 0 inset;
+    border-radius: .5rem;
+    padding: 0 .5rem;
+    position: fixed;
+    z-index: 2;
+    background: rgb(255, 255, 255, .7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
 .sale-header {
     position: sticky;
     top: 0;
@@ -396,7 +409,7 @@
                                         flex-direction: row;
                                         align-items: center;
                                         gap: .5rem;
-                                        
+
                                         & button {
                                             border: 0;
                                             border-radius: .5rem;
@@ -1446,7 +1459,7 @@
             display: none;
         }
     }
-    
+
     .create-shift-modal .create-shift-modal-content {
         padding: .8rem 1.4rem .4rem 1.4rem;
         gap: 1.7rem;
@@ -1471,9 +1484,7 @@
             padding: .7rem .3rem;
         }
     }
-}
 
-@media only screen and (max-width: 700px) and (orientation: portrait) {
     .create-sale-order-modal-content,
     .create-internet-order-modal-content {
         padding: .4rem;
