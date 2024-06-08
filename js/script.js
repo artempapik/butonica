@@ -563,6 +563,7 @@ const menuItemsContents = {
         </div>
     `,
     sale: `
+        <div class="animate-cart-product"></div>
         <div class="sale-header">
             <span class="material-symbols-outlined" onpointerup="menu.style.display ? pressMenuButton('') : pressMenuButton('flex')">menu</span>
             <h1>Продаж</h1>
