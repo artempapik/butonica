@@ -959,6 +959,37 @@ const createFlavorIcon = () => {
     return flavorIcon
 }
 
+const animateCartProduct = (cartProduct, name) => {
+    const isMobile = window.innerWidth < 700
+
+    const rect = cartProduct.getBoundingClientRect()
+    const animateProduct = document.querySelector('.animate-cart-product')
+    animateProduct.textContent = name
+    animateProduct.style.width = (isMobile ? rect.width / 2 : rect.width) + 'px'
+    animateProduct.style.height = rect.height + 'px'
+    animateProduct.style.display = 'flex'
+
+    animateProduct.style.left = (isMobile ? rect.left + rect.width / 2 : rect.left) + 'px'
+    animateProduct.style.top = rect.top + 'px'
+
+    const duration = 250
+
+    const cart = document.querySelector(isMobile ? '.cart-mobile' : '.sale-panel').getBoundingClientRect()
+    const scaleCart = document.querySelector(isMobile ? '.cart-mobile span:last-child' : '.products-header span')
+
+    animateProduct.animate([
+        { left: rect.left + 'px', top: rect.top + 'px' },
+        { left: cart.left + 'px', top: (isMobile ? cart.top : (cart.top + cart.height) / 2) + 'px' }
+    ], duration)
+
+    setTimeout(() => scaleCart.animate([
+        { transform: 'scale(1)', opacity: '.3' },
+        { transform: 'scale(1.4)', opacity: '1' }
+    ], 150), duration - 100)
+
+    setTimeout(() => animateProduct.style.display = '', duration - 20)
+}
+
 const addSaleFlavor = (saleFlavor, flavor) => {
     saleFlavor.classList.add('selected')
     let isNewShift = false
@@ -986,6 +1017,7 @@ const addSaleFlavor = (saleFlavor, flavor) => {
         }
     }
 
+    animateCartProduct(saleFlavor, flavor.name)
     saleProducts.append(createSaleFlavor(flavor))
     const shoppingCartTotal = document.querySelector('.shopping-cart-total')
     const productsNumber = document.querySelectorAll('.products .sale-product, .products .sale-flavor').length
@@ -1051,7 +1083,8 @@ const fillSaleFlavors = (saleFlavors, reshow = false) => {
     }
 }
 
-const addSaleProduct = product => {
+const addSaleProduct = (saleProduct, product) => {
+    animateCartProduct(saleProduct, product.name)
     let isNewShift = false
 
     if (!shifts.length) {
@@ -1139,7 +1172,7 @@ const fillSaleProducts = (saleProducts, reshow = false) => {
 
         const addProductIcon = createSpan('add')
         addProductIcon.classList = 'material-symbols-outlined add-product-icon'
-        addProductIcon.onpointerup = () => addSaleProduct(product)
+        addProductIcon.onpointerup = () => addSaleProduct(saleProduct, product)
 
         const div = document.createElement('div')
         div.append(productName, productAmountPrice, addProductIcon)
@@ -1154,7 +1187,7 @@ const fillSaleProducts = (saleProducts, reshow = false) => {
                 return
             }
 
-            addSaleProduct(product)
+            addSaleProduct(saleProduct, product)
         }
 
         document.querySelector('.sale-products').append(saleProduct)
