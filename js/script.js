@@ -1481,7 +1481,7 @@ const removeMenus = title => {
 
 const getSubscriptionExpiresText = date => {
     tippy(document.querySelector('.subscription'), {
-        content: `Дата оплати: ${formatDate(date)}`,
+        content: `Дата оплати: ${formatDate(date, false)}`,
         placement: 'top'
     })
 
