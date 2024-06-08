@@ -897,6 +897,13 @@ const createInternetOrderModal = () => {
         internetOrderModal.querySelectorAll('input:not(input[type=radio])').forEach(i => i.value = '')
         internetOrderModal.querySelectorAll('.enter-time-value span:first-child').forEach(t => t.textContent = '--:--')
         internetOrderModal.querySelectorAll('textarea').forEach(t => t.value = '')
+        internetOrderModal.querySelector('input[type=checkbox]').checked = false
+
+        const cashbackBlock = internetOrderModal.querySelector('.cashback')
+        cashbackBlock.style.cssText = 'display:none !important'
+        cashbackBlock.querySelector('.client span:last-child').textContent = ''
+        cashbackBlock.querySelector('.balance span:last-child').textContent = ''
+        cashbackBlock.style.display = ''
 
         saleOrderProducts.style.display = 'flex'
         checkout.style.display = 'flex'
