@@ -1231,11 +1231,17 @@ const searchSaleProductFlavor = e => {
         return
     }
 
-    document.querySelector('.sale-products').innerHTML = ''
+    const saleProductsWindow = document.querySelector('.sale-products')
+    saleProductsWindow.innerHTML = ''
     const searchQuery = e.target.value.trim().toLowerCase()
 
     const filteredSaleFlavors = saleFlavors.filter(f => f.name.toLowerCase().includes(searchQuery))
     const filteredSaleProducts = saleProducts.filter(p => p.name.toLowerCase().includes(searchQuery))
+
+    if (!filteredSaleFlavors.length && !filteredSaleProducts.length) {
+        saleProductsWindow.append(createEmptyDataDiv())
+        return   
+    }
 
     fillSaleFlavors(filteredSaleFlavors, true)
     fillSaleProducts(filteredSaleProducts, true)
