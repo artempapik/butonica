@@ -396,21 +396,18 @@
                                         flex-direction: row;
                                         align-items: center;
                                         gap: .5rem;
-            
+                                        
                                         & button {
                                             border: 0;
-                                            border-radius: 50%;
+                                            border-radius: .5rem;
                                             background: rgba(42, 82, 190, .8);
                                             font-size: 1.2rem;
-                                            padding: .2rem .6rem;
+                                            padding: .2rem 0;
+                                            width: 1.9rem;
                                             
                                             &:hover {
                                                 box-shadow: none;
                                                 background: rgb(42, 82, 190);
-                                            }
-    
-                                            &:first-child {
-                                                padding: .2rem .7rem;
                                             }
                                         }
     
