@@ -1,4 +1,4 @@
-let inventoriesTable, inventoryFilters, inventories, inventoryStocks, inventoriesPages
+let inventoriesTable, inventoryFilters, inventories, inventoryStocks, inventoriesPages, anyInventoryProducts
 
 const getInventories = month => {
     showLoadAnimation()
@@ -37,6 +37,8 @@ const showInventoryInfo = e => {
         inventoryFilters.style.display = 'flex'
         fillInventoryFilters(inventoryFilters, inventoryStocks, 'name')
     })
+
+    get(`Product/ids-names/${loginInfo.companyId}`).then(response => anyInventoryProducts = response)
 
     const inventoryCalendar = new VanillaCalendar('.inventory-table td:nth-child(2)', {
         type: 'month',
@@ -130,6 +132,11 @@ const inventoryModal = document.querySelector('.create-inventory-modal')
 const inventoryInfoModal = document.querySelector('.inventory-info-modal')
 
 const createInventoryModal = () => {
+    if (!anyInventoryProducts.length) {
+        showMessage('error', 'Ви не створили жодного товару')
+        return
+    }
+    
     inventoryModal.querySelector('h1').textContent = 'Створити інвентаризацію'
     inventoryModal.querySelector('input').value = ''
 
