@@ -136,6 +136,11 @@ const calculateSupplyTotalSum = () => {
 }
 
 const createSupplyModal = () => {
+    if (!supplyProducts.length) {
+        showMessage('error', 'Ви не створили жодного товару')
+        return
+    }
+    
     supplyModal.querySelector('h1').textContent = 'Створити поставку'
     supplyModal.querySelectorAll('input').forEach(i => i.value = '')
 
