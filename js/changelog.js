@@ -8,7 +8,7 @@ const CHANGELOG_TYPES = {
 const changelogs = [
     {
         v: '3.2.1',
-        date: '06.07.24',
+        date: '10.07.24',
         changes: [
             {
                 type: CHANGELOG_TYPES.exclamation,
@@ -24,7 +24,7 @@ const changelogs = [
     },
     {
         v: '3.2',
-        date: '01.07.24',
+        date: '05.07.24',
         changes: [
             {
                 type: CHANGELOG_TYPES.fire,
@@ -42,7 +42,7 @@ const changelogs = [
     },
     {
         v: '3.1',
-        date: '25.06.24',
+        date: '29.06.24',
         changes: [
             {
                 type: CHANGELOG_TYPES.fire,
@@ -63,7 +63,7 @@ const changelogs = [
     },
     {
         v: '3.0',
-        date: '17.06.24',
+        date: '21.06.24',
         changes: [
             {
                 type: CHANGELOG_TYPES.fire,
