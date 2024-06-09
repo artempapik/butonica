@@ -1,0 +1,5 @@
+@media only screen and (max-width: 900px) {
+    .completed-order-table td {
+        padding: .3rem .25rem !important;
+    }
+}
