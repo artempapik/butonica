@@ -30,7 +30,7 @@ const createStoreExpenseCategoryColors = (activeIndex = 0) => {
 
         storeExpenseCategoryColor.onpointerup = () => {
             for (const storeExpenseCategoryColor of storeExpenseCategoryColors.querySelectorAll('div')) {
-                storeExpenseCategoryColor.style.outline = '.1rem rgb(150, 150, 150) solid'
+                storeExpenseCategoryColor.style.outline = '.1rem rgb(200, 200, 200) solid'
             }
 
             storeExpenseCategoryColor.style.outline = '.2rem rgb(70, 70, 70) solid'
