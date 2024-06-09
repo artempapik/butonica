@@ -14,12 +14,21 @@ const getStatisticsValues = () => {
         get(`Statistics/general/${loginInfo.companyId}/${year}`).then(response => {
             pieCharts.style.display = ''
             document.querySelector('.bar-charts').style.display = 'none'
-
             const statValues = document.querySelectorAll('.general-statistics-info .stat-value span:first-child')
-            const yearGain = response.reduce((total, current) => total + current.generalNumbers[0], 0)
 
+            if (response.every(s => s.generalNumbers.every(n => !n) && !s.internetOrdersIncomeByLabel.length)) {
+                replaceLoadIcons()
+                pieCharts.style.display = 'none'
+                document.querySelector('.bar-charts:last-child').style.display = 'none'
+                statValues.forEach(s => s.textContent = '–')
+                statValues.item(0).parentNode.classList = 'stat-value gain'
+                showMessage('info', 'Дані за рік відсутні')
+                return
+            }
+
+            const yearGain = response.reduce((total, current) => total + current.generalNumbers[0], 0)
             statValues.item(0).parentNode.classList = `stat-value gain ${getClassForNumber(yearGain)}`
-    
+            
             for (let i = 0; i < statValues.length; i++) {
                 const statValue = (response.reduce((total, current) => total + current.generalNumbers[i], 0)).toFixed(0)
                 statValues.item(i).textContent = i > 1 ? '-' + statValue : statValue
