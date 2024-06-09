@@ -48,6 +48,11 @@ const wasteModal = document.querySelector('.create-waste-modal')
 const wasteInfoModal = document.querySelector('.waste-info-modal')
 
 const createWasteModal = () => {
+    if (!wasteProducts.length) {
+        showMessage('error', 'Ви не створили жодного товару')
+        return
+    }
+
     wasteModal.querySelector('h1').textContent = 'Створити списання'
     wasteModal.querySelector('input').value = ''
 
@@ -64,15 +69,15 @@ const createWasteModal = () => {
     $(wasteStocksSelect).select2(select2NoSearch('Обрати склад'))
     wasteModal.querySelector('textarea').value = ''
 
-    const wasteProducts = wasteModal.querySelector('.waste-products')
-    wasteProducts.style.display = ''
+    const wasteProductsBlock = wasteModal.querySelector('.waste-products')
+    wasteProductsBlock.style.display = ''
 
-    const wasteProductsHeader = wasteProducts.querySelector('div').innerHTML
-    wasteProducts.innerHTML = ''
+    const wasteProductsHeader = wasteProductsBlock.querySelector('div').innerHTML
+    wasteProductsBlock.innerHTML = ''
     const div = document.createElement('div')
     div.classList = 'waste-products-row'
     div.innerHTML = wasteProductsHeader
-    wasteProducts.append(div)
+    wasteProductsBlock.append(div)
 
     wasteModal.querySelector('button:not(.one-more-product)').onpointerup = () => createWaste()
     hideBodyOverflow()
