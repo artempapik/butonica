@@ -60,7 +60,7 @@ const createLabelColors = (activeIndex = 0) => {
 
         labelColor.onpointerup = () => {
             for (const labelColor of labelColors.querySelectorAll('div')) {
-                labelColor.style.outline = '.1rem rgb(150, 150, 150) solid'
+                labelColor.style.outline = '.1rem rgb(200, 200, 200) solid'
             }
 
             labelColor.style.outline = '.2rem rgb(70, 70, 70) solid'
