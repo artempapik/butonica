@@ -662,6 +662,11 @@ header {
                 &:nth-child(7) {
                     color: rgb(255, 69, 0);
 
+                    &:hover {
+                        background: rgb(255, 69, 0);
+                        color: rgb(235, 235, 235);
+                    }
+
                     &.animate:hover {
                         padding-left: 1.7rem;
                         gap: .3rem;
