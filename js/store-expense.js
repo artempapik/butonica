@@ -75,8 +75,7 @@ const storeExpenseInfoModal = document.querySelector('.store-expense-info-modal'
 
 const createStoreExpenseModal = () => {
     storeExpenseModal.querySelector('h1').textContent = 'Створити витрату'
-    storeExpenseModal.querySelector('input').value = ''
-    storeExpenseModal.querySelector('.enter-value').textContent = ''
+    storeExpenseModal.querySelectorAll('input').forEach(i => i.value = '')
     $(storeExpenseModal.querySelector('select')).select2(select2NoSearch('Обрати склад'))
     storeExpenseModal.querySelector('textarea').value = ''
     storeExpenseModal.querySelector('button').onpointerup = () => createStoreExpense()
