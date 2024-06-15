@@ -588,7 +588,6 @@
     <div class="create-stock-modal">
         <div class="animate create-stock-modal-content">
             <div class="modal-content-name">
-                <span class="material-symbols-outlined">history</span>
                 <h1></h1>
                 <span class="close-modal material-symbols-outlined">close</span>
             </div>
@@ -615,7 +614,6 @@
     <div class="create-cash-register-modal">
         <div class="animate create-cash-register-modal-content">
             <div class="modal-content-name">
-                <span class="material-symbols-outlined">history</span>
                 <h1></h1>
                 <span class="close-modal material-symbols-outlined">close</span>
             </div>
@@ -642,7 +640,6 @@
     <div class="create-employee-modal">
         <div class="animate create-employee-modal-content">
             <div class="modal-content-name">
-                <span class="material-symbols-outlined">history</span>
                 <h1></h1>
                 <span class="close-modal material-symbols-outlined">close</span>
             </div>
@@ -680,10 +677,7 @@
                 <select class="employee-stock"></select>
             </div>
             <div class="form active-employee">
-                <h2>
-                    <span class="required">*</span>
-                    <span>Активний</span>
-                </h2>
+                <h2>Активний</h2>
                 <input type="checkbox">
             </div>
             <div class="form">
@@ -693,9 +687,9 @@
                 </h2>
                 <input class="employee-full-name" maxlength="30">
             </div>
-            <div class="form">
-                <h2>Телефон</h2>
-                <input type="tel" class="employee-phone" maxlength="10">
+            <div class="form phone-input">
+                <span class="material-symbols-outlined">call</span>
+                <input type="tel" placeholder="(050) 123-45-67" class="employee-phone" maxlength="15">
             </div>
             <div class="form">
                 <h2>День народження</h2>
@@ -746,7 +740,6 @@
     <div class="create-category-modal">
         <div class="animate create-category-modal-content">
             <div class="modal-content-name">
-                <span class="material-symbols-outlined">history</span>
                 <h1></h1>
                 <span class="close-modal material-symbols-outlined">close</span>
             </div>
@@ -766,7 +759,6 @@
     <div class="create-product-modal">
         <div class="animate create-product-modal-content">
             <div class="modal-content-name">
-                <span class="material-symbols-outlined">history</span>
                 <h1></h1>
                 <span class="close-modal material-symbols-outlined">close</span>
             </div>
@@ -887,7 +879,6 @@
     <div class="create-contractor-modal">
         <div class="animate create-contractor-modal-content">
             <div class="modal-content-name">
-                <span class="material-symbols-outlined">history</span>
                 <h1></h1>
                 <span class="close-modal material-symbols-outlined">close</span>
             </div>
@@ -958,7 +949,7 @@
     <div class="create-supply-modal">
         <div class="animate create-supply-modal-content">
             <div class="modal-content-name">
-                <span class="material-symbols-outlined">history</span>
+                <span class="material-symbols-outlined" onpointerup="restoreSupply()">history</span>
                 <h1></h1>
                 <span class="close-modal material-symbols-outlined">close</span>
             </div>
@@ -1105,7 +1096,6 @@
     <div class="create-inventory-modal">
         <div class="animate create-inventory-modal-content">
             <div class="modal-content-name">
-                <span class="material-symbols-outlined">history</span>
                 <h1></h1>
                 <span class="close-modal material-symbols-outlined">close</span>
             </div>
@@ -1177,7 +1167,6 @@
     <div class="create-client-modal">
         <div class="animate create-client-modal-content">
             <div class="modal-content-name">
-                <span class="material-symbols-outlined">history</span>
                 <h1></h1>
                 <span class="close-modal material-symbols-outlined">close</span>
             </div>
@@ -1298,7 +1287,6 @@
     <div class="create-waste-modal">
         <div class="animate create-waste-modal-content">
             <div class="modal-content-name">
-                <span class="material-symbols-outlined">history</span>
                 <h1></h1>
                 <span class="close-modal material-symbols-outlined">close</span>
             </div>
@@ -1443,7 +1431,7 @@
     <div class="create-sale-order-modal">
         <div class="animate create-sale-order-modal-content">
             <div class="modal-content-name">
-                <span class="material-symbols-outlined">history</span>
+                <span class="material-symbols-outlined" onpointerup="restoreOrder()">history</span>
                 <h1>Оформити замовлення</h1>
                 <span class="close-modal material-symbols-outlined">close</span>
             </div>
@@ -1803,23 +1791,39 @@
                     <div>
                         <h2>
                             <span class="required">*</span>
-                            <span>Ім'я замовника</span>
+                            <span>Замовник</span>
                         </h2>
                         <textarea class="sale-order-customer-name" maxlength="100" rows="3"></textarea>
                     </div>
                     <div>
-                        <h2>Телефон</h2>
-                        <textarea class="sale-order-customer-phone" maxlength="30" rows="3"></textarea>
+                        <div class="phone-input">
+                            <span class="material-symbols-outlined">call</span>
+                            <input type="tel" placeholder="(050) 123-45-67" maxlength="15">
+                            <span class="material-symbols-outlined clipboard">copy_all</span>
+                        </div>
+                        <div class="phone-input">
+                            <span class="material-symbols-outlined">language</span>
+                            <input type="tel" placeholder="Будь-який номер" class="world" maxlength="17">
+                            <span class="material-symbols-outlined clipboard">copy_all</span>
+                        </div>
                     </div>
                 </div>
                 <div class="sale-order-info">
                     <div>
-                        <h2>Ім'я отримувача</h2>
+                        <h2>Отримувач</h2>
                         <textarea class="sale-order-recipient-name" maxlength="30" rows="3"></textarea>
                     </div>
                     <div>
-                        <h2>Телефон</h2>
-                        <textarea class="sale-order-recipient-phone" maxlength="30" rows="3"></textarea>
+                        <div class="phone-input">
+                            <span class="material-symbols-outlined">call</span>
+                            <input type="tel" placeholder="(050) 123-45-67" class="employee-phone" maxlength="15">
+                            <span class="material-symbols-outlined clipboard">copy_all</span>
+                        </div>
+                        <div class="phone-input">
+                            <span class="material-symbols-outlined">language</span>
+                            <input type="tel" placeholder="Будь-який номер" class="world" maxlength="17">
+                            <span class="material-symbols-outlined clipboard">copy_all</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1833,8 +1837,16 @@
                         <textarea class="sale-order-customer-name" maxlength="30" rows="3"></textarea>
                     </div>
                     <div>
-                        <h2>Телефон</h2>
-                        <textarea class="sale-order-customer-phone" maxlength="30" rows="3"></textarea>
+                        <div class="phone-input">
+                            <span class="material-symbols-outlined">call</span>
+                            <input type="tel" placeholder="(050) 123-45-67" maxlength="15">
+                            <span class="material-symbols-outlined clipboard">copy_all</span>
+                        </div>
+                        <div class="phone-input">
+                            <span class="material-symbols-outlined">language</span>
+                            <input type="tel" placeholder="Будь-який номер" class="world" maxlength="17">
+                            <span class="material-symbols-outlined clipboard">copy_all</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2291,7 +2303,6 @@
     <div class="create-flavor-modal">
         <div class="animate create-flavor-modal-content">
             <div class="modal-content-name">
-                <span class="material-symbols-outlined">history</span>
                 <h1></h1>
                 <span class="close-modal material-symbols-outlined">close</span>
             </div>
@@ -2421,7 +2432,6 @@
     <div class="create-store-expense-modal">
         <div class="animate create-store-expense-modal-content">
             <div class="modal-content-name">
-                <span class="material-symbols-outlined">history</span>
                 <h1></h1>
                 <span class="close-modal material-symbols-outlined">close</span>
             </div>
@@ -2490,7 +2500,6 @@
     <div class="create-store-expense-category-modal">
         <div class="animate create-store-expense-category-modal-content">
             <div class="modal-content-name">
-                <span class="material-symbols-outlined">history</span>
                 <h1></h1>
                 <span class="close-modal material-symbols-outlined">close</span>
             </div>
@@ -2517,7 +2526,6 @@
     <div class="create-label-modal">
         <div class="animate create-label-modal-content">
             <div class="modal-content-name">
-                <span class="material-symbols-outlined">history</span>
                 <h1></h1>
                 <span class="close-modal material-symbols-outlined">close</span>
             </div>
@@ -2660,6 +2668,31 @@
     <script>
         $(document).on('focus', '.select2-selection.select2-selection--single', () => $('.select2-search__field').trigger('focus'))
         $('select.select2').on('select2:closing', e => $(e.target).data('select2').$selection.one('focus focusin', e => e.stopPropagation()))
+
+        document.querySelectorAll('input[type=tel]').forEach(i => i.onpaste = () => false)
+        document.querySelectorAll('input[type=tel]:not(.world)').forEach(i => i.oninput = e => typePhoneNumber(e, i))
+        document.querySelectorAll('input[type=tel].world').forEach(i => i.oninput = e => typeWorldPhoneNumber(e, i))
+
+        document.querySelectorAll('.phone-input span:last-child').forEach(p => p.onpointerup = () =>
+            navigator.clipboard.readText().then(text => {
+                if (!text) {
+                    showMessage('info', 'Буфер обміну порожній')
+                    return
+                }
+
+                showMessage('success', 'Вставлено з буферу обміну')
+                const phone = formatTypedNumber(text.replace('+38', ''))
+
+                if (isNaN(phone)) {
+                    showMessage('error', `Невірний формат номеру\n${text}`)
+                    return
+                }
+
+                p.parentNode.querySelector('input').value = phone.length === 10 ?
+                    formatPhoneNumber(phone) :
+                    phone.substring(0, 9).match(/.{1,3}/g).join(' ') + ' ' + phone.substring(9).match(/.{1,2}/g).join(' ')
+            })
+        )
     </script>
 </body>
 </html>
