@@ -967,12 +967,33 @@ const createInternetOrder = saleOrderType => {
     }
 
     const customerName = customerNameElement.value.trim()
-    const customerPhone = customerInfo.querySelector('.sale-order-customer-phone').value.trim()
+
+    const readTwoPhones = (n = 'first') => {
+        const phoneInputs = customerInfo.querySelectorAll(`.sale-order-info:${n}-child .phone-input input`)
+        const [phone1, phone2] = [...phoneInputs].map(i => formatTypedNumber(i.value))
+
+        if (!phone1) {
+            return phone2
+        }
+
+        if (phone1.length !== 10) {
+            return null
+        }
+
+        return phone2 ? phone1 + '\n' + phone2 : phone1
+    }
+
+    const customerPhone = readTwoPhones()
 
     let recipientName, recipientPhone
     if (saleOrderType === 'delivery') {
         recipientName = customerInfo.querySelector('.sale-order-recipient-name').value.trim()
-        recipientPhone = customerInfo.querySelector('.sale-order-recipient-phone').value.trim()
+        recipientPhone = readTwoPhones('last')
+    }
+
+    if (customerPhone === null || recipientPhone === null) {
+        showMessage('error', 'Невірний формат номеру')
+        return
     }
 
     const addressElement = internetOrderModal.querySelector('.sale-order-address')
@@ -1088,6 +1109,8 @@ const createInternetOrder = saleOrderType => {
         paidBonusSum,
         paidSum: +internetOrderModal.querySelector('.cash input').value || 0
     }
+
+    // COME HEREEEEEE RESPONSE
 
     post('Order/internet', order)
         .then(response => {
