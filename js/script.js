@@ -278,7 +278,7 @@ const menuItemsContents = {
             </div>
             <div class="company-buttons">
                 <button onpointerup="copyToClipboard()">
-                    <span class="material-symbols-outlined">content_copy</span>
+                    <span class="material-symbols-outlined">copy_all</span>
                     <span>Скопіювати</span>
                 </button>
                 </button>
@@ -598,7 +598,7 @@ const menuItemsContents = {
                                     <span class="material-symbols-outlined">shopping_cart</span>
                                     <span>Кошик порожній</span>
                                 </div>
-                                <span class="add-shift material-symbols-outlined" onpointerup="addShift()">add_circle</span>
+                                <span class="add-shift material-symbols-outlined" onpointerup="addShift()">add</span>
                             </div>
                             <div class="products">
                                 <div class="products-header">
@@ -1203,6 +1203,69 @@ const formatPhoneNumber = phone => phone?.length === 10 ?
     `(${phone.substring(0, 3)}) ${phone.substring(3, 6)}-${phone.substring(6, 8)}-${phone.substring(8)}` :
     phone
 
+const typePhoneNumber = (e, input) => {
+    if (isNaN(e.data) || e.data === ' ') {
+        input.value = input.value.slice(0, -1)
+        return
+    }
+
+    const backspace = e.inputType === 'deleteContentBackward'
+    const value = input.value
+
+    if (value.length === 1) {
+        input.value = backspace ? '' : '(' + value
+        return
+    }
+
+    if (value.length === 4) {
+        input.value += ') '
+        return
+    }
+
+    if (value.length === 5 && backspace) {
+        input.value = value.slice(0, -2)
+        return
+    }
+
+    if (value.length === 9 || value.length === 12) {
+        if (backspace) {
+            input.value = value.slice(0, -1)
+            return
+        }
+
+        input.value += '-'
+    }
+}
+
+const typeWorldPhoneNumber = (e, input) => {
+    if (e.data === '+' && input.value.length !== 1) {
+        input.value = input.value.slice(0, -1)
+        return
+    }
+
+    if (e.data !== '+' && (isNaN(e.data) || e.data === ' ')) {
+        input.value = input.value.slice(0, -1)
+        return
+    }
+
+    const value = input.value
+
+    if (value.length === 3 || value.length === 7 || value.length === 11 || value.length === 14) {
+        if (e.inputType === 'deleteContentBackward') {
+            input.value = value.slice(0, -1)
+            return
+        }
+
+        input.value += ' '
+    }
+}
+
+const formatTypedNumber = number => number
+    .replace('(', '')
+    .replace(')', '')
+    .replaceAll(' ', '')
+    .replaceAll('-', '')
+
 const padTime = time => time.toString().padStart(2, '0')
 
 const getDate = date => {
@@ -1376,6 +1439,126 @@ document.querySelectorAll('.close-modal').forEach(b => b.onpointerup = () => {
         labelModal
     ]) {
         if (modal.style.display) {
+            if (modal === supplyModal) {
+                const products = []
+
+                for (const tr of supplyModal.querySelectorAll('tr:not(:first-child)')) {
+                    const supplyProduct = tr.querySelector('td:first-child select')
+                    const amount = +tr.querySelector('td:nth-child(2) input').value
+                    const price = +tr.querySelector('td:nth-child(3) input').value
+                    const sum = +tr.querySelector('td:nth-child(4) span').textContent
+
+                    if (supplyProduct.value && amount) {
+                        products.push({
+                            productId: +supplyProduct.selectedOptions[0].dataset.id,
+                            amount,
+                            price,
+                            sum
+                        })
+                    }
+                }
+
+                const associatedCosts = []
+
+                for (const div of supplyModal.querySelectorAll('.associated-costs-data div')) {
+                    const name = div.querySelector('input:first-of-type').value
+                    const cost = +div.querySelector('input:last-of-type').value
+
+                    if (name || cost) {
+                        associatedCosts.push({ name, cost })
+                    }
+                }
+
+                const supply = {
+                    date: supplyModal.querySelector('.supply-date').value,
+                    contractor: supplyModal.querySelector('.supply-contractor').value || null,
+                    stock: supplyModal.querySelector('.supply-stock').value || null,
+                    paidSum: supplyModal.querySelector('.supply-paid-sum').textContent,
+                    payDate: supplyModal.querySelector('.supply-pay-date').value,
+                    comment: supplyModal.querySelector('.supply-comment').value.trim(),
+                    products,
+                    associatedCosts,
+                    updateBuyingCost: supplyModal.querySelector('.update-buying-cost input').checked
+                }
+
+                if (supply.date ||
+                    supply.contractor ||
+                    supply.paidSum ||
+                    supply.payDate ||
+                    supply.comment ||
+                    supply.products.length ||
+                    supply.associatedCosts.length) {
+                    localStorage.setItem('saved-supply', JSON.stringify(supply))
+                    showMessage('info', 'Поставку збережено в чернетки')
+                }
+            }
+
+            if (modal === saleOrderModal) {
+                const isType = i => types.item(i).style.background === 'rgb(40, 40, 40)'
+                const types = saleOrderModal.querySelectorAll('.sale-order-type span')
+                const saleOrderType = isType(0) ? 'delivery' : isType(1) ? 'pickup' : ''
+
+                if (saleOrderType) {
+                    const dateInfo = saleOrderModal.querySelector(`#${saleOrderType}-date`)
+                    const customerInfo = saleOrderModal.querySelector(`#${saleOrderType}-customer-recipient-info`)
+
+                    let recipientName, recipientPhone
+                    if (saleOrderType === 'delivery') {
+                        recipientName = customerInfo.querySelector('.sale-order-recipient-name').value.trim()
+                        recipientPhone = customerInfo.querySelector('.sale-order-recipient-phone').value.trim()
+                    }
+
+                    const timeFromElement = dateInfo.querySelector('.sale-order-date-time-from')
+                    const timeTillElement = dateInfo.querySelector('.sale-order-date-time-till')
+
+                    const timeFrom = timeFromElement.textContent[0] === '-' ? null : timeFromElement.textContent.replaceAll('-', '0')
+                    const timeTill = timeTillElement.textContent[0] === '-' ? null : timeTillElement.textContent.replaceAll('-', '0')
+
+                    const order = {
+                        type: saleOrderType,
+                        labels: [...saleOrderModal.querySelectorAll('.sale-order-label')]
+                            .filter(l => l.style.outlineColor === l.style.background)
+                            .map(l => ({
+                                labelId: +l.dataset.id,
+                                color: l.style.color
+                            })),
+                        date: dateInfo.querySelector('.sale-order-date-date').value,
+                        timeFrom: timeFrom && isValidTime(timeFrom) ? timeFrom : '--:--',
+                        timeTill: timeTill && isValidTime(timeTill) ? timeTill : '--:--',
+                        customerName: customerInfo.querySelector('.sale-order-customer-name').value.trim(),
+                        customerPhone: customerInfo.querySelector('.sale-order-customer-phone').value.trim(),
+                        recipientName,
+                        recipientPhone,
+                        address: saleOrderModal.querySelector('.sale-order-address').value.trim(),
+                        comment: saleOrderModal.querySelector(`#${saleOrderType}-comment textarea`).value.trim(),
+                        payType: saleOrderModal.querySelector('.free-payment input').checked ?
+                            2 :
+                            saleOrderModal.querySelector('.payment-content li').classList.contains('active-payment-type') ? 0 : 1,
+                        paidSum: saleOrderModal.querySelector('.cash input').value
+                    }
+
+                    if (order.labels.length ||
+                        order.date ||
+                        order.timeFrom !== '--:--' ||
+                        order.timeTill !== '--:--' ||
+                        order.customerName ||
+                        order.customerPhone ||
+                        order.recipientName ||
+                        order.recipientPhone ||
+                        order.address ||
+                        order.comment ||
+                        order.paidSum) {
+                        localStorage.setItem('saved-order', JSON.stringify(order))
+                        showMessage('info', 'Замовлення збережено в чернетки')
+                    }
+                }
+            }
+
+            if (modal === internetOrderModal) {
+                const internetOrder = ''
+                localStorage.setItem('saved-internet-order', JSON.stringify(internetOrder))
+            }
+
             setTimeout(() => hideModal(modal), 1)
         }
     }
@@ -1615,7 +1798,7 @@ if (loginInfo) {
 
         if (!subscription) {
             showMessage('error', 'Термін підписки вийшов')
-            localStorage.setItem('login-info', null)
+            localStorage.setItem('login-info', '')
             setTimeout(() => location.reload(), 2500)
         }
 
@@ -1801,7 +1984,8 @@ const showConfirm = (text, f) => {
 }
 
 const logout = () => showConfirm('Вийти з Butonica?', () => {
-    localStorage.setItem('login-info', null)
+    ;['supply', 'order', 'internet-order'].forEach(s => localStorage.setItem('saved-' + s, ''))
+    localStorage.setItem('login-info', '')
     location.reload()
 })
 
@@ -2067,7 +2251,10 @@ const noInternetPhrases = [
     'Butonica сумує від нашого дисконекту'
 ]
 
+let wasHidden
+
 window.onoffline = () => {
+    wasHidden = document.body.style.overflow === 'hidden'
     hideBodyOverflow()
     noInternetModal.querySelector('h1').textContent = noInternetPhrases[getRandom(0, noInternetPhrases.length - 1)] + ' 💔'
     noInternetModal.style.display = 'flex'
@@ -2081,7 +2268,10 @@ const internetPhrases = [
 ]
 
 window.ononline = () => {
-    document.body.style.overflow = ''
+    if (!wasHidden) {
+        document.body.style.overflow = ''
+    }
+    
     noInternetModal.style.display = ''
     showMessage('success', internetPhrases[getRandom(0, internetPhrases.length - 1)] + ' 🔥')
 }
