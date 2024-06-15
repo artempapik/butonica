@@ -1986,8 +1986,7 @@ const showConfirm = (text, f) => {
 
 const logout = () => showConfirm('Вийти з Butonica?', () => {
     ;['supply', 'order', 'internet-order'].forEach(s => localStorage.setItem('saved-' + s, ''))
-    localStorage.setItem('shifts', null)
-    localStorage.setItem('login-info', null)
+    ;['shifts', 'login-info'].forEach(i => localStorage.setItem(i, null))
     location.reload()
 })
 
