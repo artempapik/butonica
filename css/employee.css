@@ -1,8 +1,8 @@
 .create-employee-modal-content {
     gap: 1.2rem;
 
-    & div:first-child {
-        margin-bottom: 1rem;
+    & .modal-content-name {
+        margin-bottom: .3rem;
     }
 
     & .form {
@@ -16,7 +16,11 @@
             flex-direction: row;
             align-items: center;
             gap: .7rem;
-            margin: .5rem 0;
+            margin: .2rem 0;
+        }
+
+        &.phone-input {
+            margin-top: -.8rem;
         }
     }
 }
