@@ -303,6 +303,113 @@ const createSale = () => {
     })
 }
 
+const selectOrderType = b => {
+    imageData = ''
+    saleOrderModal.querySelectorAll('img').forEach(i => i.src = EMPTY_IMAGE_URL)
+
+    const buttons = saleOrderModal.querySelectorAll('.sale-order-type span')
+
+    buttons.forEach(b => {
+        b.style.background = '#fff'
+        b.style.color = '#000'
+    })
+
+    b.style.background = 'rgb(40, 40, 40)'
+    b.style.color = 'rgb(245, 245, 245)'
+
+    const labelsBlock = saleOrderModal.querySelector('.sale-order-labels')
+    labelsBlock.innerHTML = ''
+    labelsBlock.style.display = 'flex'
+    
+    for (const label of labels) {
+        const div = document.createElement('div')
+        div.classList = 'sale-order-label'
+        div.textContent = label.name
+        div.dataset.id = label.id
+
+        const backgroundColor = `rgb(${labelIndexToBackground[label.color]})`
+        div.style.outline = `.15rem ${backgroundColor} solid`
+
+        div.onpointerup = () => {
+            if (div.style.background === backgroundColor) {
+                unselectLabelDiv(div)
+                return
+            }
+
+            labelsBlock.querySelectorAll('.sale-order-label').forEach(unselectLabelDiv)
+            div.style.background = backgroundColor
+            div.style.color = `rgb(${labelIndexToColor[label.color]})`
+            div.style.boxShadow = 'rgba(0, 0, 0, .16) 0 3px 6px, rgba(0, 0, 0, .23) 0 3px 6px'
+        }
+
+        labelsBlock.append(div)
+    }
+
+    const paymentIcons = saleOrderModal.querySelectorAll('.payment-content li span:first-child')
+    paymentIcons.forEach(pi => pi.parentNode.classList.remove('active-payment-type'))
+    paymentIcons.item(0).parentNode.classList.add('active-payment-type')
+
+    paymentIcons.forEach(paymentIcon => paymentIcon.onpointerup = () => {
+        paymentIcons.forEach(pi => pi.parentNode.classList.remove('active-payment-type'))
+        paymentIcon.parentNode.classList.add('active-payment-type')
+    })
+
+    saleOrderModal.querySelectorAll('input:not(input[type=radio])').forEach(i => i.value = '')
+    saleOrderModal.querySelectorAll('.enter-time-value span:first-child').forEach(t => t.textContent = '--:--')
+    saleOrderModal.querySelectorAll('textarea').forEach(t => t.value = '')
+
+    const saleOrderProducts = saleOrderModal.querySelector('.sale-order-products')
+    const checkout = saleOrderModal.querySelector('.sale-order-checkout')
+    const payment = saleOrderModal.querySelector('.payment')
+
+    saleOrderProducts.style.display = 'flex'
+    checkout.style.display = 'flex'
+    payment.style.display = 'flex'
+
+    const fillClientInfo = saleOrderType => {
+        const checkoutClient = checkoutClients.querySelector('select').selectedOptions[0]
+        const cashBackBlock = payment.querySelector('.cashback')
+        const cashBlock = payment.querySelector('.cash')
+
+        if (checkoutClient) {
+            cashBackBlock.style.display = ''
+            cashBlock.querySelector('ul').style.margin = ''
+        } else {
+            cashBackBlock.style.display = 'none'
+            cashBlock.querySelector('ul').style.margin = 'auto'
+            return
+        }
+
+        if (!checkoutClient) {
+            return
+        }
+
+        let customerName = checkoutClient.dataset.name
+
+        const customerInfo = saleOrderModal.querySelector(`#${saleOrderType}-customer-recipient-info`)
+        customerInfo.querySelector('.sale-order-customer-name').value = customerName
+        customerInfo.querySelector('.sale-order-customer-phone').value = checkoutClient.dataset.phone
+
+        const clientInfo = saleOrderModal.querySelector('.cashback')
+        clientInfo.querySelector('.client span:last-child').textContent = checkoutClient.dataset.name
+        clientInfo.querySelector('.balance span:last-child').textContent = (+checkoutClient.dataset.bonusCash).toFixed(2) + ' грн'
+    }
+
+    const deliveryBlocks = saleOrderModal.querySelectorAll('[id^=delivery]')
+    const pickupBlocks = saleOrderModal.querySelectorAll('[id^=pickup]')
+
+    if (b.textContent === 'Доставка') {
+        deliveryBlocks.forEach(b => b.style.display = 'flex')
+        pickupBlocks.forEach(b => b.style.display = 'none')
+        fillClientInfo('delivery')
+        return
+    }
+
+    deliveryBlocks.forEach(b => b.style.display = 'none')
+    pickupBlocks.forEach(b => b.style.display = 'flex')
+    fillClientInfo('pickup')
+}
+
 const createSaleOrderModal = () => {
     if (!shifts || !shifts.length || !shifts[activeShiftIndex].products.length) {
         showMessage('error', 'Ви не додали жодного товару')
@@ -311,6 +418,7 @@ const createSaleOrderModal = () => {
 
     hideBodyOverflow()
 
+    saleOrderModal.querySelector('span').style.visibility = localStorage.getItem('saved-order') ? '' : 'hidden'
     saleOrderModal.querySelector('.free-payment input').checked = false
     saleOrderModal.querySelector('.payment-content').classList.remove('free-payment')
     saleOrderModal.style.display = 'flex'
@@ -337,99 +445,7 @@ const createSaleOrderModal = () => {
     checkout.style.display = 'none'
     payment.style.display = 'none'
     
-    buttons.forEach(b => b.onpointerup = () => {
-        imageData = ''
-        saleOrderModal.querySelectorAll('img').forEach(i => i.src = EMPTY_IMAGE_URL)
-
-        buttons.forEach(b => {
-            b.style.background = '#fff'
-            b.style.color = '#000'
-        })
-
-        b.style.background = 'rgb(40, 40, 40)'
-        b.style.color = 'rgb(245, 245, 245)'
-
-        labelsBlock.innerHTML = ''
-        labelsBlock.style.display = 'flex'
-        
-        for (const label of labels) {
-            const div = document.createElement('div')
-            div.classList = 'sale-order-label'
-            div.textContent = label.name
-            div.dataset.id = label.id
-
-            const backgroundColor = `rgb(${labelIndexToBackground[label.color]})`
-            div.style.outline = `.15rem ${backgroundColor} solid`
-
-            div.onpointerup = () => {
-                if (div.style.background === backgroundColor) {
-                    unselectLabelDiv(div)
-                    return
-                }
-
-                labelsBlock.querySelectorAll('.sale-order-label').forEach(unselectLabelDiv)
-                div.style.background = backgroundColor
-                div.style.color = `rgb(${labelIndexToColor[label.color]})`
-                div.style.boxShadow = 'rgba(0, 0, 0, .16) 0 3px 6px, rgba(0, 0, 0, .23) 0 3px 6px'
-            }
-
-            labelsBlock.append(div)
-        }
-
-        const paymentIcons = saleOrderModal.querySelectorAll('.payment-content li span:first-child')
-        paymentIcons.forEach(paymentIcon => paymentIcon.onpointerup = () => {
-            paymentIcons.forEach(pi => pi.parentNode.classList.remove('active-payment-type'))
-            paymentIcon.parentNode.classList.add('active-payment-type')
-        })
-
-        saleOrderModal.querySelectorAll('input:not(input[type=radio])').forEach(i => i.value = '')
-        saleOrderModal.querySelectorAll('.enter-time-value span:first-child').forEach(t => t.textContent = '--:--')
-        saleOrderModal.querySelectorAll('textarea').forEach(t => t.value = '')
-
-        saleOrderProducts.style.display = 'flex'
-        checkout.style.display = 'flex'
-        payment.style.display = 'flex'
-
-        const fillClientInfo = saleOrderType => {
-            const checkoutClient = checkoutClients.querySelector('select').selectedOptions[0]
-            const cashBackBlock = payment.querySelector('.cashback')
-            const cashBlock = payment.querySelector('.cash')
-
-            if (checkoutClient) {
-                cashBackBlock.style.display = ''
-                cashBlock.querySelector('ul').style.margin = ''
-            } else {
-                cashBackBlock.style.display = 'none'
-                cashBlock.querySelector('ul').style.margin = 'auto'
-                return
-            }
-
-            if (!checkoutClient) {
-                return
-            }
-
-            let customerName = checkoutClient.dataset.name
-
-            const customerInfo = saleOrderModal.querySelector(`#${saleOrderType}-customer-recipient-info`)
-            customerInfo.querySelector('.sale-order-customer-name').value = customerName
-            customerInfo.querySelector('.sale-order-customer-phone').value = checkoutClient.dataset.phone
-
-            const clientInfo = saleOrderModal.querySelector('.cashback')
-            clientInfo.querySelector('.client span:last-child').textContent = checkoutClient.dataset.name
-            clientInfo.querySelector('.balance span:last-child').textContent = (+checkoutClient.dataset.bonusCash).toFixed(2) + ' грн'
-        }
-
-        if (b.textContent === 'Доставка') {
-            deliveryBlocks.forEach(b => b.style.display = 'flex')
-            pickupBlocks.forEach(b => b.style.display = 'none')
-            fillClientInfo('delivery')
-            return
-        }
-
-        deliveryBlocks.forEach(b => b.style.display = 'none')
-        pickupBlocks.forEach(b => b.style.display = 'flex')
-        fillClientInfo('pickup')
-    })
+    buttons.forEach(b => b.onpointerup = () => selectOrderType(b))
 
     const orderProducts = saleOrderModal.querySelector('table')
     orderProducts.innerHTML = orderProducts.querySelector('tbody').innerHTML
@@ -594,7 +610,7 @@ const setActiveButton = button => {
 
     button.style.background = 'rgb(20, 20, 20)'
     button.style.color = 'rgb(240, 240, 240)'
-    button.style.width = '5.7rem'
+    button.style.width = '5.2rem'
 
     if (button.children.length) {
         button.querySelector('span:last-child').style.display = ''
@@ -1369,4 +1385,50 @@ const fillClientsSelect = clients => {
         option.dataset.bonusCash = client.bonusCash
         checkoutClientsSelect.add(option)
     }
+}
+
+const restoreOrder = () => {
+    saleOrderModal.querySelector('span').style.visibility = 'hidden'
+    const savedOrder = JSON.parse(localStorage.getItem('saved-order'))
+
+    const buttons = saleOrderModal.querySelectorAll('.sale-order-type span')
+    selectOrderType(buttons.item(savedOrder.type === 'delivery' ? 0 : 1))
+
+    if (savedOrder.labels.length) {
+        for (const label of saleOrderModal.querySelectorAll('.sale-order-label')) {
+            if (+label.dataset.id === savedOrder.labels[0].labelId) {
+                label.style.background = label.style.outlineColor
+                label.style.color = savedOrder.labels[0].color
+                label.style.boxShadow = 'rgba(0, 0, 0, .16) 0 3px 6px, rgba(0, 0, 0, .23) 0 3px 6px'
+                break
+            }
+        }
+    }
+
+    const dateInfo = saleOrderModal.querySelector(`#${savedOrder.type}-date`)
+    dateInfo.querySelector('.sale-order-date-date').value = savedOrder.date
+    dateInfo.querySelector('.sale-order-date-time-from').textContent = savedOrder.timeFrom
+    dateInfo.querySelector('.sale-order-date-time-till').textContent = savedOrder.timeTill
+
+    const customerInfo = saleOrderModal.querySelector(`#${savedOrder.type}-customer-recipient-info`)
+    customerInfo.querySelector('.sale-order-customer-name').value = savedOrder.customerName
+    customerInfo.querySelector('.sale-order-customer-phone').value = savedOrder.customerPhone
+
+    if (savedOrder.type === 'delivery') {
+        customerInfo.querySelector('.sale-order-recipient-name').value = savedOrder.recipientName
+        customerInfo.querySelector('.sale-order-recipient-phone').value = savedOrder.recipientPhone
+        saleOrderModal.querySelector('.sale-order-address').value = savedOrder.address
+    }
+
+    saleOrderModal.querySelector(`#${savedOrder.type}-comment textarea`).value = savedOrder.comment
+
+    if (savedOrder.payType !== 2) {
+        const paymentIcons = saleOrderModal.querySelectorAll('.payment-content li span:first-child')
+        paymentIcons.forEach(pi => pi.parentNode.classList.remove('active-payment-type'))
+        paymentIcons.item(savedOrder.payType).parentNode.classList.add('active-payment-type')
+        saleOrderModal.querySelector('.cash input').value = savedOrder.paidSum
+    }
+
+    localStorage.setItem('saved-order', '')
+    showMessage('success', 'Замовлення відновлено з чернетки')
 }
