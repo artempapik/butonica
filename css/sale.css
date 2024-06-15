@@ -1547,7 +1547,7 @@
                 padding: .4rem 0;
 
                 & .phone-input {
-                    gap: .4rem !important;
+                    gap: .3rem !important;
 
                     & span {
                         &:first-child {
@@ -1555,13 +1555,14 @@
                         }
 
                         &.clipboard {
+                            font-size: 1.3rem;
                             margin-left: 0;
                         }
                     }
 
                     & input {
-                        padding: .45rem .15rem;
-                        width: 6.6rem;
+                        padding: .45rem .1rem;
+                        width: 7rem;
                         font-size: .8rem;
                     }
                 }
