@@ -177,7 +177,12 @@
         }
 
         & .sale-flavor {
-            outline: .1rem solid rgb(100, 100, 100);
+            outline: .1rem solid rgb(var(--table-hover-color));
+            box-shadow: none;
+
+            &:hover {
+                box-shadow: rgba(var(--table-hover-color), .6) 0 0 0 2.5px;
+            }
 
             &.selected {
                 filter: grayscale();
@@ -193,16 +198,14 @@
         & .sale-panel {
             max-height: 90vh;
             overflow-y: auto;
-            border-top-left-radius: .5rem;
-            border-top-right-radius: .5rem;
             background: #fff;
             display: flex;
             flex-direction: column;
-            box-shadow: rgba(0, 0, 0, .16) 0 1px 4px, rgba(51, 51, 51, .7) 0 0 0 3px;
+            box-shadow: rgba(0, 0, 0, .16) 0 1px 4px, rgba(51, 51, 51, .8) 0 0 0 2.2px;
             margin-bottom: .5rem;
             min-width: 31rem;
             width: 31rem;
-    
+
             & .sale-cash-register {
                 flex: 1;
                 padding: .3rem;
@@ -213,14 +216,14 @@
                     gap: 1rem;
         
                     & button {
-                        padding: .4rem 0;
+                        padding: .35rem 0;
                         border-width: .15rem;
-                        border-radius: .7rem;
+                        border-radius: .45rem;
                         transition: .1s;
                         display: flex;
                         gap: .2rem;
                         justify-content: center;
-    
+                        
                         &:hover {
                             box-shadow: none;
                         }
@@ -275,14 +278,15 @@
     
                     & .shifts {
                         display: flex;
-                        margin: 0 .3rem;
-                        gap: .8rem;
-                        row-gap: .4rem;
+                        margin: 0;
+                        gap: .35rem;
+                        row-gap: .3rem;
                         flex-wrap: wrap;
                         align-items: center;
                         
                         & .shift {
                             padding: .2rem;
+                            padding-left: .15rem;
                             display: flex;
                             justify-content: space-between;
                             border: .1rem rgb(170, 170, 170) solid;
@@ -290,6 +294,7 @@
                             font-family: 'Roboto Mono', monospace;
                             background: rgb(250, 250, 250);
                             color: rgb(20, 20, 20);
+                            gap: .5rem;
     
                             &:hover {
                                 box-shadow: none;
@@ -302,9 +307,10 @@
                             & span:last-child {
                                 font-size: 1.3rem;
                                 align-self: end;
+                                color: rgb(200, 200, 200);
                                 
                                 &:hover {
-                                    color: rgb(255, 0, 0);
+                                    color: rgb(255, 69, 69);
                                 }
                             }
                         }
@@ -313,9 +319,14 @@
                             display: none;
                             align-items: center;
                             cursor: pointer;
+                            background: rgba(42, 82, 190, .8);
+                            color: rgb(240, 240, 240);
+                            border-radius: 30%;
+                            font-size: 1.3rem;
+                            padding: .1rem;
                             
                             &:hover {
-                                color: rgb(0, 119, 204);
+                                transform: scale(1.1);
                             }
                         }
                     }
@@ -331,21 +342,25 @@
                                 gap: .5rem;
         
                                 & .shopping-cart-total {
-                                    font-size: 1.2rem;
+                                    font-size: 1.35rem;
                                     font-weight: bold;
-                                    color: rgb(80, 80, 80);
+                                    color: rgb(50, 50, 50);
                                 }
                             }
-    
+
                             & span {
-                                font-size: 1.5rem;
+                                font-size: 1.6rem;
         
                                 &.remove-cart {
                                     cursor: pointer;
-                                    color: rgba(239, 1, 7, .7);
-        
+                                    background: rgba(239, 1, 7, .65);
+                                    color: rgb(235, 235, 235);
+                                    font-size: 1.3rem;
+                                    padding: .2rem;
+                                    border-radius: 35%;
+
                                     &:hover {
-                                        color: rgb(239, 1, 7);
+                                        background: rgb(239, 1, 7);
                                     }
                                 }
                             }
@@ -455,9 +470,9 @@
                                         }
                                     }
                                 }
-    
+                                
                                 & .sale-flavor {
-                                    outline: .1rem solid rgb(100, 100, 100);
+                                    outline: .1rem solid rgba(var(--table-hover-color), .55);
                                 }
     
                                 & .material-symbols-outlined {
@@ -537,7 +552,7 @@
                         background: rgb(215, 215, 215);
                     }
                 }
-    
+                
                 & .checkout-clients {
                     padding: .8rem .5rem;
                     display: flex;
@@ -552,7 +567,7 @@
                         justify-content: center;
                         gap: .5rem;
                         color: rgb(240, 240, 240);
-                        padding: .2rem 0;
+                        padding: .25rem 0;
                         border-radius: .3rem;
                         width: 7.3rem;
     
@@ -687,11 +702,6 @@
     width: calc(var(--modal-content-width) + 12rem);
     padding: 1rem .8rem;
 
-    & .modal-content-name span:first-child {
-        display: block;
-        visibility: hidden;
-    }
-
     & .sale-order-type {
         display: flex;
         justify-content: center;
@@ -806,17 +816,17 @@
         display: none;
         flex-direction: column;
         gap: 2rem;
-        padding: 1.3rem;
-        outline: .1rem rgb(80, 80, 80) dashed;
+        margin-bottom: .7rem;
 
         & .sale-order-info {
             display: flex;
             justify-content: space-between;
-    
+            align-items: end;
+
             & div {
                 display: flex;
                 flex-direction: column;
-                gap: 1rem;
+                gap: .5rem;
     
                 & h2 {
                     font-weight: normal;
@@ -1071,7 +1081,7 @@
     & .internet-client-info {
         justify-content: space-between;
         align-items: center;
-        margin-bottom: -1.3rem;
+        margin: -1rem 0;
 
         & div {
             display: flex;
@@ -1443,13 +1453,13 @@
                 }
     
                 & .checkout-clients {
-                    padding: .9rem .2rem;
+                    padding: .55rem .2rem;
                     gap: .4rem;
                 }
             }
     
             & .sale-cash-register .cash-register-products .products .sale-products {
-                max-height: 31vh;
+                max-height: 33.5vh;
                 padding: .1rem;
                 gap: .4rem;
             }
@@ -1531,14 +1541,29 @@
         }
 
         & .customer-recipient-info {
-            padding: .6rem;
             gap: 0;
 
             & .sale-order-info {
                 padding: .4rem 0;
 
-                & textarea {
-                    width: 9.1rem;
+                & .phone-input {
+                    gap: .4rem !important;
+
+                    & span {
+                        &:first-child {
+                            display: none;
+                        }
+
+                        &.clipboard {
+                            margin-left: 0;
+                        }
+                    }
+
+                    & input {
+                        padding: .45rem .15rem;
+                        width: 6.6rem;
+                        font-size: .8rem;
+                    }
                 }
             }
         }
