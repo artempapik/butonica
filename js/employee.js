@@ -218,7 +218,7 @@ const createEmployee = () => {
     }
 
     const phone = formatTypedNumber(employeeModal.querySelector('.employee-phone').value)
-    if (phone.length !== 10) {
+    if (phone && phone.length !== 10) {
         showMessage('error', 'Некоректний номер телефону')
         return
     }
