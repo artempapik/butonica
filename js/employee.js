@@ -42,7 +42,7 @@ const createEmployeeModal = () => {
     $(employeeModal.querySelector('.employee-title')).select2(select2NoSearch('Обрати посаду'))
     $(employeeModal.querySelector('.employee-stock')).select2(select2NoSearch('Обрати магазин'))
     employeeModal.querySelector('.active-employee').style.display = 'flex'
-    employeeModal.querySelector('.active-employee input').checked = false
+    employeeModal.querySelector('.active-employee input').checked = true
     employeeModal.querySelector('button').onpointerup = () => createEmployee()
     hideBodyOverflow()
     employeeModal.style.display = 'flex'
@@ -217,6 +217,12 @@ const createEmployee = () => {
         return
     }
 
+    const phone = formatTypedNumber(employeeModal.querySelector('.employee-phone').value)
+    if (phone.length !== 10) {
+        showMessage('error', 'Некоректний номер телефону')
+        return
+    }
+
     const payButton = employeeModal.querySelector('button')
     payButton.disabled = true
 
@@ -231,7 +237,7 @@ const createEmployee = () => {
         stockId: +employeeModal.querySelector('.employee-stock').selectedOptions[0].dataset.id,
         isActive: employeeModal.querySelector('.active-employee input').checked,
         fullName,
-        phone: employeeModal.querySelector('.employee-phone').value.trim(),
+        phone,
         birthDate,
         registrationDate: new Date()
     }
