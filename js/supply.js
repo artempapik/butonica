@@ -140,7 +140,8 @@ const createSupplyModal = () => {
         showMessage('error', 'Ви не створили жодного товару')
         return
     }
-    
+
+    supplyModal.querySelector('span').style.visibility = localStorage.getItem('saved-supply') ? '' : 'hidden'
     supplyModal.querySelector('h1').textContent = 'Створити поставку'
     supplyModal.querySelectorAll('input').forEach(i => i.value = '')
 
@@ -506,12 +507,13 @@ const createSupply = () => {
 const editSupply = () => {
 }
 
-const addAssociatedCost = () => {
+const addAssociatedCost = associatedCost => {
     const associatedCostsBlock = supplyModal.querySelector('.associated-costs div')
 
     const name = document.createElement('input')
     name.placeholder = 'Назва'
     name.maxLength = 25
+    name.value = associatedCost ? associatedCost.name : ''
 
     const price = document.createElement('input')
     price.placeholder = 'Ціна'
@@ -521,7 +523,7 @@ const addAssociatedCost = () => {
         calculateSupplyTotalSum()
     }
 
-    price.value = ''
+    price.value = associatedCost ? associatedCost.cost || '' : ''
     price.type = 'number'
     price.min = '0'
     price.max = '1000'
@@ -639,4 +641,22 @@ const addSupplyProduct = () => {
     supplyProductsTable.append(tr)
     supplyModal.querySelector('table tbody').style.display = 'contents'
     $(supplyProductSelect).select2(select2NoResults('Обрати товар', '12rem'))
+}
+
+const restoreSupply = () => {
+    supplyModal.querySelector('span').style.visibility = 'hidden'
+    const savedSupply = JSON.parse(localStorage.getItem('saved-supply'))
+
+    supplyModal.querySelector('.supply-date').value = savedSupply.date
+    $(supplyModal.querySelector('.supply-contractor')).val(savedSupply.contractor).trigger('change')
+    $(supplyModal.querySelector('.supply-stock')).val(savedSupply.stock).trigger('change')
+    supplyModal.querySelector('.supply-paid-sum').textContent = savedSupply.paidSum
+    supplyModal.querySelector('.supply-pay-date').value = savedSupply.payDate
+    supplyModal.querySelector('.supply-comment').value = savedSupply.comment
+    supplyModal.querySelector('.update-buying-cost input').checked = savedSupply.updateBuyingCost
+    savedSupply.associatedCosts.forEach(ac => addAssociatedCost(ac))
+    // supply.products.forEach(p => addSupplyProduct(p))
+
+    localStorage.setItem('saved-supply', '')
+    showMessage('success', 'Поставку відновлено з чернетки')
 }
