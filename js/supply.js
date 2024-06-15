@@ -585,7 +585,7 @@ const addSupplyProduct = () => {
     productAmount.type = 'number'
     productAmount.min = '0'
     productAmount.max = '1000'
-    productAmount.pattern = '[0-9.]'
+    productAmount.inputMode = 'numeric'
     const productAmountColumn = document.createElement('td')
     productAmountColumn.append(productAmount)
 
@@ -601,7 +601,7 @@ const addSupplyProduct = () => {
     productPrice.type = 'number'
     productPrice.min = '0'
     productPrice.max = '1000'
-    productPrice.pattern = '\\d*'
+    productPrice.inputMode = 'decimal'
     const productPriceColumn = document.createElement('td')
     productPriceColumn.append(productPrice)
 
