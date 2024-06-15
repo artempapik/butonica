@@ -50,7 +50,7 @@ const updateCompanyInfo = () => {
         return
     }
 
-    const payButton = document.querySelector('button')
+    const payButton = document.querySelector('button:last-child')
     payButton.disabled = true
     
     const company = {
