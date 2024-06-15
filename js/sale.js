@@ -880,6 +880,7 @@ const createSaleProduct = product => {
     input.type = 'number'
     input.min = '0'
     input.max = '9999'
+    input.inputMode = 'decimal'
 
     const updateShiftProduct = (id, amount, totalCost, changedCost) => {
         const currentShift = shifts[activeShiftIndex]
