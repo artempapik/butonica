@@ -1151,19 +1151,17 @@ main {
             }
 
             & .fact-day {
-                box-shadow: rgba(0, 0, 0, .24) 0 3px 8px;
+                box-shadow: rgba(204, 85, 0, .8) 0 0 0 2px;
                 background: #fff;
                 padding: .7rem;
-                border-radius: .7rem;
+                border-radius: .5rem;
                 transition: .1s;
-                transform: skewY(1deg);
 
                 & .fact {
                     width: 16.3rem;
                     margin-bottom: .5rem;
                     font-size: 1rem;
                     line-height: 1.2;
-                    transform: skewY(-1deg);
                 }
 
                 & .fact-date {
