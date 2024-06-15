@@ -521,6 +521,8 @@ const addAssociatedCost = associatedCost => {
     price.value = associatedCost ? associatedCost.cost || '' : ''
     price.type = 'number'
     price.inputMode = 'decimal'
+    price.min = '0'
+    price.max = '1000'
 
     const remove = document.createElement('span')
     remove.classList = 'material-symbols-outlined'
