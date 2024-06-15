@@ -517,17 +517,10 @@ const addAssociatedCost = associatedCost => {
 
     const price = document.createElement('input')
     price.placeholder = 'Ціна'
-
-    price.oninput = e => {
-        handlePriceInput(e)
-        calculateSupplyTotalSum()
-    }
-
+    price.oninput = () => calculateSupplyTotalSum()
     price.value = associatedCost ? associatedCost.cost || '' : ''
     price.type = 'number'
-    price.min = '0'
-    price.max = '1000'
-    price.pattern = '\\d*'
+    price.inputMode = 'numeric'
 
     const remove = document.createElement('span')
     remove.classList = 'material-symbols-outlined'
@@ -575,33 +568,21 @@ const addSupplyProduct = () => {
 
     const productAmount = document.createElement('input')
     productAmount.classList = 'product-amount'
-
-    productAmount.oninput = e => {
-        handlePriceInput(e)
-        changeSum()
-    }
-
+    productAmount.oninput = () => changeSum()
     productAmount.value = ''
     productAmount.type = 'number'
-    productAmount.min = '0'
-    productAmount.max = '1000'
     productAmount.inputMode = 'numeric'
+
     const productAmountColumn = document.createElement('td')
     productAmountColumn.append(productAmount)
 
     const productPrice = document.createElement('input')
     productPrice.classList = 'product-price'
-
-    productPrice.oninput = e => {
-        handlePriceInput(e)
-        changeSum()
-    }
-
+    productPrice.oninput = () => changeSum()
     productPrice.value = ''
     productPrice.type = 'number'
-    productPrice.min = '0'
-    productPrice.max = '1000'
     productPrice.inputMode = 'decimal'
+    
     const productPriceColumn = document.createElement('td')
     productPriceColumn.append(productPrice)
 
