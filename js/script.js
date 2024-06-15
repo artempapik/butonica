@@ -1798,7 +1798,7 @@ if (loginInfo) {
 
         if (!subscription) {
             showMessage('error', 'Термін підписки вийшов')
-            localStorage.setItem('login-info', '')
+            localStorage.setItem('login-info', null)
             setTimeout(() => location.reload(), 2500)
         }
 
@@ -1985,7 +1985,7 @@ const showConfirm = (text, f) => {
 
 const logout = () => showConfirm('Вийти з Butonica?', () => {
     ;['supply', 'order', 'internet-order'].forEach(s => localStorage.setItem('saved-' + s, ''))
-    localStorage.setItem('login-info', '')
+    localStorage.setItem('login-info', null)
     location.reload()
 })
 
@@ -2271,7 +2271,7 @@ window.ononline = () => {
     if (!wasHidden) {
         document.body.style.overflow = ''
     }
-    
+
     noInternetModal.style.display = ''
     showMessage('success', internetPhrases[getRandom(0, internetPhrases.length - 1)] + ' 🔥')
 }
