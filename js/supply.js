@@ -527,7 +527,7 @@ const addAssociatedCost = associatedCost => {
     price.type = 'number'
     price.min = '0'
     price.max = '1000'
-    price.pattern = '\d*'
+    price.pattern = '\\d*'
 
     const remove = document.createElement('span')
     remove.classList = 'material-symbols-outlined'
@@ -585,7 +585,7 @@ const addSupplyProduct = () => {
     productAmount.type = 'number'
     productAmount.min = '0'
     productAmount.max = '1000'
-    productAmount.pattern = '\d*'
+    productAmount.pattern = '\\d*'
     const productAmountColumn = document.createElement('td')
     productAmountColumn.append(productAmount)
 
@@ -601,7 +601,7 @@ const addSupplyProduct = () => {
     productPrice.type = 'number'
     productPrice.min = '0'
     productPrice.max = '1000'
-    productPrice.pattern = '\d*'
+    productPrice.pattern = '\\d*'
     const productPriceColumn = document.createElement('td')
     productPriceColumn.append(productPrice)
 
