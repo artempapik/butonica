@@ -520,7 +520,7 @@ const addAssociatedCost = associatedCost => {
     price.oninput = () => calculateSupplyTotalSum()
     price.value = associatedCost ? associatedCost.cost || '' : ''
     price.type = 'number'
-    price.inputMode = 'numeric'
+    price.inputMode = 'decimal'
 
     const remove = document.createElement('span')
     remove.classList = 'material-symbols-outlined'
@@ -582,7 +582,7 @@ const addSupplyProduct = () => {
     productPrice.value = ''
     productPrice.type = 'number'
     productPrice.inputMode = 'decimal'
-    
+
     const productPriceColumn = document.createElement('td')
     productPriceColumn.append(productPrice)
 
