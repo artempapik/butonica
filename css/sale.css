@@ -354,7 +354,7 @@
                                 &.remove-cart {
                                     cursor: pointer;
                                     background: rgba(239, 1, 7, .65);
-                                    color: rgb(235, 235, 235);
+                                    color: rgb(245, 245, 245);
                                     font-size: 1.3rem;
                                     padding: .2rem;
                                     border-radius: 35%;
