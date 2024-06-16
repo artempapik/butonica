@@ -75,8 +75,7 @@ const storeExpenseInfoModal = document.querySelector('.store-expense-info-modal'
 
 const createStoreExpenseModal = () => {
     storeExpenseModal.querySelector('h1').textContent = 'Створити витрату'
-    storeExpenseModal.querySelector('input').value = ''
-    storeExpenseModal.querySelector('.enter-value').textContent = ''
+    storeExpenseModal.querySelectorAll('input').forEach(i => i.value = '')
     $(storeExpenseModal.querySelector('select')).select2(select2NoSearch('Обрати склад'))
     storeExpenseModal.querySelector('textarea').value = ''
     storeExpenseModal.querySelector('button').onpointerup = () => createStoreExpense()
@@ -113,7 +112,7 @@ const createStoreExpenseRow = storeExpense => {
     editAction.onpointerup = () => {
         storeExpenseModal.querySelector('h1').textContent = 'Редагувати витрату'
         storeExpenseModal.querySelector('.store-expense-date').value = getDate(storeExpense.date)
-        storeExpenseModal.querySelector('.store-expense-sum').textContent = storeExpense.sum
+        storeExpenseModal.querySelector('.store-expense-sum').value = storeExpense.sum
         $(storeExpenseModal.querySelector('select')).select2(select2NoSearch())
         storeExpenseModal.querySelector('.store-expense-comment').value = storeExpense.comment
         storeExpenseModal.querySelector('button').onpointerup = () => editStoreExpense(storeExpense.id, tr)
@@ -171,12 +170,12 @@ const createStoreExpense = () => {
 
     const sumElement = storeExpenseModal.querySelector('.store-expense-sum')
 
-    if (!sumElement.textContent) {
+    if (!sumElement.value) {
         showMessage('error', 'Вкажіть суму витрати')
         return
     }
 
-    const sum = +sumElement.textContent
+    const sum = +sumElement.value
 
     const commentElement = storeExpenseModal.querySelector('.store-expense-comment')
     const comment = commentElement.value.trim()
@@ -223,12 +222,12 @@ const editStoreExpense = (id, oldRow) => {
 
     const sumElement = storeExpenseModal.querySelector('.store-expense-sum')
 
-    if (!sumElement.textContent) {
+    if (!sumElement.value) {
         showMessage('error', 'Вкажіть суму витрати')
         return
     }
 
-    const sum = +sumElement.textContent
+    const sum = +sumElement.value
 
     const commentElement = storeExpenseModal.querySelector('.store-expense-comment')
     const comment = commentElement.value.trim()
