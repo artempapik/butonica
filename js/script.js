@@ -651,7 +651,7 @@ const menuItemsContents = {
         <div class="client-bonus">
             <span>Відсоток бонусів:</span>
             <div>
-                <span class="enter-value" onpointerup="createCalculatorValueSpan(this)"></span>
+                <input type="number" inputmode="numeric" min="0" max="100">
                 <span>%</span>
             </div>
             <button>
