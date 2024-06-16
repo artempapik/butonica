@@ -296,6 +296,8 @@ const createSupplyRow = supply => {
             supplyProductAmount.type = 'number'
             supplyProductAmount.min = '0'
             supplyProductAmount.max = '1000'
+            supplyProductAmount.inputMode = 'numeric'
+
             const supplyProductAmountColumn = document.createElement('td')
             supplyProductAmountColumn.append(supplyProductAmount)
             
@@ -305,6 +307,7 @@ const createSupplyRow = supply => {
             supplyProductPrice.type = 'number'
             supplyProductPrice.min = '0'
             supplyProductPrice.max = '1000'
+            supplyProductPrice.inputMode = 'decimal'
             const supplyProductPriceColumn = document.createElement('td')
             supplyProductPriceColumn.append(supplyProductPrice)
 
