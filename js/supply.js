@@ -152,8 +152,6 @@ const createSupplyModal = () => {
         $(supplyStock).val('').select2(select2NoSearch('Обрати склад'))
     }
 
-    supplyModal.querySelector('.supply-paid-sum').textContent = ''
-
     const associatedCosts = supplyModal.querySelector('.associated-costs-data')
     associatedCosts.innerHTML = ''
     totalSumAssociatedCostsSpan.style.display = ''
@@ -252,7 +250,7 @@ const createSupplyRow = supply => {
         supplyModal.querySelector('.supply-date').value = supply.date
         supplyModal.querySelector('.supply-contractor').value = supply.contractor
         supplyModal.querySelector('.supply-stock').value = supply.stock
-        supplyModal.querySelector('.supply-paid-sum').textContent = supply.paidSum
+        supplyModal.querySelector('.supply-paid-sum').value = supply.paidSum
         supplyModal.querySelector('.supply-pay-date').value = supply.payDate
         supplyModal.querySelector('.supply-comment').value = supply.comment
 
@@ -401,7 +399,7 @@ const createSupply = () => {
         return
     }
 
-    const paidSum = +supplyModal.querySelector('.supply-paid-sum').textContent || 0
+    const paidSum = +supplyModal.querySelector('.supply-paid-sum').value || 0
     const payDateElement = supplyModal.querySelector('.supply-pay-date')
 
     if ((paidSum && !payDateElement.value) || (!paidSum && payDateElement.value)) {
@@ -639,7 +637,7 @@ const restoreSupply = () => {
     supplyModal.querySelector('.supply-date').value = savedSupply.date
     $(supplyModal.querySelector('.supply-contractor')).val(savedSupply.contractor).trigger('change')
     $(supplyModal.querySelector('.supply-stock')).val(savedSupply.stock).trigger('change')
-    supplyModal.querySelector('.supply-paid-sum').textContent = savedSupply.paidSum
+    supplyModal.querySelector('.supply-paid-sum').value = savedSupply.paidSum
     supplyModal.querySelector('.supply-pay-date').value = savedSupply.payDate
     supplyModal.querySelector('.supply-comment').value = savedSupply.comment
     supplyModal.querySelector('.update-buying-cost input').checked = savedSupply.updateBuyingCost
