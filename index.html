@@ -2684,7 +2684,7 @@
                 const phone = formatTypedNumber(text.replace('+38', ''))
 
                 if (isNaN(phone)) {
-                    showMessage('error', `Невірний формат номеру\n${text}`)
+                    showMessage('error', `Невірний формат номеру\n${text.length > 20 ? text.substring(0, 20) + '...' : text}`)
                     return
                 }
 
