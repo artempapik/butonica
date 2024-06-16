@@ -12,7 +12,7 @@ const showClientInfo = e => {
 
     get(`Client/${loginInfo.companyId}`).then(response => {
         clients = response.clients
-        document.querySelector('.client-bonus .enter-value').textContent = response.discount
+        document.querySelector('.client-bonus input').value = response.discount
 
         if (response.clients.length) {
             clientsTable.style.display = 'block'
@@ -24,15 +24,10 @@ const showClientInfo = e => {
 }
 
 const setClientDiscount = () => {
-    const discount = document.querySelector('.client-bonus .enter-value').textContent
+    const discount = document.querySelector('.client-bonus input').value
 
     if (discount < 0 || discount > 100) {
         showMessage('error', 'Відсоток бонусів має бути між 0 та 100')
-        return
-    }
-
-    if (discount % 1 !== 0) {
-        showMessage('error', 'Відсоток бонусів має бути цілим числом')
         return
     }
 
