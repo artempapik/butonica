@@ -24,8 +24,8 @@
         align-items: center;
         gap: .2rem;
 
-        & .enter-value {
-            width: 2.8rem;
+        & input {
+            padding: .2rem .3rem;
         }
     }
 
