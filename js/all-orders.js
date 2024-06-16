@@ -498,6 +498,7 @@ const createOrderRow = (order, table) => {
                 amount.min = '0'
                 amount.max = '1000'
                 amount.value = product.amount
+                amount.inputMode = 'decimal'
     
                 const amountTd = document.createElement('td')
                 amountTd.append(amount)
@@ -1150,15 +1151,12 @@ const addInternetOrderProduct = () => {
 
     const productAmount = document.createElement('input')
     productAmount.classList = 'product-amount'
-
-    productAmount.oninput = e => {
-        handlePriceInput(e)
-        changeSum()
-    }
-
+    productAmount.oninput = () => changeSum()
     productAmount.type = 'number'
     productAmount.min = '0'
     productAmount.max = '1000'
+    productAmount.inputMode = 'decimal'
+
     const productAmountColumn = document.createElement('td')
     productAmountColumn.append(productAmount)
 
