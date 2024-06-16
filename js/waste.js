@@ -197,7 +197,7 @@ const createWaste = () => {
     for (const wasteProduct of wasteModal.querySelectorAll('.waste-product')) {
         products.push({
             productId: +wasteProduct.querySelector('select').selectedOptions[0].dataset.id,
-            amount: +wasteProduct.querySelector('.enter-value').textContent || 0
+            amount: +wasteProduct.querySelector('input').value || 0
         })
     }
 
@@ -277,9 +277,11 @@ const addWasteProduct = () => {
 
     wasteProductSelect.value = ''
 
-    const amount = document.createElement('span')
-    amount.classList = 'enter-value'
-    amount.onpointerup = () => createCalculatorValueSpan(amount)
+    const amount = document.createElement('input')
+    amount.type = 'number'
+    amount.min = '0'
+    amount.max = '1000'
+    amount.inputMode = 'numeric'
 
     const div = document.createElement('div')
     div.append(wasteProductSelect, amount)
