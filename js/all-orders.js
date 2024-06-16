@@ -963,7 +963,7 @@ const createInternetOrder = saleOrderType => {
     const customerNameElement = customerInfo.querySelector('.sale-order-customer-name')
 
     if (!customerNameElement.value) {
-        showMessage('error', "Введіть ім'я замовника")
+        showMessage('error', 'Вкажіть замовника')
         return
     }
 
