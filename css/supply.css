@@ -12,8 +12,8 @@
         align-items: center;
 
         & .supply-paid-sum {
-            padding: .4rem;
-            width: 3.5rem;
+            padding: .3rem;
+            width: 5.5rem;
         }
     }
 
