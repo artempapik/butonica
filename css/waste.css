@@ -44,8 +44,8 @@
                 display: flex;
                 gap: 1rem;
 
-                & .enter-value {
-                    width: 4.3rem;
+                & input {
+                    padding: .2rem .3rem;
                 }
             }
 
