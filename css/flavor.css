@@ -121,7 +121,7 @@
     & .flavor-sums {
         flex-direction: row;
         justify-content: space-between;
-        align-items: center;
+        align-items: end;
         gap: 1.5rem;
         margin: .7rem 0;
 
@@ -136,7 +136,7 @@
 
         & .total-sum {
             display: flex;
-            align-items: center;
+            align-items: end;
             gap: .6rem;
             align-self: end;
     
