@@ -197,11 +197,11 @@ const createInventoryModal = () => {
                     totalSumSpan.textContent = totalSum.toFixed(2)
                 }
 
-                productFactAmount.oninput = e => handlePriceInput(e)
                 productFactAmount.value = inventoryProduct.amount
                 productFactAmount.type = 'number'
-                productFactAmount.min = '0'
+                productFactAmount.min = '-10000'
                 productFactAmount.max = '100000'
+                productFactAmount.inputMode = 'decimal'
 
                 const productFactAmountColumn = document.createElement('td')
                 productFactAmountColumn.append(productFactAmount)
