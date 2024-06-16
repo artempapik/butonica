@@ -1467,7 +1467,7 @@ document.querySelectorAll('.close-modal').forEach(b => b.onpointerup = () => {
                     date: supplyModal.querySelector('.supply-date').value,
                     contractor: supplyModal.querySelector('.supply-contractor').value || null,
                     stock: supplyModal.querySelector('.supply-stock').value || null,
-                    paidSum: supplyModal.querySelector('.supply-paid-sum').textContent,
+                    paidSum: supplyModal.querySelector('.supply-paid-sum').value,
                     payDate: supplyModal.querySelector('.supply-pay-date').value,
                     comment: supplyModal.querySelector('.supply-comment').value.trim(),
                     products,
