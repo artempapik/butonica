@@ -1357,12 +1357,6 @@ const formatWeekDate = (date, onlyText = false, includeTime = true) => {
     return td
 }
 
-const handlePriceInput = e => {
-    if (!(e.keyCode === 8 || e.keyCode === 46 || e.charCode >= 48 && e.charCode <= 57)) {
-        e.preventDefault()
-    }
-}
-
 const hideBodyOverflow = () => {
     if (isMobile) {
         const scrollY = window.scrollY
