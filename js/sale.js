@@ -502,7 +502,7 @@ const createSaleOrder = saleOrderType => {
     const customerNameElement = customerInfo.querySelector('.sale-order-customer-name')
 
     if (!customerNameElement.value) {
-        showMessage('error', "Введіть ім'я замовника")
+        showMessage('error', 'Вкажіть замовника')
         return
     }
 
@@ -867,8 +867,7 @@ const createSaleProduct = product => {
     spans.item(5).textContent = product.totalProductCost || product.totalProductCost === 0 ? product.totalProductCost.toFixed(2) : product.sellingCost.toFixed(2)
 
     const input = document.createElement('input')
-    input.oninput = e => {
-        handlePriceInput(e)
+    input.oninput = () => {
         spans.item(3).textContent = input.value
 
         const totalCost = +input.value * (product.changedCost || product.sellingCost)
@@ -881,6 +880,7 @@ const createSaleProduct = product => {
     input.min = '0'
     input.max = '9999'
     input.inputMode = 'decimal'
+    input.lang = 'en'
 
     const updateShiftProduct = (id, amount, totalCost, changedCost) => {
         const currentShift = shifts[activeShiftIndex]
