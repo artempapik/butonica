@@ -1426,13 +1426,13 @@ const restoreOrder = () => {
 
     if (savedOrder.type === 'delivery') {
         customerInfo.querySelector('.sale-order-recipient-name').value = savedOrder.recipientName
+        saleOrderModal.querySelector('.sale-order-address').value = savedOrder.address
+
         if (savedOrder.recipientPhone) {
             const recipientPhoneInputs = customerInfo.querySelectorAll(`.sale-order-info:last-child .phone-input input`)
             const recipientPhones = savedOrder.recipientPhone.split('\n')
             recipientPhoneInputs.forEach((i, index) => i.value = recipientPhones[index] ? formatPastedPhone(recipientPhones[index]) : '')
-        }
-        
-        saleOrderModal.querySelector('.sale-order-address').value = savedOrder.address
+        }        
     }
 
     saleOrderModal.querySelector(`#${savedOrder.type}-comment textarea`).value = savedOrder.comment
