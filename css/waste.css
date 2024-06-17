@@ -32,11 +32,6 @@
                 &:first-child {
                     width: 13rem;
                 }
-
-                &:last-child {
-                    width: 4rem;
-                    text-align: center;
-                }
             }
         }
 
