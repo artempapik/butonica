@@ -1098,9 +1098,6 @@ const createInternetOrder = saleOrderType => {
 
     // COME HEREEEEEE RESPONSE
 
-    console.log(order)
-    return
-
     post('Order/internet', order)
         .then(response => {
             hideModalEnableButton(internetOrderModal, payButton)
