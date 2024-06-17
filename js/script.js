@@ -1266,6 +1266,10 @@ const formatTypedNumber = number => number
     .replaceAll(' ', '')
     .replaceAll('-', '')
 
+const formatPastedPhone = p => p.length === 10 ?
+    formatPhoneNumber(p) :
+    p.substring(0, 9).match(/.{1,3}/g)?.join(' ') + ' ' + (p.length > 9 ? p.substring(9).match(/.{1,2}/g).join(' ') : '')
+
 const padTime = time => time.toString().padStart(2, '0')
 
 const getDate = date => {
@@ -1499,7 +1503,7 @@ document.querySelectorAll('.close-modal').forEach(b => b.onpointerup = () => {
                     let recipientName, recipientPhone
                     if (saleOrderType === 'delivery') {
                         recipientName = customerInfo.querySelector('.sale-order-recipient-name').value.trim()
-                        recipientPhone = customerInfo.querySelector('.sale-order-recipient-phone').value.trim()
+                        recipientPhone = readTwoPhones(customerInfo, 'last', true)
                     }
 
                     const timeFromElement = dateInfo.querySelector('.sale-order-date-time-from')
@@ -1520,7 +1524,7 @@ document.querySelectorAll('.close-modal').forEach(b => b.onpointerup = () => {
                         timeFrom: timeFrom && isValidTime(timeFrom) ? timeFrom : '--:--',
                         timeTill: timeTill && isValidTime(timeTill) ? timeTill : '--:--',
                         customerName: customerInfo.querySelector('.sale-order-customer-name').value.trim(),
-                        customerPhone: customerInfo.querySelector('.sale-order-customer-phone').value.trim(),
+                        customerPhone: readTwoPhones(customerInfo, 'first', true),
                         recipientName,
                         recipientPhone,
                         address: saleOrderModal.querySelector('.sale-order-address').value.trim(),
@@ -2515,6 +2519,25 @@ const unselectLabelDiv = div => {
     div.style.background = ''
     div.style.color = ''
     div.style.boxShadow = ''
+}
+
+const readTwoPhones = (ci, n = 'first', forSaving = false) => {
+    const phoneInputs = ci.querySelectorAll(`.sale-order-info:${n}-child .phone-input input`)
+    const [phone1, phone2] = [...phoneInputs].map(i => formatTypedNumber(i.value))
+
+    if (!phone1) {
+        return forSaving ? '\n' + phone2 : phone2
+    }
+
+    if (phone1.length !== 10) {
+        return null
+    }
+
+    if (forSaving) {
+        return phone2 ? phone1 + '\n' + phone2 : phone1 + '\n'
+    }
+
+    return phone2 ? phone1 + '\n' + phone2 : phone1
 }
 
 // Notification.requestPermission().then(permission => console.log(permission))
