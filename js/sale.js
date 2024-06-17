@@ -507,12 +507,17 @@ const createSaleOrder = saleOrderType => {
     }
 
     const customerName = customerNameElement.value.trim()
-    const customerPhone = customerInfo.querySelector('.sale-order-customer-phone').value.trim()
+    const customerPhone = readTwoPhones(customerInfo)
 
     let recipientName, recipientPhone
     if (saleOrderType === 'delivery') {
         recipientName = customerInfo.querySelector('.sale-order-recipient-name').value.trim()
-        recipientPhone = customerInfo.querySelector('.sale-order-recipient-phone').value.trim()
+        recipientPhone = readTwoPhones(customerInfo, 'last')
+    }
+
+    if (customerPhone === null || recipientPhone === null) {
+        showMessage('error', 'Невірний формат номеру')
+        return
     }
 
     const addressElement = saleOrderModal.querySelector('.sale-order-address')
@@ -1412,11 +1417,21 @@ const restoreOrder = () => {
 
     const customerInfo = saleOrderModal.querySelector(`#${savedOrder.type}-customer-recipient-info`)
     customerInfo.querySelector('.sale-order-customer-name').value = savedOrder.customerName
-    customerInfo.querySelector('.sale-order-customer-phone').value = savedOrder.customerPhone
+
+    if (savedOrder.customerPhone) {
+        const customerPhoneInputs = customerInfo.querySelectorAll(`.sale-order-info:first-child .phone-input input`)
+        const customerPhones = savedOrder.customerPhone.split('\n')
+        customerPhoneInputs.forEach((i, index) => i.value = customerPhones[index] ? formatPastedPhone(customerPhones[index]) : '')
+    }
 
     if (savedOrder.type === 'delivery') {
         customerInfo.querySelector('.sale-order-recipient-name').value = savedOrder.recipientName
-        customerInfo.querySelector('.sale-order-recipient-phone').value = savedOrder.recipientPhone
+        if (savedOrder.recipientPhone) {
+            const recipientPhoneInputs = customerInfo.querySelectorAll(`.sale-order-info:last-child .phone-input input`)
+            const recipientPhones = savedOrder.recipientPhone.split('\n')
+            recipientPhoneInputs.forEach((i, index) => i.value = recipientPhones[index] ? formatPastedPhone(recipientPhones[index]) : '')
+        }
+        
         saleOrderModal.querySelector('.sale-order-address').value = savedOrder.address
     }
 
