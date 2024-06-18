@@ -37,7 +37,7 @@ const createCashRegisterModal = () => {
     cashRegisterModal.querySelector('h1').textContent = 'Створити касу'
     cashRegisterModal.querySelector('input').value = ''
     cashRegisterModal.querySelector('select').value = ''
-    $(cashRegisterModal.querySelector('select')).select2(select2NoSearch('Обрати склад'))
+    $(cashRegisterModal.querySelector('select')).select2(select2NoSearch('Обрати точку'))
     cashRegisterModal.querySelector('button').onpointerup = () => createCashRegister()
     hideBodyOverflow()
     cashRegisterModal.style.display = 'flex'
