@@ -36,7 +36,8 @@ const cashRegisterModal = document.querySelector('.create-cash-register-modal')
 const createCashRegisterModal = () => {
     cashRegisterModal.querySelector('h1').textContent = 'Створити касу'
     cashRegisterModal.querySelector('input').value = ''
-    cashRegisterModal.querySelector('select').selectedIndex = 0
+    cashRegisterModal.querySelector('select').value = ''
+    $(cashRegisterModal.querySelector('select')).select2(select2NoSearch('Обрати склад'))
     cashRegisterModal.querySelector('button').onpointerup = () => createCashRegister()
     hideBodyOverflow()
     cashRegisterModal.style.display = 'flex'
@@ -58,6 +59,14 @@ const createCashRegisterRow = cashRegister => {
         editAction.onpointerup = () => {
             cashRegisterModal.querySelector('h1').textContent = 'Редагувати касу'
             cashRegisterModal.querySelector('input').value = cashRegister.name
+            const select = cashRegisterModal.querySelector('select')
+            for (const option of select.querySelectorAll('option')) {
+                if (+option.dataset.id === cashRegister.stockId) {
+                    select.value = option.value
+                    break
+                }
+            }
+            $(select).select2(select2NoSearch())
             cashRegisterModal.querySelector('button').onpointerup = () => editCashRegister(cashRegister, tr)
             hideBodyOverflow()
             cashRegisterModal.style.display = 'flex'
