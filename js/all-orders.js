@@ -419,8 +419,12 @@ const createOrderRow = (order, table) => {
                 const surcharge = response.surcharge
                 surchargeBlock.querySelector('.surcharge span').textContent = surcharge.toFixed(2)
 
-                const performSurcharge = (isCash, cashText) => get(`Shift/last-any/${loginInfo.companyId}`)
-                    .then(response => {
+                const performSurcharge = (isCash, cashText) => {
+                    showPageLoad()
+
+                    get(`Shift/last-any/${loginInfo.companyId}`).then(response => {
+                        hidePageLoad()
+                        
                         if (!response) {
                             showMessage('error', 'Відкрийте зміну, щоб доплатити')
                             return
@@ -441,7 +445,11 @@ const createOrderRow = (order, table) => {
                                 showMessage('info', `Замовлення ${order.id} доплачено`)
                             }).catch(() => showMessage('error', `${ERROR_TEXT} доплатити`))
                         )
-                    }).catch(() => getErrorMessage('зміну'))
+                    }).catch(() => {
+                        hidePageLoad()
+                        getErrorMessage('зміну')
+                    })
+                }
 
                 surchargeBlock.querySelector('.surcharge-button').onpointerup = () => performSurcharge(true, 'готівкою')
                 surchargeBlock.querySelector('.surcharge-button:last-child').onpointerup = () => performSurcharge(false, 'терміналом')
