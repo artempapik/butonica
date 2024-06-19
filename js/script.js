@@ -1541,9 +1541,9 @@ document.querySelectorAll('.close-modal').forEach(b => b.onpointerup = () => {
                         order.timeFrom !== '--:--' ||
                         order.timeTill !== '--:--' ||
                         order.customerName ||
-                        order.customerPhone ||
+                        order.customerPhone !== '\n' ||
                         order.recipientName ||
-                        order.recipientPhone ||
+                        (order.recipientPhone && order.recipientPhone !== '\n') ||
                         order.address ||
                         order.comment ||
                         order.paidSum) {
