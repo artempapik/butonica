@@ -1385,6 +1385,7 @@ const hideModal = modal => {
         modal !== flavorTemplatesModal &&
         !flavorTemplatesModal.style.display &&
         !shiftInfoModal.style.display &&
+        !orderInfoModal.style.display &&
         !cart?.style.display) {
         document.body.style.overflow = ''
     }
