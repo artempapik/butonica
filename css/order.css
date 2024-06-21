@@ -219,7 +219,7 @@
 
         & .name {
             display: flex;
-            flex: 2;
+            flex: 3;
             font-size: .9rem;
             flex-direction: column;
             justify-content: space-between;
@@ -238,7 +238,7 @@
 
         & .phones {
             display: flex;
-            flex: 1;
+            flex: 2;
             flex-direction: column;
             align-self: center;
             gap: 1rem;
@@ -256,6 +256,19 @@
                         padding-left: 1rem;
                         font-size: .9rem;
                         color: rgb(70, 70, 70);
+                    }
+                }
+
+                & img {
+                    width: 1.5rem;
+                    margin-left: .7rem;
+                    opacity: .85;
+                    filter: drop-shadow(1px 1px 1px rgb(200, 200, 200));
+                    cursor: pointer;
+
+                    &:hover {
+                        opacity: 1;
+                        filter: drop-shadow(1px 1px 1px rgb(170, 170, 170));
                     }
                 }
             }
