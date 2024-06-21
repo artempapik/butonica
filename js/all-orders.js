@@ -349,7 +349,7 @@ const createOrderRow = (order, table) => {
 
                     const socialLink = document.createElement('img')
                     socialLink.src = 'img/viber.png'
-                    socialLink.onpointerup = () => window.open(`viber://add?number=${phone}`)
+                    socialLink.onpointerup = () => window.open(`viber://add?number=38${phone}`)
                     
                     const phoneBlock = document.createElement('div')
                     phoneBlock.classList = 'phone'
