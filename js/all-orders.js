@@ -346,6 +346,10 @@ const createOrderRow = (order, table) => {
                     const phoneLink = document.createElement('a')
                     phoneLink.href = 'tel:' + phone
                     phoneLink.textContent = formatPhoneNumber(phone)
+
+                    const socialLink = document.createElement('img')
+                    socialLink.src = 'img/viber.png'
+                    socialLink.onpointerup = () => window.open(`viber://add?number=${phone}`)
                     
                     const phoneBlock = document.createElement('div')
                     phoneBlock.classList = 'phone'
@@ -358,6 +362,7 @@ const createOrderRow = (order, table) => {
                         phoneBlock.append(phoneSpan)
                     }
 
+                    phoneBlock.append(socialLink)
                     phonesBlock.append(phoneBlock)
                 }
 
@@ -857,7 +862,7 @@ const createInternetOrderModal = () => {
     
     buttons.forEach(b => b.onpointerup = () => {
         imageData = ''
-        internetOrderModal.querySelectorAll('img').forEach(i => i.src = EMPTY_IMAGE_URL)
+        internetOrderModal.querySelectorAll('img:not(.social-buttons img)').forEach(i => i.src = EMPTY_IMAGE_URL)
 
         buttons.forEach(b => {
             b.style.background = '#fff'
