@@ -229,7 +229,7 @@ const createClientRow = client => {
         }).catch(() => showMessage('error', deleteErrorMessage('клієнта'))))
 
     const instagramLink = document.createElement('a')
-    instagramLink.target = '_blank'
+    instagramLink.target = 'blank'
     instagramLink.href = client.instagram ? 'https://www.instagram.com/' + formatInstagramLink(client.instagram) : ''
     instagramLink.textContent = client.instagram ? formatInstagramLink(client.instagram) : ''
 
