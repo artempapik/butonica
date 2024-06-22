@@ -1142,8 +1142,8 @@ const createInternetOrder = saleOrderType => {
         return
     }
 
-    // const payButton = internetOrderModal.querySelector('button:not(.one-more-product)')
-    // payButton.disabled = true
+    const payButton = internetOrderModal.querySelector('button:not(.one-more-product)')
+    payButton.disabled = true
 
     const order = {
         companyId: loginInfo.companyId,
