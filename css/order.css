@@ -569,7 +569,7 @@
             gap: 1.4rem;
 
             & .name, & .phones {
-                align-self: unset;
+                align-self: start;
             }
         }
 
