@@ -347,10 +347,24 @@ const createOrderRow = (order, table) => {
                     phoneLink.href = 'tel:' + phone
                     phoneLink.textContent = formatPhoneNumber(phone)
 
-                    const socialLink = document.createElement('img')
-                    socialLink.src = 'img/viber.png'
-                    socialLink.onpointerup = () => window.open(`viber://add?number=38${phone}`)
-                    
+                    const getSocialIconLink = (name, p) => {
+                        const phone = p.length === 10 ? p + '38' : p
+
+                        if (name.endsWith('\ttgl')) {
+                            return ['telegram', `https://t.me/+${phone}`]
+                        }
+
+                        if (name.endsWith('\tvbl')) {
+                            return ['viber', `viber://add?number=${phone}`]
+                        }
+
+                        if (name.endsWith('\twal')) {
+                            return ['whatsapp', `https://wa.me/${phone}`]
+                        }
+
+                        return ''
+                    }
+
                     const phoneBlock = document.createElement('div')
                     phoneBlock.classList = 'phone'
 
@@ -362,7 +376,15 @@ const createOrderRow = (order, table) => {
                         phoneBlock.append(phoneSpan)
                     }
 
-                    phoneBlock.append(socialLink)
+                    const [icon, link] = getSocialIconLink('артем\tvbl', phone)
+
+                    if (icon) {
+                        const socialLink = document.createElement('img')
+                        socialLink.src = `img/${icon}.png`
+                        socialLink.onpointerup = () => window.open(link)
+                        phoneBlock.append(socialLink)
+                    }
+
                     phonesBlock.append(phoneBlock)
                 }
 
@@ -862,7 +884,7 @@ const createInternetOrderModal = () => {
     
     buttons.forEach(b => b.onpointerup = () => {
         imageData = ''
-        internetOrderModal.querySelectorAll('img:not(.social-buttons img)').forEach(i => i.src = EMPTY_IMAGE_URL)
+        internetOrderModal.querySelectorAll('img:not([class$=social-buttons] img)').forEach(i => i.src = EMPTY_IMAGE_URL)
 
         buttons.forEach(b => {
             b.style.background = '#fff'
@@ -901,6 +923,23 @@ const createInternetOrderModal = () => {
 
             labelsBlock.append(div)
         }
+
+        const handlerSocialButtons = cn => {
+            const socialButons = internetOrderModal.querySelectorAll(`.${cn}-social-buttons img`)
+
+            socialButons.forEach(sb => sb.onpointerup = () => {
+                if (sb.classList.contains('selected')) {
+                    sb.classList.remove('selected')
+                    return
+                }
+
+                socialButons.forEach(sb => sb.classList.remove('selected'))
+                sb.classList.add('selected')
+            })
+        }
+
+        handlerSocialButtons('customer')
+        handlerSocialButtons('recipient')
 
         const paymentIcons = internetOrderModal.querySelectorAll('.payment-content li span:first-child')
         paymentIcons.forEach(paymentIcon => paymentIcon.onpointerup = () => {
@@ -946,6 +985,22 @@ const createInternetOrderModal = () => {
     }
 }
 
+const getSelectedSocialSuffix = (modal, cn) => {
+    const socialButtons = modal.querySelectorAll(`.${cn}-social-buttons img`)
+
+    for (let i = 0; i < 3; i++) {
+        if (socialButtons.item(i).classList.contains('selected')) {
+            return '\t' + {
+                0: 'tgl',
+                1: 'vbl',
+                2: 'wal'
+            }[i]
+        }
+    }
+
+    return ''
+}
+
 const createInternetOrder = saleOrderType => {
     const dateInfo = internetOrderModal.querySelector(`#${saleOrderType}-date`)
     const dateElement = dateInfo.querySelector('.sale-order-date-date')
@@ -980,14 +1035,21 @@ const createInternetOrder = saleOrderType => {
         return
     }
 
-    const customerName = customerNameElement.value.trim()
-
+    let customerName = customerNameElement.value.trim()
     const customerPhone = readTwoPhones(customerInfo)
+
+    if (customerPhone) {
+        customerName += getSelectedSocialSuffix(internetOrderModal, 'customer')
+    }
 
     let recipientName, recipientPhone
     if (saleOrderType === 'delivery') {
         recipientName = customerInfo.querySelector('.sale-order-recipient-name').value.trim()
         recipientPhone = readTwoPhones(customerInfo, 'last')
+
+        if (recipientPhone) {
+            recipientName += getSelectedSocialSuffix(internetOrderModal, 'recipient')
+        }
     }
 
     if (customerPhone === null || recipientPhone === null) {
@@ -1060,7 +1122,7 @@ const createInternetOrder = saleOrderType => {
     }
 
     if (!flavors.length && !products.length) {
-        showMessage('error', 'Додайте товари або букети')
+        showMessage('error', 'Додайте товар або букет')
         return
     }
 
@@ -1077,8 +1139,8 @@ const createInternetOrder = saleOrderType => {
         return
     }
 
-    const payButton = internetOrderModal.querySelector('button:not(.one-more-product)')
-    payButton.disabled = true
+    // const payButton = internetOrderModal.querySelector('button:not(.one-more-product)')
+    // payButton.disabled = true
 
     const order = {
         companyId: loginInfo.companyId,
@@ -1108,6 +1170,9 @@ const createInternetOrder = saleOrderType => {
         paidBonusSum,
         paidSum: +internetOrderModal.querySelector('.cash input').value || 0
     }
+
+    console.log(order)
+    return
 
     // COME HEREEEEEE RESPONSE
 
