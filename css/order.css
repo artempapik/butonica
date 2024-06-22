@@ -248,6 +248,7 @@
                 display: flex;
                 gap: .7rem;
                 align-items: center;
+                align-self: end;
 
                 & span {
                     font-size: 1.3rem;
@@ -261,8 +262,8 @@
 
                 & img {
                     width: 1.5rem;
-                    margin-left: .7rem;
-                    opacity: .85;
+                    margin-left: .4rem;
+                    opacity: .8;
                     filter: drop-shadow(1px 1px 1px rgb(200, 200, 200));
                     cursor: pointer;
 
