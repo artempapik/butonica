@@ -348,7 +348,7 @@ const createOrderRow = (order, table) => {
                     phoneLink.textContent = formatPhoneNumber(phone)
 
                     const getSocialIconLink = (name, p) => {
-                        const phone = p.length === 10 ? p + '38' : p
+                        const phone = p.length === 10 ? '38' + p : p
 
                         if (name.endsWith('\ttgl')) {
                             return ['telegram', `https://t.me/+${phone}`]
