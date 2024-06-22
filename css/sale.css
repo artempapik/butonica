@@ -832,6 +832,24 @@
                     font-weight: normal;
                     font-size: 1.1rem;
                 }
+
+                & [class$=social-buttons] {
+                    flex-direction: row;
+                    align-self: end;
+                    margin-bottom: .3rem;
+
+                    & img {
+                        width: 1.5rem;
+                        cursor: pointer;
+                        filter: grayscale(100%) drop-shadow(1px 1px 1px rgb(200, 200, 200));
+                        opacity: .65;
+
+                        &:hover, &.selected {
+                            filter: grayscale(0) drop-shadow(1px 1px 1px rgb(170, 170, 170));
+                            opacity: .95;
+                        }
+                    }
+                }
             }
         }
     }
