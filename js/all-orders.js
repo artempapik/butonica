@@ -685,8 +685,10 @@ const createOrderRow = (order, table) => {
 }
 
 const createOrderClientTd = customer => {
-    if (customer.includes('@')) {
-        const customerInfo = customer.split('@')
+    const fCustomer = customer.includes('\t') ? customer.slice(0, -4) : customer
+
+    if (fCustomer.includes('@')) {
+        const customerInfo = fCustomer.split('@')
 
         const link = document.createElement('a')
         link.textContent = customerInfo[1]
@@ -696,7 +698,7 @@ const createOrderClientTd = customer => {
         return [customerInfo[0], link]
     }
 
-    return [customer]
+    return [fCustomer]
 }
 
 const fillAllOrdersTable = order => allOrdersTable.append(createOrderRow(order, allOrdersTable))
@@ -926,6 +928,7 @@ const createInternetOrderModal = () => {
 
         const handlerSocialButtons = cn => {
             const socialButons = internetOrderModal.querySelectorAll(`.${cn}-social-buttons img`)
+            socialButons.forEach(sb => sb.classList.remove('selected'))
 
             socialButons.forEach(sb => sb.onpointerup = () => {
                 if (sb.classList.contains('selected')) {
