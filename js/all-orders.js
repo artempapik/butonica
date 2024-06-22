@@ -355,7 +355,7 @@ const createOrderRow = (order, table) => {
                         }
 
                         if (name.endsWith('\tvbl')) {
-                            return ['viber', `viber://add?number=${phone}`]
+                            return ['viber', `viber://chat?number=${phone}`]
                         }
 
                         if (name.endsWith('\twal')) {
