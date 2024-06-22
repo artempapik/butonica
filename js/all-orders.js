@@ -926,23 +926,18 @@ const createInternetOrderModal = () => {
             labelsBlock.append(div)
         }
 
-        const handlerSocialButtons = cn => {
-            const socialButons = internetOrderModal.querySelectorAll(`.${cn}-social-buttons img`)
+        const socialButons = internetOrderModal.querySelectorAll('.social-buttons img')
+        socialButons.forEach(sb => sb.classList.remove('selected'))
+
+        socialButons.forEach(sb => sb.onpointerup = () => {
+            if (sb.classList.contains('selected')) {
+                sb.classList.remove('selected')
+                return
+            }
+
             socialButons.forEach(sb => sb.classList.remove('selected'))
-
-            socialButons.forEach(sb => sb.onpointerup = () => {
-                if (sb.classList.contains('selected')) {
-                    sb.classList.remove('selected')
-                    return
-                }
-
-                socialButons.forEach(sb => sb.classList.remove('selected'))
-                sb.classList.add('selected')
-            })
-        }
-
-        handlerSocialButtons('customer')
-        handlerSocialButtons('recipient')
+            sb.classList.add('selected')
+        })
 
         const paymentIcons = internetOrderModal.querySelectorAll('.payment-content li span:first-child')
         paymentIcons.forEach(paymentIcon => paymentIcon.onpointerup = () => {
