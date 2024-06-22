@@ -1178,8 +1178,20 @@
                 <input class="client-full-name" maxlength="50">
             </div>
             <div class="form">
-                <h2>Телефон(и)</h2>
-                <textarea class="client-phone" maxlength="30" rows="3"></textarea>
+                <div class="phone-input">
+                    <div>
+                        <span class="material-symbols-outlined">call</span>
+                        <input type="tel" placeholder="(050) 123-45-67" maxlength="15">
+                    </div>
+                    <span class="material-symbols-outlined clipboard">copy_all</span>
+                </div>
+                <div class="phone-input">
+                    <div>
+                        <span class="material-symbols-outlined">language</span>
+                        <input type="tel" placeholder="Будь-який номер" class="world" maxlength="17">
+                    </div>
+                    <span class="material-symbols-outlined clipboard">copy_all</span>
+                </div>
             </div>
             <div class="form">
                 <h2>Email</h2>
@@ -1817,9 +1829,14 @@
                             <span class="required">*</span>
                             <span>Замовник</span>
                         </h2>
-                        <textarea class="sale-order-customer-name" maxlength="100" rows="3"></textarea>
+                        <textarea class="sale-order-customer-name" maxlength="95" rows="3"></textarea>
                     </div>
                     <div>
+                        <div class="customer-social-buttons">
+                            <img src="img/telegram.png">
+                            <img src="img/viber.png">
+                            <img src="img/whatsapp.png">
+                        </div>
                         <div class="phone-input">
                             <span class="material-symbols-outlined">call</span>
                             <input type="tel" placeholder="(050) 123-45-67" maxlength="15">
@@ -1835,9 +1852,14 @@
                 <div class="sale-order-info">
                     <div>
                         <h2>Отримувач</h2>
-                        <textarea class="sale-order-recipient-name" maxlength="30" rows="3"></textarea>
+                        <textarea class="sale-order-recipient-name" maxlength="25" rows="3"></textarea>
                     </div>
                     <div>
+                        <div class="recipient-social-buttons">
+                            <img src="img/telegram.png">
+                            <img src="img/viber.png">
+                            <img src="img/whatsapp.png">
+                        </div>
                         <div class="phone-input">
                             <span class="material-symbols-outlined">call</span>
                             <input type="tel" placeholder="(050) 123-45-67" maxlength="15">
