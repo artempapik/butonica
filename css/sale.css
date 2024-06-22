@@ -833,7 +833,7 @@
                     font-size: 1.1rem;
                 }
 
-                & [class$=social-buttons] {
+                & .social-buttons {
                     flex-direction: row;
                     align-self: end;
                     margin-bottom: .3rem;
