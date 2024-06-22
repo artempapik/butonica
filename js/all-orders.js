@@ -983,8 +983,8 @@ const createInternetOrderModal = () => {
     }
 }
 
-const getSelectedSocialSuffix = (modal, cn) => {
-    const socialButtons = modal.querySelectorAll(`.${cn}-social-buttons img`)
+const getSelectedSocialSuffix = modal => {
+    const socialButtons = modal.querySelectorAll('.social-buttons img')
 
     for (let i = 0; i < 3; i++) {
         if (socialButtons.item(i).classList.contains('selected')) {
@@ -1044,10 +1044,6 @@ const createInternetOrder = saleOrderType => {
     if (saleOrderType === 'delivery') {
         recipientName = customerInfo.querySelector('.sale-order-recipient-name').value.trim()
         recipientPhone = readTwoPhones(customerInfo, 'last')
-
-        if (recipientPhone) {
-            recipientName += getSelectedSocialSuffix(internetOrderModal, 'recipient')
-        }
     }
 
     if (customerPhone === null || recipientPhone === null) {
