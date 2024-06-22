@@ -1171,9 +1171,6 @@ const createInternetOrder = saleOrderType => {
         paidSum: +internetOrderModal.querySelector('.cash input').value || 0
     }
 
-    console.log(order)
-    return
-
     // COME HEREEEEEE RESPONSE
 
     post('Order/internet', order)
