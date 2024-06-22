@@ -1573,6 +1573,7 @@ table {
         letter-spacing: .02rem;
         border-color: rgb(150, 150, 150);
         border-radius: .3rem;
+        padding: .3rem .4rem;
 
         &:focus {
             border-color: #000;
