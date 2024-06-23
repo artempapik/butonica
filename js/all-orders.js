@@ -349,7 +349,7 @@ const createOrderRow = (order, table) => {
 
                     const getSocialIconLink = (name, p) => {
                         let phone
-                        
+
                         if (p.length === 10) {
                             phone = '%2b38' + p
                         } else {
@@ -992,13 +992,13 @@ const createInternetOrderModal = () => {
 const getSelectedSocialSuffix = modal => {
     const socialButtons = modal.querySelectorAll('.social-buttons img')
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 6; i++) {
         if (socialButtons.item(i).classList.contains('selected')) {
             return '\t' + {
                 0: 'tgl',
                 1: 'vbl',
                 2: 'wal'
-            }[i]
+            }[i % 3]
         }
     }
 
