@@ -376,7 +376,7 @@ const createOrderRow = (order, table) => {
                         phoneBlock.append(phoneSpan)
                     }
 
-                    const [icon, link] = getSocialIconLink('артем\tvbl', phone)
+                    const [icon, link] = getSocialIconLink(text, phone)
 
                     if (icon) {
                         const socialLink = document.createElement('img')
