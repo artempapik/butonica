@@ -351,7 +351,7 @@ const createOrderRow = (order, table) => {
                         const phone = p.length === 10 ? '%2b38' + p : p
 
                         if (name.endsWith('\ttgl')) {
-                            return ['telegram', `https://t.me/+${phone}`]
+                            return ['telegram', `https://t.me/${phone}`]
                         }
 
                         if (name.endsWith('\tvbl')) {
