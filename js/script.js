@@ -1094,17 +1094,63 @@ const menuItemsContents = {
         </div>
         <div class="bar-charts">
             <div class="month-line-chart">
+                <aside>
+                    <h2>
+                        <img src="img/id-card.png">
+                        <span>Виручка змін за місяць</span>
+                    </h2>
+                    <h3>
+                        <span>середня виручка:</span>
+                        <span>13500 грн</span>
+                    </h3>
+                </aside>
                 <canvas id="income-by-shift-line-chart"></canvas>
             </div>
         </div>
         <div class="bar-charts">
             <div>
+                <aside>
+                    <h2>
+                        <img src="img/gain.png">
+                        <span>Прибуток за рік</span>
+                    </h2>
+                    <h3>
+                        <span>середній прибуток:</span>
+                        <span>22130 грн</span>
+                    </h3>
+                </aside>
                 <canvas id="year-gain-bar-chart"></canvas>
             </div>
             <div>
+                <aside>
+                    <h2>
+                        <img src="img/income-expense.png">
+                        <span>Доходи та витрати за рік</span>
+                    </h2>
+                    <h3 class="income-expense">
+                        <span class="av-ei">
+                            <span>сер. доходи:</span>
+                            <span>55400 грн</span>
+                        </span>
+                        <span class="av-ei">
+                            <span>сер. витрати:</span>
+                            <span>49500 грн</span>
+                        </span>
+                    </h3>
+                </aside>
                 <canvas id="year-income-expense-bar-chart"></canvas>
             </div>
             <div>
+                <aside>
+                    <h2>
+                        <img src="img/profitability.png">
+                        <span>Рентабельність</span>
+                    </h2>
+                    <h3>
+                        <span>середня рентабельність:</span>
+                        <span>122.4%</span>
+                    </h3>
+                </aside>
                 <canvas id="year-profitability-line-chart"></canvas>
             </div>
         </div>
@@ -1872,7 +1918,8 @@ const login = pass => {
         '837432': ['florist_ir', '837432'],
         '971241': ['kvityoneli', '971241'],
         '663167': ['helenchepoywork@gmail.com', '55555'],
-        '468569': ['vasil.cherepanin', 'test11435']
+        '468569': ['vasil.cherepanin', 'test11435'],
+        '286399': ['Floristtulip', 'Floristtulip']
     }
 
     const cred = passToCred[pass] || ''
