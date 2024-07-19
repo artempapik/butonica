@@ -114,14 +114,14 @@
                 flex-direction: column;
                 font-family: 'Roboto Mono', monospace;
                 text-align: center;
-                gap: .3rem;
-                padding: .4rem;
-                border-radius: .3rem;
+                gap: .25rem;
+                padding: .4rem .3rem;
+                border-radius: .15rem;
                 color: #777;
 
                 &.active-order-status {
                     background: rgb(230, 230, 230);
-                    outline: .1rem #aaa solid;
+                    outline: .07rem #aaa solid;
                     color: #000;
                 }
 
@@ -656,7 +656,7 @@
         & .order-status {
             & .statuses .status:hover {
                 background: rgb(230, 230, 230);
-                outline: .1rem #aaa solid;
+                outline: .07rem #aaa solid;
                 color: #000;
             }
             
