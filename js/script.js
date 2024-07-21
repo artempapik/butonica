@@ -1101,7 +1101,7 @@ const menuItemsContents = {
                     </h2>
                     <h3>
                         <span>середня виручка:</span>
-                        <span>13500 грн</span>
+                        <span></span>
                     </h3>
                 </aside>
                 <canvas id="income-by-shift-line-chart"></canvas>
@@ -1116,7 +1116,7 @@ const menuItemsContents = {
                     </h2>
                     <h3>
                         <span>середній прибуток:</span>
-                        <span>22130 грн</span>
+                        <span class="av"></span>
                     </h3>
                 </aside>
                 <canvas id="year-gain-bar-chart"></canvas>
@@ -1130,11 +1130,11 @@ const menuItemsContents = {
                     <h3 class="income-expense">
                         <span class="av-ei">
                             <span>сер. доходи:</span>
-                            <span>55400 грн</span>
+                            <span class="av"></span>
                         </span>
                         <span class="av-ei">
                             <span>сер. витрати:</span>
-                            <span>49500 грн</span>
+                            <span class="av"></span>
                         </span>
                     </h3>
                 </aside>
@@ -1148,7 +1148,7 @@ const menuItemsContents = {
                     </h2>
                     <h3>
                         <span>середня рентабельність:</span>
-                        <span>122.4%</span>
+                        <span class="av-pr"></span>
                     </h3>
                 </aside>
                 <canvas id="year-profitability-line-chart"></canvas>
