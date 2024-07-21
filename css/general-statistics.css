@@ -143,8 +143,8 @@
 
     & div {
         padding: .5rem;
-        border: .2rem solid rgb(100, 100, 100);
-        border-radius: 1.5rem;
+        border: .15rem solid rgb(30, 30, 30);
+        border-radius: .7rem;
         box-shadow: rgba(99, 99, 99, .2) 0 2px 8px 0;
         transition: .1s;
         background: #fff;
@@ -152,6 +152,57 @@
         &.month-line-chart {
             width: fit-content;
             margin: 0 auto;
+        }
+
+        & aside {
+            padding: .7rem 1.2rem 0 1.7rem;
+            box-shadow: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            & h2 {
+                display: flex;
+                align-items: center;
+                gap: .8rem;
+
+                & img {
+                    width: 1.8rem;
+                }
+            }
+
+            & h3 {
+                display: flex;
+                align-items: center;
+                font-size: .9rem;
+                padding: .25rem .6rem;
+                border-radius: .4rem;
+                gap: .5rem;
+                background: rgb(30, 30, 30);
+                color: rgb(240, 240, 240);
+
+                &.income-expense {
+                    background: unset;
+                    color: unset;
+                    gap: 1rem;
+
+                    & span.av-ei {
+                        font-size: .85rem;
+                        background: rgb(30, 30, 30);
+                        color: rgb(240, 240, 240);
+                        padding: .25rem .5rem;
+                        border-radius: .4rem;
+
+                        & span:first-child {
+                            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+                        }
+                    }
+                }
+
+                & span:last-child {
+                    font-family: 'Roboto Mono', monospace;
+                }
+            }
         }
     }
 }
