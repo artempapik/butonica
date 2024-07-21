@@ -190,20 +190,21 @@
         & .payed-block {
             display: flex;
             align-items: center;
-            gap: .7rem;
-            outline: .1rem rgb(180, 180, 180) solid;
-            border-radius: .7rem;
+            gap: .5rem;
+            outline: .07rem rgb(120, 120, 120) solid;
+            border-radius: .6rem;
             padding: .4rem .6rem;
 
-            & img {
-                width: 2rem;
-                opacity: .8;
-                filter: dow(1px 1px 1px rgb(200, 200, 200));
-            }
-
             & span {
-                font-family: 'Roboto Mono', monospace;
-                font-size: .9rem;
+                &:first-child {
+                    font-size: 2rem;
+                    color: rgba(48, 133, 108, .85);
+                }
+
+                &:last-child {
+                    font-family: 'Roboto Mono', monospace;
+                    font-size: .9rem;
+                }
             }
         }
     }
@@ -663,10 +664,6 @@
             & .surcharge-block .surcharge-buttons .surcharge-button:hover {
                 background: rgba(204, 85, 0, .45);
                 color: #000;
-            }
-
-            & .payed-block:hover {
-                outline-color: rgb(130, 130, 130);
             }
         }
 
