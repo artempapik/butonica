@@ -195,6 +195,11 @@
             border-radius: .6rem;
             padding: .4rem .6rem;
 
+            &:hover {
+                background: rgb(240, 240, 240);
+                outline-color: rgb(50, 50, 50);
+            }
+
             & span {
                 &:first-child {
                     padding: .2rem;
@@ -667,11 +672,6 @@
             & .surcharge-block .surcharge-buttons .surcharge-button:hover {
                 background: rgba(204, 85, 0, .45);
                 color: #000;
-            }
-
-            & .payed-block:hover {
-                background: rgb(240, 240, 240);
-                outline-width: .1rem;
             }
         }
 
