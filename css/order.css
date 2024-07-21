@@ -668,6 +668,11 @@
                 background: rgba(204, 85, 0, .45);
                 color: #000;
             }
+
+            & .payed-block:hover {
+                background: rgb(240, 240, 240);
+                outline-width: .1rem;
+            }
         }
 
         & .order-products {
