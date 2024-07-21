@@ -142,7 +142,7 @@ const createSupplyModal = () => {
     }
 
     supplyModal.querySelector('span').style.visibility = localStorage.getItem('saved-supply') ? '' : 'hidden'
-    supplyModal.querySelector('h1').textContent = 'Створити поставку'
+    supplyModal.querySelector('h1').textContent = 'Оформити поставку'
     supplyModal.querySelectorAll('input').forEach(i => i.value = '')
 
     $(supplyModal.querySelector('.supply-contractor')).val('').select2(select2NoResults('Обрати постачальника'))
