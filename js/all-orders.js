@@ -1,4 +1,4 @@
-let allOrdersTable, orderProducts, internetProductsOptions, internetProductsOptionsArray, internetFlavorsOptions, internetFlavorsOptionsArray, allOrdersPages, allOrderIntervalId, orderTippy
+let allOrdersTable, orderProducts, internetProductsOptions, internetProductsOptionsArray, internetFlavorsOptions, internetFlavorsOptionsArray, allOrdersPages, allOrderIntervalId, orderTippy, surchargeTippy
 
 const orderInfoModal = document.querySelector('.order-info-modal')
 const internetOrderModal = document.querySelector('.create-internet-order-modal')
@@ -491,6 +491,15 @@ const createOrderRow = (order, table) => {
             } else {
                 surchargeBlock.style.display = 'none'
                 payedBlock.style.display = ''
+
+                if (surchargeTippy) {
+                    surchargeTippy.destroy()
+                }
+    
+                surchargeTippy = tippy(payedBlock, {
+                    content: 'оплачено нещодавно',
+                    // placement: 'bottom'
+                })
             }
             
             fillClient('customer', order.customer)
@@ -1141,7 +1150,7 @@ const createInternetOrder = saleOrderType => {
 
     const payButton = internetOrderModal.querySelector('button:not(.one-more-product)')
     payButton.disabled = true
-
+    
     const order = {
         companyId: loginInfo.companyId,
         employeeId: loginInfo.employeeId,
