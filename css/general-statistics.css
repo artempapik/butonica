@@ -34,8 +34,8 @@
 
             & .stat-switcher {
                 display: flex;
-                border: .1rem rgb(30, 30, 30) solid;
-                border-radius: .2rem;
+                border: .07rem rgb(30, 30, 30) solid;
+                border-radius: .15rem;
 
                 & div {
                     width: 5.3rem;
@@ -182,6 +182,7 @@
                 color: rgb(240, 240, 240);
 
                 &.income-expense {
+                    padding: 0;
                     background: unset;
                     color: unset;
                     gap: 1rem;
