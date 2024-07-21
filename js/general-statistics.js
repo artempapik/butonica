@@ -26,11 +26,28 @@ const getStatisticsValues = () => {
                 return
             }
 
+            let gainSum = 0, incomeSum = 0, expenseSum = 0, avMonths = 0
+
+            for (const month of response) {
+                if (month.generalNumbers.every(n => !n) && !month.internetOrdersIncomeByLabel.length) {
+                    continue
+                }
+
+                avMonths++
+                gainSum += month.generalNumbers[0]
+                incomeSum += month.generalNumbers[1]
+                expenseSum += month.generalNumbers[4] + month.generalNumbers[5]
+            }
+
+            const avValues = [gainSum, incomeSum, expenseSum]
+            document.querySelectorAll('.av').forEach((s, i) => s.textContent = Math.trunc(avValues[i] / avMonths) + ' грн')
+            document.querySelector('.av-pr').textContent = (incomeSum / expenseSum * 100).toFixed(1) + '%'
+
             const yearGain = response.reduce((total, current) => total + current.generalNumbers[0], 0)
             statValues.item(0).parentNode.classList = `stat-value gain ${getClassForNumber(yearGain)}`
             
             for (let i = 0; i < statValues.length; i++) {
-                const statValue = (response.reduce((total, current) => total + current.generalNumbers[i], 0)).toFixed(0)
+                const statValue = Math.trunc(response.reduce((total, current) => total + current.generalNumbers[i], 0))
                 statValues.item(i).textContent = i > 1 ? '-' + statValue : statValue
             }
             
@@ -127,6 +144,9 @@ const getStatisticsValues = () => {
         const statValues = document.querySelectorAll('.general-statistics-info .stat-value span:first-child')
 
         if (response.generalNumbers.some(n => n)) {
+            const averageIncome = response.shiftsIncome.reduce((total, current) => total + current.sum, 0) / response.shiftsIncome.length
+            document.querySelector('aside h3 span:last-child').textContent = Math.trunc(averageIncome) + ' грн'
+
             pieCharts.style.display = ''
             document.querySelector('.bar-charts').style.display = ''
             const generalNumbers = response.generalNumbers
@@ -139,7 +159,7 @@ const getStatisticsValues = () => {
                     continue
                 }
                 
-                const statValue = (+generalNumbers[i]).toFixed(0)
+                const statValue = Math.trunc(+generalNumbers[i])
                 statValues.item(i).textContent = i > 1 ? '-' + statValue : statValue
             }
 
@@ -223,7 +243,7 @@ const getChartDatasets = (size, isLine = false) => {
     return datasets
 }
 
-const getBarChart = (selector, title, datasetsAmount = 1) => new Chart(document.querySelector(`#${selector}-bar-chart`), {
+const getBarChart = (selector, datasetsAmount = 1) => new Chart(document.querySelector(`#${selector}-bar-chart`), {
     type: 'bar',
     data: {
         labels: ['січень', 'лютий', 'березень', 'квітень', 'травень', 'червень', 'липень', 'серпень', 'вересень', 'жовтень', 'листопад', 'грудень'],
@@ -241,16 +261,6 @@ const getBarChart = (selector, title, datasetsAmount = 1) => new Chart(document.
             }
         },
         plugins: {
-            title: {
-                display: true,
-                text: title,
-                font: {
-                    family: "'Roboto', 'Helvetica', 'Roboto Mono', monospace"
-                },
-                padding: {
-                    bottom: 20
-                }
-            },
             tooltip: {
                 enabled: false
             },
@@ -265,7 +275,7 @@ const getBarChart = (selector, title, datasetsAmount = 1) => new Chart(document.
                     weight: 'bold',
                     size: 12
                 },
-                formatter: value => value ? value.toFixed(0) : ''
+                formatter: value => value ? Math.trunc(value) : ''
             }
         },
         scales: {
@@ -280,7 +290,7 @@ const getBarChart = (selector, title, datasetsAmount = 1) => new Chart(document.
     }
 })
 
-const getLineChart = (selector, title, datasetsAmount = 1) => new Chart(document.querySelector(`#${selector}-line-chart`), {
+const getLineChart = (selector, datasetsAmount = 1) => new Chart(document.querySelector(`#${selector}-line-chart`), {
     type: 'line',
     data: {
         labels: ['січень', 'лютий', 'березень', 'квітень', 'травень', 'червень', 'липень', 'серпень', 'вересень', 'жовтень', 'листопад', 'грудень'],
@@ -304,16 +314,6 @@ const getLineChart = (selector, title, datasetsAmount = 1) => new Chart(document
             }
         },
         plugins: {
-            title: {
-                display: true,
-                text: title,
-                font: {
-                    family: "Roboto, Helvetica, 'Roboto Mono', monospace"
-                },
-                padding: {
-                    bottom: 25
-                }
-            },
             tooltip: {
                 enabled: false
             },
@@ -390,7 +390,7 @@ const getPieChart = (selector, title, size) => new Chart(document.querySelector(
                     weight: 'bold',
                     size: getPieChartFontSize(39, 26, 16, 13)
                 },
-                formatter: value => value ? value.toFixed(0) : '',
+                formatter: value => value ? Math.trunc(value) : '',
                 color: context => context.dataIndex ? 'rgb(250, 250, 250)' : 'rgb(50, 50, 50)'
             }
         },
@@ -441,19 +441,19 @@ const showGeneralStatisticsInfo = e => {
     incomePieChart = getPieChart('income', 'Розподіл доходів по Продажам', 2)
     expensesIncomePieChart = getPieChart('expenses-income', 'Відношення доходів до витрат', 2)
 
-    incomeByShiftLineChart = getLineChart('income-by-shift', '')
+    incomeByShiftLineChart = getLineChart('income-by-shift')
     incomeByShiftLineChart.options.layout.padding = { top: 10, right: 20 }
     incomeByShiftLineChart.options.plugins.datalabels.formatter = value => value || null
     incomeByShiftLineChart.update()
 
-    yearGainBarChart = getBarChart('year-gain', '')
+    yearGainBarChart = getBarChart('year-gain')
     yearGainBarChart.options.plugins.datalabels.color = context => context.dataset.data[context.dataIndex] < 1 ? 'rgb(240, 0, 0)' : 'rgb(34, 139, 34)'
 
-    yearIncomeExpenseBarChart = getBarChart('year-income-expense', '', 2)
+    yearIncomeExpenseBarChart = getBarChart('year-income-expense', 2)
     yearIncomeExpenseBarChart.options.plugins.datalabels.font.size = 11
     yearIncomeExpenseBarChart.options.plugins.legend.display = true
 
-    yearProfitabilityLineChart = getLineChart('year-profitability', '')
+    yearProfitabilityLineChart = getLineChart('year-profitability')
 
     get(`Label/${loginInfo.companyId}/ids`).then(response => {
         incomeByLabelPieChart = getPieChart('income-by-label', 'Розподіл доходів по Міткам', response.length)
