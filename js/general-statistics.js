@@ -441,19 +441,19 @@ const showGeneralStatisticsInfo = e => {
     incomePieChart = getPieChart('income', 'Розподіл доходів по Продажам', 2)
     expensesIncomePieChart = getPieChart('expenses-income', 'Відношення доходів до витрат', 2)
 
-    incomeByShiftLineChart = getLineChart('income-by-shift', 'Виручка змін за місяць')
+    incomeByShiftLineChart = getLineChart('income-by-shift', '')
     incomeByShiftLineChart.options.layout.padding = { top: 10, right: 20 }
     incomeByShiftLineChart.options.plugins.datalabels.formatter = value => value || null
     incomeByShiftLineChart.update()
 
-    yearGainBarChart = getBarChart('year-gain', 'Прибуток за рік')
+    yearGainBarChart = getBarChart('year-gain', '')
     yearGainBarChart.options.plugins.datalabels.color = context => context.dataset.data[context.dataIndex] < 1 ? 'rgb(240, 0, 0)' : 'rgb(34, 139, 34)'
 
-    yearIncomeExpenseBarChart = getBarChart('year-income-expense', 'Доходи та витрати за рік', 2)
+    yearIncomeExpenseBarChart = getBarChart('year-income-expense', '', 2)
     yearIncomeExpenseBarChart.options.plugins.datalabels.font.size = 11
     yearIncomeExpenseBarChart.options.plugins.legend.display = true
 
-    yearProfitabilityLineChart = getLineChart('year-profitability', 'Рентабельність')
+    yearProfitabilityLineChart = getLineChart('year-profitability', '')
 
     get(`Label/${loginInfo.companyId}/ids`).then(response => {
         incomeByLabelPieChart = getPieChart('income-by-label', 'Розподіл доходів по Міткам', response.length)
