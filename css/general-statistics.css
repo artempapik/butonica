@@ -372,7 +372,7 @@
                     gap: .3rem;
 
                     & img {
-                        width: 1.3rem;
+                        display: none;
                     }
 
                     & span {
@@ -385,6 +385,7 @@
                     font-size: .7rem;
                     padding: .15rem .2rem;
                     border-radius: .2rem;
+                    font-weight: normal;
 
                     &.income-expense {
                         flex-direction: column;
