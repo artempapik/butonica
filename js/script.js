@@ -1094,7 +1094,7 @@ const menuItemsContents = {
         </div>
         <div class="bar-charts">
             <div class="month-line-chart">
-                <aside>
+                <article>
                     <h2>
                         <img src="img/id-card.png">
                         <span>Виручка змін за місяць</span>
@@ -1103,13 +1103,13 @@ const menuItemsContents = {
                         <span>середня виручка:</span>
                         <span></span>
                     </h3>
-                </aside>
+                </article>
                 <canvas id="income-by-shift-line-chart"></canvas>
             </div>
         </div>
         <div class="bar-charts">
             <div>
-                <aside>
+                <article>
                     <h2>
                         <img src="img/gain.png">
                         <span>Прибуток за рік</span>
@@ -1118,11 +1118,11 @@ const menuItemsContents = {
                         <span>середній прибуток:</span>
                         <span class="av"></span>
                     </h3>
-                </aside>
+                </article>
                 <canvas id="year-gain-bar-chart"></canvas>
             </div>
             <div>
-                <aside>
+                <article>
                     <h2>
                         <img src="img/income-expense.png">
                         <span>Доходи та витрати за рік</span>
@@ -1137,11 +1137,11 @@ const menuItemsContents = {
                             <span class="av"></span>
                         </span>
                     </h3>
-                </aside>
+                </article>
                 <canvas id="year-income-expense-bar-chart"></canvas>
             </div>
             <div>
-                <aside>
+                <article>
                     <h2>
                         <img src="img/profitability.png">
                         <span>Рентабельність</span>
@@ -1150,7 +1150,7 @@ const menuItemsContents = {
                         <span>середня рентабельність:</span>
                         <span class="av-pr"></span>
                     </h3>
-                </aside>
+                </article>
                 <canvas id="year-profitability-line-chart"></canvas>
             </div>
         </div>
