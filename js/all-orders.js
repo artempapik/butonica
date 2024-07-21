@@ -495,10 +495,10 @@ const createOrderRow = (order, table) => {
                 if (surchargeTippy) {
                     surchargeTippy.destroy()
                 }
-    
+                
                 surchargeTippy = tippy(payedBlock, {
                     content: 'оплачено нещодавно',
-                    // placement: 'bottom'
+                    placement: 'bottom'
                 })
             }
             
