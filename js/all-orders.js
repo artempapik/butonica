@@ -1081,14 +1081,12 @@ const createInternetOrder = saleOrderType => {
         recipientPhone = readTwoPhones(customerInfo, 'last')
     }
 
-    if (document.querySelector('.same-as-cust input').checked) {
+    const shortRN = recipientName?.toLowerCase()
+    if (document.querySelector('.same-as-cust input').checked ||
+        shortRN === 'тот же' ||
+        shortRN === 'той самий') {
         recipientName = '\t'
         recipientPhone = ''
-    }
-
-    const shortRN = recipientName?.toLowerCase()
-    if (shortRN === 'тот же' || shortRN === 'той самий') {
-        recipientName = '\t'
     }
 
     if (customerPhone === null || recipientPhone === null) {
