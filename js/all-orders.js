@@ -314,9 +314,13 @@ const createOrderRow = (order, table) => {
             const fillClient = (selector, text) => {
                 const clientBlock = orderInfoModal.querySelector('.' + selector)
                 const nameBlock = clientBlock.querySelector('.name span:last-child')
+                orderInfoModal.querySelector('.name span').textContent = 'Замовник'
                 
                 if (!text) {
                     nameBlock.textContent = 'Не вказано'
+                } else if (text === '\t') {
+                    orderInfoModal.querySelector('.name span').textContent += ' і отримувач'
+                    clientBlock.style.display = 'none'
                 } else {
                     const customerInfo = createOrderClientTd(text)
                     nameBlock.textContent = customerInfo[0]
@@ -854,6 +858,18 @@ const createInternetOrderModal = () => {
         }
     }
 
+    const sameAsCust = internetOrderModal.querySelector('.same-as-cust input')
+    sameAsCust.onclick = () => {
+        if (sameAsCust.checked) {
+            internetOrderModal.querySelector('.sale-order-recipient-name').classList.add('disabled')
+            sameAsCust.parentNode.parentNode.querySelectorAll('.phone-input').forEach(i => i.classList.add('disabled'))
+            return
+        }
+
+        internetOrderModal.querySelector('.sale-order-recipient-name').classList.remove('disabled')
+        sameAsCust.parentNode.parentNode.querySelectorAll('.phone-input').forEach(i => i.classList.remove('disabled'))
+    }
+
     const internetOrderStocks = internetOrderModal.querySelector('.sale-order-stock select')
     internetOrderStocks.innerHTML = ''
 
@@ -940,6 +956,10 @@ const createInternetOrderModal = () => {
 
             labelsBlock.append(div)
         }
+
+        sameAsCust.checked = false
+        internetOrderModal.querySelector('.sale-order-recipient-name').classList.remove('disabled')
+        sameAsCust.parentNode.parentNode.querySelectorAll('.phone-input').forEach(i => i.classList.remove('disabled'))
 
         const socialButons = internetOrderModal.querySelectorAll('.social-buttons img')
         socialButons.forEach(sb => sb.classList.remove('selected'))
@@ -1059,6 +1079,16 @@ const createInternetOrder = saleOrderType => {
     if (saleOrderType === 'delivery') {
         recipientName = customerInfo.querySelector('.sale-order-recipient-name').value.trim()
         recipientPhone = readTwoPhones(customerInfo, 'last')
+    }
+
+    if (document.querySelector('.same-as-cust input').checked) {
+        recipientName = '\t'
+        recipientPhone = ''
+    }
+
+    const shortRN = recipientName?.toLowerCase()
+    if (shortRN === 'тот же' || shortRN === 'той самий') {
+        recipientName = '\t'
     }
 
     if (customerPhone === null || recipientPhone === null) {
