@@ -1730,10 +1730,7 @@ const hideStartPageLoad = (getDaily = false) => setTimeout(() => {
     const animationsDisabled = localStorage.getItem('animations-disabled') || false
 
     if (animationsDisabled) {
-        const toggleAnimationsButton = document.querySelector('.profile-info div:nth-child(5)')
-        const toggleAnimationsIcon = toggleAnimationsButton.querySelector('span')
-        toggleAnimationsButton.style.color = 'rgb(150, 150, 150)'
-        toggleAnimationsIcon.textContent = 'toggle_off'
+        document.querySelector('.profile-info div:nth-child(5)').style.color = 'rgb(150, 150, 150)'
         toggleAnimationsClass()
     }
 
@@ -2122,22 +2119,20 @@ const toggleAnimationsClass = () => {
 }
 
 const toggleAnimations = () => {
+    console.log((localStorage.getItem('animations-disabled') || false))
     const toggleAnimationsButton = document.querySelector('.profile-info div:nth-child(5)')
-    const toggleAnimationsIcon = toggleAnimationsButton.querySelector('span')
     toggleAnimationsClass()
     
-    if (toggleAnimationsIcon.textContent === 'toggle_on') {
-        toggleAnimationsButton.style.color = 'rgb(150, 150, 150)'
-        localStorage.setItem('animations-disabled', ' ')
-        showMessage('error', 'Анімації вимкнено 👀')
-        toggleAnimationsIcon.textContent = 'toggle_off'
+    if ((localStorage.getItem('animations-disabled') || false)) {
+        toggleAnimationsButton.style.color = '#000'
+        localStorage.setItem('animations-disabled', '')
+        showMessage('success', 'Анімації ввімкнено ☄️')
         return
     }
 
-    toggleAnimationsButton.style.color = '#000'
-    localStorage.setItem('animations-disabled', '')
-    showMessage('success', 'Анімації ввімкнено ☄️')
-    toggleAnimationsIcon.textContent = 'toggle_on'
+    toggleAnimationsButton.style.color = 'rgb(150, 150, 150)'
+    localStorage.setItem('animations-disabled', ' ')
+    showMessage('error', 'Анімації вимкнено 👀')
 }
 
 const notesModal = document.querySelector('.notes-modal')
