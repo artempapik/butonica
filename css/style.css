@@ -133,7 +133,7 @@ a {
                 &.material-symbols-outlined {
                     font-size: 1.6rem;
                     color: rgb(240, 240, 240);
-                    border-radius: 35%;
+                    border-radius: 30%;
 
                     &:first-child {
                         background: rgba(var(--table-hover-color), .75);
@@ -2811,6 +2811,10 @@ table {
 
         & .main-stat-blocks {
             gap: .5rem;
+
+            & .day-progress div {
+                height: .3rem !important;
+            }
         }
 
         & .main-top-sales {
