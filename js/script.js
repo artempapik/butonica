@@ -2119,7 +2119,6 @@ const toggleAnimationsClass = () => {
 }
 
 const toggleAnimations = () => {
-    console.log((localStorage.getItem('animations-disabled') || false))
     const toggleAnimationsButton = document.querySelector('.profile-info div:nth-child(5)')
     toggleAnimationsClass()
     
@@ -2493,7 +2492,7 @@ if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js')
             .then(_ => {})
-            .catch(e => console.log(e))
+            .catch(() => {})
     })
 }
 
