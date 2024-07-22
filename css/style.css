@@ -959,6 +959,12 @@ aside {
     }
 }
 
+@keyframes progress-scale {
+    0% { transform: scaleY(1); }
+    50% { transform: scaleY(2.2); }
+    100% { transform: scaleY(1); }
+}
+
 main {
     background: rgba(var(--table-hover-color), .8);
     display: flex;
@@ -1040,6 +1046,27 @@ main {
                             font-weight: bold;
                             font-size: 1.15rem;
                         }
+                    }
+                }
+
+                & .day-progress {
+                    margin-top: -.5rem;
+                    outline: .07rem rgb(var(--table-hover-color)) solid;
+
+                    &.done {
+                        outline-color: rgb(204, 85, 0);
+                        animation: progress-scale .6s;
+                        animation-delay: .4s;
+
+                        & div {
+                            background: rgb(204, 85, 0);
+                        }
+                    }
+
+                    & div {
+                        width: 0;
+                        height: .2rem;
+                        background: rgb(var(--table-hover-color));
                     }
                 }
             }
