@@ -2813,7 +2813,7 @@ table {
             gap: .5rem;
 
             & .day-progress div {
-                height: .3rem !important;
+                height: .4rem !important;
             }
         }
 
