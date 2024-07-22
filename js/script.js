@@ -1799,6 +1799,24 @@ const getDailyStatistics = (loginName = '') => {
             }
         }
 
+        const dayProgress = main.querySelector('.day-progress')
+        const percentWidth = response.revenue / 19000 * 100
+        const maxProgressWidth = Math.min(percentWidth, 100) + '%'
+
+        if (percentWidth > 100) {
+            dayProgress.classList.add('done')
+        }
+
+        setTimeout(() => {
+            dayProgress.querySelector('div').animate([
+                { width: 0 },
+                { width: maxProgressWidth }
+            ], 170)
+            dayProgress.querySelector('div').style.width = maxProgressWidth
+        }, 170)
+
+        tippy(dayProgress, { content: percentWidth.toFixed(1) + '%' })
+
         const topSalesTable = main.querySelector('table')
 
         if (response.topSales.length) {
