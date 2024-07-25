@@ -1937,7 +1937,8 @@ const login = pass => {
         '286399': ['Floristtulip', 'Floristtulip'],
         '195428': ['Sviatotut', 'test15960'],
         '112233': ['florry.lviv', 'test112233'],
-        '953767': ['evgenia', '1111']
+        '953767': ['evgenia', '1111'],
+        '276434': ['sevenroses', 'sevenroses33621']
     }
 
     const cred = passToCred[pass] || ''
