@@ -961,7 +961,7 @@ aside {
 
 @keyframes progress-scale {
     0% { transform: scaleY(1); }
-    50% { transform: scaleY(2.2); }
+    50% { transform: scaleY(1.8); }
     100% { transform: scaleY(1); }
 }
 
