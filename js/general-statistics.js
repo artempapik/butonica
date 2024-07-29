@@ -145,7 +145,7 @@ const getStatisticsValues = () => {
 
         if (response.generalNumbers.some(n => n)) {
             const averageIncome = response.shiftsIncome.reduce((total, current) => total + current.sum, 0) / response.shiftsIncome.length
-            document.querySelector('article h3 span:last-child').textContent = Math.trunc(averageIncome) + ' грн'
+            document.querySelector('article h3 span:last-child').textContent = averageIncome ? Math.trunc(averageIncome) + ' грн' : '–'
 
             pieCharts.style.display = ''
             document.querySelector('.bar-charts').style.display = ''
