@@ -59,9 +59,7 @@ const showShiftInfo = e => {
     const shiftsCalendar = new VanillaCalendar('.shift-table td:nth-child(3)', {
         type: 'month',
         input: true,
-        settings: {
-            lang: 'uk'
-        },
+        settings: { lang: 'uk' },
         actions: {
             clickMonth(_, self) {
                 shiftsCalendar.hide()
@@ -231,10 +229,6 @@ const createShiftRow = shift => {
 
                     const innerContent = document.createElement('div')
                     innerContent.classList = 'inner-content'
-
-                    if (!(localStorage.getItem('animations-disabled') || false)) {
-                        innerContent.classList.add('animate')
-                    }
 
                     const cashRegisterOperation = document.createElement('div')
                     cashRegisterOperation.classList = 'form'
@@ -431,10 +425,9 @@ const showShiftByEmployeeFilter = () => {
     
             li.onpointerup = () => {
                 if (li.classList.contains('active')) {
-                    hideModal(shiftEmployeesInfoModal)
                     return
                 }
-    
+                
                 employeesList.querySelectorAll('li').forEach(e => e.classList.remove('active'))
                 li.classList.add('active')
                 shiftEmployeesInfoModal.querySelector('button').style.display = 'flex'
