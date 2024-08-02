@@ -1,4 +1,5 @@
 let pendingOrdersTable, pendingOrders, pendingOrderIntervalId
+const reminderModal = document.querySelector('.create-reminder-modal')
 
 const showPendingOrderInfo = e => {
     main.innerHTML = menuItemsContents['pendingorder']
@@ -47,9 +48,7 @@ const showPendingOrderInfo = e => {
 
     const pendingOrdersCalendar = new VanillaCalendar('.pending-order-table td:nth-child(3)', {
         input: true,
-        settings: {
-            lang: 'uk'
-        },
+        settings: { lang: 'uk' },
         actions: {
             clickDay(_, self) {
                 pendingOrdersCalendar.hide()
@@ -119,3 +118,65 @@ const filterPendingOrders = () => {
 }
 
 const fillPendingOrdersTable = order => pendingOrdersTable.append(createOrderRow(order, pendingOrdersTable))
+
+const createReminderModal = () => {
+    reminderModal.querySelector('input').value = ''
+    reminderModal.querySelectorAll('.enter-time-value span:first-child').forEach(t => t.textContent = '--:--')
+    imageData = ''
+    reminderModal.querySelector('img').src = EMPTY_IMAGE_URL
+    reminderModal.querySelector('textarea').value = ''
+
+    hideBodyOverflow()
+    reminderModal.style.display = 'flex'
+
+    reminderModal.querySelector('button').onpointerup = () => {
+        const dateElement = reminderModal.querySelector('.reminder-date-date')
+
+        if (!dateElement.value) {
+            showMessage('error', 'Вкажіть дату нагадування')
+            return
+        }
+
+        const date = new Date(dateElement.value)
+
+        const remTimeElement = reminderModal.querySelector('.reminder-time .reminder-date-time')
+        const remTime = remTimeElement.textContent[0] === '-' ? null : remTimeElement.textContent.replaceAll('-', '0')
+
+        if (!isValidTime(remTime)) {
+            showMessage('error', 'Вкажіть коректний час нагадування')
+            return
+        }
+
+        const comment = reminderModal.querySelector('textarea').value.trim()
+
+        if (!comment) {
+            showMessage('error', 'Вкажіть коментар до нагадування')
+            return
+        }
+
+        const payButton = reminderModal.querySelector('button')
+        payButton.disabled = true
+
+        const reminder = {
+            companyId: loginInfo.companyId,
+            employeeId: loginInfo.employeeId,
+            imageData,
+            date,
+            timeFromString: remTime,
+            timeTillString: remTime,
+            comment,
+        }
+    
+        // COME HEREEEEEE RESPONSE
+    
+        post('Order/internet', reminder)
+            .then(response => {
+                hideModalEnableButton(reminderModal, payButton)
+                showMessage('success', createSuccessMessage('нагадування'))
+                showPendingOrderInfo()
+            }).catch(() => {
+                hideModalEnableButton(reminderModal, payButton)
+                showMessage('error', createErrorMessage('нагадування'))
+            })
+    }
+}
