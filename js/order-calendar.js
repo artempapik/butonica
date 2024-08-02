@@ -99,8 +99,6 @@ const fillOrderCalendar = (day, month, year, isWeek = false) => {
         c.append(category)
     })
 
-    const animationsDisabled = localStorage.getItem('animations-disabled') || false
-
     get(`Order/calendar/${isWeek ? 'week/' : ''}${loginInfo.companyId}/${day}/${month}/${year}`)
         .then(response => {
             replaceLoadIcons()
@@ -130,11 +128,6 @@ const fillOrderCalendar = (day, month, year, isWeek = false) => {
             for (let i = 0; i < 3; i++) {
                 if (!response[i].length) {
                     const emptyDataDiv = createEmptyDataDiv()
-
-                    if (!animationsDisabled) {
-                        emptyDataDiv.classList.add('animate')
-                    }
-
                     categories.item(i).append(emptyDataDiv)
                     continue
                 }
@@ -314,7 +307,7 @@ const fillOrderCalendar = (day, month, year, isWeek = false) => {
                     orderBody.append(buttons)
     
                     const orderCard = document.createElement('div')
-                    orderCard.classList = 'order animate'
+                    orderCard.classList = 'order'
                     orderCard.id = order.id
                     orderCard.draggable = true
 
@@ -345,10 +338,6 @@ const fillOrderCalendar = (day, month, year, isWeek = false) => {
                         })
 
                         orderCard.classList.remove('moving')
-                    }
-
-                    if (animationsDisabled) {
-                        orderCard.classList.remove('animate')
                     }
 
                     orderCard.append(orderNumberBlock, orderBody)
