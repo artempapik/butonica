@@ -698,7 +698,8 @@
 }
 
 .create-sale-order-modal-content,
-.create-internet-order-modal-content {
+.create-internet-order-modal-content,
+.create-reminder-modal-content {
     width: calc(var(--modal-content-width) + 12rem);
     padding: 1rem .8rem;
 
@@ -744,20 +745,19 @@
         }
     }
 
-    & .sale-order-date-header {
-        display: none;
+    & .sale-order-date-header, & .reminder-date-header {
         margin: 0;
         padding: 1.3rem;
         outline: .1rem rgb(50, 50, 50) solid;
         justify-content: space-between;
         align-items: center;
 
-        & .sale-order-date-time {
+        & .sale-order-date-time, & .reminder-date-time {
             display: flex;
             flex-direction: column;
             gap: .8rem;
 
-            & .sale-order-date {
+            & .sale-order-date, & .reminder-date {
                 display: flex;
                 flex-direction: column;
                 gap: .8rem;
@@ -778,7 +778,7 @@
                 }
             }
             
-            & .sale-order-time {
+            & .sale-order-time, & .reminder-time {
                 display: flex;
                 flex-direction: column;
                 gap: .5rem;
@@ -802,10 +802,14 @@
             }
         }
 
-        & .sale-order-image div {
+        & .sale-order-image div, & .reminder-image div {
             flex-direction: column !important;
             gap: .5rem;
         }
+    }
+
+    & .sale-order-date-header {
+        display: none;
     }
 
     & textarea {
@@ -870,9 +874,7 @@
         }
     }
 
-    & .sale-order-textarea {
-        display: none;
-
+    & .sale-order-textarea, & .reminder-textarea {
         & div {
             display: flex;
 
@@ -880,6 +882,10 @@
                 flex: 1;
             }
         }
+    }
+
+    & .sale-order-textarea {
+        display: none;
     }
 
     & .sale-order-products {
@@ -1107,6 +1113,20 @@
                 box-shadow: none;
                 background: rgb(58, 143, 118);
             }
+        }
+    }
+}
+
+.create-reminder-modal-content {
+    width: calc(var(--modal-content-width) + 6rem);
+    gap: 2rem;
+
+    & .reminder-date-header {
+        padding: 1.2rem 1rem;
+        outline-color: rgb(100, 100, 100);
+
+        & img {
+            width: 11rem;
         }
     }
 }
