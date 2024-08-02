@@ -32,7 +32,7 @@ const header = document.querySelector('header')
 
 header.onpointerup = e => {
     if (e.target === header && !document.querySelector('#screensaver')) {
-        window.scrollTo({ top: 0, behavior: (localStorage.getItem('animations-disabled') || false) ? 'instant' : 'smooth' })
+        window.scrollTo({ top: 0, behavior: 'smooth' })
     }
 }
 
@@ -61,14 +61,10 @@ const showMessage = (type, text) => {
     const delayTime = 2500
     const disappearTime = animationTime + delayTime - 50
 
-    setTimeout(() => {
-        if (!(localStorage.getItem('animations-disabled') || false)) {
-            message.animate([
-                { top: '3%', opacity: '1' },
-                { top: '0', opacity: '0' }
-            ], animationTime)
-        }
-    }, delayTime)
+    setTimeout(() => message.animate([
+        { top: '3%', opacity: 1 },
+        { top: '0', opacity: 0 }
+    ], animationTime), delayTime)
 
     setTimeout(() => {
         message.style.display = ''
@@ -250,7 +246,7 @@ const menuItemsContents = {
                 <h1>Деталі компанії</h1>
             </div>
         </div>
-        <div class="company-container animate-item animate">
+        <div class="company-container">
             <div class="content">
                 <div class="upload-image">
                     <img src="img/empty-flower.png">
@@ -299,7 +295,7 @@ const menuItemsContents = {
             <button onpointerup="createStockModal()">Створити</button>
         </div>
         <div class="stock-table">
-            <table class="animate">
+            <table>
                 <tr>
                     <td>Назва</td>
                     <td>Адреса</td>
@@ -318,7 +314,7 @@ const menuItemsContents = {
             <button onpointerup="createCashRegisterModal()">Створити</button>
         </div>
         <div class="cash-register-table">
-            <table class="animate">
+            <table>
                 <tr>
                     <td>Назва</td>
                     <td>
@@ -345,7 +341,7 @@ const menuItemsContents = {
             <button onpointerup="createEmployeeModal()">Створити</button>
         </div>
         <div class="employee-table">
-            <table class="animate">
+            <table>
                 <tr>
                     <td>ПІБ</td>
                     <td>Магазин</td>
@@ -368,7 +364,7 @@ const menuItemsContents = {
         </div>
         <input type="search" oninput="searchCategory()" class="search-category" placeholder="Пошук категорії">
         <div class="category-table">
-            <table class="animate">
+            <table>
                 <tr>
                     <td onpointerup="sortCategories()">
                         <span>Назва</span>
@@ -394,7 +390,7 @@ const menuItemsContents = {
             <button onpointerup="showAllProducts()">Всі</button>
         </div>
         <div class="product-table">
-            <table class="animate">
+            <table>
                 <tr>
                     <td onpointerup="sortProducts()">
                         <span>Назва</span>
@@ -416,7 +412,7 @@ const menuItemsContents = {
             <button onpointerup="createContractorModal()">Створити</button>
         </div>
         <div class="contractor-table">
-            <table class="animate">
+            <table>
                 <tr>
                     <td onpointerup="sortContractors()">
                         <span>Ім'я</span>
@@ -481,7 +477,7 @@ const menuItemsContents = {
             <button onpointerup="createSupplyModal()">Створити</button>
         </div>
         <div class="supply-table">
-            <table class="animate">
+            <table>
                 <tr>
                     <td>Дата</td>
                     <td>Постачальник</td>
@@ -511,7 +507,7 @@ const menuItemsContents = {
             <button onpointerup="showAllLeftoverStocks()">Всі</button>
         </div>
         <div class="leftover-table">
-            <table class="animate">
+            <table>
                 <tr>
                     <td onpointerup="sortLeftoverByName()">
                         <span>Товар</span>
@@ -549,7 +545,7 @@ const menuItemsContents = {
             <button onpointerup="showAllInventories()">Всі</button>
         </div>
         <div class="inventory-table">
-            <table class="animate">
+            <table>
                 <tr>
                     <td>Склад</td>
                     <td>
@@ -660,7 +656,7 @@ const menuItemsContents = {
             </button>
         </div>
         <div class="client-table">
-            <table class="animate">
+            <table>
                 <tr>
                     <td>ПІБ</td>
                     <td>
@@ -683,7 +679,7 @@ const menuItemsContents = {
             <button onpointerup="createWasteModal()">Створити</button>
         </div>
         <div class="waste-table">
-            <table class="animate">
+            <table>
                 <tr>
                     <td>
                         <span>Дата</span>
@@ -705,7 +701,7 @@ const menuItemsContents = {
             </div>
         </div>
         <div class="shift-table">
-            <table class="animate">
+            <table>
                 <tr>
                     <td>Каса</td>
                     <td onpointerup="showShiftByEmployeeFilter()">
@@ -753,7 +749,7 @@ const menuItemsContents = {
             </button>
         </div>
         <div class="all-order-table">
-            <table class="animate">
+            <table>
                 <tr>
                     <td>№</td>
                     <td>
@@ -789,12 +785,15 @@ const menuItemsContents = {
                     </div>
                 </div>
             </div>
-            <button onpointerup="createInternetOrderModal()">Створити</button>
+            <div class="pending-buttons">
+                <button onpointerup="createInternetOrderModal()">Створити</button>
+                <span class="material-symbols-outlined" onpointerup="createReminderModal()">notifications</span>
+            </div>
         </div>
         <div class="pending-order-table">
-            <table class="animate">
+            <table>
                 <tr>
-                    <td class="animate-item animate">
+                    <td>
                         <span class="material-symbols-outlined">search</span>
                     </td>
                     <td>
@@ -839,7 +838,7 @@ const menuItemsContents = {
             </div>
         </div>
         <div class="completed-order-table">
-            <table class="animate">
+            <table>
                 <tr>
                     <td>№</td>
                     <td>
@@ -936,7 +935,7 @@ const menuItemsContents = {
             <button onpointerup="createFlavorModal()">Створити</button>
         </div>
         <div class="flavor-table">
-            <table class="animate">
+            <table>
                 <tr>
                     <td>Назва</td>
                     <td>Склад букету</td>
@@ -967,7 +966,7 @@ const menuItemsContents = {
             <button onpointerup="createStoreExpenseModal()">Створити</button>
         </div>
         <div class="store-expense-table">
-            <table class="animate">
+            <table>
                 <tr>
                     <td>
                         <span>Дата</span>
@@ -992,7 +991,7 @@ const menuItemsContents = {
             <button onpointerup="createStoreExpenseCategoryModal()">Створити</button>
         </div>
         <div class="store-expense-category-table">
-            <table class="animate">
+            <table>
                 <tr>
                     <td>Назва</td>
                     <td></td>
@@ -1010,7 +1009,7 @@ const menuItemsContents = {
             <button onpointerup="createLabelModal()">Створити</button>
         </div>
         <div class="label-table">
-            <table class="animate">
+            <table>
                 <tr>
                     <td>Назва</td>
                     <td></td>
@@ -1174,8 +1173,6 @@ const fillSelectedMenuItem = e => {
     clearInterval(allOrderIntervalId)
     clearInterval(pendingOrderIntervalId)
     clearInterval(orderCalendarIntervalId)
-    clearInterval(dailyStatisticsFactIntervalId)
-    clearInterval(dailyStatisticsTimeIntervalId)
 
     window.scrollTo({ top: 0, behavior: 'smooth' })
 
@@ -1226,10 +1223,6 @@ const fillSelectedMenuItem = e => {
     if (menuItem.className !== 'menu-item-content') {
         menuItem.style.background = selectedMenuItemColor
         menuItem.style.boxShadow = selectedMenuItemBoxShadow
-    }
-
-    if (localStorage.getItem('animations-disabled') || false) {
-        main.querySelector('table')?.classList.remove('animate')
     }
 }
 
@@ -1478,6 +1471,7 @@ document.querySelectorAll('.close-modal').forEach(b => b.onpointerup = () => {
         wasteModal,
         saleOrderModal,
         internetOrderModal,
+        reminderModal,
         flavorModal,
         storeExpenseModal,
         storeExpenseCategoryModal,
@@ -1623,26 +1617,19 @@ window.onpointerup = e => {
         shiftInfoModal,
         shiftEmployeesInfoModal,
         orderInfoModal,
+        reminderInfoModal,
         flavorInfoModal,
         flavorTemplatesModal,
         leftoverInfoModal,
         employeeInfoModal,
         storeExpenseInfoModal,
         printEmptySheetModal,
-        notesModal,
         changelogModal,
         calculatorModal,
         cart
     ]) {
         if (e.target === modal) {
             setTimeout(() => hideModal(modal), 1)
-
-            if (e.target === notesModal) {
-                const screensaver = document.querySelector('#screensaver')
-                if (screensaver) {
-                    screensaver.style.zIndex = 2
-                }
-            }
 
             if (recalculateAction && !previousSaleSpan.textContent) {
                 previousSaleSpan.textContent = previousSalePrice
@@ -1727,21 +1714,12 @@ const getSubscriptionExpiresText = date => {
 }
 
 const hideStartPageLoad = (getDaily = false) => setTimeout(() => {
-    const animationsDisabled = localStorage.getItem('animations-disabled') || false
-
-    if (animationsDisabled) {
-        document.querySelector('.profile-info div:nth-child(5)').style.color = 'rgb(150, 150, 150)'
-        toggleAnimationsClass()
-    }
-
     document.querySelector('#loader-page-load').remove()
 
-    if (!animationsDisabled) {
-        document.body.animate([
-            { opacity: '0' },
-            { opacity: '1' }
-        ], 200)
-    }
+    document.body.animate([
+        { opacity: '0' },
+        { opacity: '1' }
+    ], 200)
 
     if (loginInfo) {
         get(`Employee/${loginInfo.companyId}/names`).then(response => employeesNames = response)
@@ -1751,8 +1729,6 @@ const hideStartPageLoad = (getDaily = false) => setTimeout(() => {
         getDailyStatistics()
     }
 }, 300)
-
-let dailyStatisticsFactIntervalId, dailyStatisticsTimeIntervalId
 
 const getDailyStatistics = (loginName = '') => {
     showPageLoad()
@@ -1832,14 +1808,6 @@ const getDailyStatistics = (loginName = '') => {
         } else {
             topSalesTable.append(createEmptyDataDiv())
         }
-
-        const fact = main.querySelector('.fact')
-        fact.textContent = randomFacts[getRandom(0, randomFacts.length - 1)]
-        dailyStatisticsFactIntervalId = setInterval(() => fact.textContent = randomFacts[getRandom(0, randomFacts.length - 1)], 60 * 1000 * 15)
-
-        const factDate = main.querySelector('.fact-date')
-        factDate.textContent = new Date().toLocaleTimeString('ru').substring(0, 5)
-        dailyStatisticsTimeIntervalId = setInterval(() => factDate.textContent = new Date().toLocaleTimeString('ru').substring(0, 5), 60 * 1000)
 
         main.querySelector('.main-statistics').style.display = 'flex'
     }).catch(() => {
@@ -2067,7 +2035,7 @@ let intervalId
 
 const toggleScreensaver = () => {
     const screensaver = document.querySelector('#screensaver')
-    const toggleScreensaverButton = document.querySelector('.profile-info div:nth-child(4)')
+    const toggleScreensaverButton = document.querySelector('.profile-info div:nth-child(3)')
     const screensaverItems = [main, menu]
 
     if (screensaver) {
@@ -2124,129 +2092,6 @@ const toggleScreensaver = () => {
     document.querySelector('#screensaver').onpointerup = () => setDirection()
 }
 
-const toggleAnimationsClass = () => {
-    document.querySelectorAll('.animate-item').forEach(i => i.classList.toggle('animate'))
-    main.querySelectorAll('.bg-animate').forEach(d => d.style.display = d.style.display === 'none' ? '' : 'none')
-
-    document.querySelectorAll('[class$=modal-content]').forEach(i => {
-        if (i.classList.contains('animate')) {
-            i.classList.remove('animate')
-            return
-        }
-
-        i.classList = 'animate ' + i.classList
-    })
-}
-
-const toggleAnimations = () => {
-    const toggleAnimationsButton = document.querySelector('.profile-info div:nth-child(5)')
-    toggleAnimationsClass()
-    
-    if ((localStorage.getItem('animations-disabled') || false)) {
-        toggleAnimationsButton.style.color = '#000'
-        localStorage.setItem('animations-disabled', '')
-        showMessage('success', 'Анімації ввімкнено ☄️')
-        return
-    }
-
-    toggleAnimationsButton.style.color = 'rgb(150, 150, 150)'
-    localStorage.setItem('animations-disabled', ' ')
-    showMessage('error', 'Анімації вимкнено 👀')
-}
-
-const notesModal = document.querySelector('.notes-modal')
-const notes = JSON.parse(localStorage.getItem('notes')) || []
-
-const getNoteMarkup = (text, author, index) => {
-    const noteText = document.createElement('span')
-    noteText.classList = 'text'
-    noteText.textContent = text
-
-    const noteAuthor = document.createElement('span')
-    noteAuthor.classList = 'author'
-    noteAuthor.textContent = author
-
-    const noteSpan = document.createElement('span')
-    noteSpan.classList = 'note'
-    noteSpan.append(noteText, noteAuthor)
-
-    const deleteIcon = createSpan('delete_forever')
-    deleteIcon.classList = 'material-symbols-outlined'
-
-    const li = document.createElement('li')
-    li.append(noteSpan, deleteIcon)
-
-    deleteIcon.onpointerup = () => {
-        li.remove()
-        notes.splice(index, 1)
-        localStorage.setItem('notes', JSON.stringify(notes))
-        showMessage('info', 'Замітку видалено')
-
-        if (!notes.length) {
-            createNote()
-        }
-    }
-
-    return li
-}
-
-const showNotesModal = () => {
-    hideBodyOverflow()
-
-    const screensaver = document.querySelector('#screensaver')
-    if (screensaver) {
-        screensaver.style.zIndex = 1
-    }
-
-    if (!notes.length) {
-        notesModal.querySelector('textarea').value = ''
-        notesModal.querySelector('li').style.display = 'flex'
-        notesModal.style.display = 'flex'
-        return
-    }
-
-    const ul = notesModal.querySelector('ul')
-    const addNoteLi = document.createElement('li')
-    addNoteLi.innerHTML = ul.querySelector('li').innerHTML
-    ul.innerHTML = ''
-    ul.append(addNoteLi)
-
-    for (let i = 0; i < notes.length; i++) {
-        ul.append(getNoteMarkup(notes[i].text, notes[i].author, i))
-    }
-
-    notesModal.style.display = 'flex'
-    notesModal.querySelector('div').scroll(0, 0)
-}
-
-const createNote = () => {
-    const addNote = notesModal.querySelector('li')
-
-    if (addNote.style.display === 'flex') {
-        saveNote()
-        return
-    }
-
-    addNote.style.display = 'flex'
-}
-
-const saveNote = () => {
-    const text = notesModal.querySelector('textarea').value.trim()
-
-    if (!text) {
-        showMessage('error', 'Текст замітки порожній')
-        return
-    }
-
-    notesModal.querySelector('ul').append(getNoteMarkup(text, loginInfo.fullName, notes.length))
-    notes.push({ text, author: loginInfo.fullName })
-    localStorage.setItem('notes', JSON.stringify(notes))
-
-    showMessage('success', 'Замітку збережено')
-    notesModal.querySelector('li').style.display = ''
-    notesModal.querySelector('textarea').value = ''
-}
-
 const loaderPage = document.querySelector('#loader-page')
 
 const showPageLoad = () => loaderPage.style.display = 'flex'
@@ -2264,7 +2109,7 @@ clocks[1].onpointerup = () => {
     setTimeout(() => clocks[1].style.display = '', 690)
 }
 
-document.querySelector('#version').textContent = 'butonica v' + changelogs[0].v
+document.querySelector('#version').textContent = 'butonica ' + changelogs[0].v
 const changelogModal = document.querySelector('.changelog-modal')
 
 const showChangelog = () => {
@@ -2516,7 +2361,7 @@ if ('serviceWorker' in navigator) {
     })
 }
 
-const animateChange = item => (localStorage.getItem('animations-disabled') || false) ? {} : item.animate([
+const animateChange = item => item.animate([
     { opacity: '.4' },
     { opacity: '1' }
 ], 170)
@@ -2554,7 +2399,7 @@ const createCalculatorValueSpan = (span, isTime = false) => {
     animateCalculator()
 }
 
-const animateCalculator = () => (localStorage.getItem('animations-disabled') || false) ? {} : calculator.animate([
+const animateCalculator = () => calculator.animate([
     { transform: 'scale(.7)', opacity: '.4' },
     { transform: 'scale(1)', opacity: '1' }
 ], 80)
