@@ -4,7 +4,6 @@ const cacheAsset = [
     'img/cart.png',
     'img/checkout.png',
     'img/courier.png',
-    'img/decline.png',
     'img/delivery.png',
     'img/empty-box.webp',
     'img/empty-flower.png',
