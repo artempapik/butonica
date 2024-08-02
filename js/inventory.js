@@ -43,9 +43,7 @@ const showInventoryInfo = e => {
     const inventoryCalendar = new VanillaCalendar('.inventory-table td:nth-child(2)', {
         type: 'month',
         input: true,
-        settings: {
-            lang: 'uk'
-        },
+        settings: { lang: 'uk' },
         actions: {
             clickMonth(_, self) {
                 inventoryCalendar.hide()
@@ -165,8 +163,11 @@ const createInventoryModal = () => {
         }
 
         inventoryProductsTable.innerHTML = inventoryProductsTable.querySelector('tbody').innerHTML
+        showPageLoad()
 
         get(`Inventory/products/${stockId}`).then(response => {
+            hidePageLoad()
+
             for (const inventoryProduct of response) {
                 const productNameColumn = document.createElement('td')
                 productNameColumn.textContent = inventoryProduct.name
@@ -222,6 +223,9 @@ const createInventoryModal = () => {
             inventoryProductsTable.style.display = 'block'
             inventoryProductsTable.scroll(0, 0)
             inventoryModal.querySelector('.total-sum').style.display = 'flex'
+        }).catch(() => {
+            hidePageLoad()
+            showMessage('error', getErrorMessage('інвентаризацію'))
         })
     }
 
