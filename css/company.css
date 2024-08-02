@@ -8,10 +8,7 @@
     justify-content: space-between;
     width: 20rem;
     margin-bottom: 1rem;
-
-    &.animate {
-        animation: table-animate .15s;
-    }
+    animation: table-animate .15s;
 
     & h2 {
         padding: 0 .3rem;
