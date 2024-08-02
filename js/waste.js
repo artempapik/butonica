@@ -29,9 +29,7 @@ const showWasteInfo = e => {
     const wastesCalendar = new VanillaCalendar('.waste-table td:first-child', {
         type: 'month',
         input: true,
-        settings: {
-            lang: 'uk'
-        },
+        settings: { lang: 'uk' },
         actions: {
             clickMonth(_, self) {
                 wastesCalendar.hide()
