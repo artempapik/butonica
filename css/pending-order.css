@@ -51,12 +51,28 @@
     }
 }
 
+.pending-buttons {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    margin-right: .6rem;
+
+    & span {
+        font-size: 2rem;
+        color: rgba(235, 30, 49, .7);
+        cursor: pointer;
+        filter: drop-shadow(1px 1px 1px rgb(200, 200, 200));
+
+        &:hover {
+            color: rgb(235, 30, 49);
+            filter: drop-shadow(1px 1px 1px rgb(170, 170, 170));
+        }
+    }
+}
+
 .pending-order-table tr:first-child td:first-child {
     cursor: pointer;
-
-    &.animate {
-        transition: .1s;
-    }
+    transition: .1s;
 }
 
 @media only screen and (max-width: 1500px) {
