@@ -234,10 +234,7 @@
                 display: none;
                 padding-left: .5rem;
                 color: rgb(70, 70, 70);
-
-                &.animate {
-                    animation: submenu-animate .15s;
-                }
+                animation: submenu-animate .15s;
 
                 & table {
                     display: block;
