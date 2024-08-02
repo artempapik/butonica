@@ -1,23 +1,23 @@
-.order-info-modal-content {
+.order-info-modal-content, .reminder-info-modal-content {
     width: calc(var(--modal-content-width) + 12rem);
     gap: 1.5rem;
     padding: 1.5rem;
 
-    & .order-main-info {
+    & .order-main-info, & .reminder-main-info {
         display: flex;
         justify-content: space-between;
         
-        & .order-title {
+        & .order-title, & .reminder-title {
             display: flex;
             flex-direction: column;
             gap: .8rem;
     
-            & .order-number-date {
+            & .order-number-date, & .reminder-number-date {
                 display: flex;
                 flex-direction: column;
                 gap: 1.7rem;
                 
-                & .order-number {
+                & .order-number, & .reminder-number {
                     font-size: 1.2rem;
 
                     & .material-symbols-outlined {
@@ -52,7 +52,7 @@
                     }
                 }
                 
-                & .order-date {
+                & .order-date, & .reminder-date {
                     display: flex;
                     justify-content: end;
                     align-items: center;
@@ -68,7 +68,7 @@
                 }
             }
             
-            & .order-time {
+            & .order-time, & .reminder-time {
                 display: flex;
                 align-items: end;
                 flex-direction: column;
@@ -92,7 +92,7 @@
             }
         }
 
-        & .order-info-image {
+        & .order-info-image, & .reminder-info-image {
             display: flex;
             align-items: center;
         }
@@ -383,6 +383,27 @@
     }
 }
 
+.reminder-info-modal-content {
+    width: calc(var(--modal-content-width) + 7rem);
+
+    & .reminder-number .material-symbols-outlined:hover {
+        color: rgba(235, 30, 49, .8) !important;
+    }
+
+    & .number {
+        font-family: 'Roboto Mono', monospace;
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    & img {
+        width: 11rem;
+    }
+}
+
 [class$="order-table"] table {
     & tr:not(:first-child) td:first-child {
         font-family: 'Roboto Mono', monospace;
@@ -416,6 +437,18 @@
 
 [class$="order-table"] table tr:not(:first-child) {
     cursor: pointer;
+
+    &.reminder {
+        & td:first-child {
+            color: rgb(240, 240, 240);
+            background: rgb(204, 85, 0);
+        }
+
+        & td:nth-child(5) {
+            color: rgba(235, 30, 49, .8);
+            filter: drop-shadow(1px 1px 1px rgb(170, 170, 170));
+        }
+    }
 
     & td:nth-child(2) img {
         filter: drop-shadow(1px 1px 2px rgb(130, 130, 130));
