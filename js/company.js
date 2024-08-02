@@ -14,11 +14,6 @@ const copyToClipboard = () => {
 const showCompanyInfo = e => {
     main.innerHTML = menuItemsContents['company']
     fillSelectedMenuItem(e)
-    
-    if (localStorage.getItem('animations-disabled') || false) {
-        main.querySelector('.company-container').classList.remove('animate')
-    }
-
     uploadImageBlock = document.querySelector('.upload-image')
 
     if (loginInfo.title > 0) {
