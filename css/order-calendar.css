@@ -1,45 +1,43 @@
-.order-calendar-header {
-    .order-calendar-months {
+.order-calendar-header .order-calendar-months {
+    display: flex;
+    gap: .9rem;
+    align-items: center;
+    margin-left: 14.2rem;
+
+    & .order-calendar-month {
         display: flex;
-        gap: .9rem;
         align-items: center;
-        margin-left: 14.2rem;
+        gap: .3rem;
 
-        & .order-calendar-month {
-            display: flex;
-            align-items: center;
-            gap: .3rem;
+        & span:not(& span.material-symbols-outlined) {
+            width: 3.5rem;
+            text-align: center;
+        }
+        
+        & span.material-symbols-outlined {
+            opacity: .9;
+            color: rgb(var(--table-hover-color));
+            border: .15rem rgb(var(--table-hover-color)) solid;
+            font-size: 2rem;
+            border-radius: 45%;
+            cursor: pointer;
+            transition: .1s;
 
-            & span:not(& span.material-symbols-outlined) {
-                width: 3.5rem;
-                text-align: center;
-            }
-            
-            & span.material-symbols-outlined {
-                opacity: .9;
-                color: rgb(var(--table-hover-color));
-                border: .15rem rgb(var(--table-hover-color)) solid;
-                font-size: 2rem;
-                border-radius: 45%;
-                cursor: pointer;
-                transition: .1s;
-    
-                &:hover {
-                    opacity: 1;
-                    background: rgb(var(--table-hover-color));
-                    color: rgb(240, 240, 240);
-                }
+            &:hover {
+                opacity: 1;
+                background: rgb(var(--table-hover-color));
+                color: rgb(240, 240, 240);
             }
         }
-    
-        & .separator {
-            font-family: 'Roboto Mono', monospace;
-            font-size: .8rem;
-            background: rgb(var(--table-hover-color));
-            color: rgb(230, 230, 230);
-            padding: .1rem .4rem;
-            border-radius: .2rem;
-        }
+    }
+
+    & .separator {
+        font-family: 'Roboto Mono', monospace;
+        font-size: .8rem;
+        background: rgb(var(--table-hover-color));
+        color: rgb(230, 230, 230);
+        padding: .1rem .4rem;
+        border-radius: .2rem;
     }
 }
 
@@ -169,10 +167,7 @@
             align-items: center;
             gap: .8rem;
             padding: 1.5rem 0;
-
-            &.animate {
-                animation: order-animate .3s;
-            }
+            animation: order-animate .3s;
 
             & img {
                 filter: drop-shadow(1px 1px 1px rgb(180, 180, 180));
@@ -198,11 +193,8 @@
             border-radius: .7rem;
             padding: .5rem .55rem .4rem .55rem;
             cursor: pointer;
-
-            &.animate {
-                animation: order-animate .3s;
-                transition: .1s;
-            }
+            animation: order-animate .3s;
+            transition: .1s;
 
             &.moving {
                 transform: scale(1) !important;
@@ -214,7 +206,7 @@
                 margin-bottom: 1rem;
             }
 
-            &.animate:hover {
+            &:hover {
                 transform: scale(1.03);
                 box-shadow: rgba(60, 64, 67, .3) 0 1px 2px 0, rgba(60, 64, 67, .15) 0 2px 6px 2px;
             }
@@ -496,7 +488,7 @@
                     margin-bottom: .3rem;
                 }
 
-                &.animate:hover {
+                &:hover {
                     transform: none;
                 }
 
