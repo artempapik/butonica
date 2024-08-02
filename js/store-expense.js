@@ -55,9 +55,7 @@ const showStoreExpenseInfo = e => {
     const storeExpenseCalendar = new VanillaCalendar('.store-expense-table td:first-child', {
         type: 'month',
         input: true,
-        settings: {
-            lang: 'uk'
-        },
+        settings: { lang: 'uk' },
         actions: {
             clickMonth(_, self) {
                 storeExpenseCalendar.hide()
