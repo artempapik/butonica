@@ -1,6 +1,7 @@
 let allOrdersTable, orderProducts, internetProductsOptions, internetProductsOptionsArray, internetFlavorsOptions, internetFlavorsOptionsArray, allOrdersPages, allOrderIntervalId, orderTippy, surchargeTippy
 
 const orderInfoModal = document.querySelector('.order-info-modal')
+const reminderInfoModal = document.querySelector('.reminder-info-modal')
 const internetOrderModal = document.querySelector('.create-internet-order-modal')
 const internetTotalSumElement = internetOrderModal.querySelector('.sale-order-total-sum input')
 
@@ -172,9 +173,7 @@ const showAllOrderInfo = e => {
 
     const allOrdersCalendar = new VanillaCalendar('.all-order-table td:nth-child(3)', {
         input: true,
-        settings: {
-            lang: 'uk'
-        },
+        settings: { lang: 'uk' },
         actions: {
             clickDay(_, self) {
                 allOrdersCalendar.hide()
@@ -310,6 +309,36 @@ const createOrderRow = (order, table) => {
 
         get(`Order/order/${order.id}`).then(response => {
             hidePageLoad()
+
+            if (!order.customer) {
+                const reminderNumberDate = reminderInfoModal.querySelector('.reminder-number-date')
+
+                if (orderTippy) {
+                    orderTippy.destroy()
+                }
+
+                orderTippy = tippy(reminderNumberDate.querySelector('.reminder-number span'), {
+                    content: 'нагадування створено',
+                    placement: 'right'
+                })
+
+                const reminderId = order.id.toString()
+                const reminderNumber = reminderNumberDate.querySelector('.reminder-number .number')
+                reminderNumber.textContent = reminderId.length > 4 ? reminderId.substring(reminderId.length - 4) : reminderId
+                reminderNumber.onpointerup = () => reminderNumber.textContent = reminderNumber.textContent.length <= 4 ? reminderId : reminderId.substring(reminderId.length - 4)
+
+                reminderNumberDate.querySelector('.reminder-date input').value = getDate(response.date)
+                reminderInfoModal.querySelector('.reminder-time .enter-time-value span').textContent = order.timeFrom || '--:--'
+                
+                imageData = ''
+                reminderInfoModal.querySelector('img').src = response.imageData ? response.imageData : EMPTY_IMAGE_URL
+                reminderInfoModal.querySelector('.comment textarea').value = response.comment
+
+                reminderInfoModal.style.display = 'flex'
+                reminderInfoModal.querySelector('.reminder-info-modal-content').scroll(0, 0)
+
+                return
+            }
 
             const fillClient = (selector, text) => {
                 const clientBlock = orderInfoModal.querySelector('.' + selector)
@@ -599,21 +628,25 @@ const createOrderRow = (order, table) => {
         const cancelAction = createDeleteSpan('order')
         cancelAction.textContent = 'cancel'
         actionsColumn.append(cancelAction)
+        
+        cancelAction.onpointerup = () => {
+            const oType = order.customer ? 'замовлення' : 'нагадування'
 
-        cancelAction.onpointerup = () => showConfirm(`Скасувати замовлення ${order.id}?`, () => {
-            delete order.timeFrom
-            delete order.timeTill
+            showConfirm(`Скасувати ${oType} ${order.id}?`, () => {
+                delete order.timeFrom
+                delete order.timeTill
 
-            remove(`Order${order.isInternet ? '/internet' : ''}`, order).then(() => {
-                setTimeout(() => hideModal(confirmModal), 1)
-                showMessage('info', 'Замовлення скасовано')
-                table.removeChild(tr)
+                remove(`Order${order.isInternet ? '/internet' : ''}`, order).then(() => {
+                    setTimeout(() => hideModal(confirmModal), 1)
+                    showMessage('info', `${capitalize(oType)} скасовано`)
+                    table.removeChild(tr)
 
-                if (table.children.length === 1) {
-                    table.style.display = ''
-                }
-            }).catch(() => showMessage('error', `${ERROR_TEXT} скасувати замовлення`))
-        })
+                    if (table.children.length === 1) {
+                        table.style.display = ''
+                    }
+                }).catch(() => showMessage('error', `${ERROR_TEXT} скасувати ${oType}`))
+            })
+        }
     }
 
     const formatOrderDate = (date, from, till) => {
@@ -677,9 +710,15 @@ const createOrderRow = (order, table) => {
     }
 
     const orderTypeTd = createTd()
-    const img = document.createElement('img')
-    img.src = `img/${order.isPickup ? 'pickup' : 'delivery'}.png`
-    orderTypeTd.append(img)
+    if (order.customer) {
+        const img = document.createElement('img')
+        img.src = `img/${order.isPickup ? 'pickup' : 'delivery'}.png`
+        orderTypeTd.append(img)
+    } else {
+        const span = createSpan('notifications')
+        span.classList = 'material-symbols-outlined'
+        orderTypeTd.append(span)
+    }
 
     const customerInfo = createOrderClientTd(order.customer)
     const customerTd = createTd(customerInfo[0])
@@ -689,6 +728,10 @@ const createOrderRow = (order, table) => {
     }
 
     const orderId = order.id.toString()
+
+    if (!order.customer) {
+        tr.classList = 'reminder'
+    }
 
     tr.append(
         createTd(orderId.length > 4 ? order.id.toString().substring(orderId.length - 4) : orderId),
@@ -704,6 +747,10 @@ const createOrderRow = (order, table) => {
 }
 
 const createOrderClientTd = customer => {
+    if (!customer) {
+        return ['–']
+    }
+
     const fCustomer = customer.includes('\t') ? customer.slice(0, -4) : customer
 
     if (fCustomer.includes('@')) {
