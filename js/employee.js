@@ -152,11 +152,12 @@ const createEmployeeRow = employee => {
     const titleTd = document.createElement('td')
     titleTd.append(span)
 
-    const activeIcon = document.createElement('img')
-    activeIcon.src = `img/${employee.isActive ? 'check' : 'decline'}.png`
+    const activeIcon = document.createElement('span')
+    activeIcon.classList = 'material-symbols-outlined'
+    activeIcon.textContent = employee.isActive ? 'check_circle' : 'cancel'
 
-    if (!employee.isActive) {
-        activeIcon.classList.add('scaled')
+    if (employee.isActive) {
+        activeIcon.classList.add('active')
     }
 
     const activeEmployeeTd = document.createElement('td')
