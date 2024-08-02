@@ -3,7 +3,6 @@ let statMonth, statYear
 const statDate = new Date()
 
 const getStatisticsValues = () => {
-    const animate = (localStorage.getItem('animations-disabled') || false) ? 'none' : ''
     showLoadAnimation()
 
     let month = statMonth === 0 ? 0 : statMonth ? statMonth + 2 : null
@@ -60,7 +59,7 @@ const getStatisticsValues = () => {
                 response.reduce((total, current) => total + current.generalNumbers[4], 0),
                 response.reduce((total, current) => total + current.generalNumbers[5], 0)
             ]
-            expensesPieChart.update(animate)
+            expensesPieChart.update()
 
             incomePieChart.data.labels = ['продажі на магазині', 'online-замовлення'].map((l, i) => {
                 const current = response.reduce((total, current) => total + current.generalNumbers[i + 2], 0)
@@ -71,7 +70,7 @@ const getStatisticsValues = () => {
                 response.reduce((total, current) => total + current.generalNumbers[2], 0),
                 response.reduce((total, current) => total + current.generalNumbers[3], 0)
             ]
-            incomePieChart.update(animate)
+            incomePieChart.update()
 
             const labelsIncome = Array.from(new Set(response.map(r => r.internetOrdersIncomeByLabel.map(io => io.labelName)).flat())).map(l => ({
                 name: l,
@@ -97,7 +96,7 @@ const getStatisticsValues = () => {
 
             incomeByLabelPieChart.data.labels = labelsIncome.map(l => `${(l.name || 'Без мітки')} (${l.income} – ${(l.income / labelsIncomeTotal * 100).toFixed(2)}%)`)
             incomeByLabelPieChart.data.datasets[0].data = labelsIncome.map(l => l.income)
-            incomeByLabelPieChart.update(animate)
+            incomeByLabelPieChart.update()
 
             const allExpensesIncome =
                 response.reduce((total, current) => total + current.generalNumbers[1], 0) +
@@ -111,26 +110,26 @@ const getStatisticsValues = () => {
                 response.reduce((total, current) => total + current.generalNumbers[1], 0),
                 response.reduce((total, current) => total + current.generalNumbers[4], 0) + response.reduce((total, current) => total + current.generalNumbers[5], 0)
             ]
-            expensesIncomePieChart.update(animate)
+            expensesIncomePieChart.update()
 
             document.querySelector('.bar-charts:last-child').style.display = 'flex'
 
             yearGainBarChart.data.datasets[0].label = 'прибуток'
             yearGainBarChart.data.datasets[0].data = response.map(r => r.generalNumbers[0])
-            yearGainBarChart.update(animate)
+            yearGainBarChart.update()
 
             yearIncomeExpenseBarChart.data.datasets[0].label = 'доходи'
             yearIncomeExpenseBarChart.data.datasets[0].data = response.map(r => r.generalNumbers[1])
             yearIncomeExpenseBarChart.data.datasets[1].label = 'витрати'
             yearIncomeExpenseBarChart.data.datasets[1].data = response.map(r => r.generalNumbers[4] + r.generalNumbers[5])
-            yearIncomeExpenseBarChart.update(animate)
+            yearIncomeExpenseBarChart.update()
 
             yearProfitabilityLineChart.data.datasets[0].label = 'рентабельність'
             yearProfitabilityLineChart.data.datasets[0].data = response.map(r => {
                 const expenses = r.generalNumbers[4] + r.generalNumbers[5]
                 return expenses ? r.generalNumbers[1] / expenses : 1
             })
-            yearProfitabilityLineChart.update(animate)
+            yearProfitabilityLineChart.update()
 
             replaceLoadIcons()
         }).catch(() => showMessage('error', getErrorMessage('статистику')))
@@ -167,11 +166,11 @@ const getStatisticsValues = () => {
 
             expensesPieChart.data.labels = ['витрати магазину', 'витрати на товар'].map((l, i) => `${l} (${(generalNumbers[i + 4] / (totalExpenses || 1) * 100).toFixed(2)}%)`)
             expensesPieChart.data.datasets[0].data = [generalNumbers[4], generalNumbers[5]]
-            expensesPieChart.update(animate)
+            expensesPieChart.update()
 
             incomePieChart.data.labels = ['продажі на магазині', 'online-замовлення'].map((l, i) => `${l} (${(generalNumbers[i + 2] / generalNumbers[1] * 100).toFixed(2)}%)`)
             incomePieChart.data.datasets[0].data = [generalNumbers[2], generalNumbers[3]]
-            incomePieChart.update(animate)
+            incomePieChart.update()
 
             const internetOrdersIncome = response.internetOrdersIncomeByLabel.reduce((total, current) => total + current.totalSum, 0)
     
@@ -180,7 +179,7 @@ const getStatisticsValues = () => {
                 return `${(o.labelName || 'Без мітки')} (${totalSum} – ${(totalSum / internetOrdersIncome * 100).toFixed(2)}%)`
             })
             incomeByLabelPieChart.data.datasets[0].data = response.internetOrdersIncomeByLabel.map(o => o.totalSum)
-            incomeByLabelPieChart.update(animate)
+            incomeByLabelPieChart.update()
 
             const expensesIncome = generalNumbers[1] + totalExpenses
 
@@ -189,7 +188,7 @@ const getStatisticsValues = () => {
                 `всі витрати (${(totalExpenses / expensesIncome * 100).toFixed(2)}%)`
             ]
             expensesIncomePieChart.data.datasets[0].data = [generalNumbers[1], totalExpenses]
-            expensesIncomePieChart.update(animate)
+            expensesIncomePieChart.update()
 
             const monthNumbers = Array.from({ length: new Date(year, month || new Date().getMonth() + 1, 0).getDate() }, (_, i) => i + 1)
             const monthToIncome = []
@@ -212,7 +211,7 @@ const getStatisticsValues = () => {
 
             incomeByShiftLineChart.data.datasets[0].data = monthToIncome
             updateShiftsLineChartLabels(month || new Date().getMonth() + 1, year)
-            incomeByShiftLineChart.update(animate)
+            incomeByShiftLineChart.update()
         } else {
             pieCharts.style.display = 'none'
             document.querySelector('.bar-charts').style.display = 'none'
