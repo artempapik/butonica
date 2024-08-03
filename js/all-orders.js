@@ -671,12 +671,15 @@ const createOrderRow = (order, table) => {
         return from ? orderDate + 'з ' + from : orderDate + 'до ' + till
     }
 
-    const span = document.createElement('span')
-    span.textContent = statusTypeToText[order.status]
-    span.style.background = statusTypeToBackground[order.status]
-
     const statusTd = document.createElement('td')
-    statusTd.append(span)
+
+    if (order.customer) {
+        const span = createSpan(statusTypeToText[order.status])
+        span.style.background = statusTypeToBackground[order.status]
+        statusTd.append(span)
+    } else {
+        statusTd.textContent = '–'
+    }
 
     const labelsTd = document.createElement('td')
 
@@ -750,6 +753,10 @@ const createOrderRow = (order, table) => {
 }
 
 const createOrderClientTd = customer => {
+    if (customer === '\t') {
+        // reminder
+    }
+    
     if (!customer) {
         return ['–']
     }
