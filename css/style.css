@@ -1823,33 +1823,6 @@ table {
     }
 }
 
-@keyframes change-box-shadow {
-    20%, 100% {
-        box-shadow:
-            rgba(240, 46, 170, .4) 5px 5px,
-            rgba(240, 46, 170, .3) 10px 10px,
-            rgba(240, 46, 170, .2) 15px 15px,
-            rgba(240, 46, 170, .1) 20px 20px,
-            rgba(240, 46, 170, .05) 25px 25px;
-    }
-    40%, 80% {
-        box-shadow:
-            rgba(240, 46, 170, .4) 0 5px,
-            rgba(240, 46, 170, .3) 0 10px,
-            rgba(240, 46, 170, .2) 0 15px,
-            rgba(240, 46, 170, .1) 0 20px,
-            rgba(240, 46, 170, .05) 0 25px;
-    }
-    60% {
-        box-shadow:
-            rgba(240, 46, 170, .4) -5px 5px,
-            rgba(240, 46, 170, .3) -10px 10px,
-            rgba(240, 46, 170, .2) -15px 15px,
-            rgba(240, 46, 170, .1) -20px 20px,
-            rgba(240, 46, 170, .05) -25px 25px;
-    }
-}
-
 #screensaver {
     cursor: pointer;
     z-index: 2;
@@ -1858,12 +1831,13 @@ table {
     border-radius: .4rem;
     padding: .5rem .8rem;
     position: fixed;
-    animation: moveX var(--screensaver-move-x) linear 0s infinite alternate, moveY var(--screensaver-move-y) linear 0s infinite alternate, change-box-shadow var(--box-shadow-delay) infinite;
+    animation: moveX var(--screensaver-move-x) linear 0s infinite alternate, moveY var(--screensaver-move-y) linear 0s infinite alternate;
     animation-delay: var(--screensaver-delay);
     display: flex;
     gap: 1rem;
     justify-content: center;
     transition: .1s;
+    outline: .1rem rgb(100, 100, 100) solid;
     box-shadow:
         rgba(240, 46, 170, .4) 5px 5px,
         rgba(240, 46, 170, .3) 10px 10px,
@@ -1872,7 +1846,7 @@ table {
         rgba(240, 46, 170, .05) 25px 25px;
 
     &:hover {
-        transform: scale(1.05);
+        outline-color: #000;
     }
 
     & img {
