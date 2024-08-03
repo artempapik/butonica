@@ -1,3 +1,4 @@
+
 let movingOrder, calendarDate = new Date(), orderCalendarIntervalId
 
 const calendarMonthIndexToName = {
@@ -155,33 +156,39 @@ const fillOrderCalendar = (day, month, year, isWeek = false) => {
                     const leftTime = document.createElement('span')
                     leftTime.classList = 'left'
 
-                    const timeToCalc = order.timeFrom || '00:00'
-
                     const timeLeft = i === 2 ?
                         { text: '–' } :
-                        convertMsToTime(new Date(order.date.replace('00', timeToCalc.substring(0, 2)).replace('00', timeToCalc.substring(3))) - new Date())
+                        order.timeFrom ?
+                            convertMsToTime(new Date(order.date.replace('00', order.timeFrom.substring(0, 2)).replace('00', order.timeFrom.substring(3))) - new Date()) :
+                            { text: calculateDaysLeft(order.date) }
 
                     if (timeLeft.text !== '–' && order.timeFrom) {
                         leftTime.dataset.timeFrom = order.timeFrom
                         leftTime.dataset.date = order.date
                     }
 
-                    leftTime.textContent = timeLeft.text
-
-                    if ('background' in timeLeft) {
-                        leftTime.style.background = timeLeft.background
+                    if (timeLeft.text instanceof HTMLImageElement) {
+                        const img = document.createElement('img')
+                        img.src = 'img/today.png'
+                        leftTime.append(img)
                     } else {
-                        if (timeLeft.text === '–') {
-                            leftTime.style.visibility = 'hidden'
-                        } else {
-                            leftTime.style.fontWeight = 'bold'
-                            leftTime.style.color = 'rgb(50, 50, 50)'
-                        }
-                    }
+                        leftTime.textContent = timeLeft.text
 
-                    if (timeLeft.text === '!') {
-                        leftTime.style.color = 'rgb(240, 240, 240)'
-                        leftTime.style.background = 'rgb(240, 0, 0)'
+                        if ('background' in timeLeft) {
+                            leftTime.style.background = timeLeft.background
+                        } else {
+                            if (timeLeft.text === '–') {
+                                leftTime.style.visibility = 'hidden'
+                            } else {
+                                leftTime.style.fontWeight = 'bold'
+                                leftTime.style.color = 'rgb(50, 50, 50)'
+                            }
+                        }
+    
+                        if (timeLeft.text === '!') {
+                            leftTime.style.color = 'rgb(240, 240, 240)'
+                            leftTime.style.background = 'rgb(240, 0, 0)'
+                        }
                     }
 
                     const orderTimeBlock = document.createElement('div')
@@ -389,8 +396,10 @@ const moveOrder = (e, index) => {
                 button.style.visibility = ''
                 leftTime.style.visibility = ''
 
-                const timeToCalc = movingOrder.timeFrom || '00:00'
-                const timeLeft = convertMsToTime(new Date(movingOrder.date.replace('00', timeToCalc.substring(0, 2)).replace('00', timeToCalc.substring(3))) - new Date())
+                const timeLeft = movingOrder.timeFrom ?
+                    convertMsToTime(new Date(movingOrder.date.replace('00', movingOrder.timeFrom.substring(0, 2)).replace('00', movingOrder.timeFrom.substring(3))) - new Date()) :
+                    { text: calculateDaysLeft(movingOrder.date) }
+
                 leftTime.textContent = timeLeft.text
 
                 if ('background' in timeLeft) {
