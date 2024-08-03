@@ -7,6 +7,10 @@ const internetTotalSumElement = internetOrderModal.querySelector('.sale-order-to
 
 const updateOrderLeftTime = table => setInterval(() => {
     for (const td of table.querySelectorAll('td:not(tbody td):nth-child(2)')) {
+        if (!td.dataset.timeFrom) {
+            continue
+        }
+
         const timeLeft = convertMsToTime(new Date(td.dataset.date.replace('00', td.dataset.timeFrom.substring(0, 2)).replace('00', td.dataset.timeFrom.substring(3))) - new Date())
 
         if ('background' in timeLeft) {
@@ -241,6 +245,22 @@ const statusTypeToBackground = {
     0: 'linear-gradient(180deg, #4B91F7 0%, #367AF6 100%)',
     1: 'rgb(48, 133, 108)',
     2: 'rgb(230, 80, 25)'
+}
+
+const calculateDaysLeft = date => {
+    const daysLeft = Math.ceil((new Date(date) - new Date()) / (1000 * 60 * 60 * 24))
+
+    if (daysLeft < 0) {
+        return '!'
+    }
+
+    if (!daysLeft) {
+        const img = document.createElement('img')
+        img.src = 'img/today.png'
+        return img
+    }
+
+    return daysLeft + 'д'
 }
 
 const convertMsToTime = milliseconds => {
@@ -668,16 +688,16 @@ const createOrderRow = (order, table) => {
         labelsTd.append(span)
     }
 
-    const timeToCalc = order.timeFrom || '00:00'
-
     const timeLeft = order.status === 2 ?
         { text: '–' } :
-        convertMsToTime(new Date(order.date.replace('00', timeToCalc.substring(0, 2)).replace('00', timeToCalc.substring(3))) - new Date())
+        order.timeFrom ?
+            convertMsToTime(new Date(order.date.replace('00', order.timeFrom.substring(0, 2)).replace('00', order.timeFrom.substring(3))) - new Date()) :
+            { text: calculateDaysLeft(order.date) }
 
     const timeLeftTd = createTd(timeLeft.text)
     
-    if (timeLeft.text !== '–') {
-        timeLeftTd.dataset.timeFrom = timeToCalc
+    if (timeLeft.text !== '–' && order.timeFrom) {
+        timeLeftTd.dataset.timeFrom = order.timeFrom
         timeLeftTd.dataset.date = order.date
     }
 
