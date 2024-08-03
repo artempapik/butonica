@@ -100,11 +100,11 @@
         margin-right: 0;
 
         & button {
-            padding: .35rem .6rem;
+            padding: .3rem .5rem;
         }
 
         & span {
-            font-size: 1.7rem;
+            font-size: 1.5rem;
         }
     }
 }
