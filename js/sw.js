@@ -13,6 +13,7 @@ const cacheAsset = [
     'img/pickup.png',
     'img/rent.png',
     'img/surcharge.png',
+    'img/today.png',
     'img/trash.png',
     'img/water.png',
     'img/withdrawal.png'
