@@ -580,20 +580,20 @@
         display: none;
     }
 
-    .order-info-modal-content {
+    .order-info-modal-content, & .reminder-info-modal-content {
         padding: 1rem .5rem;
         gap: 1.3rem;
 
-        & .order-main-info {
+        & .order-main-info, & .reminder-main-info {
             flex-direction: column;
             align-items: center;
             gap: 1.2rem;
 
-            & .order-date {
+            & .order-date, & .reminder-date {
                 align-self: end;
             }
 
-            & .order-time {
+            & .order-time, & .reminder-time {
                 align-items: center;
             }
         }
