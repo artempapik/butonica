@@ -1556,6 +1556,14 @@
         }
     }
 
+    .create-reminder-modal-content {
+        gap: 1.7rem;
+
+        & .reminder-date-header img {
+            width: 7rem;
+        }
+    }
+
     .cash-register-operations-modal-content {
         padding: .7rem .6rem;
         gap: .8rem;
