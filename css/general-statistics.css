@@ -77,11 +77,10 @@
 
         & .stat-title {
             font-size: 1.2rem;
-            color: rgb(80, 80, 80);
+            color: rgb(70, 70, 70);
             font-weight: bold;
 
             &.gain {
-                text-decoration: underline;
                 font-size: 1.3rem;
                 color: #000;
             }
