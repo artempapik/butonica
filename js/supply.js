@@ -302,7 +302,7 @@ const createSupplyRow = supply => {
             const supplyProductPrice = document.createElement('input')
             supplyProductPrice.onchange = () => changeSum()
             supplyProductPrice.value = product.price
-            supplyProductPrice.type = 'number'
+            // supplyProductPrice.type = 'number'
             supplyProductPrice.min = '0'
             supplyProductPrice.max = '1000'
             supplyProductPrice.inputMode = 'decimal'
