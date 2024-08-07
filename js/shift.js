@@ -220,7 +220,7 @@ const createShiftRow = shift => {
                     }
 
                     if (operation.type === 3) {
-                        info.removeChild(deleteIcon)
+                        //info.removeChild(deleteIcon)
                     }
                     
                     const content = document.createElement('div')
