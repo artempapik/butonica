@@ -1839,7 +1839,6 @@ if (loginInfo) {
     hideStartPageLoad()
     ;[header, menu].forEach(i => i.style.display = 'none')
 
-    let password = ''
     const passwordButtons = loginModal.querySelectorAll('.login-row span')
     const passwordChars = document.querySelectorAll('.login-field span')
 
@@ -1893,20 +1892,12 @@ const login = pass => {
     
     const passToCred = {
         '000000': ['test', '1111'],
-        '995128': ['irzhov2013@gmail.com', '0673995128'],
+        '995128': ['irzhov2013', '0673995128'],
         '173371': ['KR173371', '0684108854'],
         '838485': ['Alesia', '0982797447'],
         '145666': ['Katerina', 'Antichrist666'],
         '584781': ['daria', 'saVa58478'],
-        '837432': ['florist_ir', '837432'],
-        '971241': ['kvityoneli', '971241'],
-        '663167': ['helenchepoywork@gmail.com', '55555'],
-        '468569': ['vasil.cherepanin', 'test11435'],
-        '286399': ['Floristtulip', 'Floristtulip'],
-        '195428': ['Sviatotut', 'test15960'],
-        '112233': ['florry.lviv', 'test112233'],
-        '953767': ['evgenia', '1111'],
-        '276434': ['sevenroses', 'sevenroses33621']
+        '953767': ['evgenia', '1111']
     }
 
     const cred = passToCred[pass] || ''
@@ -2199,7 +2190,44 @@ const keyToCalculatorNumber = {
     9: 2
 }
 
+let password = ''
+
 window.onkeyup = e => {
+    if (loginModal.style.display === 'flex') {
+        const passwordButtons = loginModal.querySelectorAll('.login-row span')
+        const passwordChars = document.querySelectorAll('.login-field span')
+
+        passwordButtons.forEach(b => b.classList.remove('active'))
+
+        if (e.key === 'Backspace') {
+            password = password.slice(0, -1)
+            passwordChars.item(password.length).classList.remove('entered')
+            passwordChars.item(password.length).textContent = '•'
+            return
+        }
+
+        if (password.length === 6) {
+            return
+        }
+
+        passwordButtons.item(e.key === '0' ? 10 : e.key - 1).classList.add('active')
+        password += e.key
+        passwordChars.item(password.length - 1).classList.add('entered')
+
+        if (passwordButtons.item(9).textContent === 'visibility_off') {
+            passwordChars.item(password.length - 1).textContent = e.key
+        }
+
+        if (password.length === 6) {
+            if (!login(password)) {
+                passwordButtons.forEach(b => b.classList.remove('active'))
+                password = ''
+            }
+        }
+
+        return
+    }
+    
     if (calculatorModal.style.display !== 'flex') {
         return
     }
