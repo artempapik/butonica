@@ -6,7 +6,7 @@ const Environment = {
 const BASE_URL = Environment.PROD
 const EMPTY_IMAGE_URL = 'img/empty-flower.png'
 
-let imageData, currentPage, employeesNames, password = ''
+let imageData, currentPage, employeesNames
 
 const uploadImage = e => {
     const image = e.target.files[0]
@@ -2190,6 +2190,8 @@ const keyToCalculatorNumber = {
     9: 2
 }
 
+let password = ''
+
 window.onkeyup = e => {
     if (loginModal.style.display === 'flex') {
         const passwordButtons = loginModal.querySelectorAll('.login-row span')
@@ -2471,12 +2473,3 @@ const readTwoPhones = (ci, n = 'first', forSaving = false) => {
 
     return phone2 ? phone1 + '\n' + phone2 : phone1
 }
-
-// Notification.requestPermission().then(permission => console.log(permission))
-
-// navigator.serviceWorker.ready.then(registration => registration.pushManager.subscribe({
-//     userVisibleOnly: true,
-//     applicationServerKey: 'BFmkGFeE0h2F6QF6MA3DoP35vJlCVu-op-YbrNNFMLe7hYj6p7kzjCGwWZuRll0_GRtLwTre6EV9U0nja-fQwW4'
-// })
-//     .then(subscription => console.log(subscription))
-//     .catch(e => console.log(e)))
