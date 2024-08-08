@@ -2193,6 +2193,9 @@ const keyToCalculatorNumber = {
 let password = ''
 
 window.onkeyup = e => {
+    console.log(e)
+    console.log(password)
+    console.log()
     if (loginModal.style.display === 'flex') {
         const passwordButtons = loginModal.querySelectorAll('.login-row span')
         const passwordChars = document.querySelectorAll('.login-field span')
