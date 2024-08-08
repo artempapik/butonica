@@ -2383,9 +2383,9 @@ calculatorNumbers.forEach(e => e.onpointerup = () => {
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js')
+        navigator.serviceWorker.register('./js/sw.js')
             .then(_ => {})
-            .catch(e => console.log(e))
+            .catch(_ => {})
     })
 }
 
