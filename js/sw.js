@@ -18,7 +18,7 @@ const cacheAsset = [
 ]
 
 self.addEventListener('install', e => e.waitUntil(caches.open('butonica')
-    .then(cache => cache.addAll(cacheAsset.map(n => '../img' + n)))
+    .then(cache => cache.addAll(cacheAsset.map(n => '../img/' + n)))
     .then(() => self.skipWaiting())
 ))
 
