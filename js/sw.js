@@ -1,24 +1,24 @@
 const cacheAsset = [
-    'img/cart.png',
-    'img/checkout.png',
-    'img/courier.png',
-    'img/delivery.png',
-    'img/empty-box.webp',
-    'img/empty-flower.png',
-    'img/exchange.png',
-    'img/order.png',
-    'img/parsley.png',
-    'img/pickup.png',
-    'img/rent.png',
-    'img/surcharge.png',
-    'img/today.png',
-    'img/trash.png',
-    'img/water.png',
-    'img/withdrawal.png'
+    'cart.png',
+    'checkout.png',
+    'courier.png',
+    'delivery.png',
+    'empty-box.webp',
+    'empty-flower.png',
+    'exchange.png',
+    'order.png',
+    'parsley.png',
+    'pickup.png',
+    'rent.png',
+    'surcharge.png',
+    'today.png',
+    'trash.png',
+    'water.png',
+    'withdrawal.png'
 ]
 
 self.addEventListener('install', e => e.waitUntil(caches.open('butonica')
-    .then(cache => cache.addAll(cacheAsset))
+    .then(cache => cache.addAll(cacheAsset.map(n => '../img' + n)))
     .then(() => self.skipWaiting())
 ))
 
