@@ -1816,6 +1816,8 @@ const getDailyStatistics = (loginName = '') => {
     })
 }
 
+let password = ''
+
 if (loginInfo) {
     get(`Company/start-subscription/${loginInfo.companyId}`).then(response => {
         loginInfo.startSubscription = response
@@ -2189,8 +2191,6 @@ const keyToCalculatorNumber = {
     8: 1,
     9: 2
 }
-
-let password = ''
 
 window.onkeyup = e => {
     if (loginModal.style.display === 'flex') {
