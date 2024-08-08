@@ -1,4 +1,4 @@
-/*const cacheAsset = [
+const cacheAsset = [
     'img/cart.png',
     'img/checkout.png',
     'img/courier.png',
@@ -31,4 +31,4 @@ self.addEventListener('activate', e => e.waitUntil(
     )
 ))
 
-self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => caches.match(e.request))))*/
+self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => caches.match(e.request))))
