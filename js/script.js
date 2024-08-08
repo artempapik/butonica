@@ -6,7 +6,7 @@ const Environment = {
 const BASE_URL = Environment.PROD
 const EMPTY_IMAGE_URL = 'img/empty-flower.png'
 
-let imageData, currentPage, employeesNames
+let imageData, currentPage, employeesNames, password = ''
 
 const uploadImage = e => {
     const image = e.target.files[0]
@@ -1815,8 +1815,6 @@ const getDailyStatistics = (loginName = '') => {
         showMessage('error', getErrorMessage('сьогоднішню статистику'))
     })
 }
-
-let password = ''
 
 if (loginInfo) {
     get(`Company/start-subscription/${loginInfo.companyId}`).then(response => {
