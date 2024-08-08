@@ -864,7 +864,7 @@
                         filter: grayscale(100%) drop-shadow(1px 1px 1px rgb(200, 200, 200));
                         opacity: .65;
 
-                        &:hover, &.selected {
+                        &.selected {
                             filter: grayscale(0) drop-shadow(1px 1px 1px rgb(170, 170, 170));
                             opacity: .95;
                         }
@@ -1475,6 +1475,15 @@
 
     & button {
         align-self: auto;
+    }
+}
+
+@media (hover: hover) {
+    .create-sale-order-modal-content, .create-internet-order-modal-content, .create-reminder-modal-content {
+        & .customer-recipient-info .sale-order-info div .social-buttons img:hover {
+            filter: grayscale(0) drop-shadow(1px 1px 1px rgb(170, 170, 170));
+            opacity: .95;
+        }
     }
 }
 
