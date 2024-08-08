@@ -674,14 +674,9 @@ const createOrderRow = (order, table) => {
     }
 
     const statusTd = document.createElement('td')
-
-    if (order.customer) {
-        const span = createSpan(statusTypeToText[order.status])
-        span.style.background = statusTypeToBackground[order.status]
-        statusTd.append(span)
-    } else {
-        statusTd.textContent = '–'
-    }
+    const span = createSpan(statusTypeToText[order.status])
+    span.style.background = statusTypeToBackground[order.status]
+    statusTd.append(span)
 
     const labelsTd = document.createElement('td')
 
