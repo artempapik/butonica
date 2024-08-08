@@ -1847,7 +1847,7 @@ if (loginInfo) {
 
         if (b.textContent === 'visibility') {
             b.textContent = 'visibility_off'
-            passwordChars.forEach((s, index) => s.textContent = gpassword[index] || '•')
+            passwordChars.forEach((s, index) => s.textContent = password[index] || '•')
             return
         }
 
@@ -1858,28 +1858,28 @@ if (loginInfo) {
         }
 
         if (b.textContent === 'backspace') {
-            gpassword = gpassword.slice(0, -1)
-            passwordChars.item(gpassword.length).classList.remove('entered')
-            passwordChars.item(gpassword.length).textContent = '•'
+            password = password.slice(0, -1)
+            passwordChars.item(password.length).classList.remove('entered')
+            passwordChars.item(password.length).textContent = '•'
             return
         }
 
-        if (gpassword.length === 6) {
+        if (password.length === 6) {
             return
         }
 
         b.classList.add('active')
-        gpassword += b.textContent
-        passwordChars.item(gpassword.length - 1).classList.add('entered')
+        password += b.textContent
+        passwordChars.item(password.length - 1).classList.add('entered')
 
         if (passwordButtons.item(9).textContent === 'visibility_off') {
-            passwordChars.item(gpassword.length - 1).textContent = b.textContent
+            passwordChars.item(password.length - 1).textContent = b.textContent
         }
 
-        if (gpassword.length === 6) {
-            if (!login(gpassword)) {
+        if (password.length === 6) {
+            if (!login(password)) {
                 passwordButtons.forEach(b => b.classList.remove('active'))
-                gpassword = ''
+                password = ''
             }
         }
     })
@@ -2190,7 +2190,7 @@ const keyToCalculatorNumber = {
     9: 2
 }
 
-let gpassword = ''
+let password = ''
 
 window.onkeyup = e => {
     if (loginModal.style.display === 'flex') {
@@ -2200,28 +2200,28 @@ window.onkeyup = e => {
         passwordButtons.forEach(b => b.classList.remove('active'))
 
         if (e.key === 'Backspace') {
-            gpassword = gpassword.slice(0, -1)
-            passwordChars.item(gpassword.length).classList.remove('entered')
-            passwordChars.item(gpassword.length).textContent = '•'
+            password = password.slice(0, -1)
+            passwordChars.item(password.length).classList.remove('entered')
+            passwordChars.item(password.length).textContent = '•'
             return
         }
 
-        if (gpassword.length === 6) {
+        if (password.length === 6) {
             return
         }
 
         passwordButtons.item(e.key === '0' ? 10 : e.key - 1).classList.add('active')
-        gpassword += e.key
-        passwordChars.item(gpassword.length - 1).classList.add('entered')
+        password += e.key
+        passwordChars.item(password.length - 1).classList.add('entered')
 
         if (passwordButtons.item(9).textContent === 'visibility_off') {
-            passwordChars.item(gpassword.length - 1).textContent = e.key
+            passwordChars.item(password.length - 1).textContent = e.key
         }
 
-        if (gpassword.length === 6) {
-            if (!login(gpassword)) {
+        if (password.length === 6) {
+            if (!login(password)) {
                 passwordButtons.forEach(b => b.classList.remove('active'))
-                gpassword = ''
+                password = ''
             }
         }
 
