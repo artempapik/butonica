@@ -1,5 +1,3 @@
-const cacheName = 'butonica'
-
 const cacheAsset = [
     'img/cart.png',
     'img/checkout.png',
@@ -19,7 +17,7 @@ const cacheAsset = [
     'img/withdrawal.png'
 ]
 
-self.addEventListener('install', e => e.waitUntil(caches.open(cacheName)
+self.addEventListener('install', e => e.waitUntil(caches.open('butonica')
     .then(cache => cache.addAll(cacheAsset))
     .then(() => self.skipWaiting())
 ))
@@ -34,9 +32,3 @@ self.addEventListener('activate', e => e.waitUntil(
 ))
 
 self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => caches.match(e.request))))
-
-// self.addEventListener('push', e => {
-//     e.waitUntil(self.registration.showNotification('Test Message from Butonica', {
-//         body: 'Hello from Notification API beach'
-//     }))
-// })
