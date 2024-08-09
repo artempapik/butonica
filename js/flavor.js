@@ -1,4 +1,4 @@
-let flavorsTable, flavorProductsOptions, flavorProductOptionsArray
+let flavorsTable, flavorProductOptions
 
 const showFlavorInfo = e => {
     main.innerHTML = menuItemsContents['flavor']
@@ -30,23 +30,7 @@ const showFlavorInfo = e => {
         $(flavorStocks).select2(select2NoSearch())
     })
 
-    get(`Product/ids-names-all-costs/${loginInfo.companyId}`).then(response => {
-        const flavorProductsList = flavorModal.querySelector('#flavor-product')
-        flavorProductsList.innerHTML = ''
-
-        for (const product of response) {
-            const option = document.createElement('option')
-            option.text = product.name
-            option.value = product.name
-            option.dataset.id = product.id
-            option.dataset.buyingCost = product.buyingCost
-            option.dataset.cost = product.cost
-            flavorProductsList.append(option)
-        }
-
-        flavorProductsOptions = flavorModal.querySelectorAll(`#flavor-product option`)
-        flavorProductOptionsArray = response
-    })
+    get(`Product/ids-names-all-costs/${loginInfo.companyId}`).then(response => flavorProductOptions = response)
 }
 
 const flavorModal = document.querySelector('.create-flavor-modal')
@@ -60,9 +44,13 @@ const calculateFlavorTotalSum = () => {
     let totalBuyingSum = 0
 
     for (const tr of flavorModal.querySelectorAll('tr:not(:first-child)')) {
-        for (const option of flavorProductsOptions) {
-            if (+option.dataset.id === +tr.querySelector('select').selectedOptions[0].dataset.id) {
-                totalBuyingSum += +option.dataset.buyingCost * +tr.querySelector('.product-amount').value
+        if (!tr.querySelector('select').selectedOptions[0]) {
+            continue
+        }
+
+        for (const option of flavorProductOptions) {
+            if (+option.id === +tr.querySelector('select').selectedOptions[0].dataset.id) {
+                totalBuyingSum += +option.buyingCost * +tr.querySelector('.product-amount').value
                 break
             }
         }
@@ -452,7 +440,7 @@ const addFlavorProduct = (product = null) => {
     const flavorProductsTable = flavorModal.querySelector('.flavor-products table')
     const flavorProductSelect = document.createElement('select')
 
-    for (const product of flavorProductOptionsArray) {
+    for (const product of flavorProductOptions) {
         const option = document.createElement('option')
         option.text = product.name
         option.value = product.name
@@ -465,10 +453,10 @@ const addFlavorProduct = (product = null) => {
     const productPriceColumn = createTd()
 
     if (product) {
-        for (const option of flavorProductsOptions) {
-            if (+option.dataset.id === product.productId) {
+        for (const option of flavorProductOptions) {
+            if (+option.id === product.productId) {
                 flavorProductSelect.selectedOptions[0].dataset.id = product.productId
-                flavorProductSelect.value = option.value
+                flavorProductSelect.value = option.name
                 productPriceColumn.textContent = product.sellingCost.toFixed(2)
                 break
             }
@@ -515,9 +503,9 @@ const addFlavorProduct = (product = null) => {
         const select = e.target.parentNode.parentNode.querySelector('select')
 
         if (select.value) {
-            for (const option of flavorProductsOptions) {
-                if (+option.dataset.id === +select.selectedOptions[0].dataset.id) {
-                    const buyingCost = +option.dataset.buyingCost * + e.target.parentNode.parentNode.querySelector('.product-amount').value
+            for (const option of flavorProductOptions) {
+                if (+option.id === +select.selectedOptions[0].dataset.id) {
+                    const buyingCost = +option.buyingCost * + e.target.parentNode.parentNode.querySelector('.product-amount').value
                     flavorTotalBuyingSumElement.textContent = Math.max(0, +flavorTotalBuyingSumElement.textContent - buyingCost).toFixed(2)
                     break
                 }
@@ -555,9 +543,9 @@ const addFlavorProduct = (product = null) => {
     $(flavorProductSelect).select2(select2NoResults('Обрати товар'))
 
     flavorProductSelect.onchange = () => {
-        for (const option of flavorProductsOptions) {
-            if (+option.dataset.id === +flavorProductSelect.selectedOptions[0].dataset.id) {
-                productPriceColumn.textContent = (+option.dataset.cost).toFixed(2)
+        for (const option of flavorProductOptions) {
+            if (+option.id === +flavorProductSelect.selectedOptions[0].dataset.id) {
+                productPriceColumn.textContent = (+option.cost).toFixed(2)
                 changeSum()
                 break
             }
