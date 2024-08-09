@@ -1968,7 +1968,7 @@ const login = pass => {
             return
         }
 
-        showMessage('error', 'Невірний пароль')
+        showMessage('error', 'Невірний PIN-код')
         return false
     })
 }
