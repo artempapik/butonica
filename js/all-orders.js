@@ -1,4 +1,4 @@
-let allOrdersTable, orderProducts, internetProductsOptions, internetProductsOptionsArray, internetFlavorsOptions, internetFlavorsOptionsArray, allOrdersPages, allOrderIntervalId, orderTippy, surchargeTippy
+let allOrdersTable, orderProducts, internetProductsOptions, internetProductsOptionsArray, internetFlavorsOptions, allOrdersPages, allOrderIntervalId, orderTippy, surchargeTippy
 
 const orderInfoModal = document.querySelector('.order-info-modal')
 const reminderInfoModal = document.querySelector('.reminder-info-modal')
@@ -46,21 +46,7 @@ const fillDatalistsLabels = () => {
         internetProductsOptionsArray = response
     })
 
-    get(`Flavor/ids-names-costs/${loginInfo.companyId}`).then(response => {
-        const internetFlavorsList = internetOrderModal.querySelector('#internet-flavor')
-        internetFlavorsList.innerHTML = ''
-
-        for (const flavor of response) {
-            const option = document.createElement('option')
-            option.value = getFlavorName(flavor)
-            option.dataset.id = flavor.id
-            option.dataset.cost = flavor.totalSum
-            internetFlavorsList.append(option)
-        }
-
-        internetFlavorsOptions = internetOrderModal.querySelectorAll(`#internet-flavor option`)
-        internetFlavorsOptionsArray = response
-    })
+    get(`Flavor/ids-names-costs/${loginInfo.companyId}`).then(response => internetFlavorsOptions = response)
 }
 
 const firstAllOrderPage = e => {
@@ -1365,7 +1351,7 @@ const addInternetOrderFlavor = () => {
     const internetFlavorsTable = internetOrderModal.querySelector('.sale-order-flavors table')
     const internetFlavorSelect = document.createElement('select')
 
-    for (const flavor of internetFlavorsOptionsArray) {
+    for (const flavor of internetFlavorsOptions) {
         const option = document.createElement('option')
         option.text = getFlavorName(flavor)
         option.value = getFlavorName(flavor)
@@ -1417,8 +1403,8 @@ const addInternetOrderFlavor = () => {
 
     internetFlavorSelect.onchange = () => {
         for (const option of internetFlavorsOptions) {
-            if (+option.dataset.id === +internetFlavorSelect.selectedOptions[0].dataset.id) {
-                flavorSumColumn.querySelector('span').textContent = (+option.dataset.cost).toFixed(2)
+            if (+option.id === +internetFlavorSelect.selectedOptions[0].dataset.id) {
+                flavorSumColumn.querySelector('span').textContent = (+option.totalSum).toFixed(2)
                 calculateInternetOrderTotalSum()
                 break
             }
