@@ -677,7 +677,7 @@ header {
                     &:hover {
                         font-size: .8rem;
                         background: rgb(20, 20, 20);
-                        padding: .35rem 0;
+                        padding: .3rem 0;
                     }
                 }
             }
