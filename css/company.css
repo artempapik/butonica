@@ -1,57 +1,117 @@
 .company-container {
     display: flex;
-    flex-direction: column;
-    box-shadow: rgba(0, 0, 0, .02) 0 1px 3px 0, rgba(27, 31, 35, .15) 0 0 0 1px;
-    background: #fff;
-    padding: 1.2rem 1.8rem;
-    border-radius: 1rem;
-    justify-content: space-between;
-    width: 20rem;
-    margin-bottom: 1rem;
+    gap: 2rem;
     animation: table-animate .15s;
 
-    & h2 {
-        padding: 0 .3rem;
-        margin: .6rem 0;
-        font-size: 1.2rem;
-        font-weight: normal;
-
-        & span:last-child {
-            color: rgb(30, 30, 30);
-            padding: 0 .2rem;
-        }
-    }
-
-    & .content {
+    & .company-info {
         display: flex;
         flex-direction: column;
-        justify-self: center;
-        gap: 1.8rem;
+        box-shadow: rgba(0, 0, 0, .12) 0 1px 3px, rgba(0, 0, 0, .24) 0 1px 2px;
+        background: #fff;
+        padding: .8rem 1rem;
+        border-radius: .7rem;
+        justify-content: space-between;
+        width: 20rem;
+        margin-bottom: 1rem;
 
-        & div {
+        & .info-title {
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+
+            & h2 {
+                display: flex;
+                align-items: center;
+                gap: .5rem;
+
+                & span:first-child {
+                    font-size: 2rem;
+                }
+            }
+
+            & button {
+                border-radius: .3rem;
+                gap: .5rem;
+                padding: .2rem .6rem;
+                font-size: .9rem;
+                background: linear-gradient(180deg, rgb(85, 165, 255) 0%, rgb(74, 152, 255) 100%);
+                opacity: .9;
+
+                &:hover {
+                    box-shadow: none;
+                    opacity: 1;
+                }
+            }
         }
 
-        & .inputs {
+        & h3 {
+            padding: 0 .3rem;
+            margin: .6rem 0;
+            font-size: 1.2rem;
+            font-weight: normal;
+    
+            & span:last-child {
+                color: rgb(30, 30, 30);
+                padding: 0 .2rem;
+            }
+        }
+    
+        & .content {
             display: flex;
-            gap: 1rem;
+            flex-direction: column;
+            justify-self: center;
+            gap: .5rem;
+    
+            & div {
+                display: flex;
+                flex-direction: column;
+            }
+    
+            & .inputs {
+                display: flex;
+                gap: .7rem;
+            }
         }
     }
 
-    & .company-buttons {
-        margin-top: 1.5rem;
-        display: flex;
-        justify-content: space-between;
+    & .desire-gain {
+        box-shadow: rgba(0, 0, 0, .12) 0 1px 3px, rgba(0, 0, 0, .24) 0 1px 2px;
+        background: #fff;
+        padding: .8rem 1.3rem;
+        border-radius: .7rem;
+        height: fit-content;
+
+        & h2 {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            margin-bottom: 1.7rem;
+
+            & span:first-child {
+                font-size: 2rem;
+            }
+        }
+
+        & .dg {
+            display: flex;
+            gap: .7rem;
+            margin: 1.1rem 0;
+            align-items: center;
+
+            & span {
+                padding-left: .7rem;
+                width: 6rem;
+            }
+
+            & input {
+                width: 5rem;
+            }
+        }
 
         & button {
-            padding: .45rem 1.1rem;
-
-            &:first-child {
-                background: linear-gradient(180deg, rgb(85, 165, 255) 0%, rgb(74, 152, 255) 100%);
-                padding: .45rem .9rem;
-                gap: .5rem;
-            }
+            margin-top: .7rem;
+            float: right;
         }
     }
 }
