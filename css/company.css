@@ -12,7 +12,6 @@
         border-radius: .7rem;
         justify-content: space-between;
         width: 20rem;
-        margin-bottom: 1rem;
 
         & .info-title {
             display: flex;
@@ -118,9 +117,18 @@
 
 @media only screen and (max-width: 700px) and (orientation: portrait) {
     .company-container {
-        width: unset;
-        border-radius: .7rem;
-        padding: .4rem .5rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: .7rem;
+
+        & h2 {
+            font-size: 1.2rem !important;
+
+            & span:first-child {
+                font-size: 1.7rem !important;
+            }
+        }
 
         & .content {
             gap: .8rem;
@@ -136,10 +144,6 @@
                     margin: .2rem 0;
                 }
             }
-        }
-
-        & .company-buttons {
-            margin-top: .7rem;
         }
     }
 }
