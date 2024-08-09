@@ -242,42 +242,65 @@ const menuItemsContents = {
         <div class="company-header">
             <div class="header-items">
                 <div id="loader"></div>
-                <span class="material-symbols-outlined">info</span>
-                <h1>Деталі компанії</h1>
+                <span class="material-symbols-outlined">store</span>
+                <h1>Компанія</h1>
             </div>
         </div>
         <div class="company-container">
-            <div class="content">
-                <div class="upload-image">
-                    <img src="img/empty-flower.png">
-                    <span class="files-buttons">
-                        <label for="company-files">
-                            <span class="material-symbols-outlined">upload</span>
-                        </label>
-                        <span class="remove-image material-symbols-outlined" onpointerup="removeImage(event)">delete_sweep</span>
-                    </span>
-                    <input id="company-files" type="file" onchange="uploadImage(event)">
+            <div class="company-info">
+                <div class="info-title">
+                    <h2>
+                        <span class="material-symbols-outlined">info</span>
+                        <span>Деталі</span>
+                    </h2>
+                    <button onpointerup="copyToClipboard()">
+                        <span class="material-symbols-outlined">copy_all</span>
+                        <span>Скопіювати</span>
+                    </button>
                 </div>
-                <div class="inputs">
-                    <div class="form">
-                        <h2>
-                            <span class="required">*</span>
-                            <span>Назва</span>
-                        </h2>
-                        <input class="company-name" maxlength="30">
+                <div class="content">
+                    <div class="upload-image">
+                        <img src="img/empty-flower.png">
+                        <span class="files-buttons">
+                            <label for="company-files">
+                                <span class="material-symbols-outlined">upload</span>
+                            </label>
+                            <span class="remove-image material-symbols-outlined" onpointerup="removeImage(event)">delete_sweep</span>
+                        </span>
+                        <input id="company-files" type="file" onchange="uploadImage(event)">
                     </div>
-                    <div class="form">
-                        <h2>Контактні дані</h2>
-                        <textarea class="company-contact-info" maxlength="100" rows="3"></textarea>
+                    <div class="inputs">
+                        <div class="form">
+                            <h3>
+                                <span class="required">*</span>
+                                <span>Назва</span>
+                            </h3>
+                            <input class="company-name" maxlength="30">
+                        </div>
+                        <div class="form">
+                            <h3>Контактні дані</h3>
+                            <textarea class="company-contact-info" maxlength="100" rows="3"></textarea>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="company-buttons">
-                <button onpointerup="copyToClipboard()">
-                    <span class="material-symbols-outlined">copy_all</span>
-                    <span>Скопіювати</span>
-                </button>
-                </button>
+            <div class="desire-gain">
+                <h2>
+                    <span class="material-symbols-outlined">finance_chip</span>
+                    <span>Ціль прибутку</span>
+                </h2>
+                <span class="dg">
+                    <span>за день:</span>
+                    <input type="number" inputmode="numeric">
+                </span>
+                <span class="dg">
+                    <span>за тиждень:</span>
+                    <input type="number" inputmode="numeric">
+                </span>
+                <span class="dg">
+                    <span>за місяць:</span>
+                    <input type="number" inputmode="numeric">
+                </span>
                 <button class="save" onpointerup="updateCompanyInfo()">
                     <div class="loader-button"></div>
                     <span>Зберегти</span>
@@ -1776,22 +1799,28 @@ const getDailyStatistics = (loginName = '') => {
         }
 
         const dayProgress = main.querySelector('.day-progress')
-        const percentWidth = response.revenue / 19000 * 100
-        const maxProgressWidth = Math.min(percentWidth, 100) + '%'
+        const dayGain = +localStorage.getItem('day-gain')
 
-        if (percentWidth > 100) {
-            dayProgress.classList.add('done')
+        if (dayGain) {
+            const percentWidth = response.revenue / dayGain * 100
+            const maxProgressWidth = Math.min(percentWidth, 100) + '%'
+    
+            if (percentWidth > 100) {
+                dayProgress.classList.add('done')
+            }
+    
+            setTimeout(() => {
+                dayProgress.querySelector('div').animate([
+                    { width: 0 },
+                    { width: maxProgressWidth }
+                ], 170)
+                dayProgress.querySelector('div').style.width = maxProgressWidth
+            }, 170)
+    
+            tippy(dayProgress, { content: percentWidth.toFixed(1) + '%' })
+        } else {
+            dayProgress.style.display = 'none'
         }
-
-        setTimeout(() => {
-            dayProgress.querySelector('div').animate([
-                { width: 0 },
-                { width: maxProgressWidth }
-            ], 170)
-            dayProgress.querySelector('div').style.width = maxProgressWidth
-        }, 170)
-
-        tippy(dayProgress, { content: percentWidth.toFixed(1) + '%' })
 
         const topSalesTable = main.querySelector('table')
 
