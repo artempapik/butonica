@@ -1,4 +1,4 @@
-let allOrdersTable, orderProducts, internetProductsOptions, internetProductsOptionsArray, internetFlavorsOptions, allOrdersPages, allOrderIntervalId, orderTippy, surchargeTippy
+let allOrdersTable, internetProductsOptions, internetFlavorsOptions, allOrdersPages, allOrderIntervalId, orderTippy, surchargeTippy
 
 const orderInfoModal = document.querySelector('.order-info-modal')
 const reminderInfoModal = document.querySelector('.reminder-info-modal')
@@ -28,24 +28,7 @@ const fillDatalistsLabels = () => {
         .then(response => labels = response)
         .catch(() => showMessage('error', getErrorMessage('мітки')))
 
-    get(`Product/ids-names-costs/${loginInfo.companyId}`).then(response => {
-        orderProducts = response
-        
-        const internetProductsList = internetOrderModal.querySelector('#internet-product')
-        internetProductsList.innerHTML = ''
-
-        for (const product of response) {
-            const option = document.createElement('option')
-            option.value = product.name
-            option.dataset.id = product.id
-            option.dataset.cost = product.cost
-            internetProductsList.append(option)
-        }
-
-        internetProductsOptions = internetOrderModal.querySelectorAll(`#internet-product option`)
-        internetProductsOptionsArray = response
-    })
-
+    get(`Product/ids-names-costs/${loginInfo.companyId}`).then(response => internetProductsOptions = response)
     get(`Flavor/ids-names-costs/${loginInfo.companyId}`).then(response => internetFlavorsOptions = response)
 }
 
@@ -549,7 +532,7 @@ const createOrderRow = (order, table) => {
             for (const product of response.products) {
                 const productSelect = document.createElement('select')
 
-                for (const product of orderProducts) {
+                for (const product of internetProductsOptions) {
                     const option = document.createElement('option')
                     option.text = product.name
                     option.dataset.id = product.id
@@ -1265,7 +1248,7 @@ const addInternetOrderProduct = () => {
     const internetProductsTable = internetOrderModal.querySelector('.sale-order-products table')
     const internetProductSelect = document.createElement('select')
 
-    for (const product of internetProductsOptionsArray) {
+    for (const product of internetProductsOptions) {
         const option = document.createElement('option')
         option.text = product.name
         option.value = product.name
@@ -1338,8 +1321,8 @@ const addInternetOrderProduct = () => {
 
     internetProductSelect.onchange = () => {
         for (const option of internetProductsOptions) {
-            if (+option.dataset.id === +internetProductSelect.selectedOptions[0].dataset.id) {
-                productPriceColumn.textContent = (+option.dataset.cost).toFixed(2)
+            if (+option.id === +internetProductSelect.selectedOptions[0].dataset.id) {
+                productPriceColumn.textContent = (+option.cost).toFixed(2)
                 changeSum()
                 break
             }
