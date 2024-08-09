@@ -17,7 +17,7 @@ const showCompanyInfo = e => {
     uploadImageBlock = document.querySelector('.upload-image')
 
     if (loginInfo.title > 0) {
-        document.querySelector('label').remove()
+        document.querySelector('.files-buttons').remove()
         document.querySelector('.desire-gain').remove()
     } else {
         const desireGains = document.querySelectorAll('.dg input')
