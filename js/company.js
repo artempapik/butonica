@@ -18,7 +18,12 @@ const showCompanyInfo = e => {
 
     if (loginInfo.title > 0) {
         document.querySelector('label').remove()
-        document.querySelector('button').remove()
+        document.querySelector('.desire-gain').remove()
+    } else {
+        const desireGains = document.querySelectorAll('.dg input')
+        desireGains.item(0).value = localStorage.getItem('day-gain')
+        desireGains.item(1).value = localStorage.getItem('week-gain')
+        desireGains.item(2).value = localStorage.getItem('month-gain')
     }
 
     get(`Company/${loginInfo.companyId}`).then(response => {
@@ -45,7 +50,7 @@ const updateCompanyInfo = () => {
         return
     }
 
-    const payButton = document.querySelector('button:last-child')
+    const payButton = document.querySelector('.save')
     payButton.disabled = true
     
     const company = {
@@ -58,11 +63,15 @@ const updateCompanyInfo = () => {
 
     put('Company', company)
         .then(() => {
+            const desireGains = document.querySelectorAll('.dg input')
+            localStorage.setItem('day-gain', +desireGains.item(0).value)
+            localStorage.setItem('week-gain', +desireGains.item(1).value)
+            localStorage.setItem('month-gain', +desireGains.item(2).value)
             payButton.disabled = false
-            showMessage('info', updateSuccessMessage('компанію'))
+            showMessage('info', updateSuccessMessage('відомості'))
         })
         .catch(() => {
             payButton.disabled = false
-            showMessage('error', updateErrorMessage('компанію'))
+            showMessage('error', updateErrorMessage('відомості'))
         })
 }
